@@ -1,0 +1,48 @@
+{
+"equipables":[{	
+		"ID":0,
+		"name":"EMPTY ITEM",
+		"description":"EMPTY ITEM",
+		"type":"WEAPON",
+		"modifiers":[0, 0, 0, 0, 0],
+		"levelRequirement":0
+	},{	
+		"ID":1,
+		"name":"The Sword of here and now",
+		"description":"It's definitely not old",
+		"type":"WEAPON",
+		"modifiers":[1, 1, 1, 1, 1],
+		"levelRequirement":0
+	},
+	{
+		"ID":2,
+		"name":"The headpiece of long ago",
+		"description":"It's very old",
+		"type":"HEAD",
+		"modifiers":[2, 2, 2, 2, 2],
+		"levelRequirement":0
+	}],
+"consumables":[
+	{
+		"ID":0,
+		"name":"Heal Flask",
+		"description":"Just enough to heal once",
+		"type":"HEAL",
+		"power":10
+	},
+	{
+		"ID":1,
+		"name":"Reviver",
+		"description":"It Revives",
+		"type":"REVIVE",
+		"power":30
+	},
+	{
+		"ID":2,
+		"name":"MP Giver",
+		"description":"It gives MP",
+		"type":"MANAHEAL",
+		"power":15
+	}
+	]
+}

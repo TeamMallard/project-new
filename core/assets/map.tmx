@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="25" tilewidth="16" tileheight="16" nextobjectid="7">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="480">
+  <image source="tiles.png" width="343" height="410"/>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="animation" value="flower"/>
+   </properties>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="animation" value="flower"/>
+   </properties>
+  </tile>
+  <tile id="83">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="120">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="121">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="122">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="123">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="140">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="141">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="143">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="161">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="162">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="165">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="185">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="186">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="187">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="205">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="207">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="220">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="221">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="222">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="225">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="227">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="240">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="241">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="242">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="260">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="261">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="262">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="280">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="281">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="282">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="50" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC82X203EMBBFHZ6CKJ8BBIL/FLHStoCUFlLEAjWstgZAdMAP9EARdAA0gCPZyuxlHk5wEB9Xedhrz5lrj7OVc67y+vD6VPQV+q3DNUWbEX1zqE7kqANHnagNGX+qOnhO4TgoBl0U28+HxcAhxdYkcJTG77B9xbRpHPsh3nOIG7UW5uTYkANza4lj1nyh7UUQja0N6u/vvR6CanLP6RHGXzk5LouxY/poHJFFyvFYpa5BjrGBdikPHEcDnlCP6PvoeWeogv5RCyXnXO6n5gtj51honiRZnl4rY2nc6CfO07rxLFaejkFcv5Q+1jyUZQzHnOJ8e/F6FUQZuDX7Xzh6vXk9C0qpSWPX0lzryuLg6pZ1rizht/hcCeNY0tbO+0g/4h7pa0Ksl8ihxY/v47i0npaOP6+1nGuy8hXbJQ6LAc9z7iyjHmg5T+XAmiytKxpna3AswQuulkz1gNsfR+7nXqOy/EAP0A/qBT37cnNcuvR6mBq/9P02lx914NDm+k3d/WuOHa9doj037BvKEfdRX29acs8xcN+J2Dc3x4nXKdGZ4kdJrjQuXPuSHzlqlMRx43Xr9RSud15Xjj/PpbVfue26R/tQxhweSBxTvnsWTv5/q+3zOTkwrzQ+bZ+3wnttXc3BEeuuVT9zKjfHN0cGky2IEwAA
+  </data>
+ </layer>
+ <layer name="foreground" width="50" height="25" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OQREAAAQAMGWF0F4FD3cetgSLAACAmbwOLKnrAADwUgM9+AkaiBMAAA==
+  </data>
+ </layer>
+ <objectgroup name="objects" visible="0">
+  <object id="1" x="144" y="240" width="80" height="16"/>
+  <object id="2" x="192" y="224">
+   <polyline points="0,0 464,0 528,-16 560,-16"/>
+  </object>
+  <object id="4" x="144" y="192">
+   <polygon points="0,0 48,-32 0,-64 0,-48 -96,-48 -96,-16 0,-16"/>
+  </object>
+  <object id="5" x="288" y="80" width="80" height="48">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

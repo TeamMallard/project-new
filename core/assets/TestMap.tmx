@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="8" tileheight="8" nextobjectid="33">
+ <tileset firstgid="1" name="SpriteSheetPlaceHolders" tilewidth="8" tileheight="8" tilecount="1024">
+  <image source="SpriteSheetPlaceHolders.png" width="256" height="256"/>
+  <tile id="128">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="129">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="130">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="131">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="160">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="161">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="162">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="Collision" value="1"/>
+   </properties>
+  </tile>
+  <tile id="256">
+   <properties>
+    <property name="WaterFrame" value="1"/>
+   </properties>
+  </tile>
+  <tile id="257">
+   <properties>
+    <property name="WaterFrame" value="2"/>
+   </properties>
+  </tile>
+  <tile id="288">
+   <properties>
+    <property name="WaterFrame" value="3"/>
+   </properties>
+  </tile>
+  <tile id="289">
+   <properties>
+    <property name="WaterFrame" value="4"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1025" name="tiles" tilewidth="8" tileheight="8" tilecount="2142">
+  <image source="tiles.png" width="343" height="410"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztmOmN2zAQRql0sunE6kTqRIkbsTeFhtw1sRYhWgcozWfx/Rg8HwTm0DzQcOOc++WjgRL88PEbytB6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6H+A+flj3oc6j52jtuTrxQ4v4oUX80CJ+aBE/tIgfWsQPLeKHFvFDi/ihxT3naN2bOo/2w9p9deKHFvFDi/ihRfzQIn5oET+0iB9axA8t4ocW8UOLtfvRPUX/RPz45s3H3cfg44+Pvz6uBd7fHkzztT4u/k3b/LA1rEvNj9h35KePf4XeXyfyfTnhG+qbH075cVRdin587UtTNkr4cURdin7s2XeaL8x+qR9H1FW7Hz1+4MeLuvADP/ADP9I9jMQP/MCPdX70+GHmRz/hR4sfoz28u3r/v1o7zyP8uD+xtv+v1s5zbz9ePfslMVXX8+db/TiKan68evYleu7c4w5/PIucH/H7eH5r3Wv5Ln6UYphz6sMcj/TlXfyY4+DG92TuXNj31Ic5vvJjad6a/LgFNuO4Zs6HXV/rx6VA3pr8yM1l6nzY9bV+dAXy4kc5P9oCefGjnB99gbw1+RE4uPG9mjt3ceXujzV5a/JjDTtX7v7Yg0f7Yc0w2y33h3Xde/lhzTDbtX60AnWf1Y8w27V+9AJ1v5sfgxvfq+n3zYNhtlv8yPU7l7dGP27hdTOO9LdOfCZb/Zjqd0neGv3IzSX1I9Rc0o8lefEj70eoeYsfbaZf/LDxo8/0ix95Dm58r6bfx5q7+EwyTD+Lr3P9zuWt0Q+o58ccY93pPuf6mzqn0MdZ/Aj13tyy+zd3TqGPM/mxdM5Ln5sarfcBP/DDuo8z+RHqHtyy36dT5xT6OIsfNdB6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6HyB+KNN6H+CY/wHQyp0M
+  </data>
+ </layer>
+</map>

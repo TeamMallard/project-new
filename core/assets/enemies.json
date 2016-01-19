@@ -1,0 +1,101 @@
+{
+"partyList":[{
+	"name":"Ooze",
+	"type":"ENEMY",
+	"stats":{
+		"currentHP":25,
+		"currentMP":30,
+		"maxHP":25,
+		"maxMP":30,
+		"speed":4,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":205,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[5],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		},
+	"texture": 2
+	},
+	{
+	"name":"Radiated Duck",
+	"type":"ENEMY",
+	"stats":{
+		"currentHP":50,
+		"currentMP":30,
+		"maxHP":50,
+		"maxMP":30,
+		"speed":2,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":205,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[6],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		},
+	"texture": 3
+	},
+	{
+	"name":"Scarred Duck",
+	"type":"ENEMY",
+	"stats":{
+		"currentHP":50,
+		"currentMP":30,
+		"maxHP":50,
+		"maxMP":30,
+		"speed":3,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":205,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[7],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		},
+	"texture": 4
+	},
+	{
+	"name":"Undead Duck",
+	"type":"ENEMY",
+	"stats":{
+		"currentHP":60,
+		"currentMP":30,
+		"maxHP":60,
+		"maxMP":30,
+		"speed":0,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":205,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[8],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		},
+	"texture": 5
+	}
+	],
+	"consumables": [0,1,2],
+	"equipables": [1]
+}

@@ -1,0 +1,97 @@
+{
+"partyList":[{
+	"name":"Tom the Duck",
+	"type":"FRIENDLY",
+	"stats":{
+		"currentHP":100,
+		"currentMP":30,
+		"maxHP":100,
+		"maxMP":30,
+		"speed":5,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":3,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":205,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[0, 1, 2, 3],
+	"equipment":{
+		"equipSlots":[1,0,0,0,0]
+		}
+	},
+	{
+	"name":"Ryan the Duck",
+	"type":"FRIENDLY",
+	"stats":{
+		"currentHP":100,
+		"currentMP":30,
+		"maxHP":100,
+		"maxMP":30,
+		"speed":3,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":5,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":2,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[3, 1],
+	"equipment":{
+		"equipSlots":[1,0,0,0,0]
+		}
+	},
+	{
+	"name":"Adrian the Duck",
+	"type":"FRIENDLY",
+	"stats":{
+		"currentHP":100,
+		"currentMP":30,
+		"maxHP":100,
+		"maxMP":30,
+		"speed":1,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":2,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[2, 1],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		}
+	},
+	{
+	"name":"Ahn the Duck",
+	"type":"FRIENDLY",
+	"stats":{
+		"currentHP":100,
+		"currentMP":30,
+		"maxHP":100,
+		"maxMP":30,
+		"speed":0,
+		"strength":2,
+		"dexterity":2,
+		"intelligence":2,
+		"baseArmourVal":2,
+		"armourVal":2,
+		"experience":2,
+		"currentLevel":2,
+		"maxLevel":20
+		},
+	"skills":[0, 1],
+	"equipment":{
+		"equipSlots":[0,0,0,0,0]
+		}
+	}	
+	],
+	"consumables": [0,1,2],
+	"equipables": [1]
+}

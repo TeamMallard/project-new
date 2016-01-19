@@ -1,0 +1,23 @@
+
+pack.png
+size: 128,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+knob
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  split: 13, 12, 11, 12
+  pad: 13, 13, 11, 12
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+knob2
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  split: 14, 14, 14, 14
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
