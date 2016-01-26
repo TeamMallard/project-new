@@ -20,6 +20,7 @@ public class StartScreen extends ScreenAdapter {
     private float runningTime;
     private final String START_MESSAGE = "PRESS 'E' TO START GAME";
     private SpriteBatch batch = new SpriteBatch();
+    private Pixmap black;
 
     public StartScreen (Game game){
         this.game = game;
@@ -28,6 +29,7 @@ public class StartScreen extends ScreenAdapter {
     public void show() {
         fadeInCounter = 1f;
         runningTime = 0;
+        black = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
     }
 
     public void render (float delta) {
@@ -37,7 +39,6 @@ public class StartScreen extends ScreenAdapter {
         update();
         batch.begin();
         batch.draw(Assets.title, 0, 0);
-        Pixmap black = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
         black.setColor(0,0,0,fadeInCounter);
         fadeInCounter -= 0.01f;
         if (fadeInCounter < 0) {
