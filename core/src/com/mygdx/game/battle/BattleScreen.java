@@ -173,7 +173,7 @@ public class BattleScreen extends ScreenAdapter {
     public int getTarget(Agent.AgentType typeToGet){
         Random random = new Random();
         int index = random.nextInt(turnOrder.size());
-        if(turnOrder.get(index).type!=typeToGet)
+        if(turnOrder.get(index).type != typeToGet || turnOrder.get(index).isDead())
             return getTarget(typeToGet);
         else
             return index;
@@ -257,8 +257,7 @@ public class BattleScreen extends ScreenAdapter {
             battleMenu.addResultsDialog(messages);
 
             Game.pointsScore+=xpGain*3.5f;
-        }
-        else{
+        } else {
             resultsText.add("You Lost.");
             Assets.sfx_battleLose.play(Game.masterVolume+0.3f);
             String messages[] = new String[resultsText.size()];
@@ -312,7 +311,11 @@ public class BattleScreen extends ScreenAdapter {
             battleMenu.setSkillMenuSize(turnOrder.get(turnOrderPointer).getSkills().size());
             battleMenu.resetMenus(); //Reset the menus
         }
-        currentTurnAgent = turnOrder.get(turnOrderPointer);
+        //if(!turnOrder.get(turnOrderPointer).isDead()) {
+        	currentTurnAgent = turnOrder.get(turnOrderPointer);
+        //} else {
+        //	currentTurnAgent = turnOrder.get(turnOrderPointer)
+        //}
         battleMenu.createInfoBox(currentTurnAgent.getName() + "'s turn", 10);
         battleMenu.updateTurnIndicator();
     }
