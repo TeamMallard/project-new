@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
 import com.mygdx.game.battle.BattleScreen;
 

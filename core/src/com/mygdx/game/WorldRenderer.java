@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.UI.UIRenderer;
+import com.mygdx.game.assets.Assets;
+import com.mygdx.game.ui.UIRenderer;
 
 /**
  * This class renders a GameWorld that has been passed in it's constructor.

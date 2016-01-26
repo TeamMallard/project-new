@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.UI.UIManager;
-import com.mygdx.game.UI.UIScore;
+import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
+import com.mygdx.game.ui.UIManager;
+import com.mygdx.game.ui.UIScore;
 
 import java.util.ArrayList;
 import java.util.List;

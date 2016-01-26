@@ -6,7 +6,8 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.*;
-import com.mygdx.game.UI.*;
+import com.mygdx.game.assets.Assets;
+import com.mygdx.game.ui.*;
 
 /**
  * Class manages the ui menus for the battlescreen. Stores data for them also updates and renders them.

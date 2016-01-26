@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.UI.UIManager;
+import com.mygdx.game.ui.UIManager;
 
 /**
  * NPC extends the character class to provide functionality that is unique to NPC's.
