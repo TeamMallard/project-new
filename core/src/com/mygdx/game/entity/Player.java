@@ -1,7 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.InputHandler;
+import com.mygdx.game.Level;
 
 /**
  * This class is a character that is controlled by the user.

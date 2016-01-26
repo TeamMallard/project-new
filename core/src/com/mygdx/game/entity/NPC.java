@@ -1,7 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.GameWorld;
+import com.mygdx.game.Level;
 import com.mygdx.game.ui.UIManager;
 
 /**

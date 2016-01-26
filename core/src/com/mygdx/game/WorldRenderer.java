@@ -8,6 +8,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.ui.UIRenderer;
+import com.mygdx.game.entity.Character;
+import com.mygdx.game.entity.Player;
+import com.mygdx.game.entity.SallyNPC;
 
 /**
  * This class renders a GameWorld that has been passed in it's constructor.

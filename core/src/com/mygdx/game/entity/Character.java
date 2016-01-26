@@ -1,7 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.entity;
 
 import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Level;
 
 import java.util.Comparator;
 
@@ -22,7 +23,7 @@ public abstract class Character {
     private Vector2 currentTile;
     private Vector2 absPos;
 
-    protected Vector2 targetTile;
+    public Vector2 targetTile;
     protected Vector2 targetPos;
 
     protected Vector2 oldPos;
@@ -204,7 +205,7 @@ public abstract class Character {
      * Used to compare the y position of characters in the level.
      * Useful for rendering correctly.
      */
-    static class CharacterComparator implements Comparator<Character> {
+    public static class CharacterComparator implements Comparator<Character> {
 
         @Override
         public int compare(Character o1, Character o2) {
