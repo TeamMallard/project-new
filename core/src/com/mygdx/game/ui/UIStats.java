@@ -16,7 +16,7 @@ public class UIStats extends UIComponent {
 
     private BitmapFont font;
 
-    private final float LINE_HEIGHT = 50f;
+    private final float LINE_HEIGHT = 30f;
     private Agent player;
 
     float paddingX;
@@ -25,7 +25,7 @@ public class UIStats extends UIComponent {
     public boolean selected;
 
     public UIStats(float x, float y, float width, Agent player) {
-        super(x, y, width, 230);
+        super(x, y, width, 350);
         this.player = player;
         paddingX = 20;
         paddingY = 20;
@@ -48,17 +48,29 @@ public class UIStats extends UIComponent {
         String st = "STRENGTH:  " + player.getStats().getStrength();
         String in= "INTELLIGENCE:  " + player.getStats().getIntelligence();
         String ar = "ARMOUR:  " + player.getStats().getBaseArmourVal();
+        String eq = "EQUIPMENT:";
+        String eqHead = "HEAD:" + player.getCurrentEquipment().equipSlots[0];
+        String eqChest = "CHEST:";
+        String eqFeet = "FEET:";
+        String eqAccessory = "ACCESSORY:";
+        String eqWeapon = "WEAPON:";
 
 
         renderText(batch, level, x, y, Color.WHITE);
-        renderText(batch, xp, x+200, y, Color.WHITE);
+        renderText(batch, xp, x + 200, y, Color.WHITE);
         renderText(batch, hp, x, y - LINE_HEIGHT, Color.WHITE);
-        renderText(batch, mp, x+200, y - LINE_HEIGHT, Color.WHITE);
+        renderText(batch, mp, x + 200, y - LINE_HEIGHT, Color.WHITE);
         renderText(batch, sp, x, y - LINE_HEIGHT*2, Color.WHITE);
-        renderText(batch, de, x+200, y - LINE_HEIGHT*2, Color.WHITE);
+        renderText(batch, de, x + 200, y - LINE_HEIGHT*2, Color.WHITE);
         renderText(batch, st, x, y - LINE_HEIGHT*3, Color.WHITE);
-        renderText(batch, in, x+200, y - LINE_HEIGHT*3, Color.WHITE);
+        renderText(batch, in, x + 200, y - LINE_HEIGHT*3, Color.WHITE);
         renderText(batch, ar, x, y - LINE_HEIGHT*4, Color.WHITE);
+        renderText(batch, eq, x, y - LINE_HEIGHT*6, Color.WHITE);
+        renderText(batch, eqHead, x, y - LINE_HEIGHT*7, Color.WHITE);
+        renderText(batch, eqChest, x, y - LINE_HEIGHT*8, Color.WHITE);
+        renderText(batch, eqFeet, x, y - LINE_HEIGHT*9, Color.WHITE);
+        renderText(batch, eqAccessory, x, y - LINE_HEIGHT*10, Color.WHITE);
+        renderText(batch, eqWeapon, x, y - LINE_HEIGHT*11, Color.WHITE);
     }
 
     /**
