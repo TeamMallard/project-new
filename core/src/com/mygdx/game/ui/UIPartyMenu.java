@@ -23,6 +23,13 @@ public class UIPartyMenu extends UIComponent {
 
     private List<UIPlayer> playerList;
 
+    /**
+     * Labels for the titles on the party menu.
+     */
+    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2, (y + height + 4), width/6, 0, 10);
+    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/6, (y + height +4), width/6, 0, 10);
+    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/3, (y + height+4), width/6, 0, 10);
+
     public UIPartyMenu(float x, float y, float width, float height, PartyManager party) {
         super(x, y, width, height);
         this.party = party;
@@ -43,28 +50,36 @@ public class UIPartyMenu extends UIComponent {
 
         if (show) {
             new UIMessageBox("", Assets.consolas22, Color.WHITE, Align.center, x, y, width, height).render(batch, patch);
-            for (int i=0;i<playerList.size();i++) {
-                playerList.get(i).render(batch, patch);
+            for (UIPlayer aPlayerList : playerList) {
+                aPlayerList.render(batch, patch);
             }
+
+            statsMessageBox.setColor(Color.LIGHT_GRAY);
+            skillsMessageBox.setColor(Color.LIGHT_GRAY);
+            equipmentMessageBox.setColor(Color.LIGHT_GRAY);
+
+
             if (menuSelected == 0) {
-                new UIMessageBox("STATS", Assets.consolas22, Color.WHITE, Align.center, x+width/2, (y + height + 4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/6, (y + height +4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/3, (y + height+4), width/6, 0, 10).render(batch, patch);
-                new UIStats(x + width/2, (y + height - 266), width/2, party.getMember(playerSelected)).render(batch, patch);
+                statsMessageBox.setColor(Color.WHITE);
+                new UIStats(x + width/2, (y + height - 386), width/2, party.getMember(playerSelected)).render(batch, patch);
             }
             if (menuSelected == 1) {
-                new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2, (y + height + 4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("SKILLS", Assets.consolas22, Color.WHITE, Align.center, x+width/2+width/6, (y + height +4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/3, (y + height+4), width/6, 0, 10).render(batch, patch);
+                skillsMessageBox.setColor(Color.WHITE);
                 for (int i=0;i<party.getMember(playerSelected).getSkills().size();i++) {
                     new UISkill(x + width/2, (y + height - 86)-(90*i), width/2, Game.skills.getSkill(party.getMember(playerSelected).getSkills().get(i))).render(batch, patch);
                 }
             }
             if (menuSelected == 2) {
-                new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2, (y + height + 4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/6, (y + height +4), width/6, 0, 10).render(batch, patch);
-                new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.WHITE, Align.center, x+width/2+width/3, (y + height+4), width/6, 0, 10).render(batch, patch);
+                equipmentMessageBox.setColor(Color.WHITE);
+                for(int i = 0; i < party.getEquipables().size(); i++) {
+                    Equipable equipable = Game.items.getEquipable(party.getEquipables().get(i));
+                    new UIEquipment(x + width / 2, (y + height - 71)-(75*i), width/2, equipable).render(batch, patch);
+                }
             }
+
+            statsMessageBox.render(batch, patch);
+            skillsMessageBox.render(batch, patch);
+            equipmentMessageBox.render(batch, patch);
 
         }
     }
@@ -96,6 +111,7 @@ public class UIPartyMenu extends UIComponent {
     }
 
     private void optionUpdate() {
+
         if (InputHandler.isUpJustPressed()) {
             playerSelected--;
         } else if (InputHandler.isDownJustPressed()) {

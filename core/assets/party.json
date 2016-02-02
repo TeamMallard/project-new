@@ -93,5 +93,5 @@
 	}	
 	],
 	"consumables": [0,1,2],
-	"equipables": [1]
+	"equipables": [1, 2]
 }

@@ -51,8 +51,6 @@ public class Equipable {
         this.modifiers[3] = intelligenceModifier;
         this.modifiers[4] = armourValModifier;
         this.levelRequirement = levelRequirement;
-
-
     }
 
     /**
@@ -72,6 +70,10 @@ public class Equipable {
     //Used in the CurrentEquipment method, totalStatModifiers. Simply returns modifiers array
     public int[] getModifiers() {
         return modifiers;
+    }
+
+    public int getLevelRequirement() {
+        return levelRequirement;
     }
 
     public void updateID(int id) {
