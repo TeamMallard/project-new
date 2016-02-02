@@ -1,11 +1,11 @@
 {
 "skills":[{
 	"ID":0,
-	"name":"Lightning Bolt",
-	"description":"Shoots a lightning bolt",
+	"name":"Fly",
+	"description":"Flies at the enemy",
 	"skillType":"MAGIC",
-	"basePower":10,
-	"MPCost":3
+	"basePower":5,
+	"MPCost":0
 	},
 	{
 	"ID":1,
@@ -20,7 +20,7 @@
 	"name":"Fireball Bolt",
 	"description":"Shoots a Fireball bolt",
 	"skillType":"MAGIC",
-	"basePower":6,
+	"basePower":10,
 	"MPCost":3
 	},
 	{
@@ -28,7 +28,7 @@
 	"name":"Water Bolt",
 	"description":"Shoots a Water bolt",
 	"skillType":"MAGIC",
-	"basePower":4,
+	"basePower":8,
 	"MPCost":3
 	},
 	{

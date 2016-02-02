@@ -111,7 +111,6 @@ public class UIPartyMenu extends UIComponent {
     }
 
     private void optionUpdate() {
-
         if (InputHandler.isUpJustPressed()) {
             playerSelected--;
         } else if (InputHandler.isDownJustPressed()) {
