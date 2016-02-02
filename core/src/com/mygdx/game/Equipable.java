@@ -61,6 +61,13 @@ public class Equipable {
     public Equipable() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     //Used in the CurrentEquipment method, totalStatModifiers. Simply returns modifiers array
     public int[] getModifiers() {
