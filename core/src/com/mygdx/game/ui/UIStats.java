@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Agent;
+import com.mygdx.game.Game;
+import com.mygdx.game.ItemManager;
 import com.mygdx.game.assets.Assets;
 
 /**
@@ -49,11 +51,11 @@ public class UIStats extends UIComponent {
         String in= "INTELLIGENCE:  " + player.getStats().getIntelligence();
         String ar = "ARMOUR:  " + player.getStats().getBaseArmourVal();
         String eq = "EQUIPMENT:";
-        String eqHead = "HEAD:" + player.getCurrentEquipment().equipSlots[0];
-        String eqChest = "CHEST:";
-        String eqFeet = "FEET:";
-        String eqAccessory = "ACCESSORY:";
-        String eqWeapon = "WEAPON:";
+        String eqHead = "HEAD:  " + Game.items.getEquipable(player.getCurrentEquipment().equipSlots[0]).getName();
+        String eqChest = "CHEST:  " + Game.items.getEquipable(player.getCurrentEquipment().equipSlots[1]).getName();
+        String eqFeet = "FEET:  " + Game.items.getEquipable(player.getCurrentEquipment().equipSlots[2]).getName();
+        String eqAccessory = "ACCESSORY:  " + Game.items.getEquipable(player.getCurrentEquipment().equipSlots[3]).getName();
+        String eqWeapon = "WEAPON:  " + Game.items.getEquipable(player.getCurrentEquipment().equipSlots[4]).getName();
 
 
         renderText(batch, level, x, y, Color.WHITE);
