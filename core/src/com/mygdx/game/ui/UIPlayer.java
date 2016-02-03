@@ -45,6 +45,7 @@ public class UIPlayer extends UIComponent {
         String mp = "MP:  " + player.getStats().getCurrentMP() + " /" + player.getStats().getMaxMP();
         if (selected) {
             renderText(batch, player.getName(), x, y, Color.WHITE);
+            batch.draw(Assets.arrow, x, y + 45);
         } else {
             renderText(batch, player.getName(), x, y, Color.LIGHT_GRAY);
         }

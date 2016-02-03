@@ -23,6 +23,10 @@ public class UIPartyMenu extends UIComponent {
 
     private List<UIPlayer> playerList;
 
+    // Stuff for the equipment menu.
+    private boolean inEquipmentMenu = false;
+    private int equipmentSelected;
+
     /**
      * Labels for the titles on the party menu.
      */
@@ -35,6 +39,7 @@ public class UIPartyMenu extends UIComponent {
         this.party = party;
         show = false;
         playerSelected = 0;
+        equipmentSelected = 0;
         menuSelected = 1;
         playerList = new ArrayList<UIPlayer>();
         for (int i=0;i<party.size();i++) {
@@ -57,7 +62,6 @@ public class UIPartyMenu extends UIComponent {
             statsMessageBox.setColor(Color.LIGHT_GRAY);
             skillsMessageBox.setColor(Color.LIGHT_GRAY);
             equipmentMessageBox.setColor(Color.LIGHT_GRAY);
-
 
             if (menuSelected == 0) {
                 statsMessageBox.setColor(Color.WHITE);
@@ -88,8 +92,16 @@ public class UIPartyMenu extends UIComponent {
      * Makes the UI component visible on screen.
      */
     public void show() {
+        // Initial select the first player in the menu.
         playerSelected = 0;
+        for(int i = 0; i < playerList.size(); i++) {
+            playerList.get(i).selected = i == 0;
+        }
+
+        // TODO: finish off equipment menu
+
         menuSelected = 1;
+        inEquipmentMenu = false;
         show = true;
     }
 
@@ -111,15 +123,22 @@ public class UIPartyMenu extends UIComponent {
     }
 
     private void optionUpdate() {
-        if (InputHandler.isUpJustPressed()) {
-            playerSelected--;
-        } else if (InputHandler.isDownJustPressed()) {
-            playerSelected++;
-        }
-        if (InputHandler.isLeftJustPressed()) {
-            menuSelected--;
-        } else if (InputHandler.isRightJustPressed()) {
-            menuSelected++;
+        if(!inEquipmentMenu) {
+            if (InputHandler.isUpJustPressed()) {
+                playerSelected--;
+            } else if (InputHandler.isDownJustPressed()) {
+                playerSelected++;
+            }
+            if (InputHandler.isLeftJustPressed()) {
+                menuSelected--;
+            } else if (InputHandler.isRightJustPressed()) {
+                menuSelected++;
+            }
+
+            // Send focus to equipment menu.
+            if(InputHandler.isActJustPressed()) {
+                inEquipmentMenu = true;
+            }
         }
         if (menuSelected < 0)
             menuSelected = 0;
