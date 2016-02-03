@@ -1,23 +1,23 @@
 {
 "equipables":[{	
 		"ID":0,
-		"name":"EMPTY ITEM",
-		"description":"EMPTY ITEM",
+		"name":"No Item",
+		"description":"No Item",
 		"type":"WEAPON",
 		"modifiers":[0, 0, 0, 0, 0],
 		"levelRequirement":0
 	},{	
 		"ID":1,
-		"name":"The Sword of here and now",
-		"description":"It's definitely not old",
+		"name":"Wooden Sword",
+		"description":"Made of wood",
 		"type":"WEAPON",
 		"modifiers":[1, 1, 1, 1, 1],
 		"levelRequirement":0
 	},
 	{
 		"ID":2,
-		"name":"The headpiece of long ago",
-		"description":"It's very old",
+		"name":"Wooden Helmet",
+		"description":"This won't stop much",
 		"type":"HEAD",
 		"modifiers":[2, 2, 2, 2, 2],
 		"levelRequirement":0

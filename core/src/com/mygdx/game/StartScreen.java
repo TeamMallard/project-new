@@ -39,7 +39,7 @@ public class StartScreen extends ScreenAdapter {
         runningTime += delta;
         update();
         batch.begin();
-        batch.draw(Assets.title, 0, 0);
+        batch.draw(Assets.title, 160, 0);
         black.setColor(0,0,0,fadeInCounter);
         fadeInCounter -= 0.01f;
         if (fadeInCounter < 0) {
