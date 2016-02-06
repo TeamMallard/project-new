@@ -1,8 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
-
 import java.util.Arrays;
 
 /**
@@ -13,7 +10,7 @@ public class Equipable {
 
     private int ID = -1;
     private String name, description;
-    private equipType type;
+    private EquipType type;
     private int[] modifiers = new int[5];//Ordered: speed, strength, dexterity, intelligence, armourVal
     private int levelRequirement;
 
@@ -41,7 +38,7 @@ public class Equipable {
      * @param armourValModifier The armourValue Modifier.
      * @param levelRequirement The level requirement of the Equipable.
      */
-    public Equipable(String name, String description, equipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement) {
+    public Equipable(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -85,12 +82,12 @@ public class Equipable {
         return ID;
     }
 
-    public equipType getType() {
+    public EquipType getType() {
         return type;
     }
 
     //Only 5 different types of equipable
-    public enum equipType {
+    public enum EquipType {
         HEAD, CHEST, FEET, ACCESSORY, WEAPON
     }
 }

@@ -24,27 +24,29 @@ public class UIPartyMenu extends UIComponent {
     private List<UIPlayer> playerList;
 
     // Stuff for the equipment menu.
-    private boolean inEquipmentMenu = false;
-    private int equipmentSelected;
+    private boolean hasFocus;
+
+    private UIEquipmentMenu equipmentMenu;
 
     /**
      * Labels for the titles on the party menu.
      */
-    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2, (y + height + 4), width/6, 0, 10);
-    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/6, (y + height +4), width/6, 0, 10);
-    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x+width/2+width/3, (y + height+4), width/6, 0, 10);
+    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2, (y + height + 4), width / 6, 0, 10);
+    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 6, (y + height + 4), width / 6, 0, 10);
+    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 3, (y + height + 4), width / 6, 0, 10);
 
     public UIPartyMenu(float x, float y, float width, float height, PartyManager party) {
         super(x, y, width, height);
         this.party = party;
         show = false;
         playerSelected = 0;
-        equipmentSelected = 0;
         menuSelected = 1;
         playerList = new ArrayList<UIPlayer>();
-        for (int i=0;i<party.size();i++) {
-            playerList.add(new UIPlayer(x,(y + height - 70)-(110*i), width/2, party.getMember(i)));
+        for (int i = 0; i < party.size(); i++) {
+            playerList.add(new UIPlayer(x, (y + height - 70) - (110 * i), width / 2, party.getMember(i)));
         }
+
+        equipmentMenu = new UIEquipmentMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
     }
 
     /**
@@ -65,20 +67,17 @@ public class UIPartyMenu extends UIComponent {
 
             if (menuSelected == 0) {
                 statsMessageBox.setColor(Color.WHITE);
-                new UIStats(x + width/2, (y + height - 386), width/2, party.getMember(playerSelected)).render(batch, patch);
+                new UIStats(x + width / 2, (y + height - 386), width / 2, party.getMember(playerSelected)).render(batch, patch);
             }
             if (menuSelected == 1) {
                 skillsMessageBox.setColor(Color.WHITE);
-                for (int i=0;i<party.getMember(playerSelected).getSkills().size();i++) {
-                    new UISkill(x + width/2, (y + height - 86)-(90*i), width/2, Game.skills.getSkill(party.getMember(playerSelected).getSkills().get(i))).render(batch, patch);
+                for (int i = 0; i < party.getMember(playerSelected).getSkills().size(); i++) {
+                    new UISkill(x + width / 2, (y + height - 86) - (90 * i), width / 2, Game.skills.getSkill(party.getMember(playerSelected).getSkills().get(i))).render(batch, patch);
                 }
             }
             if (menuSelected == 2) {
                 equipmentMessageBox.setColor(Color.WHITE);
-                for(int i = 0; i < party.getEquipables().size(); i++) {
-                    Equipable equipable = Game.items.getEquipable(party.getEquipables().get(i));
-                    new UIEquipment(x + width / 2, (y + height - 71)-(75*i), width/2, equipable).render(batch, patch);
-                }
+                equipmentMenu.render(batch, patch);
             }
 
             statsMessageBox.render(batch, patch);
@@ -94,19 +93,28 @@ public class UIPartyMenu extends UIComponent {
     public void show() {
         // Initial select the first player in the menu.
         playerSelected = 0;
-        for(int i = 0; i < playerList.size(); i++) {
+        for (int i = 0; i < playerList.size(); i++) {
             playerList.get(i).selected = i == 0;
         }
 
         // TODO: finish off equipment menu
 
         menuSelected = 1;
-        inEquipmentMenu = false;
+        hasFocus = true;
         show = true;
+    }
+
+    public void focus() {
+        hasFocus = true;
+    }
+
+    public PartyManager getParty() {
+        return party;
     }
 
     /**
      * Called once per frame to handle input logic for selecting a player and exiting the menu.
+     *
      * @return returns true if the dialogue box should continue to be displayed.
      */
     public boolean update(float delta) {
@@ -114,32 +122,38 @@ public class UIPartyMenu extends UIComponent {
             show = false;
             return false;
         } else {
-            playerList.get(playerSelected).selected = false;
-            optionUpdate();
-            playerList.get(playerSelected).selected = true;
+            if (hasFocus) {
+                playerList.get(playerSelected).selected = false;
+                optionUpdate();
+                playerList.get(playerSelected).selected = true;
+            } else if (equipmentMenu.hasFocus()) {
+                equipmentMenu.update();
+            }
+
             return true;
         }
-
     }
 
     private void optionUpdate() {
-        if(!inEquipmentMenu) {
-            if (InputHandler.isUpJustPressed()) {
-                playerSelected--;
-            } else if (InputHandler.isDownJustPressed()) {
-                playerSelected++;
-            }
-            if (InputHandler.isLeftJustPressed()) {
-                menuSelected--;
-            } else if (InputHandler.isRightJustPressed()) {
-                menuSelected++;
-            }
-
-            // Send focus to equipment menu.
-            if(InputHandler.isActJustPressed()) {
-                inEquipmentMenu = true;
-            }
+        if (InputHandler.isUpJustPressed()) {
+            playerSelected--;
+        } else if (InputHandler.isDownJustPressed()) {
+            playerSelected++;
         }
+        equipmentMenu.selectPlayer(playerSelected);
+
+        if (InputHandler.isLeftJustPressed()) {
+            menuSelected--;
+        } else if (InputHandler.isRightJustPressed()) {
+            menuSelected++;
+        }
+
+        // Send focus to equipment menu.
+        if (InputHandler.isActJustPressed() && menuSelected == 2) {
+            hasFocus = false;
+            equipmentMenu.focus();
+        }
+
         if (menuSelected < 0)
             menuSelected = 0;
         if (menuSelected > 2)
@@ -147,6 +161,6 @@ public class UIPartyMenu extends UIComponent {
         if (playerSelected < 0)
             playerSelected = 0;
         if (playerSelected >= party.size())
-            playerSelected = party.size()-1;
+            playerSelected = party.size() - 1;
     }
 }

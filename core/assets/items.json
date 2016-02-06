@@ -21,6 +21,27 @@
 		"type":"HEAD",
 		"modifiers":[2, 2, 2, 2, 2],
 		"levelRequirement":0
+	},{
+		"ID":3,
+		"name":"Test Sword",
+		"description":"A sword of testing",
+		"type":"WEAPON",
+		"modifiers":[1, 1, 1, 1, 1],
+		"levelRequirement":0
+	},{
+		"ID":4,
+		"name":"Sword of Memes",
+		"description":"Memetic",
+		"type":"WEAPON",
+		"modifiers":[1, 1, 1, 1, 1],
+		"levelRequirement":0
+	},{
+		"ID":5,
+		"name":"Another Sword",
+		"description":"Wow",
+		"type":"WEAPON",
+		"modifiers":[1, 3, 3, 3, 7],
+		"levelRequirement":0
 	}],
 "consumables":[
 	{

@@ -15,7 +15,7 @@ public class ItemManager {
     public ItemManager() {
 
         //Add default Empty equipments to first index of each list
-        equipables.add(new Equipable("EmptyEquipment", "EmptyEquipment", Equipable.equipType.WEAPON, 0, 0, 0, 0, 0, 0));
+        equipables.add(new Equipable("EmptyEquipment", "EmptyEquipment", Equipable.EquipType.WEAPON, 0, 0, 0, 0, 0, 0));
         consumables.add(new Consumable("EmptyConsumable","EmptyConsumable", Consumable.consumeType.HEAL,0));
     }
 
