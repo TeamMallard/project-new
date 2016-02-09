@@ -60,7 +60,6 @@ public class GameWorld {
     public void update(float delta) {
         InputHandler.update();
         level.update(delta);
-        System.out.println(gameState);
         uiManager.updateNotification(delta);
         switch (gameState) {
             case BATTLE_DIALOGUE:
@@ -113,7 +112,6 @@ public class GameWorld {
                 break;
 
             case SHOP_MENU:
-            	System.out.println("test");
                 if (!uiManager.updateShop(delta)){
                     gameState = GameState.FREEROAM;
                 }
@@ -122,7 +120,8 @@ public class GameWorld {
             case INTERACTION:
                 if (!interactingNPC.updateInteracting(delta)) {
                     interactingNPC.action(this);
-                    gameState = GameState.FREEROAM;
+                    if(gameState != GameState.SHOP_MENU)
+                    	gameState = GameState.FREEROAM;
                 }
                 break;
 

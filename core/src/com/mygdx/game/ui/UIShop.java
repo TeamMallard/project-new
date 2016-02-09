@@ -108,7 +108,6 @@ public class UIShop extends UIComponent {
      * @return returns true if the dialogue box should continue to be displayed.
      */
     public boolean update(float delta) {
-        System.out.println("test");
         if (InputHandler.isEscJustPressed()) {
             show = false;
             return false;
@@ -141,8 +140,8 @@ public class UIShop extends UIComponent {
             menuSelected = 1;
         if (itemSelected < 0)
         	itemSelected = 0;
-        if (itemSelected >= party.size())
-        	itemSelected = party.size() - 1;
+        if (itemSelected >= party.getEquipables().size())
+        	itemSelected = party.getEquipables().size() - 1;
     }
     
     public class Item extends UIComponent {
