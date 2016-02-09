@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class UIManager {
     public UIPartyMenu partyMenu;
+    public UIShop shop;
     public List<UIMessageBox> notifications;
 
     private List<UIComponent> uiComponents;
@@ -43,6 +44,15 @@ public class UIManager {
      */
     public boolean updatePartyMenu(float delta) {
         return partyMenu.update(delta);
+    }
+
+
+    /**
+     * Called once per frame to update the shop.
+     * @return false if the shop is closed.
+     */
+    public boolean updateShop(float delta) {
+        return shop.update(delta);
     }
 
     /**
@@ -101,5 +111,9 @@ public class UIManager {
 
     public List<UIComponent> getUIComponents() {
         return uiComponents;
+    }
+
+    public void setShop(UIShop shop) {
+    	this.shop = shop;
     }
 }

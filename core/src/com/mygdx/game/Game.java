@@ -25,7 +25,7 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public static float masterVolume = 0.1f;
 
-	private WorldScreen worldScreen;
+	public static WorldScreen worldScreen;
 	private BattleScreen battleScreen;
 
 	public boolean wonBattle;

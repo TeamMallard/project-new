@@ -63,5 +63,9 @@ public class WorldScreen extends ScreenAdapter {
     public void dispose() {
         worldRenderer.dispose();
     }
+    
+    public GameWorld getGameWorld() {
+        return gameWorld;
+    }
 }
 

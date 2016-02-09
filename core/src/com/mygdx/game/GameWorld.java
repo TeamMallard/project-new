@@ -9,6 +9,7 @@ import com.mygdx.game.entity.RoboNPC;
 import com.mygdx.game.entity.SallyNPC;
 import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIScore;
+import com.mygdx.game.ui.UIShop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,7 @@ public class GameWorld {
     public void update(float delta) {
         InputHandler.update();
         level.update(delta);
+        System.out.println(gameState);
         uiManager.updateNotification(delta);
         switch (gameState) {
             case BATTLE_DIALOGUE:
@@ -110,6 +112,13 @@ public class GameWorld {
                 }
                 break;
 
+            case SHOP_MENU:
+            	System.out.println("test");
+                if (!uiManager.updateShop(delta)){
+                    gameState = GameState.FREEROAM;
+                }
+                break;
+
             case INTERACTION:
                 if (!interactingNPC.updateInteracting(delta)) {
                     interactingNPC.action(this);
@@ -138,6 +147,17 @@ public class GameWorld {
         gameState = GameState.BATTLE;
         this.battleParams = battleParams;
         game.newBattle(battleParams);
+    }
+
+    /**
+     * changes the game state to BATTLE and loads a new battle in the Game object.
+     * @param battleParams The parameters used to create a battle.
+     */
+    public void setShop(UIShop shop){
+        System.out.println(gameState);
+        uiManager.setShop(shop);
+        uiManager.addUIComponent(shop);
+        gameState = GameState.SHOP_MENU;
     }
 
 
