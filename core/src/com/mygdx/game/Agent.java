@@ -77,11 +77,6 @@ public class Agent implements Comparable<Agent>{
         ENEMY,FRIENDLY
     }
 
-    public void equipEquipment(int ID){
-
-        equipment.equip(ID);
-
-    }
 
     public CurrentEquipment getCurrentEquipment() {
         return equipment;

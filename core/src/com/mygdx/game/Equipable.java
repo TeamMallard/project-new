@@ -86,8 +86,24 @@ public class Equipable {
         return type;
     }
 
-    //Only 5 different types of equipable
+    /**
+     * Represents each different type of equipment.
+     */
     public enum EquipType {
-        HEAD, CHEST, FEET, ACCESSORY, WEAPON
+        HEAD (0),
+        CHEST (1),
+        FEET (2),
+        ACCESSORY (3),
+        WEAPON (4);
+
+        private final int slot;
+
+        EquipType(int slot) {
+            this.slot = slot;
+        }
+
+        public int slot() {
+            return slot;
+        }
     }
 }

@@ -56,32 +56,45 @@ public class CurrentEquipment {
     }
 
     //NEED TO DO SOMETHING ABOUT UNEQUIPPING ALSO
-    public void equip(int ID){
-        Equipable item = Game.items.getEquipable(ID);
-        switch (item.getType()){
-            case HEAD:{
-                equipSlots[0] = ID;
-                break;
-            }
-            case CHEST:{
-                equipSlots[1] = ID;
-                break;
-            }
-            case FEET:{
-                equipSlots[2] = ID;
-                break;
-            }
-            case ACCESSORY:{
-                equipSlots[3] = ID;
-                break;
-            }
-            case WEAPON:{
-                equipSlots[4] = ID;
-                break;
+    public void equip(int id){
+        Equipable item = Game.items.getEquipable(id);
+        equipSlots[item.getType().slot()] = id;
+        totalStatModifiers = calculateTotalStatModifiers();
+    }
+
+    /**
+     * Unequips the equipment in the specified slot.
+     * @param slot the slot to unequip from
+     * @return the id of the item that was in the slot
+     */
+    public int unequip(Equipable.EquipType slot) {
+        int id = equipSlots[slot.slot()];
+        equipSlots[slot.slot()] = 0;
+        return id;
+    }
+
+    /**
+     * Checks if something is equipped in the specified slot.
+     * @param slot the slot to check for equipment
+     * @return true if there is an item equipped in the slot, false if not
+     */
+    public boolean isEquipped(Equipable.EquipType slot) {
+        return equipSlots[slot.slot()] != 0;
+    }
+
+    /**
+     * @return the total number of equipment that the player is currently wearing
+     */
+    public int getNumberEquipped() {
+        int equipped = 0;
+
+        for (int equipSlot : equipSlots) {
+            if (equipSlot != 0) {
+                equipped++;
             }
         }
-        totalStatModifiers=calculateTotalStatModifiers();
 
+        return equipped;
     }
 
     /**

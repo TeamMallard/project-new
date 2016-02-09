@@ -31,6 +31,7 @@ public class Assets {
     public static TextureAtlas atlas;
     public static Texture dialoguePointer;
     public static Texture arrow;
+    public static Texture shield;
 
     private static final int PLAYER_WALKSHEET_COLS = 4;
     private static final int PLAYER_WALKSHEET_ROWS = 2;
@@ -108,6 +109,7 @@ public class Assets {
         patch = atlas.createPatch("knob2");
         dialoguePointer = new Texture("dialoguePointer.png");
         arrow = new Texture("arrow.png");
+        shield = new Texture("shield.png");
 
         sfx_menuMove = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuMove.wav"));
         sfx_menuSelect = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuSelect.wav"));

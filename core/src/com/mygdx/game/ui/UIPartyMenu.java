@@ -135,9 +135,9 @@ public class UIPartyMenu extends UIComponent {
     }
 
     private void optionUpdate() {
-        if (InputHandler.isUpJustPressed()) {
+        if (InputHandler.isUpJustPressed() && playerSelected > 0) {
             playerSelected--;
-        } else if (InputHandler.isDownJustPressed()) {
+        } else if (InputHandler.isDownJustPressed() && playerSelected < playerList.size() - 1) {
             playerSelected++;
         }
         equipmentMenu.selectPlayer(playerSelected);
