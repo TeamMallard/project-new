@@ -11,129 +11,91 @@ import com.badlogic.gdx.Input;
 public class InputHandler {
     private static Boolean isInputEnabled=true;
 
-    private static Boolean upPressed = false;
-    private static Boolean downPressed = false;
-    private static Boolean rightPressed = false;
-    private static Boolean leftPressed = false;
-    private static Boolean actPressed = false;
-    private static Boolean escPressed = false;
-
-    private static Boolean upJustPressed = false;
-    private static Boolean downJustPressed = false;
-    private static Boolean rightJustPressed = false;
-    private static Boolean leftJustPressed = false;
-    private static Boolean actJustPressed = false;
-    private static Boolean escJustPressed = false;
-
-    private static final int UP = Input.Keys.W;
-    private static final int DOWN = Input.Keys.S;
-    private static final int LEFT = Input.Keys.A;
-    private static final int RIGHT = Input.Keys.D;
-    private static final int ACT = Input.Keys.E;
-    private static final int ESC = Input.Keys.Q;
-
+    private static final int[] UP = {Input.Keys.W, Input.Keys.UP};
+    private static final int[] DOWN = {Input.Keys.S, Input.Keys.DOWN};
+    private static final int[] LEFT = {Input.Keys.A, Input.Keys.LEFT};
+    private static final int[] RIGHT = {Input.Keys.D, Input.Keys.RIGHT};
+    private static final int[] ACT = {Input.Keys.E, Input.Keys.ENTER, Input.Keys.Z};
+    private static final int[] ESC = {Input.Keys.Q, Input.Keys.ESCAPE, Input.Keys.X};
+    
     /**
-     * Updates and polls to see which inputs are active.
+     * Checks whether any of the keys from the list is pressed
+     * @param possibleKeys a set of possible keys for a given action
+     * @return whether any of the given keys is pressed
      */
-    public static void update() {
-        if(isInputEnabled) {
-            upPressed = false;
-            upJustPressed = false;
-            if (Gdx.input.isKeyPressed(UP)) {
-                upPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(UP)) {
-                upJustPressed = true;
-            }
-
-            downPressed = false;
-            downJustPressed = false;
-            if (Gdx.input.isKeyPressed(DOWN)) {
-                downPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(DOWN)) {
-                downJustPressed = true;
-            }
-
-            rightPressed = false;
-            rightJustPressed = false;
-            if (Gdx.input.isKeyPressed(RIGHT)) {
-                rightPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(RIGHT)) {
-                rightJustPressed = true;
-            }
-
-            leftPressed = false;
-            leftJustPressed = false;
-            if (Gdx.input.isKeyPressed(LEFT)) {
-                leftPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(LEFT)) {
-                leftJustPressed = true;
-            }
-
-            actPressed = false;
-            actJustPressed = false;
-            if (Gdx.input.isKeyPressed(ACT)) {
-                actPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(ACT)) {
-                actJustPressed = true;
-            }
-
-            escPressed = false;
-            escJustPressed = false;
-            if (Gdx.input.isKeyPressed(ESC)) {
-                escPressed = true;
-            }
-            if (Gdx.input.isKeyJustPressed(ESC)) {
-                escJustPressed = true;
-            }
-        }
+    private static boolean anyKeyPressed(int[] possibleKeys){
+    	for(int key:possibleKeys){
+    		if(Gdx.input.isKeyPressed(key)){
+    			return true;
+    		}
+    	}
+    	return false;
     }
+    
+    /**
+     * Checks whether any of the keys from the list is the only key pressed
+     * @param possibleKeys a set of possible keys for a given action
+     * @return whether any of the given keys is the only one pressed
+     */
+    private static boolean anyKeyJustPressed(int[] possibleKeys){
+    	for(int key:possibleKeys){
+    		if(Gdx.input.isKeyJustPressed(key)){
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    //TODO remove and refactor
+    public static void update() {}
 
     public static Boolean isUpPressed() {
-        return upPressed;
+        return isInputEnabled?anyKeyPressed(UP):false;
     }
 
     public static Boolean isUpJustPressed() {
-        return upJustPressed;
+        return isInputEnabled?anyKeyJustPressed(UP):false;
     }
 
     public static Boolean isDownPressed() {
-        return downPressed;
+    	return isInputEnabled?anyKeyPressed(DOWN):false;
     }
 
     public static Boolean isDownJustPressed() {
-        return downJustPressed;
+    	return isInputEnabled?anyKeyJustPressed(DOWN):false;
     }
 
     public static Boolean isRightPressed() {
-        return rightPressed;
+    	return isInputEnabled?anyKeyPressed(RIGHT):false;
     }
 
     public static Boolean isRightJustPressed() {
-        return rightJustPressed;
+    	return isInputEnabled?anyKeyJustPressed(RIGHT):false;
     }
 
     public static Boolean isLeftPressed() {
-        return leftPressed;
+    	return isInputEnabled?anyKeyPressed(LEFT):false;
     }
 
     public static Boolean isLeftJustPressed() {
-        return leftJustPressed;
+    	return isInputEnabled?anyKeyJustPressed(LEFT):false;
     }
 
-    public static Boolean isActPressed() { return actPressed; }
+    public static Boolean isActPressed() {
+    	return isInputEnabled?anyKeyPressed(ACT):false;
+    	}
 
     public static Boolean isActJustPressed() {
-        return actJustPressed;
+    	return isInputEnabled?anyKeyJustPressed(ACT):false;
     }
 
-    public static Boolean isEscPressed(){return escPressed;}
+    public static Boolean isEscPressed(){
+    	return isInputEnabled?anyKeyPressed(ESC):false;
+    	}
 
-    public static Boolean isEscJustPressed(){return escJustPressed;}
+    public static Boolean isEscJustPressed(){
+    	return isInputEnabled?anyKeyJustPressed(ESC):false;
+    	}
 
     public enum inputType{
         UP,DOWN,LEFT,RIGHT,ACT,ESC
@@ -144,20 +106,8 @@ public class InputHandler {
      */
     public static void disableAllInput(){
         isInputEnabled=false;
-        upPressed = false;
-        downPressed = false;
-        rightPressed = false;
-        leftPressed = false;
-        actPressed = false;
-        escPressed = false;
-
-        upJustPressed = false;
-        downJustPressed = false;
-        rightJustPressed = false;
-        leftJustPressed = false;
-        actJustPressed = false;
-        escJustPressed = false;
     }
+    
     public static void enableAllInput(){
         isInputEnabled=true;
     }
