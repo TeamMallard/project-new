@@ -1,6 +1,5 @@
 package com.mygdx.game.ui;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -10,8 +9,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,6 +130,10 @@ public class UIEquipmentMenu extends UIComponent {
             updateEquipment();
 
             selectedEquipment = 0;
+            hasFocus = false;
+            parent.focus();
+        }
+        if(currentEquipment.length == 0) {
             hasFocus = false;
             parent.focus();
         }

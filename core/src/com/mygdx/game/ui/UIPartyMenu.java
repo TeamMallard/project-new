@@ -27,13 +27,15 @@ public class UIPartyMenu extends UIComponent {
     private boolean hasFocus;
 
     private UIEquipmentMenu equipmentMenu;
+    private UIConsumableMenu consumableMenu;
 
     /**
      * Labels for the titles on the party menu.
      */
-    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2, (y + height + 4), width / 6, 0, 10);
-    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 6, (y + height + 4), width / 6, 0, 10);
-    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 3, (y + height + 4), width / 6, 0, 10);
+    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2, (y + height + 4), width / 8, 0, 10);
+    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 8, (y + height + 4), width / 8, 0, 10);
+    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 4, (y + height + 4), width / 8, 0, 10);
+    private UIMessageBox consumableMessageBox = new UIMessageBox("CONSUMABLE", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + 3*(width / 8), (y + height + 4), width / 8, 0, 10);
 
     public UIPartyMenu(float x, float y, float width, float height, PartyManager party) {
         super(x, y, width, height);
@@ -47,6 +49,7 @@ public class UIPartyMenu extends UIComponent {
         }
 
         equipmentMenu = new UIEquipmentMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
+        consumableMenu = new UIConsumableMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
     }
 
     /**
@@ -64,6 +67,7 @@ public class UIPartyMenu extends UIComponent {
             statsMessageBox.setColor(Color.LIGHT_GRAY);
             skillsMessageBox.setColor(Color.LIGHT_GRAY);
             equipmentMessageBox.setColor(Color.LIGHT_GRAY);
+            consumableMessageBox.setColor(Color.LIGHT_GRAY);
 
             if (menuSelected == 0) {
                 statsMessageBox.setColor(Color.WHITE);
@@ -79,10 +83,15 @@ public class UIPartyMenu extends UIComponent {
                 equipmentMessageBox.setColor(Color.WHITE);
                 equipmentMenu.render(batch, patch);
             }
+            if (menuSelected == 3) {
+            	consumableMessageBox.setColor(Color.WHITE);
+            	consumableMenu.render(batch, patch);
+            }
 
             statsMessageBox.render(batch, patch);
             skillsMessageBox.render(batch, patch);
             equipmentMessageBox.render(batch, patch);
+            consumableMessageBox.render(batch, patch);
 
         }
     }
@@ -128,6 +137,8 @@ public class UIPartyMenu extends UIComponent {
                 playerList.get(playerSelected).selected = true;
             } else if (equipmentMenu.hasFocus()) {
                 equipmentMenu.update();
+            } else if (consumableMenu.hasFocus()) {
+            	consumableMenu.update();
             }
 
             return true;
@@ -153,11 +164,15 @@ public class UIPartyMenu extends UIComponent {
             hasFocus = false;
             equipmentMenu.focus();
         }
+        if (InputHandler.isActJustPressed() && menuSelected == 3) {
+            hasFocus = false;
+            consumableMenu.focus();
+        }
 
         if (menuSelected < 0)
             menuSelected = 0;
-        if (menuSelected > 2)
-            menuSelected = 2;
+        if (menuSelected > 3)
+            menuSelected = 3;
         if (playerSelected < 0)
             playerSelected = 0;
         if (playerSelected >= party.size())
