@@ -97,13 +97,12 @@ public class BattleAnimator {
         originalX=agent.getX();
         originalY=agent.getY();
         targetX=thisTargetX;
-        targetY=thisTargetY;
+        targetY=agent.getY();
 
         if(targetX<originalX){
-            targetX+=52;
-        }
-        else{
-            targetX-=52;
+            targetX = agent.getX() - 100;
+        } else{
+            targetX = agent.getX() + 100;
         }
 
         calculateMovement();

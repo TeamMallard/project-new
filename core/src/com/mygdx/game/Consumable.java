@@ -46,6 +46,10 @@ public class Consumable{
     public int getPower() {
         return power;
     }
+    
+    public int getID() {
+        return ID;
+    }
 
     @Override
     public String toString() {
