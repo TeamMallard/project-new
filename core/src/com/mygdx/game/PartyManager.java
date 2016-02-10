@@ -13,7 +13,6 @@ public class PartyManager {
     private List<Agent> partyList = new ArrayList<Agent>();
     private List<Integer> equipables = new ArrayList<Integer>();
     private List<Integer> consumables = new ArrayList<Integer>();
-    private List<Integer> consumablesQuantity = new ArrayList<Integer>();
 
 
     public PartyManager() {
