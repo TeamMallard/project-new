@@ -1,0 +1,26 @@
+{
+"shops":[{
+	"ID":1,
+	"equipment":[1],
+	"consumables":[1],
+	"consumablesQuantity":[1]
+	},
+	{
+	"ID":2,
+	"equipment":[1,2],
+	"consumables":[1,2,3],
+	"consumablesQuantity":[2,2]
+	},
+	{
+	"ID":3,
+	"equipment":[1,2,3],
+	"consumables":[1,2,3],
+	"consumablesQuantity":[3,3,3]
+	},
+	{
+	"ID":4,
+	"equipment":[1,2,3,4],
+	"consumables":[1,2,3,4],
+	"consumablesQuantity":[4,4,4,4]
+	}]
+}

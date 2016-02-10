@@ -53,6 +53,10 @@ public class JsonLoader {
     public PartyManager parsePartyManager(String file)throws FileNotFoundException, IOException{
         return json.fromJson(PartyManager.class, Gdx.files.internal(file));
     }
+    
+    public ShopManager parseShopManager(String file)throws FileNotFoundException, IOException{
+        return json.fromJson(ShopManager.class, Gdx.files.internal(file));
+    }
 
 
 }

@@ -20,6 +20,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public static PartyManager enemies;
 	public static ItemManager items;
 	public static SkillManager skills;
+	public static ShopManager shops;
 	private static JsonLoader jsonLoader = new JsonLoader();
 	public static int pointsScore=0;
 
@@ -48,6 +49,8 @@ public class Game extends com.badlogic.gdx.Game {
 			items = jsonLoader.parseItemManager("items.json");
 			party = jsonLoader.parsePartyManager("party.json");
 			enemies = jsonLoader.parsePartyManager("enemies.json");
+			shops = jsonLoader.parseShopManager("shops.json");
+			System.out.println(shops.toString());
 		}
 		catch (FileNotFoundException ex) {
 			// Do something with 'ex'
