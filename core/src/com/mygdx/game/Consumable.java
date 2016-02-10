@@ -4,11 +4,11 @@ public class Consumable{
 
     private int ID = -1;
     private String name, description;
-    private consumeType type;
+    private ConsumeType type;
     private int power;
     private int cost;
 
-    public Consumable(String name, String description, consumeType type, int power, int cost) {
+    public Consumable(String name, String description, ConsumeType type, int power, int cost) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -25,7 +25,7 @@ public class Consumable{
         this.ID = id;
     }
 
-    public enum consumeType {
+    public enum ConsumeType {
         HEAL, REVIVE, MANAHEAL, SPEEDBUFF, STRENGTHBUFF, DEXTERITYBUFF, INTELLIGENCEBUFF;
     }
 
@@ -38,7 +38,7 @@ public class Consumable{
         return description;
     }
 
-    public consumeType getType() {
+    public ConsumeType getType() {
         return type;
     }
 
