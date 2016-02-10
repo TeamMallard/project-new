@@ -9,6 +9,7 @@ import com.mygdx.game.Level;
 import com.mygdx.game.Statistics;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
+import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.ui.UIManager;
 
 import java.util.ArrayList;
@@ -55,6 +56,12 @@ public class RoboNPC extends NPC {
 
 
         gameWorld.setBattle(params);
+
+        // If Roboduck is dead then the player has completed the objective.
+        if(enemyDuck.isDead() && Game.objective instanceof DefeatRoboduckObjective) {
+            ((DefeatRoboduckObjective) Game.objective).setComplete();
+        }
+
         level.characters.remove(this);
 
     }
