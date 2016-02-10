@@ -54,10 +54,6 @@ public class Consumable{
         return cost;
     }
 
-    public int getID() {
-        return ID;
-    }
-
     @Override
     public String toString() {
         return "Consumable{" +
