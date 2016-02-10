@@ -136,6 +136,10 @@ public class UIEquipmentMenu extends UIComponent {
             hasFocus = false;
             parent.focus();
         }
+        if(currentEquipment.length == 0) {
+            hasFocus = false;
+            parent.focus();
+        }
     }
 
     private void setPlayerEquipment(Agent player, int selectedEquipment)

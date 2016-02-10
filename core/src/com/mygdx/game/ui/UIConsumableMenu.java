@@ -114,11 +114,37 @@ public class UIConsumableMenu extends UIComponent {
         }
 
         if(InputHandler.isActJustPressed()) {
-        	//USE CONSUMABLE
+        	Consumable item = currentConsumable[selectedConsumable].consumable;
+            switch(item.getType()){
+                case HEAL:{
+                    Assets.sfx_healNoise.play(Game.masterVolume);
+                    this.getSelectedPlayer().dealHealth(item.getPower());
+                    partyManager.getConsumables().remove(selectedConsumable);
+                    break;
+                }
+                case REVIVE:{
+                    Assets.sfx_healNoise.play(Game.masterVolume);
+                    this.getSelectedPlayer().dealHealth(item.getPower());
+                    partyManager.getConsumables().remove(selectedConsumable);
+                    break;
+                }
+                case MANAHEAL:{
+                    Assets.sfx_healNoise.play(Game.masterVolume);
+                    this.getSelectedPlayer().giveMana(item.getPower());
+                    partyManager.getConsumables().remove(selectedConsumable);
+                    break;
+                }
+            }
+            updateConsumable();
         	
             hasFocus = false;
             parent.focus();
         }
+        if(currentConsumable.length == 0) {
+            hasFocus = false;
+            parent.focus();
+        }
+        	
     }
 
     public class Item extends UIComponent {
