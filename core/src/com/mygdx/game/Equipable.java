@@ -13,6 +13,7 @@ public class Equipable {
     private EquipType type;
     private int[] modifiers = new int[5];//Ordered: speed, strength, dexterity, intelligence, armourVal
     private int levelRequirement;
+    private int cost;
 
     @Override
     public String toString() {
@@ -37,8 +38,9 @@ public class Equipable {
      * @param intelligenceModifier The intelligenceModifier.
      * @param armourValModifier The armourValue Modifier.
      * @param levelRequirement The level requirement of the Equipable.
+     * @param cost
      */
-    public Equipable(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement) {
+    public Equipable(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement, int cost) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -48,6 +50,7 @@ public class Equipable {
         this.modifiers[3] = intelligenceModifier;
         this.modifiers[4] = armourValModifier;
         this.levelRequirement = levelRequirement;
+        this.cost = cost;
     }
 
     /**
@@ -84,6 +87,10 @@ public class Equipable {
 
     public EquipType getType() {
         return type;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     /**

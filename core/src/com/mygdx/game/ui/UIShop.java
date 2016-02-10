@@ -21,7 +21,11 @@ public class UIShop extends UIComponent {
 
     public static final int MAX_ITEMS_PER_PAGE = 5;
 
+    protected float paddingX = 20;
+    protected float paddingY = 10;
+
     private PartyManager party;
+    private Shop shop;
     private boolean show;
 
     // Whether the current focus is on the list of shop items instead of player items.
@@ -34,6 +38,20 @@ public class UIShop extends UIComponent {
     // Selected item of each menu.
     private int selectedPlayerItem = 0;
     private int selectedShopItem = 0;
+    /**
+     * Labels for the titles on the party menu.
+     */
+    private UIMessageBox buyMessageBox = new UIMessageBox("BUY", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x, y + 75, width / 6, 0, 10);
+    private UIMessageBox sellMessageBox = new UIMessageBox("SELL", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + 460, y + 75, width / 6, 0, 10);
+
+    public UIShop(float x, float y, float width, float height, PartyManager party, Shop shop) {
+        super(x, y, width, height);
+        this.party = party;
+        this.shop = shop;
+        updateItems();
+
+        show = true;
+    }
 
     public ShopItem[] generatePlayerItems() {
         List<ShopItem> items = new ArrayList<ShopItem>();
@@ -53,27 +71,21 @@ public class UIShop extends UIComponent {
     public ShopItem[] generateShopItems() {
         List<ShopItem> items = new ArrayList<ShopItem>();
         int index = 0;
-        // TODO: populate it.
+
+        for(int i = 0; i < shop.getConsumables().size(); i++) {
+            items.add(new ConsumableShopItem(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getConsumable(shop.getConsumables().get(i))));
+        }
+
+        for(int i = 0; i < shop.getEquipment().size(); i++) {
+            items.add(new EquipmentShopItem(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getEquipable(shop.getEquipment().get(i))));
+        }
 
         return items.toArray(new ShopItem[items.size()]);
     }
-
+    
     public void updateItems() {
         currentPlayerItems = generatePlayerItems();
         currentShopItems = generateShopItems();
-    }
-
-    /**
-     * Labels for the titles on the party menu.
-     */
-    private UIMessageBox buyMessageBox = new UIMessageBox("BUY", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x, y + 75, width / 6, 0, 10);
-    private UIMessageBox sellMessageBox = new UIMessageBox("SELL", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + 460, y + 75, width / 6, 0, 10);
-    
-    public UIShop(float x, float y, float width, float height, PartyManager party) {
-        super(x, y, width, height);
-        this.party = party;
-        show = true;
-        updateItems();
     }
 
     /**
@@ -100,6 +112,8 @@ public class UIShop extends UIComponent {
                 }
             }
 
+            renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentShopItems.length / MAX_ITEMS_PER_PAGE), x, y - 2 * height + 120, Color.WHITE, Assets.consolas16);
+
             // Render player items.
             page = selectedPlayerItem / MAX_ITEMS_PER_PAGE;
             offset = page * MAX_ITEMS_PER_PAGE;
@@ -112,45 +126,19 @@ public class UIShop extends UIComponent {
                 }
             }
 
-            // Draw arrow in appropriate position.
-
-        	//BUY ITEMS
-        	/*int i;
-            for(i = 0; i < party.getEquipables().size(); i++) {
-                Equipable equipable = Game.items.getEquipable(party.getEquipables().get(i));
-                new EquipmentShopItem(x, y - (75*i), 450, equipable).render(batch, patch);
-
-                if(itemSelected == i && leftFocus == true) {
-                    batch.draw(Assets.arrow, x, y - (75*i) + 30);
-                }
-            }
-            for(int ii = 0; ii < party.getConsumables().size()-2; ii++) {
-                Consumable consumable = Game.items.getConsumable(party.getConsumables().get(ii));
-                new ConsumableShopItem(x, y - (75*(ii + i)), 450, consumable).render(batch, patch);
-
-                if(itemSelected == ii + i && leftFocus == true) {
-                    batch.draw(Assets.arrow, x, y - (75*(ii + i)) + 30);
-                }
-            }
-            //SELL ITEMS
-            for(i = 0; i < party.getEquipables().size(); i++) {
-                Equipable equipable = Game.items.getEquipable(party.getEquipables().get(i));
-                new EquipmentShopItem(x+460, y - (75*i), 450, equipable).render(batch, patch);
-
-                if(itemSelected == i && leftFocus == false) {
-                    batch.draw(Assets.arrow, x+460, y - (75*i) + 30);
-                }
-            }
-            for(int ii = 0; ii < party.getConsumables().size()-2; ii++) {
-                Consumable consumable = Game.items.getConsumable(party.getConsumables().get(ii));
-                new ConsumableShopItem(x+460, y - (75*(ii + i)), 450, consumable).render(batch, patch);
-
-                if(itemSelected == ii + i && leftFocus == false) {
-                    batch.draw(Assets.arrow, x+460, y - (75*(ii + i)) + 30);
-                }
-            }*/
+            renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentPlayerItems.length / MAX_ITEMS_PER_PAGE), x + 460, y - 2 * height + 120, Color.WHITE, Assets.consolas16);
         }
 
+    }
+
+    private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
+        GlyphLayout layout = new GlyphLayout(font, message,
+                Color.BLACK, width - paddingX * 2, Align.left, false);
+
+        font.draw(batch, layout, x + paddingX, y + height + paddingY - 2);
+        layout.setText(font, message,
+                color, width - paddingX * 2, Align.left, false);
+        font.draw(batch, layout, x + paddingX, y + height + paddingY);
     }
 
     /**
@@ -198,30 +186,74 @@ public class UIShop extends UIComponent {
         }
         
         if (InputHandler.isLeftJustPressed()) {
-            shopItemsFocus = false;
+            shopItemsFocus = true;
         } else if (InputHandler.isRightJustPressed()) {
-        	shopItemsFocus = true;
+        	shopItemsFocus = false;
         }
 
         if (InputHandler.isActJustPressed()) {
-            //BUY/SELL ITEM
+            if(shopItemsFocus) {
+                buy();
+                selectedShopItem -= selectedShopItem > 0 ? 1 : 0;
+            } else {
+                sell();
+                selectedPlayerItem -= selectedPlayerItem > 0 ? 1 : 0;
+            }
+
+            updateItems();
         }
     }
 
     /**
      * Sells the specified item from currentPlayerItems to the shop.
-     * @param index the item to sell to the shop
      */
-    private void sell(int index) {
+    private void sell() {
+        ShopItem selected = currentPlayerItems.length > 0 ? currentPlayerItems[selectedPlayerItem] : null;
 
+        if(selected == null) {
+            return;
+        }
+
+        if (selected instanceof ConsumableShopItem) {
+            party.getConsumables().remove(selectedPlayerItem);
+            shop.getConsumables().add(((ConsumableShopItem) selected).consumable.getID());
+        } else if (selected instanceof EquipmentShopItem) {
+            party.getEquipables().remove(selectedPlayerItem - party.getConsumables().size());
+            shop.getEquipment().add(((EquipmentShopItem) selected).equipment.getID());
+        }
+
+
+
+        Game.pointsScore += (int) Math.ceil(selected.getCost() * 0.8f);
+        System.out.println((int) Math.ceil(selected.getCost() * 0.8f));
     }
 
     /**
-     * Buys the specified item from currentShopItem to the player.
-     * @param index the item to buy from the shop
+     * Buys the selected item from currentShopItem to the player.
      */
-    private void buy(int index) {
+    private void buy() {
+        ShopItem selected = currentShopItems.length > 0 ? currentShopItems[selectedShopItem] : null;
 
+        if(selected == null) {
+            return;
+        }
+
+        System.out.println("Buying index " + selectedShopItem);
+
+        if (selected.getCost() <= Game.pointsScore) {
+            if(selected instanceof ConsumableShopItem) {
+                // Item is a consumable.
+                party.getConsumables().add(((ConsumableShopItem) selected).consumable.getID());
+                shop.getConsumables().remove(selectedShopItem);
+            } else if (selected instanceof EquipmentShopItem) {
+                // Item is equipment.
+                party.getEquipables().add(((EquipmentShopItem) selected).equipment.getID());
+                // Account for equipment being listed after consumables.
+                shop.getEquipment().remove(selectedShopItem - shop.getConsumables().size());
+            }
+
+            Game.pointsScore -= selected.getCost();
+        }
     }
     
     public abstract class ShopItem extends UIComponent {
@@ -239,6 +271,8 @@ public class UIShop extends UIComponent {
 
         @Override
         public abstract void render(SpriteBatch batch, NinePatch patch);
+
+        public abstract int getCost();
 
         /**
          * Helper function for render that actually does the rendering.
@@ -274,7 +308,12 @@ public class UIShop extends UIComponent {
             patch.draw(batch, x, y, width, height + (paddingY * 2));
             renderText(batch, consumable.getName(), x, y, Color.WHITE, font);
             renderText(batch, consumable.getDescription(), x, y - LINE_HEIGHT, Color.LIGHT_GRAY, font);
-            renderText(batch, "COST: 0", x + 324, y, Color.WHITE, font);
+            renderText(batch, "COST: " + consumable.getCost(), x + 324, y, Color.WHITE, font);
+        }
+
+        @Override
+        public int getCost() {
+            return consumable.getCost();
         }
     }
 
@@ -312,8 +351,13 @@ public class UIShop extends UIComponent {
             //renderText(batch, "MP COST: " + skill.getMPCost(), x+250, y, Color.WHITE);
 
             renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 350, y - LINE_HEIGHT, Color.WHITE, font);
-            renderText(batch, "COST: 0", x + 324, y, Color.WHITE, font);
+            renderText(batch, "COST: " + equipment.getCost(), x + 324, y, Color.WHITE, font);
             renderText(batch, statString, x, y - LINE_HEIGHT * 2, Color.WHITE, smallFont);
+        }
+
+        @Override
+        public int getCost() {
+            return equipment.getCost();
         }
     }
 }

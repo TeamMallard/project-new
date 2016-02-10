@@ -16,21 +16,20 @@ public class ShopManager {
     }
 
     /**
-     * Add new Skill.
-     * @param skill The Skill to add
+     * Adds a new shop.
+     * @param shop the Shop to add
      */
-    public void addSkill(Shop shop) {
-
+    public void addShop(Shop shop) {
     	shop.updateID(shops.size()); //Gives the shop the ID of it's index
         shops.add(shop);//Check size function
     }
 
     /**
      * Returns the Skill stored at the given index.
-     * @param skillID The index of the Skill to retrieve
-     * @return Skill
+     * @param shopID the index of the Sgop to retrieve
+     * @return Shop the shop
      */
-    public Shop getSkill(int shopID) {
+    public Shop getShop(int shopID) {
         return shops.get(shopID);
     }
 
