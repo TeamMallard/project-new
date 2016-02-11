@@ -67,7 +67,7 @@ public class BattleMenu {
      * Also creates the base menu that the user can navigate.
      * @param thisBattleScreen pass the BattleScreen so methods can be called.
      */
-    public BattleMenu(BattleScreen thisBattleScreen){
+    public BattleMenu(BattleScreen thisBattleScreen) {
         battleScreen = thisBattleScreen;
 
         partyStatusList = new UIBattleStatus(0, yOffset, Gdx.graphics.getWidth()/5+10, Gdx.graphics.getHeight()/4, 10, 10, Game.party);
@@ -85,7 +85,7 @@ public class BattleMenu {
      * @param delta The time passed between frames.
      * @param batch The spritebatch to draw the elements to.
      */
-    public void render(float delta, SpriteBatch batch){
+    public void render(float delta, SpriteBatch batch) {
         uiRenderer.render(batch);
         if(menuPointer==3){
             batch.draw(Assets.targetingPointer,targetingIndicatorX,targetingIndicatorY,Assets.targetingPointer.getWidth(),Assets.targetingPointer.getHeight(),0,0,Assets.targetingPointer.getWidth(),Assets.targetingPointer.getHeight(),isTargetingIndicatorPointLeft,false);
@@ -102,7 +102,7 @@ public class BattleMenu {
      * Updates the necessary UI elements. Including updating the targeting indicator if necessary.
      * @param delta the change in time between frames.
      */
-    public void update(float delta){
+    public void update(float delta) {
         if(menuPointer==3)
             updateTargetingIndicator();
 
@@ -112,8 +112,12 @@ public class BattleMenu {
             infoBoxTimer -= delta;
         }
 
-        if(currentUseAbility!=null)
+        if(currentUseAbility!=null) {
             currentUseAbility.update(delta);
+        	if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() && !battleScreen.enemyParty.isDead()) {
+        		targetingMenuInput(InputHandler.inputType.UP);
+        	}
+        }
 
         if(showResultsDialog){ //Update resultsDialog if should be shown
             boolean resultsFinished = resultsDialog.update(delta);
@@ -126,7 +130,7 @@ public class BattleMenu {
     /**
      * Updates the targeting indicator position, including if it needs to be flipped or not.
      */
-    private void updateTargetingIndicator(){
+    private void updateTargetingIndicator() {
         Agent currentTarget = battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]);
         //Adjust the location and direction of the targeting indicator based on which side of the screen the agent to draw it to is on
         if(currentTarget.getX()>=Gdx.graphics.getWidth()/2){
@@ -145,7 +149,7 @@ public class BattleMenu {
      * Updates the indicator for which friendly agent's turn it is.
      * Also updates the partyStatus Menu's highlighted Agent.
      */
-    public void updateTurnIndicator(){
+    public void updateTurnIndicator() {
 
         if(battleScreen.getCurrentTurnAgent().getType() == Agent.AgentType.FRIENDLY) {
             turnIndicatorX = battleScreen.getCurrentTurnAgent().getX()-20;
@@ -166,7 +170,7 @@ public class BattleMenu {
      * Creates results dialog for displaying results of the battle.
      * @param messages The String array of text that will appear in individual boxes.
      */
-    public void addResultsDialog(String[] messages){
+    public void addResultsDialog(String[] messages) {
         resultsDialog = new UIDialogue(Gdx.graphics.getWidth()/10,-(Gdx.graphics.getHeight()/4)*2,(Gdx.graphics.getWidth()/10)*8,(Gdx.graphics.getHeight()/12),messages, 0.25f);
         showResultsDialog = true;
     }
@@ -177,7 +181,7 @@ public class BattleMenu {
      * @param text The String to be shown in the box.
      * @param duration The duration the box should stay on screen for in seconds.
      */
-    public void createInfoBox(String text, float duration){
+    public void createInfoBox(String text, float duration) {
         if(infoBox!=null)
             destroyInfoBox();
         infoBox = new UIMessageBox(text, 0f,-90f,Gdx.graphics.getWidth(),70,10,10);//FIX POSITIONING
@@ -188,7 +192,7 @@ public class BattleMenu {
     /**
      * Destroys the current InfoBox.
      */
-    public void destroyInfoBox(){
+    public void destroyInfoBox() {
         battleUI.removeUIComponent(infoBox);
         infoBox=null;
     }
@@ -198,7 +202,7 @@ public class BattleMenu {
      * Uses the turnOrder stored in the BattleScreen to fill the battleLayout array
      * so it matches the layout of the sprites on screen.
      */
-    public void updateBattleLayout(){
+    public void updateBattleLayout() {
         resetBattleLayout();
         int enemyPointer= 4-battleScreen.enemyParty.size();
         int friendlyPointer = 4-Game.party.size();
@@ -217,7 +221,7 @@ public class BattleMenu {
     /**
      * Fills the battleLayout 2D integer array with -1 in each cell.
      */
-    private void resetBattleLayout(){
+    private void resetBattleLayout() {
         for(int i=0;i<battleLayout.length;i++){
             for(int j=0; j<battleLayout[i].length;j++){
                 battleLayout[i][j]=-1;
@@ -228,7 +232,7 @@ public class BattleMenu {
     /**
      * Resets all the menus pointers to 0.
      */
-    public void resetMenus(){
+    public void resetMenus() {
         baseMenuPointer=0;
         skillMenuPointer=0;
         itemMenuPointer=0;
@@ -248,7 +252,7 @@ public class BattleMenu {
      * Takes an input to update the Battle Menu with. Calls the relevant function based on the current menuPointer.
      * @param input The input to apply to the Battle Menu.
      */
-    public void newKeypress(InputHandler.inputType input){
+    public void newKeypress(InputHandler.inputType input) {
 
         switch (input){
             case ACT:
@@ -286,7 +290,7 @@ public class BattleMenu {
      * Uses the given input to update the baseMenu.
      * @param input the input to update the menu with.
      */
-    private void baseMenuInput(InputHandler.inputType input){
+    private void baseMenuInput(InputHandler.inputType input) {
         switch (input){
             case ACT:{
                 menuPointer=baseMenuPointer+1;//Set menuPointer to the relevant menu
@@ -313,7 +317,7 @@ public class BattleMenu {
     /**
      * Creates the skillUI using the skills of the Agent with the current turn.
      */
-    private void populateSkillUI(){
+    private void populateSkillUI() {
         skillUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).width+battleUI.getUIComponent(1).width,yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5, 20, 10);
         for(int i=0; i<battleScreen.getCurrentTurnAgent().getSkills().size();i++){
             skillUI.addListItem(Game.skills.getSkill(battleScreen.getCurrentTurnAgent().getSkills().get(i)).getName());
@@ -325,7 +329,7 @@ public class BattleMenu {
     /**
      * Creates the itemUI using the consumable items the party currently has.
      */
-    private void populateItemUI(){
+    private void populateItemUI() {
 
         itemUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).width+battleUI.getUIComponent(1).width,yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5,20,10);
         for(int i=0; i<Game.party.getConsumables().size();i++){
@@ -340,7 +344,7 @@ public class BattleMenu {
      * No menu wrapping is implemented e.g. pressing up when on the first element will not take you to the last element.
      * @param input the input to update the menu with.
      */
-    private void skillMenuInput(InputHandler.inputType input){
+    private void skillMenuInput(InputHandler.inputType input) {
         switch (input){
             case ACT:{
                 skillOrItemID=battleScreen.getCurrentTurnAgent().getSkills().get(skillMenuPointer); //Set to the skillID of the skill that is currently selected
@@ -424,7 +428,7 @@ public class BattleMenu {
      * Sets the targeting type to skill while storing the previous menu pointer as the same targeting function
      * is used for both skill and item targeting.
      */
-    private void setSkillTargeting(){
+    private void setSkillTargeting() {
         previousMenuPointer = menuPointer;
         menuPointer=3;
         isSkillTargeting =true;
@@ -434,7 +438,7 @@ public class BattleMenu {
      * Sets the targeting type to skill while storing the previous menu pointer as the same targeting function
      * is used for both skill and item targeting
      */
-    private void setItemTargeting(){
+    private void setItemTargeting() {
         previousMenuPointer = menuPointer;
         menuPointer=3;
         isItemTargeting =true;
@@ -448,7 +452,7 @@ public class BattleMenu {
     private void targetingMenuInput(InputHandler.inputType input){
 
         switch (input){
-            case ACT:{
+            case ACT:
                 if(isSkillTargeting) {
                     if(battleScreen.getCurrentTurnAgent().getType()== Agent.AgentType.FRIENDLY){
                         if(battleScreen.getCurrentTurnAgent().getStats().getCurrentMP()-Game.skills.getSkill(0).getMPCost()<0){
@@ -457,38 +461,55 @@ public class BattleMenu {
                         }
                     }
                     currentUseAbility = new UseSkill(battleScreen.getCurrentTurnAgent(),battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]), skillOrItemID, this);
-                }
-                else if(isItemTargeting) {
+                } else if(isItemTargeting) {
                     currentUseAbility = new UseItem(battleScreen.getCurrentTurnAgent(),battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]), skillOrItemID, this);
                 }
                 break;
-            }
-            case ESC:{
-                menuPointer=previousMenuPointer;
-                isSkillTargeting=false;
-                isItemTargeting=false;
+                
+            case ESC:
+                menuPointer = previousMenuPointer;
+                isSkillTargeting = false;
+                isItemTargeting = false;
                 break;
-            }
-            case RIGHT:{
-                if(targetMenuPointerColumn==0 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn+1]!=-1)
-                    targetMenuPointerColumn+=1;
+                
+            case RIGHT:
+                if(targetMenuPointerColumn == 0 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn+1] != -1)
+                    targetMenuPointerColumn += 1;
                 break;
-            }
-            case LEFT:{
-                if(targetMenuPointerColumn==1 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn-1]!=-1)
-                    targetMenuPointerColumn-=1;
+                
+            case LEFT:
+                if(targetMenuPointerColumn == 1 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn-1] != -1)
+                    targetMenuPointerColumn -= 1;
+            	if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()) {
+            		targetingMenuInput(InputHandler.inputType.UP);
+            	}
                 break;
-            }
-            case UP:{
-                if(targetMenuPointerRow!=0 && battleLayout[targetMenuPointerRow-1][targetMenuPointerColumn]!=-1)
-                    targetMenuPointerRow-=1;
+                
+            case UP:
+            	targetMenuPointerRow -= 1;
+            	//targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
+            	if(targetMenuPointerRow < 0)
+            		targetMenuPointerRow = battleLayout.length - 1;
+                if(battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
+                	targetingMenuInput(InputHandler.inputType.UP);
+                } else if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() 
+                    	&& battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type) {
+                	targetingMenuInput(InputHandler.inputType.UP);
+                }
                 break;
-            }
-            case DOWN:{
-                if(targetMenuPointerRow!=battleLayout.length-1 && battleLayout[targetMenuPointerRow+1][targetMenuPointerColumn]!=-1)
-                    targetMenuPointerRow+=1;
+                
+            case DOWN:
+            	targetMenuPointerRow += 1;
+            	//targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
+            	if(targetMenuPointerRow > battleLayout.length - 1)
+            		targetMenuPointerRow = 0;
+                if(battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
+                	targetingMenuInput(InputHandler.inputType.DOWN);
+                } else if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() 
+                    	&& battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type) {
+                	targetingMenuInput(InputHandler.inputType.DOWN);
+                }
                 break;
-            }
 
         }
 
