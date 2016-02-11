@@ -31,6 +31,7 @@ public class BattleAnimator {
      */
     public void update(float delta){
 
+
         if(isMoving) {
             updateMovement();
 
@@ -90,25 +91,18 @@ public class BattleAnimator {
      * @param caller The class that is calling the function. This is so that once the movement is complete, the calling class can be informed.
      */
     public void moveAgentTo(Agent agent, float thisTargetX, float thisTargetY, UseAbility caller){
-
         currentCaller = caller;
-        currentMoveAgent=agent;
+        currentMoveAgent = agent;
 
-        originalX=agent.getX();
-        originalY=agent.getY();
-        targetX=thisTargetX;
-        targetY=agent.getY();
+        originalX = agent.getX();
+        originalY = agent.getY();
 
-        if(targetX<originalX){
-            targetX = agent.getX() - 100;
-        } else{
-            targetX = agent.getX() + 100;
-        }
+        targetX = agent.getX() + (thisTargetX < originalX ? -100 : 100);
+        targetY = agent.getY();
 
         calculateMovement();
 
-        isMoving=true;
-
+        isMoving = true;
     }
 
     /**
