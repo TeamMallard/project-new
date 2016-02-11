@@ -57,6 +57,10 @@ public class Agent implements Comparable<Agent>{
      */
     public Agent(){};
 
+    public void healFull(int power){
+        stats.increaseHP(stats.getMaxHP());
+        stats.increaseMP(stats.getMaxMP());
+    }
     public void dealDamage(int power){
         //Needs to take into account User armourval
         stats.reduceHP(power);
@@ -65,9 +69,13 @@ public class Agent implements Comparable<Agent>{
         stats.increaseHP(amount);
     }
 
-    public void giveMana(int amount){stats.increaseMP(amount);}
+    public void giveMana(int amount){
+    	stats.increaseMP(amount);
+    }
 
-    public void takeMana(int amount){stats.reduceMP(amount);}
+    public void takeMana(int amount){
+    	stats.reduceMP(amount);
+    }
 
     public Statistics getStats() {
         return this.stats;

@@ -31,7 +31,6 @@ public class UIConsumableMenu extends UIComponent {
 
     public UIConsumableMenu(float x, float y, float width, float height, UIPartyMenu parent) {
         super(x, y, width, height);
-
         this.parent = parent;
         this.partyManager = parent.getParty();
 
@@ -114,26 +113,46 @@ public class UIConsumableMenu extends UIComponent {
         }
 
         if(InputHandler.isActJustPressed()) {
+            UIManager uiManager = Game.worldScreen.getGameWorld().uiManager;
         	Consumable item = currentConsumable[selectedConsumable].consumable;
             switch(item.getType()){
                 case HEAL:{
-                    Assets.sfx_healNoise.play(Game.masterVolume);
-                    this.getSelectedPlayer().dealHealth(item.getPower());
-                    partyManager.getConsumables().remove(selectedConsumable);
+                    if(!getSelectedPlayer().isDead()) {
+	                    Assets.sfx_healNoise.play(Game.masterVolume);
+	                    this.getSelectedPlayer().dealHealth(item.getPower());
+	                    partyManager.getConsumables().remove(selectedConsumable);
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " is healed for " + item.getPower() + " health");
+                    } else {
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be healed");
+                    }
                     break;
                 }
                 case REVIVE:{
-                    Assets.sfx_healNoise.play(Game.masterVolume);
-                    this.getSelectedPlayer().dealHealth(item.getPower());
-                    partyManager.getConsumables().remove(selectedConsumable);
+                    if(getSelectedPlayer().isDead()) {
+	                    Assets.sfx_healNoise.play(Game.masterVolume);
+	                    this.getSelectedPlayer().dealHealth(item.getPower());
+	                    partyManager.getConsumables().remove(selectedConsumable);
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " is revived on " + item.getPower() + " health");
+	                } else {
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be revived");
+	                }
                     break;
                 }
                 case MANAHEAL:{
-                    Assets.sfx_healNoise.play(Game.masterVolume);
-                    this.getSelectedPlayer().giveMana(item.getPower());
-                    partyManager.getConsumables().remove(selectedConsumable);
+                    if(!getSelectedPlayer().isDead()) {
+	                    Assets.sfx_healNoise.play(Game.masterVolume);
+	                    this.getSelectedPlayer().giveMana(item.getPower());
+	                    partyManager.getConsumables().remove(selectedConsumable);
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " gains " + item.getPower() + " mana");
+	                } else {
+	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be given mana");
+	                }
                     break;
                 }
+                default:
+                    uiManager.addNotification("This item cannot be used outside of combat");
+            		break;
+                	
             }
             updateConsumable();
         	
