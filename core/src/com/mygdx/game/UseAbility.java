@@ -7,18 +7,19 @@ import com.mygdx.game.battle.BattleMenu;
  */
 public abstract class UseAbility {
 
-    Agent user, target;
-    int abilityID;
-    BattleMenu battleMenu;
+    public static final int MOVEMENT_GOING = 0;
+    public static final int MOVEMENT_RETURNING = 1;
+
+    protected Agent user, target;
+    protected int abilityID;
+    protected BattleMenu battleMenu;
 
     public UseAbility(Agent user, Agent target, int abilityID, BattleMenu battleMenu){
         this.user = user;
         this.target = target;
         this.abilityID = abilityID;
         this.battleMenu = battleMenu;
-
     }
-
 
     public abstract void movementDone(int type);
 

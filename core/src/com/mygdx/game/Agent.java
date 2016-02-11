@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.MathUtils;
+
 import java.util.List;
 
 /**
@@ -61,9 +63,25 @@ public class Agent implements Comparable<Agent>{
         stats.increaseHP(stats.getMaxHP());
         stats.increaseMP(stats.getMaxMP());
     }
-    public void dealDamage(int power){
-        //Needs to take into account User armourval
-        stats.reduceHP(power);
+
+    public int dealDamage(int power, Agent attacker){
+        // Calculate chance to take damage based on attacker's and defender's dexterity.
+        float hitChance = MathUtils.clamp(1 - ((float) stats.getDexterity() / attacker.stats.getDexterity()) / 10, 0.1f, 0.9f);
+
+        // DEBUG
+        System.out.println(hitChance);
+
+        int damageDone = 0;
+
+        if(hitChance > MathUtils.random()) {
+            damageDone = MathUtils.round((float) (power * Math.sqrt((float) attacker.stats.getStrength() / stats.getArmourVal())));
+            System.out.println("DAMAGE DONE " + damageDone);
+
+            stats.reduceHP(damageDone);
+        }
+
+        // Return the actual damage done.
+        return damageDone;
     }
     public void dealHealth(int amount){
         stats.increaseHP(amount);
