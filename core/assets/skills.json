@@ -3,7 +3,7 @@
 	"ID":0,
 	"name":"Fly",
 	"description":"Flies at the enemy",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":5,
 	"MPCost":0
 	},
@@ -19,7 +19,7 @@
 	"ID":2,
 	"name":"Fireball Bolt",
 	"description":"Shoots a Fireball bolt",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":10,
 	"MPCost":3
 	},
@@ -27,7 +27,7 @@
 	"ID":3,
 	"name":"Water Bolt",
 	"description":"Shoots a Water bolt",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":8,
 	"MPCost":3
 	},
@@ -35,7 +35,7 @@
 	"ID":4,
 	"name":"Overly Close-Range Invisible Laser Attack",
 	"description":"Overly Close-Range Invisible Laser Attack",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":23,
 	"MPCost":3
 	},
@@ -43,7 +43,7 @@
 	"ID":5,
 	"name":"Toxic Goop",
 	"description":"Eww",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":7,
 	"MPCost":3
 	},
@@ -51,7 +51,7 @@
 	"ID":6,
 	"name":"Gamma Ray",
 	"description":"Shoots a Gamma Ray",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":11,
 	"MPCost":3
 	},
@@ -59,7 +59,7 @@
 	"ID":7,
 	"name":"Headbutt",
 	"description":"Headbutts",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":14,
 	"MPCost":3
 	},
@@ -67,7 +67,7 @@
 	"ID":8,
 	"name":"Swipe",
 	"description":"Swipes",
-	"skillType":"MAGIC",
+	"skillType":"ATTACK",
 	"basePower":10,
 	"MPCost":3
 	}

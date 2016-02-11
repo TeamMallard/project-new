@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleAnimator;
 import com.mygdx.game.battle.BattleMenu;
@@ -32,29 +33,8 @@ public class UseSkill extends UseAbility {
 
         battleMenu.showTurnIndicator=false;
 
-        switch (skill.getSkillType()){
-            case MELEE:{
-                break;
-            }
-            case RANGED:{
-                break;
-            }
-            case MAGIC:{
-                battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);//Moves the agent to the target
-                battleMenu.createInfoBox(user.getName() + " uses " + skill.getName()+" on "+target.getName(),3);//Create an info box with information on the current action
-
-                break;
-            }
-            case HEAL:{
-                battleAnimator.moveAgentTo(user, target.getX(), target.getY(), this);
-                battleMenu.createInfoBox(user.getName() + " uses " + skill.getName()+" on "+target.getName(),3);
-
-                break;
-            }
-        }
-
-
-
+        battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);//Moves the agent to the target
+        battleMenu.createInfoBox(user.getName() + " uses " + skill.getName()+" on "+target.getName(),3);//Create an info box with information on the current action
     }
 
     /**
@@ -72,40 +52,33 @@ public class UseSkill extends UseAbility {
      */
     public void movementDone(int type){
         //Type 0=moved, type 1=returned
-        if(type==0) {
-            switch (skill.getSkillType()) {
-                case MELEE: {
-                    break;
-                }
-                case RANGED: {
-                    break;
-                }
-                case MAGIC: {
-                    Assets.sfx_hitNoise.play(Game.masterVolume);
-                    target.dealDamage(user.getStats().getIntelligence() + user.getCurrentEquipment().getTotalIntelligenceModifiers() + skill.getBasePower());
-                    String infoBoxText = (target.getName() + " takes "+(user.getStats().getIntelligence() + user.getCurrentEquipment().getTotalIntelligenceModifiers() + skill.getBasePower()) + " damage");
-                    if(target.isDead())
-                        infoBoxText+=" and is defeated.";
-                    battleMenu.createInfoBox( infoBoxText, 3);
-                    battleAnimator.returnAgent();//Return agent to start point
+        if(type == MOVEMENT_GOING) {
+            StringBuilder infoBoxText = new StringBuilder();
 
-                    break;
+            if(skill.getSkillType() == Skill.SkillType.ATTACK) {
+                int damage = user.getStats().getCurrentLevel() + skill.getBasePower();
+                int damageDone = target.dealDamage(damage, user);
+
+                infoBoxText.append(target.getName()).append(damageDone > 0 ? " takes " + damageDone + " damage" : " dodges the attack");
+
+                if(target.isDead()) {
+                    infoBoxText.append(" and is defeated.");
                 }
-                case HEAL: {
-                    Assets.sfx_healNoise.play(Game.masterVolume);
-                    target.dealHealth(skill.getBasePower());
-                    battleMenu.createInfoBox(target.getName() + " healed for " + skill.getBasePower()
-                            + " health", 3);
-                    battleAnimator.returnAgent();
-                    break;
-                }
+
+                Assets.sfx_hitNoise.play(Game.masterVolume);
+            } else {
+                target.dealHealth(skill.getBasePower());
+                user.takeMana(skill.getMPCost());
+
+                Assets.sfx_healNoise.play(Game.masterVolume);
             }
-            user.takeMana(skill.getMPCost());
-        } else if(type==1){
-            InputHandler.enableAllInput();//re enable input
-            battleMenu.showTurnIndicator=false;
-            battleMenu.battleScreen.endTurn(); //End the turn
 
+            battleMenu.createInfoBox(infoBoxText.toString(), 3);
+            battleAnimator.returnAgent();
+        } else {
+            InputHandler.enableAllInput();//re enable input
+            battleMenu.showTurnIndicator = false;
+            battleMenu.battleScreen.endTurn(); //End the turn
         }
     }
 

@@ -38,7 +38,7 @@ public class BattleAnimator {
                 currentMoveAgent.setX(targetX);
                 currentMoveAgent.setY(targetY);
                 isMoving=false;
-                currentCaller.movementDone(0);
+                currentCaller.movementDone(UseAbility.MOVEMENT_GOING);
             }
 
         }
@@ -49,7 +49,7 @@ public class BattleAnimator {
                 currentMoveAgent.setX(targetX);
                 currentMoveAgent.setY(targetY);
                 isReturning=false;
-                currentCaller.movementDone(1);
+                currentCaller.movementDone(UseAbility.MOVEMENT_RETURNING);
             }
         }
     }
@@ -133,21 +133,16 @@ public class BattleAnimator {
      * Calculates the values needed to make the movement take place
      */
     private void calculateMovement(){
-        float distX,distY;
+        float distX, distY;
+
         distX=getDistance(targetX,originalX);
         distY=getDistance(targetY,originalY);
 
-        moveSpeedY=(distY/distX)*baseSpeed;
+        moveSpeedY = (distY/distX) * baseSpeed;
+        moveSpeedX = targetX < originalX ? -baseSpeed : baseSpeed;
 
-        if(targetX<originalX){
-            moveSpeedX=-baseSpeed;
-        }
-        else{
-            moveSpeedX=baseSpeed;
-        }
-
-        if(targetY<originalY)
-            moveSpeedY=-moveSpeedY;
+        if(targetY < originalY)
+            moveSpeedY =- moveSpeedY;
     }
 
 
