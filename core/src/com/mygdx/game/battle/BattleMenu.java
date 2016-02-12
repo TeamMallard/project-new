@@ -478,10 +478,13 @@ public class BattleMenu {
                 break;
                 
             case LEFT:
-                if(targetMenuPointerColumn == 1 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn-1] != -1)
+            	System.out.println(targetMenuPointerRow + " " + targetMenuPointerColumn);
+                if(targetMenuPointerColumn == 1)
                     targetMenuPointerColumn -= 1;
-            	if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()) {
-            		targetingMenuInput(InputHandler.inputType.UP);
+                if(battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
+                	targetingMenuInput(InputHandler.inputType.DOWN);
+                } else if(battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()) {
+            		targetingMenuInput(InputHandler.inputType.DOWN);
             	}
                 break;
                 
