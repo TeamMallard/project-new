@@ -29,7 +29,7 @@
 		"name":"Test Sword",
 		"description":"A sword of testing",
 		"type":"WEAPON",
-		"modifiers":[1, 1, 1, 1, 1],
+		"modifiers":[1000, 1000, 1000, 1000, 1000],
 		"levelRequirement":0,
 		"cost":7
 	},{

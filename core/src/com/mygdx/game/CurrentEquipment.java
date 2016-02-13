@@ -8,9 +8,13 @@ import java.util.Arrays;
  * Can only have one of each type of equipment equipped at once.
  */
 public class CurrentEquipment {
+	
+	
+	public static enum slot {HEAD, CHEST, FEET, ACCESSORY, WEAPON};
+	public static enum modifier {AGI, STR, DEX, INT, DEF};
 
-    public int[] equipSlots = new int[5]; //Stores equipped equipment in order: head, chest, feet, accessory, weapon
-    private int[] totalStatModifiers = new int[5]; //Ordered: speed, strength, dexterity, intelligence, armourVal
+    public int[] equipSlots = new int[slot.values().length]; //Stores equipped equipment in order: head, chest, feet, accessory, weapon
+    private int[] totalStatModifiers = new int[modifier.values().length]; //Ordered: speed, strength, dexterity, intelligence, armourVal
 
 
     @Override

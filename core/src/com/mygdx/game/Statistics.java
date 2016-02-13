@@ -5,13 +5,15 @@ package com.mygdx.game;
  */
 
 public class Statistics {
+	
+	private final int[] LEVEL_CURVE = {10, 20, 35, 50, 70, 95, 125, 160, 200, 250};
 
     private int currentHP,currentMP, maxHP, maxMP;
     private int speed,strength,dexterity,intelligence;
     private int baseArmourVal,armourVal;
     private int experience, currentLevel;
-    public final int maxLevel = 20;
-    public final int maxExp = 100;
+    public final int maxLevel = 10;
+    public final int maxExp = 250;
 
 
     @Override
@@ -59,8 +61,7 @@ public class Statistics {
     public int increaseXP(int xp){//might need to return things when level up
         int levelIncrease = 0;
         experience+=xp;
-        while(experience>=maxExp) {
-                experience -= maxExp;
+        while(experience>=this.getLevelCap()) {
                 currentLevel += 1;
                 levelIncrease+=1;
         }
@@ -156,5 +157,7 @@ public class Statistics {
         return currentLevel;
     }
 
-    public int getMaxExp() { return maxExp; }
+    public int getLevelCap() { return LEVEL_CURVE[this.getCurrentLevel()]; }
+    
+    public int getMaxExP() {return maxExp;}
 }

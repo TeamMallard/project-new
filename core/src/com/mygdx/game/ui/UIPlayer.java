@@ -40,7 +40,7 @@ public class UIPlayer extends UIComponent {
     public void render(SpriteBatch batch, NinePatch patch) {
         patch.draw(batch, x, y, width, height + (paddingY * 2));
         String level = "LV:  " + player.getStats().getCurrentLevel();
-        String xp = "XP:  " + player.getStats().getExperience() + " /" + player.getStats().getMaxExp();
+        String xp = "XP:  " + player.getStats().getExperience() + " /" + player.getStats().getLevelCap();
         String hp = "HP:  " + player.getStats().getCurrentHP() + " /" + player.getStats().getMaxHP();
         String mp = "MP:  " + player.getStats().getCurrentMP() + " /" + player.getStats().getMaxMP();
         if (selected) {

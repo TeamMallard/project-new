@@ -236,7 +236,7 @@ public class BattleScreen extends ScreenAdapter {
                 if(!thisAgent.isDead()){
 
                     int increaseXPReturn, thisXpGain;
-                    thisXpGain = Math.round((float)xpGain * random.nextFloat()%0.1f);
+                    thisXpGain = Math.round((float)xpGain * (random.nextFloat()%0.1f+1));
                     increaseXPReturn = thisAgent.getStats().increaseXP(thisXpGain);
                     resultsText.add(thisAgent.getName() +" received "+thisXpGain +" experience.");
 
