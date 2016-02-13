@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class UIConsumableMenu extends UIComponent {
             currentConsumable[i].render(batch, patch);
 
             if(hasFocus && selectedConsumable == i) {
-                batch.draw(Assets.arrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+                batch.draw(Assets.selectArrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
             }
         }
 

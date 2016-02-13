@@ -1,6 +1,6 @@
 {
-"equipables":[{	
-		"ID":0,
+"equipment":[{
+		"id":0,
 		"name":"No Item",
 		"description":"No Item",
 		"type":"WEAPON",
@@ -8,7 +8,7 @@
 		"levelRequirement":0,
 		"cost":1
 	},{	
-		"ID":1,
+		"id":1,
 		"name":"Wooden Sword",
 		"description":"Made of wood",
 		"type":"WEAPON",
@@ -17,7 +17,7 @@
 		"cost":5
 	},
 	{
-		"ID":2,
+		"id":2,
 		"name":"Wooden Helmet",
 		"description":"This won't stop much",
 		"type":"HEAD",
@@ -25,7 +25,7 @@
 		"levelRequirement":0,
 		"cost":1
 	},{
-		"ID":3,
+		"id":3,
 		"name":"Test Sword",
 		"description":"A sword of testing",
 		"type":"WEAPON",
@@ -33,7 +33,7 @@
 		"levelRequirement":0,
 		"cost":7
 	},{
-		"ID":4,
+		"id":4,
 		"name":"Sword of Memes",
 		"description":"Memetic",
 		"type":"WEAPON",
@@ -41,7 +41,7 @@
 		"levelRequirement":0,
 		"cost":13
 	},{
-		"ID":5,
+		"id":5,
 		"name":"Another Sword",
 		"description":"Wow",
 		"type":"WEAPON",
@@ -51,7 +51,7 @@
 	}],
 "consumables":[
 	{
-		"ID":0,
+		"id":0,
 		"name":"Heal Flask",
 		"description":"Just enough to heal once",
 		"type":"HEAL",
@@ -59,7 +59,7 @@
 		"cost":8
 	},
 	{
-		"ID":1,
+		"id":1,
 		"name":"Reviver",
 		"description":"It Revives",
 		"type":"REVIVE",
@@ -67,7 +67,7 @@
 		"cost":1
 	},
 	{
-		"ID":2,
+		"id":2,
 		"name":"MP Giver",
 		"description":"It gives MP",
 		"type":"MANAHEAL",

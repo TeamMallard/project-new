@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 public class Consumable{
 
-    private int ID = -1;
+    private int id = -1;
     private String name, description;
     private ConsumeType type;
     private int power;
@@ -22,7 +22,7 @@ public class Consumable{
 
 
     public void updateID(int id) {
-        this.ID = id;
+        this.id = id;
     }
 
     public enum ConsumeType {
@@ -47,7 +47,7 @@ public class Consumable{
     }
     
     public int getID() {
-        return ID;
+        return id;
     }
 
     public int getCost() {
@@ -57,7 +57,7 @@ public class Consumable{
     @Override
     public String toString() {
         return "Consumable{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", type=" + type +

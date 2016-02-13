@@ -23,7 +23,7 @@ public class RoboNPC extends NPC {
     private String[] messages;
 
     public RoboNPC(Level level, Vector2 currentTile) {
-        super(level, currentTile);
+        super(level, currentTile, Assets.roboWalkingTextures);
         messages = new String[2];
         messages[0] = "01011001 01101111 01110101 01110010 00100000 01101101 01101111 01110100 01101000 01100101 01110010 00100000 01101001 01110011 00100000 01100001 00100000 01110111 01101000 01101111 01110010 01100101 00001101 00001010!!!";
         messages[1] = "Robo duck has challenged you to a battle.";

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameWorld;
 import com.mygdx.game.Level;
+import com.mygdx.game.assets.WalkingTextures;
 import com.mygdx.game.ui.UIManager;
 
 /**
@@ -15,8 +16,8 @@ public abstract class NPC extends Character {
     private float runningTime;
     protected UIManager uiManager;
 
-    public NPC(Level level, Vector2 currentTile) {
-        super(level, currentTile);
+    public NPC(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
+        super(level, currentTile, walkingTextures);
     }
 
     /**

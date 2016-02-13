@@ -1,9 +1,9 @@
 package com.mygdx.game.entity;
 
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.InputHandler;
 import com.mygdx.game.Level;
+import com.mygdx.game.assets.Assets;
 
 /**
  * This class is a character that is controlled by the user.
@@ -17,7 +17,7 @@ public class Player extends Character {
     private float runningTime;
 
     public Player(Level level, Vector2 currentTile) {
-        super(level, currentTile);
+        super(level, currentTile, Assets.playerWalkingTextures);
         tempDirection = getDirection();
     }
 
