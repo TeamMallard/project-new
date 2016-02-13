@@ -47,7 +47,7 @@ public class UIEquipmentMenu extends UIComponent {
             currentEquipment[i].render(batch, patch);
 
             if(hasFocus && selectedEquipment == i) {
-                batch.draw(Assets.arrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+                batch.draw(Assets.selectArrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
             }
         }
 
@@ -81,13 +81,13 @@ public class UIEquipmentMenu extends UIComponent {
             int equipmentId = getSelectedPlayer().getCurrentEquipment().equipSlots[i];
 
             if(equipmentId != 0) {
-                equipment.add(new Item(x, y - (75 * index++), width, Game.items.getEquipable(equipmentId), true));
+                equipment.add(new Item(x, y - (75 * index++), width, Game.items.getEquipment(equipmentId), true));
             }
         }
 
         // Add rest of equipment in inventory.
-        for(Integer equipmentId : partyManager.getEquipables()) {
-            equipment.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getEquipable(equipmentId), false));
+        for(Integer equipmentId : partyManager.getEquipment()) {
+            equipment.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getEquipment(equipmentId), false));
         }
 
         return equipment.toArray(new Item[equipment.size()]);
@@ -142,7 +142,7 @@ public class UIEquipmentMenu extends UIComponent {
     private void setPlayerEquipment(Agent player, int selectedEquipment)
     {
         Item selected = currentEquipment[selectedEquipment];
-        Equipable.EquipType slot = selected.equipment.getType();
+        Equipment.EquipType slot = selected.equipment.getType();
 
         System.out.println("EQUIPPING " + selected.equipment.getName());
         System.out.println("FROM SLOT " + selectedEquipment);
@@ -152,32 +152,32 @@ public class UIEquipmentMenu extends UIComponent {
             System.out.println("ALREADY EQUIPPED");
             // Already equipped, unequip.
             player.getCurrentEquipment().unequip(slot);
-            partyManager.getEquipables().add(selected.equipment.getID());
+            partyManager.getEquipment().add(selected.equipment.getID());
         } else {
             System.out.println("NOT EQUIPPED");
 
             // Remove the appropraite item from the party's equipment.
-            partyManager.getEquipables().remove(selectedEquipment - player.getCurrentEquipment().getNumberEquipped());
+            partyManager.getEquipment().remove(selectedEquipment - player.getCurrentEquipment().getNumberEquipped());
 
             // If player already has an item in the slot, remove it.
             if(player.getCurrentEquipment().isEquipped(slot)) {
                 System.out.println("REPLACING");
-                partyManager.getEquipables().add(player.getCurrentEquipment().unequip(slot));
+                partyManager.getEquipment().add(player.getCurrentEquipment().unequip(slot));
             }
 
             // Equip the item.
             player.getCurrentEquipment().equip(selected.equipment.getID());
         }
 
-//        player.equipEquipment(partyManager.getEquipables().get(selectedEquipment));
-//        partyManager.getEquipables().remove(selectedEquipment);
+//        player.equipEquipment(partyManager.getEquipment().get(selectedEquipment));
+//        partyManager.getEquipment().remove(selectedEquipment);
     }
 
     public class Item extends UIComponent {
         private BitmapFont font = Assets.consolas22;
         private BitmapFont smallFont = Assets.consolas16;
 
-        private Equipable equipment;
+        private Equipment equipment;
         private boolean equipped;
 
         private final float LINE_HEIGHT = 25f;
@@ -187,7 +187,7 @@ public class UIEquipmentMenu extends UIComponent {
 
         private String statString;
 
-        public Item(float x, float y, float width, Equipable equipment, boolean equipped) {
+        public Item(float x, float y, float width, Equipment equipment, boolean equipped) {
             super(x, y, width, 55);
             this.equipment = equipment;
             this.equipped = equipped;

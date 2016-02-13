@@ -61,8 +61,8 @@ public class UIShop extends UIComponent {
             items.add(new ConsumableShopItem(x + 460, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getConsumable(party.getConsumables().get(i))));
         }
 
-        for (int i = 0; i < party.getEquipables().size(); i++) {
-            items.add(new EquipmentShopItem(x + 460, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getEquipable(party.getEquipables().get(i))));
+        for (int i = 0; i < party.getEquipment().size(); i++) {
+            items.add(new EquipmentShopItem(x + 460, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getEquipment(party.getEquipment().get(i))));
         }
 
         return items.toArray(new ShopItem[items.size()]);
@@ -77,7 +77,7 @@ public class UIShop extends UIComponent {
         }
 
         for(int i = 0; i < shop.getEquipment().size(); i++) {
-            items.add(new EquipmentShopItem(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getEquipable(shop.getEquipment().get(i))));
+            items.add(new EquipmentShopItem(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), 450, Game.items.getEquipment(shop.getEquipment().get(i))));
         }
 
         return items.toArray(new ShopItem[items.size()]);
@@ -108,7 +108,7 @@ public class UIShop extends UIComponent {
                 currentShopItems[i].render(batch, patch);
 
                 if(shopItemsFocus && selectedShopItem == i) {
-                    batch.draw(Assets.arrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+                    batch.draw(Assets.selectArrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
                 }
             }
 
@@ -122,7 +122,7 @@ public class UIShop extends UIComponent {
                 currentPlayerItems[i].render(batch, patch);
 
                 if(!shopItemsFocus && selectedPlayerItem == i) {
-                    batch.draw(Assets.arrow, x + 460, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+                    batch.draw(Assets.selectArrow, x + 460, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
                 }
             }
 
@@ -218,7 +218,7 @@ public class UIShop extends UIComponent {
             party.getConsumables().remove(selectedPlayerItem);
             shop.getConsumables().add(((ConsumableShopItem) selected).consumable.getID());
         } else if (selected instanceof EquipmentShopItem) {
-            party.getEquipables().remove(selectedPlayerItem - party.getConsumables().size());
+            party.getEquipment().remove(selectedPlayerItem - party.getConsumables().size());
             shop.getEquipment().add(((EquipmentShopItem) selected).equipment.getID());
         }
 
@@ -247,7 +247,7 @@ public class UIShop extends UIComponent {
                 shop.getConsumables().remove(selectedShopItem);
             } else if (selected instanceof EquipmentShopItem) {
                 // Item is equipment.
-                party.getEquipables().add(((EquipmentShopItem) selected).equipment.getID());
+                party.getEquipment().add(((EquipmentShopItem) selected).equipment.getID());
                 // Account for equipment being listed after consumables.
                 shop.getEquipment().remove(selectedShopItem - shop.getConsumables().size());
             }
@@ -319,10 +319,10 @@ public class UIShop extends UIComponent {
 
     public class EquipmentShopItem extends ShopItem {
 
-        private Equipable equipment;
+        private Equipment equipment;
         private String statString;
 
-        public EquipmentShopItem(float x, float y, float width, Equipable equipment) {
+        public EquipmentShopItem(float x, float y, float width, Equipment equipment) {
             super(x, y, width);
 
             this.equipment = equipment;

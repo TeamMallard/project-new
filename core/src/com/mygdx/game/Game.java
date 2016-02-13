@@ -81,7 +81,6 @@ public class Game extends com.badlogic.gdx.Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-		Assets.dispose();
 	}
 
 	/**

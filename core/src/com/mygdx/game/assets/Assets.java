@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Assets is a static class containing all assets that are used in rendering the game.
@@ -12,46 +13,27 @@ import com.badlogic.gdx.graphics.g2d.*;
  * respective methods.
  */
 public class Assets {
-//  BATTLE ASSETS
-    public static Texture playerTexture;
-    public static Texture deadPlayerTexture;
-    public static Texture[][] battleSprites;
 
-    public static Texture battleTurnPointer;
-    public static Texture targetingPointer;
+    public static Texture selectArrow, turnArrow;
 
-//  MAP ASSETS
+    //  MAP ASSETS
     public static Texture[] battleBGs = new Texture[4];
-    public static Texture mapTexture;
 
-//  UI ASSETS
+    //  UI ASSETS
     public static BitmapFont consolas22;
     public static BitmapFont consolas16;
     public static NinePatch patch;
     public static TextureAtlas atlas;
     public static Texture dialoguePointer;
-    public static Texture arrow;
     public static Texture shield;
-
-    private static final int PLAYER_WALKSHEET_COLS = 4;
-    private static final int PLAYER_WALKSHEET_ROWS = 2;
-    private static final int NPC_WALKSHEET_COLS = 4;
-    private static final int NPC_WALKSHEET_ROWS = 2;
-
-    //  CHARACTER TEXTURE SHEETS
-    public static Animation[] playerWalkAnimation;
-    public static Texture playerWalkSheet;
-
-    public static Animation[] SallyNPCWalkAnimation;
-    public static Texture SallyNPCWalkSheet;
-
-    public static Animation[] RoboNPCWalkAnimation;
-    public static Texture RoboNPCWalkSheet;
 
     public static Texture shadow;
 
     public static Texture title;
 
+
+    public static WalkingTextures playerWalkingTextures, roboWalkingTextures, sallyWalkingTextures;
+    public static BattleTextures[] battleTextures = new BattleTextures[6];
 
     //SOUNDS
     public static Sound sfx_menuMove;
@@ -66,33 +48,27 @@ public class Assets {
 
     public static Music battleMusic;
     public static Music worldMusic;
+
     /**
      * Loads the assets from the asset folder and initialises animation frames.
      */
     public static void load() {
-
         title = new Texture("Start Screen.png");
+
         //  BATTLE ASSETS
+        battleTextures = new BattleTextures[6];
 
-        playerTexture = new Texture("Duck2.png");
-        deadPlayerTexture = new Texture("DuckDead.png");
-        battleSprites = new Texture[6][2];
-        battleSprites[0][0] = new Texture("Duck2.png");
-        battleSprites[0][1] = new Texture("DuckDead.png");
-        battleSprites[1][0] = new Texture("Roboduck.png");
-        battleSprites[1][1] = new Texture("deadroboduck.png");
+        loadPlayerTextures();
+        loadRoboTextures();
+        loadSallyTextures();
 
-        battleSprites[2][0] = new Texture("enemy_sprites/Ooze.png");
-        battleSprites[2][1] = new Texture("enemy_sprites/OozeDead.png");
-        battleSprites[3][0] = new Texture("enemy_sprites/RadiatedDuck.png");
-        battleSprites[3][1] = new Texture("enemy_sprites/RadiatedDuckDead.png");
-        battleSprites[4][0] = new Texture("enemy_sprites/ScarDuck.png");
-        battleSprites[4][1] = new Texture("enemy_sprites/ScarDuckDead.png");
-        battleSprites[5][0] = new Texture("enemy_sprites/UndeadDuck.png");
-        battleSprites[5][1] = new Texture("enemy_sprites/UndeadDuckDead.png");
+        battleTextures[2] = loadBattleTextures("ooze", 32, 32);
+        battleTextures[3] = loadBattleTextures("radiated_duck", 32, 32);
+        battleTextures[4] = loadBattleTextures("scar_duck", 32, 32);
+        battleTextures[5] = loadBattleTextures("undead_duck", 32, 32);
 
-        battleTurnPointer = new Texture("turnPointer.png");
-        targetingPointer = new Texture("targetingPointer.png");
+        turnArrow = new Texture("turnPointer.png");
+        selectArrow = new Texture("arrow.png");
 
         //  MAP ASSETS
         battleBGs[0] = new Texture("backgrounds/CS_centrefixed.png");
@@ -100,15 +76,13 @@ public class Assets {
         battleBGs[2] = new Texture("backgrounds/RCH_lake.png");
         battleBGs[3] = new Texture("backgrounds/Background_1.png");
 
-        mapTexture = new Texture("map.jpg");
-
         //  UI ASSETS
         consolas22 = new BitmapFont(Gdx.files.internal("fonts/consolas22.fnt"));
         consolas16 = new BitmapFont(Gdx.files.internal("fonts/consolas16.fnt"));
         atlas = new TextureAtlas(Gdx.files.internal("packedimages/pack.atlas"));
         patch = atlas.createPatch("knob2");
         dialoguePointer = new Texture("dialoguePointer.png");
-        arrow = new Texture("arrow.png");
+        selectArrow = new Texture("arrow.png");
         shield = new Texture("shield.png");
 
         sfx_menuMove = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuMove.wav"));
@@ -117,9 +91,9 @@ public class Assets {
         sfx_hitNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Damage.wav"));
         sfx_healNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Heal.wav"));
 
-        sfx_battleStart  = Gdx.audio.newSound(Gdx.files.internal("sound_effects/EnterBattle.wav"));
-        sfx_battleWin  = Gdx.audio.newSound(Gdx.files.internal("sound_effects/WinBattle.wav"));
-        sfx_battleLose  = Gdx.audio.newSound(Gdx.files.internal("sound_effects/LoseBattle.wav"));
+        sfx_battleStart = Gdx.audio.newSound(Gdx.files.internal("sound_effects/EnterBattle.wav"));
+        sfx_battleWin = Gdx.audio.newSound(Gdx.files.internal("sound_effects/WinBattle.wav"));
+        sfx_battleLose = Gdx.audio.newSound(Gdx.files.internal("sound_effects/LoseBattle.wav"));
 
         battleMusic = Gdx.audio.newMusic(Gdx.files.internal("sound_effects/BattleTheme.ogg"));
         worldMusic = Gdx.audio.newMusic(Gdx.files.internal("sound_effects/WorldTheme.ogg"));
@@ -128,79 +102,79 @@ public class Assets {
         worldMusic.setLooping(true);
 
 
-
         //  CHARACTER TEXTURE SHEETS
         shadow = new Texture("shadow.png");
+    }
 
-        playerWalkSheet = new Texture("DuckAnimationFrames.png");
-        TextureRegion[][] tmp = TextureRegion.split(playerWalkSheet, playerWalkSheet.getWidth() / PLAYER_WALKSHEET_COLS, playerWalkSheet.getHeight() / PLAYER_WALKSHEET_ROWS);
-        TextureRegion[][] walkFrameDirections = new TextureRegion[PLAYER_WALKSHEET_COLS][PLAYER_WALKSHEET_ROWS];
-        int index = 0;
-        for (int i = 0; i < PLAYER_WALKSHEET_ROWS; i++) {
-            for (int j = 0; j < PLAYER_WALKSHEET_COLS; j++) {
-                if (j % 2 == 0) {
-                    walkFrameDirections[index][j % 2] = tmp[i][j];
-                } else {
-                    walkFrameDirections[index++][j % 2] = tmp[i][j];
-                }
-            }
-        }
-        playerWalkAnimation = new Animation[PLAYER_WALKSHEET_COLS];
-        for (int x = 0; x < walkFrameDirections.length;x++) {
-            playerWalkAnimation[x] = new Animation(0.175f, walkFrameDirections[x]);
-            playerWalkAnimation[x].setPlayMode(Animation.PlayMode.LOOP);
-        }
+    private static void loadPlayerTextures() {
+        playerWalkingTextures = loadWalkingTextures("player", 32, 32, 2, 0.175f);
+        battleTextures[0] = loadBattleTextures("player", 32, 32);
+    }
 
-        SallyNPCWalkSheet = new Texture("EvilDuckAnimationFrames.png");
-        tmp = TextureRegion.split(SallyNPCWalkSheet, SallyNPCWalkSheet.getWidth() / NPC_WALKSHEET_COLS, SallyNPCWalkSheet.getHeight() / NPC_WALKSHEET_ROWS);
-        walkFrameDirections = new TextureRegion[NPC_WALKSHEET_COLS][NPC_WALKSHEET_ROWS];
-        index = 0;
-        for (int i = 0; i < NPC_WALKSHEET_ROWS; i++) {
-            for (int j = 0; j < NPC_WALKSHEET_COLS; j++) {
-                if (j % 2 == 0) {
-                    walkFrameDirections[index][j % 2] = tmp[i][j];
-                } else {
-                    walkFrameDirections[index++][j % 2] = tmp[i][j];
-                }
-            }
-        }
-        SallyNPCWalkAnimation = new Animation[NPC_WALKSHEET_COLS];
-        for (int x = 0; x < walkFrameDirections.length;x++) {
-            SallyNPCWalkAnimation[x] = new Animation(0.175f, walkFrameDirections[x]);
-            SallyNPCWalkAnimation[x].setPlayMode(Animation.PlayMode.LOOP);
-        }
+    private static void loadRoboTextures() {
+        roboWalkingTextures = loadWalkingTextures("robo", 32, 32, 2, 0.175f);
+        battleTextures[1] = loadBattleTextures("robo", 32, 32);
+    }
 
-        RoboNPCWalkSheet = new Texture("RoboDuckAnimationFrames.png");
-        tmp = TextureRegion.split(RoboNPCWalkSheet, RoboNPCWalkSheet.getWidth() / NPC_WALKSHEET_COLS, RoboNPCWalkSheet.getHeight() / NPC_WALKSHEET_ROWS);
-        walkFrameDirections = new TextureRegion[NPC_WALKSHEET_COLS][NPC_WALKSHEET_ROWS];
-        index = 0;
-        for (int i = 0; i < NPC_WALKSHEET_ROWS; i++) {
-            for (int j = 0; j < NPC_WALKSHEET_COLS; j++) {
-                if (j % 2 == 0) {
-                    walkFrameDirections[index][j % 2] = tmp[i][j];
-                } else {
-                    walkFrameDirections[index++][j % 2] = tmp[i][j];
-                }
-            }
-        }
-        RoboNPCWalkAnimation = new Animation[NPC_WALKSHEET_COLS];
-        for (int x = 0; x < walkFrameDirections.length;x++) {
-            RoboNPCWalkAnimation[x] = new Animation(0.175f, walkFrameDirections[x]);
-            RoboNPCWalkAnimation[x].setPlayMode(Animation.PlayMode.LOOP);
-        }
+    private static void loadSallyTextures() {
+        sallyWalkingTextures = loadWalkingTextures("sally", 32, 32, 2, 0.175f);
+    }
 
+    private static WalkingTextures loadWalkingTextures(String prefix, int width, int height, int frameCount, float frameDuration) {
+        Texture idle = loadTexture("world/" + prefix + "_idle.png");
+
+        // Cut idle textures from texture map.
+        TextureRegion down = new TextureRegion(idle, 0, 0, width, height);
+        TextureRegion up = new TextureRegion(idle, width, 0, width, height);
+        TextureRegion left = new TextureRegion(idle, width * 2, 0, width, height);
+        TextureRegion right = new TextureRegion(idle, width * 3, 0, width, height);
+
+        // Load walking animations.
+        Animation walkingDown = loadAnimation("world/" + prefix + "_walking_down.png", width, height, frameCount, frameDuration);
+        Animation walkingUp = loadAnimation("world/" + prefix + "_walking_up.png", width, height, frameCount, frameDuration);
+        Animation walkingLeft = loadAnimation("world/" + prefix + "_walking_left.png", width, height, frameCount, frameDuration);
+        Animation walkingRight = loadAnimation("world/" + prefix + "_walking_right.png", width, height, frameCount, frameDuration);
+
+        return new WalkingTextures(down, up, left, right, walkingDown, walkingUp, walkingLeft, walkingRight);
+    }
+
+    private static BattleTextures loadBattleTextures(String prefix, int width, int height) {
+        Texture battle = loadTexture("battle/" + prefix + "_battle.png");
+
+        TextureRegion alive = new TextureRegion(battle, 0, 0, width, height);
+        TextureRegion dead = new TextureRegion(battle, width, 0, width, height);
+
+        return new BattleTextures(alive, dead);
     }
 
     /**
-     * Disposes of assets when not in use.
+     * Loads the texture from the specified file.
+     *
+     * @param file the file to load from
+     * @return the texture
      */
-    public static void dispose() {
-        playerTexture.dispose();
-        playerTexture.dispose();
-        battleTurnPointer.dispose();
-        mapTexture.dispose();
-        consolas22.dispose();
-        atlas.dispose();
+    public static Texture loadTexture(String file) {
+        return new Texture(Gdx.files.internal(file));
+    }
 
+    /**
+     * Loads the animation from the specified file.
+     *
+     * @param file          the file to load from
+     * @param frameCount    how many frames are in the file
+     * @param frameWidth    how wide each frame is in the file
+     * @param frameHeight   how tall each frame is in the file
+     * @param frameDuration how long each frame should be shown for in seconds
+     * @return the animation
+     */
+    public static Animation loadAnimation(String file, int frameWidth, int frameHeight, int frameCount, float frameDuration) {
+        Texture texture = loadTexture(file);
+        Array<TextureRegion> keyFrames = new Array<TextureRegion>();
+
+        for (int i = 0; i < frameCount; i++) {
+            keyFrames.add(new TextureRegion(texture, i * frameWidth, 0, frameWidth, frameHeight));
+        }
+
+        return new Animation(frameDuration, keyFrames);
     }
 }

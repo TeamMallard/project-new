@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Game;
 import com.mygdx.game.GameWorld;
 import com.mygdx.game.Level;
+import com.mygdx.game.assets.Assets;
 import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIShop;
 
@@ -16,7 +17,7 @@ public class SallyNPC extends NPC {
     private String[] messages;
 
     public SallyNPC(Level level, Vector2 currentTile) {
-        super(level, currentTile);
+        super(level, currentTile, Assets.sallyWalkingTextures);
         messages = new String[3];
         messages[0] = "Help! There is a robo duck on the loose!";
         messages[1] = "Please help us by finding him and defeating him!";

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.ui.UIRenderer;
@@ -33,8 +34,6 @@ public class WorldRenderer {
 
     private Vector2 textureOffset = new Vector2(-2, 0);
 
-    private float stateTime = 0;
-
     /**
      * @param world required to access state of the game e.g.
      *              character positions and map.
@@ -57,7 +56,7 @@ public class WorldRenderer {
     /**
      * Renders the game world and should be called once per frame.
      */
-    public void render() {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -68,80 +67,26 @@ public class WorldRenderer {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        renderPlayers();
+        renderPlayers(delta);
         batch.end();
         uiRenderer.render();
-
     }
 
     /**
      * Iterates through each player in the level and renders the correct sprite based
      * on position, orientation ect.
      */
-    private void renderPlayers() {
+    private void renderPlayers(float delta) {
         for (int i = 0; i < world.level.characters.size(); i++) {
             Character c = world.level.characters.get(i);
-            if (c instanceof Player) {
-                if (c.getState() != Character.CharacterState.TRANSITIONING) {
-                    c.setStateTime(0.174f);
-                }else{
-                    c.setStateTime(c.getStateTime() + Gdx.graphics.getDeltaTime());
-                }
-                batch.draw(Assets.shadow, c.getAbsPos().x - textureOffset.x - 9, c.getAbsPos().y - textureOffset.y - 4);
-                if (c.getDirection() == Player.Direction.DOWN) {
-                    batch.draw(Assets.playerWalkAnimation[2].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.LEFT) {
-                    batch.draw(Assets.playerWalkAnimation[1].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.RIGHT) {
-                    batch.draw(Assets.playerWalkAnimation[3].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else {
-                    batch.draw(Assets.playerWalkAnimation[0].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                }
-            } else if (c instanceof SallyNPC) {
-                if (c.getState() != Character.CharacterState.TRANSITIONING) {
-                    c.setStateTime(0.174f);
-                }else{
-                    c.setStateTime(c.getStateTime() + Gdx.graphics.getDeltaTime());
-                }
-                batch.draw(Assets.shadow, c.getAbsPos().x - textureOffset.x - 10, c.getAbsPos().y - textureOffset.y - 4);
-                if (c.getDirection() == Player.Direction.DOWN) {
-                    batch.draw(Assets.SallyNPCWalkAnimation[2].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.LEFT) {
-                    batch.draw(Assets.SallyNPCWalkAnimation[1].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.RIGHT) {
-                    batch.draw(Assets.SallyNPCWalkAnimation[3].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else {
-                    batch.draw(Assets.SallyNPCWalkAnimation[0].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                }
+
+            if (c.getState() != Character.CharacterState.TRANSITIONING) {
+                c.setStateTime(0);
             } else {
-                if (c.getState() != Character.CharacterState.TRANSITIONING) {
-                    c.setStateTime(0.174f);
-                }else{
-                    c.setStateTime(c.getStateTime() + Gdx.graphics.getDeltaTime());
-                }
-                batch.draw(Assets.shadow, c.getAbsPos().x - textureOffset.x - 10, c.getAbsPos().y - textureOffset.y - 4);
-                if (c.getDirection() == Player.Direction.DOWN) {
-                    batch.draw(Assets.RoboNPCWalkAnimation[2].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.LEFT) {
-                    batch.draw(Assets.RoboNPCWalkAnimation[1].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else if (c.getDirection() == Player.Direction.RIGHT) {
-                    batch.draw(Assets.RoboNPCWalkAnimation[3].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                } else {
-                    batch.draw(Assets.RoboNPCWalkAnimation[0].getKeyFrame(c.getStateTime()), c.getAbsPos().x - textureOffset.x,
-                            c.getAbsPos().y - textureOffset.y);
-                }
+                c.setStateTime(c.getStateTime() + delta);
             }
+
+            batch.draw(c.getCurrentTexture(), c.getAbsPos().x - textureOffset.x, c.getAbsPos().y - textureOffset.y);
         }
     }
 
@@ -150,26 +95,25 @@ public class WorldRenderer {
      * bounds of the map.
      */
     private void updateCamera() {
+        // Constrain camera to area around player.
+        float boundWidth = camera.viewportWidth / PLAYER_CAMERA_BOUND;
+        float boundHeight = camera.viewportHeight / PLAYER_CAMERA_BOUND;
 
-//      Constrain camera to player
-        if ((world.level.player.getAbsPos().x + Character.CHARACTER_SIZE.x > camera.position.x + camera.viewportWidth / PLAYER_CAMERA_BOUND))
-            camera.position.x = (world.level.player.getAbsPos().x + Character.CHARACTER_SIZE.x) - (camera.viewportWidth / PLAYER_CAMERA_BOUND);
-        if ((world.level.player.getAbsPos().x < camera.position.x - camera.viewportWidth / PLAYER_CAMERA_BOUND))
-            camera.position.x = world.level.player.getAbsPos().x + (camera.viewportWidth / PLAYER_CAMERA_BOUND);
-        if ((world.level.player.getAbsPos().y + Character.CHARACTER_SIZE.y > camera.position.y + camera.viewportHeight / PLAYER_CAMERA_BOUND))
-            camera.position.y = (world.level.player.getAbsPos().y + Character.CHARACTER_SIZE.y) - (camera.viewportHeight / PLAYER_CAMERA_BOUND);
-        if ((world.level.player.getAbsPos().y < camera.position.y - camera.viewportHeight / PLAYER_CAMERA_BOUND))
-            camera.position.y = world.level.player.getAbsPos().y + (camera.viewportHeight / PLAYER_CAMERA_BOUND);
+        if (world.level.player.getAbsPos().x + Character.CHARACTER_SIZE.x > camera.position.x + boundWidth) {
+            camera.position.x = world.level.player.getAbsPos().x + Character.CHARACTER_SIZE.x - boundWidth;
+        } else if (world.level.player.getAbsPos().x < camera.position.x - boundWidth) {
+            camera.position.x = world.level.player.getAbsPos().x + boundWidth;
+        }
 
-//      Constrain camera to map
-        if (camera.position.x + camera.viewportWidth / 2f > world.level.mapBounds.x)
-            camera.position.x = world.level.mapBounds.x - camera.viewportWidth / 2f;
-        if (camera.position.x < camera.viewportWidth / 2f)
-            camera.position.x = camera.viewportWidth / 2f;
-        if (camera.position.y + camera.viewportHeight / 2f > world.level.mapBounds.y)
-            camera.position.y = world.level.mapBounds.y - camera.viewportHeight / 2f;
-        if (camera.position.y < camera.viewportHeight / 2f)
-            camera.position.y = camera.viewportHeight / 2f;
+        if (world.level.player.getAbsPos().y + Character.CHARACTER_SIZE.y > camera.position.y + boundHeight) {
+            camera.position.y = world.level.player.getAbsPos().y + Character.CHARACTER_SIZE.y - boundHeight;
+        } else if (world.level.player.getAbsPos().y < camera.position.y - boundHeight) {
+            camera.position.y = world.level.player.getAbsPos().y + boundHeight;
+        }
+
+        // Constrain camera to map
+        camera.position.x = MathUtils.clamp(camera.position.x, camera.viewportWidth / 2f, world.level.mapBounds.x - camera.viewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, camera.viewportHeight / 2f, world.level.mapBounds.y - camera.viewportHeight / 2f);
 
         camera.update();
     }

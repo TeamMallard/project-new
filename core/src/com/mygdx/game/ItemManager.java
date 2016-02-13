@@ -8,34 +8,34 @@ import java.util.List;
  */
 public class ItemManager {
 
-    private List<Equipable> equipables = new ArrayList<Equipable>();
+    private List<Equipment> equipment = new ArrayList<Equipment>();
     private List<Consumable> consumables = new ArrayList<Consumable>();
 
 
     public ItemManager() {
 
         //Add default Empty equipments to first index of each list
-        equipables.add(new Equipable("EmptyEquipment", "EmptyEquipment", Equipable.EquipType.WEAPON, 0, 0, 0, 0, 0, 0, 0));
+        equipment.add(new Equipment("EmptyEquipment", "EmptyEquipment", Equipment.EquipType.WEAPON, 0, 0, 0, 0, 0, 0, 0));
         consumables.add(new Consumable("EmptyConsumable","EmptyConsumable", Consumable.ConsumeType.HEAL,0, 0));
     }
 
     /**
-     * Adds a new equipable item.
-     * @param equipable The Equipable to add.
+     * Adds a new equipment item.
+     * @param equipment The Equipment to add.
      */
-    public void addEquipable(Equipable equipable) {
+    public void addEquipment(Equipment equipment) {
 
-        equipable.updateID(equipables.size());
-        equipables.add(equipable);//Check size function
+        equipment.updateID(this.equipment.size());
+        this.equipment.add(equipment);//Check size function
     }
 
     /**
-     * Returns the Equipable stored at the given index.
-     * @param itemID The index of the Equipable to retrieve.
-     * @return An Equipable
+     * Returns the Equipment stored at the given index.
+     * @param itemID The index of the Equipment to retrieve.
+     * @return An Equipment
      */
-    public Equipable getEquipable(int itemID) {
-        return equipables.get(itemID);
+    public Equipment getEquipment(int itemID) {
+        return equipment.get(itemID);
     }
 
     /**
@@ -59,7 +59,7 @@ public class ItemManager {
     @Override
     public String toString() {
         return "ItemManager{" +
-                "equipables=" + equipables +
+                "equipment=" + equipment +
                 ", consumables=" + consumables +
                 '}';
     }

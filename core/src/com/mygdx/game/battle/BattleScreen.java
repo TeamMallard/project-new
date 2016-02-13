@@ -67,7 +67,7 @@ public class BattleScreen extends ScreenAdapter {
         determineTurnOrder();
         assignInitialPositions();
 
-        //json.toJson(Game.items.getEquipable(0), Equipable.class, new FileHandle("E:\\My Documents\\Uni Stuff\\Second Year\\SEPR\\PrivateDev\\core\\assets\\items.json"));
+        //json.toJson(Game.items.getEquipment(0), Equipment.class, new FileHandle("E:\\My Documents\\Uni Stuff\\Second Year\\SEPR\\PrivateDev\\core\\assets\\items.json"));
 
 
         //Initialise the size of the battlemenu menus

@@ -3,12 +3,12 @@ package com.mygdx.game;
 import java.util.Arrays;
 
 /**
- * Class represents an individual equipable item, ID's are assigned by the order of the equipment in the ItemManager's list.
+ * Class represents an individual item of equipment, id's are assigned by the order of the equipment in the ItemManager's list.
  * The Modifiers array stores the statistic modifiers this equipment piece gives in the order: Speed, Strength, Dexterity, Intelligence, ArmourValue.
  */
-public class Equipable {
+public class Equipment {
 
-    private int ID = -1;
+    private int id = -1;
     private String name, description;
     private EquipType type;
     private int[] modifiers = new int[5];//Ordered: speed, strength, dexterity, intelligence, armourVal
@@ -17,8 +17,8 @@ public class Equipable {
 
     @Override
     public String toString() {
-        return "Equipable{" +
-                "ID=" + ID +
+        return "Equipment{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", type=" + type +
@@ -28,19 +28,19 @@ public class Equipable {
     }
 
     /**
-     * Constructor for a new Equipable.
-     * @param name The name of the Equipable.
-     * @param description The description of the Equipable.
-     * @param type The type of the Equipable.
+     * Constructor for a new Equipment.
+     * @param name The name of the Equipment.
+     * @param description The description of the Equipment.
+     * @param type The type of the Equipment.
      * @param speedModifier The speedModifier.
      * @param strengthModifier The strengthModifier.
      * @param dexterityModifier The dexterityModifier.
      * @param intelligenceModifier The intelligenceModifier.
      * @param armourValModifier The armourValue Modifier.
-     * @param levelRequirement The level requirement of the Equipable.
+     * @param levelRequirement The level requirement of the Equipment.
      * @param cost
      */
-    public Equipable(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement, int cost) {
+    public Equipment(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement, int cost) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -56,7 +56,7 @@ public class Equipable {
     /**
      * Used for generating classes from json.
      */
-    public Equipable() {
+    public Equipment() {
     }
 
     public String getName() {
@@ -77,12 +77,12 @@ public class Equipable {
     }
 
     public void updateID(int id) {
-        this.ID = id;
+        this.id = id;
     }
 
 
     public int getID() {
-        return ID;
+        return id;
     }
 
     public EquipType getType() {

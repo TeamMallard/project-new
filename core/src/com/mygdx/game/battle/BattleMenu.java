@@ -88,10 +88,10 @@ public class BattleMenu {
     public void render(float delta, SpriteBatch batch) {
         uiRenderer.render(batch);
         if(menuPointer==3){
-            batch.draw(Assets.targetingPointer,targetingIndicatorX,targetingIndicatorY,Assets.targetingPointer.getWidth(),Assets.targetingPointer.getHeight(),0,0,Assets.targetingPointer.getWidth(),Assets.targetingPointer.getHeight(),isTargetingIndicatorPointLeft,false);
+            batch.draw(Assets.selectArrow,targetingIndicatorX,targetingIndicatorY,Assets.selectArrow.getWidth(),Assets.selectArrow.getHeight(),0,0,Assets.selectArrow.getWidth(),Assets.selectArrow.getHeight(),isTargetingIndicatorPointLeft,false);
         }
         if(showTurnIndicator){
-            batch.draw(Assets.battleTurnPointer,turnIndicatorX,turnIndicatorY);
+            batch.draw(Assets.turnArrow,turnIndicatorX,turnIndicatorY);
         }
         if(showResultsDialog){
             resultsDialog.render(batch, Assets.patch);

@@ -51,7 +51,7 @@ public class WorldScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         update(delta);
-        worldRenderer.render();
+        worldRenderer.render(delta);
     }
 
     @Override

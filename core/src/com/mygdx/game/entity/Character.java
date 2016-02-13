@@ -1,8 +1,11 @@
 package com.mygdx.game.entity;
 
 import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Level;
+import com.mygdx.game.assets.WalkingTextures;
 
 import java.util.Comparator;
 
@@ -35,6 +38,8 @@ public abstract class Character {
     private float stateTime;
     protected float waitTime;
 
+    private WalkingTextures walkingTextures;
+
 //  Map information for collision detection.
     protected Level level;
 
@@ -43,8 +48,9 @@ public abstract class Character {
      * @param level The level which contains the character.
      * @param currentTile The tile which the character should start on.
      */
-    public Character(Level level, Vector2 currentTile) {
+    public Character(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
         this.level = level;
+        this.walkingTextures = walkingTextures;
 
         waitTime = 0;
         this.currentTile = currentTile;
@@ -187,6 +193,10 @@ public abstract class Character {
         this.stateTime = stateTime;
     }
 
+    public TextureRegion getCurrentTexture() {
+        return walkingTextures.getTexture(direction, stateTime);
+    }
+
     /**
      * The state of the character
      */
@@ -198,7 +208,17 @@ public abstract class Character {
      * Represents the direction of a character
      */
     public enum Direction {
-        UP, DOWN, LEFT, RIGHT
+        DOWN (0), UP (1), LEFT (2), RIGHT (3);
+
+        private int index;
+
+        Direction(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
     }
 
     /**

@@ -1,16 +1,15 @@
 package com.mygdx.game;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * Manages the equipables currently equipped to an agent.
- * Stores the ID of the currently equipped equipable in the relevant variable.
- * Can only have one of each type of equipable equipped at once.
+ * Manages the equipment currently equipped to an agent.
+ * Stores the ID of the currently equipped equipment in the relevant variable.
+ * Can only have one of each type of equipment equipped at once.
  */
 public class CurrentEquipment {
 
-    public int[] equipSlots = new int[5]; //Stores equipped equipables in order: head, chest, feet, accessory, weapon
+    public int[] equipSlots = new int[5]; //Stores equipped equipment in order: head, chest, feet, accessory, weapon
     private int[] totalStatModifiers = new int[5]; //Ordered: speed, strength, dexterity, intelligence, armourVal
 
 
@@ -41,7 +40,7 @@ public class CurrentEquipment {
         int[][] totalStatModifiersPerItem= new int[5][5];//2x2 array that stores the total stats of each item on its own row
 
         for(int i=0; i<5; i++){
-            totalStatModifiersPerItem[i] = Game.items.getEquipable(equipSlots[i]).getModifiers();
+            totalStatModifiersPerItem[i] = Game.items.getEquipment(equipSlots[i]).getModifiers();
         }
 
         int[] totalStatModifiers = new int[5];
@@ -57,7 +56,7 @@ public class CurrentEquipment {
 
     //NEED TO DO SOMETHING ABOUT UNEQUIPPING ALSO
     public void equip(int id){
-        Equipable item = Game.items.getEquipable(id);
+        Equipment item = Game.items.getEquipment(id);
         equipSlots[item.getType().slot()] = id;
         totalStatModifiers = calculateTotalStatModifiers();
     }
@@ -67,7 +66,7 @@ public class CurrentEquipment {
      * @param slot the slot to unequip from
      * @return the id of the item that was in the slot
      */
-    public int unequip(Equipable.EquipType slot) {
+    public int unequip(Equipment.EquipType slot) {
         int id = equipSlots[slot.slot()];
         equipSlots[slot.slot()] = 0;
         return id;
@@ -78,7 +77,7 @@ public class CurrentEquipment {
      * @param slot the slot to check for equipment
      * @return true if there is an item equipped in the slot, false if not
      */
-    public boolean isEquipped(Equipable.EquipType slot) {
+    public boolean isEquipped(Equipment.EquipType slot) {
         return equipSlots[slot.slot()] != 0;
     }
 
