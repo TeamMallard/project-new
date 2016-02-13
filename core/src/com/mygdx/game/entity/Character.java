@@ -1,4 +1,4 @@
-package com.mygdx.game.entity;
+	package com.mygdx.game.entity;
 
 import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
 import com.badlogic.gdx.math.Vector2;
@@ -97,7 +97,7 @@ public abstract class Character {
      * @param requestedDirection The time since the last frame was rendered.
      */
     protected void updateMovement(Direction requestedDirection) {
-        if (getDirection() == requestedDirection) {
+    	setDirection(requestedDirection);
             switch (requestedDirection) {
                 case UP:
                     if (!level.collisionMap[(int) getCurrentTile().x][(int) getCurrentTile().y + 1]) {
@@ -130,11 +130,6 @@ public abstract class Character {
             }
 //          To stop other characters moving in the same frame
             level.collisionMap[(int) targetTile.x][(int) targetTile.y] = true;
-        } else {
-            setDirection(requestedDirection);
-            setState(CharacterState.WAITING);
-            waitTime = 0;
-        }
     }
 
     /**

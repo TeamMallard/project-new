@@ -67,7 +67,7 @@ public class BattleScreen extends ScreenAdapter {
         determineTurnOrder();
         assignInitialPositions();
 
-        //json.toJson(Game.items.getEquipable(0), Equipable.class, new FileHandle("E:\\My Documents\\Uni Stuff\\Second Year\\SEPR\\PrivateDev\\core\\assets\\items.json"));
+        //json.toJson(Game.items.getEquipment(0), Equipment.class, new FileHandle("E:\\My Documents\\Uni Stuff\\Second Year\\SEPR\\PrivateDev\\core\\assets\\items.json"));
 
 
         //Initialise the size of the battlemenu menus
@@ -236,7 +236,7 @@ public class BattleScreen extends ScreenAdapter {
                 if(!thisAgent.isDead()){
 
                     int increaseXPReturn, thisXpGain;
-                    thisXpGain = xpGain+random.nextInt(4);
+                    thisXpGain = Math.round((float)xpGain * random.nextFloat()%0.1f);
                     increaseXPReturn = thisAgent.getStats().increaseXP(thisXpGain);
                     resultsText.add(thisAgent.getName() +" received "+thisXpGain +" experience.");
 
