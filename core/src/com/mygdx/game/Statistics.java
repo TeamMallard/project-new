@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Statistics {
 	
-	private final int[] LEVEL_CURVE = {10, 20, 35, 50, 70, 95, 125, 160, 200, 250};
+	private final int[] LEVEL_CURVE = {20, 35, 50, 70, 95, 125, 160, 200, 250, 325};
 
     private int currentHP,currentMP, maxHP, maxMP;
     private int speed,strength,dexterity,intelligence;
@@ -169,7 +169,7 @@ public class Statistics {
         return currentLevel;
     }
 
-    public int getLevelCap() { return LEVEL_CURVE[this.getCurrentLevel()]; }
+    public int getLevelCap() { return LEVEL_CURVE[this.getCurrentLevel() - 1]; }
     
     public int getMaxExP() {return maxExp;}
 }
