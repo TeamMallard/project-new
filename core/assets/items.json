@@ -52,7 +52,7 @@
 "consumables":[
 	{
 		"id":0,
-		"name":"Heal Flask",
+		"name":"Small Heal Flask",
 		"description":"Just enough to heal once",
 		"type":"HEAL",
 		"power":10,
@@ -60,18 +60,50 @@
 	},
 	{
 		"id":1,
-		"name":"Reviver",
-		"description":"It Revives",
-		"type":"REVIVE",
+		"name":"Medium Heal Flask",
+		"description":"Heals for a fair amount",
+		"type":"HEAL",
+		"power":30,
+		"cost":8
+	},
+	{
+		"id":2,
+		"name":"Large Heal Flask",
+		"description":"Heals for a large amount",
+		"type":"HEAL",
+		"power":60,
+		"cost":8
+	},
+	{
+		"id":3,
+		"name":"Small MP Flask",
+		"description":"It gives a small amount of MP",
+		"type":"MANAHEAL",
+		"power":10,
+		"cost":1
+	},
+	{
+		"id":4,
+		"name":"Medium MP Flask",
+		"description":"It gives a fair amount of MP",
+		"type":"MANAHEAL",
 		"power":30,
 		"cost":1
 	},
 	{
-		"id":2,
-		"name":"MP Giver",
-		"description":"It gives MP",
+		"id":5,
+		"name":"Large MP Flask",
+		"description":"It gives a large amount of MP",
 		"type":"MANAHEAL",
-		"power":15,
+		"power":60,
+		"cost":1
+	},
+	{
+		"id":6,
+		"name":"Reviver",
+		"description":"It Revives",
+		"type":"REVIVE",
+		"power":30,
 		"cost":1
 	}
 	]

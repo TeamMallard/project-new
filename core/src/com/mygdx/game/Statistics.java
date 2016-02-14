@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.Random;
+
 /**
  * Stores an agents statistics.
  */
@@ -60,10 +62,20 @@ public class Statistics {
 
     public int increaseXP(int xp){//might need to return things when level up
         int levelIncrease = 0;
+        Random random = new Random();
         experience+=xp;
         while(experience>=this.getLevelCap()) {
-                currentLevel += 1;
-                levelIncrease+=1;
+        	maxHP += random.nextInt(intelligence*10) + 10;
+        	currentHP = maxHP;
+        	maxMP += random.nextInt(intelligence) + 1;
+        	currentMP = maxMP;
+        	speed += random.nextInt(intelligence) + 1;
+        	strength += random.nextInt(intelligence) + 1;
+        	dexterity += random.nextInt(intelligence) + 1;
+        	intelligence += random.nextInt(intelligence) + 1;
+        	
+            currentLevel += 1;
+            levelIncrease+=1;
         }
         if(levelIncrease>0)
             return levelIncrease;
