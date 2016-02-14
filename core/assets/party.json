@@ -13,7 +13,7 @@
 		"intelligence":3,
 		"baseArmourVal":2,
 		"armourVal":2,
-		"experience":0,
+		"experience":100,
 		"currentLevel":1,
 		"maxLevel":20
 		},
@@ -46,7 +46,7 @@
 		}
 	},
 	{
-	"name":"Adrian the Duck",
+	"name":"Adrian the Dick",
 	"type":"FRIENDLY",
 	"stats":{
 		"currentHP":100,

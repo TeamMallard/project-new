@@ -65,7 +65,7 @@ public class Statistics {
         Random random = new Random();
         experience+=xp;
         while(experience>=this.getLevelCap()) {
-        	maxHP += random.nextInt(intelligence*10) + 10;
+        	maxHP += random.nextInt(intelligence*5) + 10;
         	currentHP = maxHP;
         	maxMP += random.nextInt(intelligence) + 1;
         	currentMP = maxMP;
