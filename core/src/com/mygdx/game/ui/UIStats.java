@@ -44,11 +44,11 @@ public class UIStats extends UIComponent {
         String xp = "XP:  " + player.getStats().getExperience() + " /" + player.getStats().getLevelCap();
         String hp = "HP:  " + player.getStats().getCurrentHP() + " /" + player.getStats().getMaxHP();
         String mp = "MP:  " + player.getStats().getCurrentMP() + " /" + player.getStats().getMaxMP();
-        String sp = "SPEED:  " + player.getStats().getSpeed();
-        String de = "DEXTERITY:  " + player.getStats().getDexterity();
-        String st = "STRENGTH:  " + player.getStats().getStrength();
-        String in= "INTELLIGENCE:  " + player.getStats().getIntelligence();
-        String ar = "ARMOUR:  " + player.getStats().getBaseArmourVal();
+        String sp = "SPEED:  " + player.getTotalSpeed() + "(" + player.getStats().getSpeed() + ")";
+        String de = "DEXTERITY:  " + player.getTotalDexterity() + "(" + player.getStats().getDexterity() + ")";
+        String st = "STRENGTH:  " +  player.getTotalStrength() + "(" + player.getStats().getStrength() + ")";
+        String in= "INTELLIGENCE:  " +  player.getTotalInteligence() + "(" + player.getStats().getIntelligence() + ")";
+        String ar = "ARMOUR:  " +  player.getTotalDefence() + "(" + player.getStats().getBaseArmourVal() + ")";
         String eq = "EQUIPMENT:";
         String eqHead = "HEAD:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[0]).getName();
         String eqChest = "CHEST:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[1]).getName();

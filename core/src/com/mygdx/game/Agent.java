@@ -66,7 +66,7 @@ public class Agent implements Comparable<Agent>{
 
     public int dealDamage(int power, Agent attacker){
         // Calculate chance to take damage based on attacker's and defender's dexterity.
-        float hitChance = MathUtils.clamp(1 - ((float) stats.getDexterity() / attacker.stats.getDexterity()) / 10, 0.1f, 0.9f);
+        float hitChance = MathUtils.clamp(1 - ((float) getTotalDexterity() / attacker.getTotalDexterity()) / 10, 0.1f, 0.9f);
 
         // DEBUG
         System.out.println(hitChance);
@@ -74,7 +74,7 @@ public class Agent implements Comparable<Agent>{
         int damageDone = 0;
 
         if(hitChance > MathUtils.random()) {
-            damageDone = MathUtils.round((float) (power * Math.sqrt((float) attacker.stats.getStrength() / stats.getArmourVal())));
+            damageDone = MathUtils.round((float) (power * Math.sqrt((float) attacker.getTotalStrength() / getTotalDefence()	)));
             System.out.println("DAMAGE DONE " + damageDone);
 
             stats.reduceHP(damageDone);
@@ -128,6 +128,29 @@ public class Agent implements Comparable<Agent>{
 
     public List<Integer> getSkills() {
         return skills;
+    }
+
+    
+//	TOTAL means sum of base and equipment modifiers
+    
+    public int getTotalSpeed(){
+    	return this.getStats().getSpeed()+this.getCurrentEquipment().getTotalSpeedModifiers();
+    }
+    
+    public int getTotalStrength(){
+    	return this.getStats().getStrength()+this.getCurrentEquipment().getTotalStrengthModifiers();
+    }
+    
+    public int getTotalDexterity(){
+    	return this.getStats().getDexterity()+this.getCurrentEquipment().getTotalDexterityModifiers();
+    }
+    
+    public int getTotalInteligence(){
+    	return this.getStats().getIntelligence()+this.getCurrentEquipment().getTotalIntelligenceModifiers();
+    }
+    
+    public int getTotalDefence(){
+    	return this.getStats().getBaseArmourVal()+this.getCurrentEquipment().getTotalArmourValModifiers();
     }
 
 

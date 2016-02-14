@@ -26,11 +26,11 @@ public class CurrentEquipment {
 
     public CurrentEquipment(int head, int chest, int feet, int accessory, int weapon) {
 
-        equipSlots[0] = head;
-        equipSlots[1] = chest;
-        equipSlots[2] = feet;
-        equipSlots[3] = accessory;
-        equipSlots[4] = weapon;
+        equipSlots[slot.HEAD.ordinal()] = head;
+        equipSlots[slot.CHEST.ordinal()] = chest;
+        equipSlots[slot.FEET.ordinal()] = feet;
+        equipSlots[slot.ACCESSORY.ordinal()] = accessory;
+        equipSlots[slot.WEAPON.ordinal()] = weapon;
 
         totalStatModifiers=calculateTotalStatModifiers();
     }
@@ -43,7 +43,7 @@ public class CurrentEquipment {
     private int[] calculateTotalStatModifiers(){
         int[][] totalStatModifiersPerItem= new int[5][5];//2x2 array that stores the total stats of each item on its own row
 
-        for(int i=0; i<5; i++){
+        for(int i=0; i<slot.values().length; i++){
             totalStatModifiersPerItem[i] = Game.items.getEquipment(equipSlots[i]).getModifiers();
         }
 
@@ -55,6 +55,7 @@ public class CurrentEquipment {
                 totalStatModifiers[column]+=totalStatModifiersPerItem[row][column];
             }
         }
+        System.out.println("total modifiers:" + Arrays.toString(totalStatModifiers));
         return totalStatModifiers;
     }
 

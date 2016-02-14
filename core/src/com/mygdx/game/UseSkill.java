@@ -56,7 +56,7 @@ public class UseSkill extends UseAbility {
             StringBuilder infoBoxText = new StringBuilder();
 
             if(skill.getSkillType() == Skill.SkillType.ATTACK) {
-                int damage = user.getStats().getCurrentLevel() + skill.getBasePower();
+                int damage = user.getTotalStrength();
                 int damageDone = target.dealDamage(damage, user);
 
                 infoBoxText.append(target.getName()).append(damageDone > 0 ? " takes " + damageDone + " damage" : " dodges the attack");
