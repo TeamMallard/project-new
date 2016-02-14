@@ -35,6 +35,8 @@ public class Assets {
     public static WalkingTextures playerWalkingTextures, roboWalkingTextures, sallyWalkingTextures;
     public static BattleTextures[] battleTextures = new BattleTextures[6];
 
+    public static TextureRegion[] equipment = new TextureRegion[5];
+
     //SOUNDS
     public static Sound sfx_menuMove;
     public static Sound sfx_menuSelect;
@@ -61,6 +63,8 @@ public class Assets {
         loadPlayerTextures();
         loadRoboTextures();
         loadSallyTextures();
+
+        loadEquipmentTextures();
 
         battleTextures[2] = loadBattleTextures("ooze", 32, 32);
         battleTextures[3] = loadBattleTextures("radiated_duck", 32, 32);
@@ -104,6 +108,14 @@ public class Assets {
 
         //  CHARACTER TEXTURE SHEETS
         shadow = new Texture("shadow.png");
+    }
+
+    private static void loadEquipmentTextures() {
+        Texture texture = loadTexture("equipment.png");
+
+        for(int i = 0; i < equipment.length; i++) {
+            equipment[i] = new TextureRegion(texture, i * 15, 0, 15, 15);
+        }
     }
 
     private static void loadPlayerTextures() {

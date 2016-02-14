@@ -222,8 +222,6 @@ public class UIShop extends UIComponent {
             shop.getEquipment().add(((EquipmentShopItem) selected).equipment.getID());
         }
 
-
-
         Game.pointsScore += (int) Math.ceil(selected.getCost() * 0.8f);
         System.out.println((int) Math.ceil(selected.getCost() * 0.8f));
     }
@@ -353,6 +351,8 @@ public class UIShop extends UIComponent {
             renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 350, y - LINE_HEIGHT, Color.WHITE, font);
             renderText(batch, "COST: " + equipment.getCost(), x + 324, y, Color.WHITE, font);
             renderText(batch, statString, x, y - LINE_HEIGHT * 2, Color.WHITE, smallFont);
+
+            batch.draw(equipment.getType().getTexture(), x + 324, y + 50);
         }
 
         @Override

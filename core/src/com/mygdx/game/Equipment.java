@@ -1,5 +1,9 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.particles.ResourceData;
+import com.mygdx.game.assets.Assets;
+
 import java.util.Arrays;
 
 /**
@@ -111,6 +115,10 @@ public class Equipment {
 
         public int slot() {
             return slot;
+        }
+
+        public TextureRegion getTexture() {
+            return Assets.equipment[slot];
         }
     }
 }

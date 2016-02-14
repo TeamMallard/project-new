@@ -218,6 +218,8 @@ public class UIEquipmentMenu extends UIComponent {
             renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 340, y, Color.WHITE, font);
             renderText(batch, statString, x, y - LINE_HEIGHT * 2, Color.WHITE, smallFont);
 
+            batch.draw(equipment.getType().getTexture(), x + width - 70, y + 20);
+
             if(equipped) {
                 batch.draw(Assets.shield, x + width - 50, y + 20);
             }
