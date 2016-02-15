@@ -18,7 +18,7 @@ public abstract class Character {
     public final float TRANSITION_SPEED = 0.25f;
     public final float WAIT_PERIOD = 0.15f;
 
-    public static final Vector2 CHARACTER_SIZE = new Vector2(13,21);
+    public static final Vector2 CHARACTER_SIZE = new Vector2(26,42);
 
 //  Player position & orientation information
     private Vector2 currentTile;
