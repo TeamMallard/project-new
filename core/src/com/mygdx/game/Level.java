@@ -30,6 +30,11 @@ public class Level {
     private TiledMapTileLayer collisionLayer;
 
     public Vector2 mapBounds;
+    public Vector2[] doors = {new Vector2(58, 36), new Vector2(20, 35), new Vector2(46, 69), new Vector2(47, 69), 
+    		new Vector2(78, 96), new Vector2(119, 65), new Vector2(147, 89), new Vector2(201, 65)};
+    public Vector2[] exits = {new Vector2(48, 49), new Vector2(22, 55), new Vector2(59, 76), new Vector2(59, 76), 
+    		new Vector2(89, 106), new Vector2(119, 87), new Vector2(157, 97), new Vector2(211, 73)};
+    
 
     /**
      * The constructor loads the map and creates a new player in the appropriate position.
@@ -54,7 +59,7 @@ public class Level {
             }
         }
 
-        player = new Player(this, new Vector2(115, 94));
+        player = new Player(this, new Vector2(85, 59));
         characters = new ArrayList<Character>();
         characters.add(player);
         stopInput = false;
@@ -69,8 +74,11 @@ public class Level {
         for (Character character : characters) {
             character.update(delta);
             if (character instanceof Player) {
-                if (character.getCurrentTile().equals(new Vector2(115, 95)) && character.getState() != CharacterState.TRANSITIONING) {
-                    character.setCurrentTile(new Vector2(115, 94));
+            	System.out.println(character.getCurrentTile().toString());
+                for (int i = 0; i < doors.length; i++) {
+	                if (character.getCurrentTile().equals(doors[i]) && character.getState() != CharacterState.TRANSITIONING) {
+	                    character.setCurrentTile(exits[i]);
+	                }
                 }
             }
         }
