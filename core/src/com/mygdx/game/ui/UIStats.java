@@ -48,7 +48,7 @@ public class UIStats extends UIComponent {
         String de = "DEXTERITY:  " + player.getTotalDexterity() + "(" + player.getStats().getDexterity() + ")";
         String st = "STRENGTH:  " +  player.getTotalStrength() + "(" + player.getStats().getStrength() + ")";
         String in= "INTELLIGENCE:  " +  player.getTotalInteligence() + "(" + player.getStats().getIntelligence() + ")";
-        String ar = "ARMOUR:  " +  player.getTotalDefence() + "(" + player.getStats().getBaseArmourVal() + ")";
+        String ar = "ARMOUR:  " +  player.getTotalDefence() + "(" + player.getStats().getArmourVal() + ")";
         String eq = "EQUIPMENT:";
         String eqHead = "HEAD:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[0]).getName();
         String eqChest = "CHEST:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[1]).getName();

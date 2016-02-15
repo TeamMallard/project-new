@@ -23,6 +23,16 @@ public class Agent implements Comparable<Agent>{
 
     private int texture;
 
+    /**
+     * Whether or not this Agent is currently attacking.
+     */
+    private boolean attacking;
+
+    /**
+     * The time that the Agent has spent on the current attack.
+     */
+    private float attackTime = 0;
+
 
     /**
      * Implements the compareTo function required when implementing the Comparable abstract class.
@@ -74,11 +84,16 @@ public class Agent implements Comparable<Agent>{
         int damageDone = 0;
 
         if(hitChance > MathUtils.random()) {
-            damageDone = MathUtils.round((float) (power * Math.sqrt((float) attacker.getTotalStrength() / getTotalDefence()	)));
+            float multiplier = (float) MathUtils.clamp(Math.sqrt((float) attacker.getTotalStrength() / getTotalDefence()), 0.1, 1);
+            damageDone = MathUtils.round(power * multiplier);
+
             System.out.println("DAMAGE DONE " + damageDone);
+            System.out.println("DAMAGE CALC " + multiplier);
 
             stats.reduceHP(damageDone);
         }
+
+
 
         // Return the actual damage done.
         return damageDone;
@@ -138,7 +153,7 @@ public class Agent implements Comparable<Agent>{
     }
     
     public int getTotalStrength(){
-    	return this.getStats().getStrength()+this.getCurrentEquipment().getTotalStrengthModifiers();
+    	return this.getStats().getStrength() + this.getCurrentEquipment().getTotalStrengthModifiers();
     }
     
     public int getTotalDexterity(){
@@ -150,7 +165,7 @@ public class Agent implements Comparable<Agent>{
     }
     
     public int getTotalDefence(){
-    	return this.getStats().getBaseArmourVal()+this.getCurrentEquipment().getTotalArmourValModifiers();
+    	return this.getStats().getArmourVal()+this.getCurrentEquipment().getTotalArmourValModifiers();
     }
 
 
@@ -183,6 +198,26 @@ public class Agent implements Comparable<Agent>{
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public boolean isAttacking() {
+        return attacking;
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.attacking = attacking;
+
+        if(!attacking) {
+            attackTime = 0;
+        }
+    }
+
+    public float getAttackTime() {
+        return attackTime;
+    }
+
+    public void updateAttackTime(float delta) {
+        this.attackTime += delta;
     }
 
     @Override

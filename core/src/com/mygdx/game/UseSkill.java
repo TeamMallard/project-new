@@ -33,6 +33,10 @@ public class UseSkill extends UseAbility {
 
         battleMenu.showTurnIndicator=false;
 
+        if(skill.getSkillType() == Skill.SkillType.ATTACK) {
+            user.setAttacking(true);
+        }
+
         battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);//Moves the agent to the target
         battleMenu.createInfoBox(user.getName() + " uses " + skill.getName()+" on "+target.getName(),3);//Create an info box with information on the current action
     }
@@ -57,6 +61,9 @@ public class UseSkill extends UseAbility {
 
             if(skill.getSkillType() == Skill.SkillType.ATTACK) {
                 int damage = user.getTotalStrength();
+
+                System.out.println("DAMAGE OF ATTACK " + damage);
+
                 int damageDone = target.dealDamage(damage, user);
 
                 infoBoxText.append(target.getName()).append(damageDone > 0 ? " takes " + damageDone + " damage" : " dodges the attack");
@@ -66,6 +73,7 @@ public class UseSkill extends UseAbility {
                 }
 
                 Assets.sfx_hitNoise.play(Game.masterVolume);
+                user.setAttacking(false);
             } else {
                 target.dealHealth(skill.getBasePower());
                 user.takeMana(skill.getMPCost());

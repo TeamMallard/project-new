@@ -30,8 +30,6 @@ public class BattleAnimator {
      * Will also call the movementDone function of the caller to notify of a movement completion
      */
     public void update(float delta){
-
-
         if(isMoving) {
             updateMovement();
 
@@ -42,6 +40,9 @@ public class BattleAnimator {
                 currentCaller.movementDone(UseAbility.MOVEMENT_GOING);
             }
 
+            if(currentMoveAgent.isAttacking()) {
+                currentMoveAgent.updateAttackTime(delta);
+            }
         }
         else if(isReturning){
             updateMovement();

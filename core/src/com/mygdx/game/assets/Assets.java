@@ -113,7 +113,7 @@ public class Assets {
     private static void loadEquipmentTextures() {
         Texture texture = loadTexture("equipment.png");
 
-        for(int i = 0; i < equipment.length; i++) {
+        for (int i = 0; i < equipment.length; i++) {
             equipment[i] = new TextureRegion(texture, i * 15, 0, 15, 15);
         }
     }
@@ -156,7 +156,15 @@ public class Assets {
         TextureRegion alive = new TextureRegion(battle, 0, 0, width, height);
         TextureRegion dead = new TextureRegion(battle, width, 0, width, height);
 
-        return new BattleTextures(alive, dead);
+        // Load the battle animation if it exists.
+        if (Gdx.files.internal("battle/" + prefix + "_anim.png").exists()) {
+            System.out.println("loaded animation");
+            Texture texture = loadTexture("battle/" + prefix + "_anim.png");
+
+            return new BattleTextures(alive, dead, loadAnimation(texture, width, height, texture.getWidth() / width, 100f));
+        } else {
+            return new BattleTextures(alive, dead);
+        }
     }
 
     /**
@@ -181,6 +189,20 @@ public class Assets {
      */
     public static Animation loadAnimation(String file, int frameWidth, int frameHeight, int frameCount, float frameDuration) {
         Texture texture = loadTexture(file);
+        return loadAnimation(texture, frameWidth, frameHeight, frameCount, frameDuration);
+    }
+
+    /**
+     * Loads an animation from the specified texture.Ò
+     *
+     * @param texture       the texture to create from
+     * @param frameCount    how many frames are in the file
+     * @param frameWidth    how wide each frame is in the file
+     * @param frameHeight   how tall each frame is in the file
+     * @param frameDuration how long each frame should be shown for in seconds
+     * @return the animation
+     */
+    public static Animation loadAnimation(Texture texture, int frameWidth, int frameHeight, int frameCount, float frameDuration) {
         Array<TextureRegion> keyFrames = new Array<TextureRegion>();
 
         for (int i = 0; i < frameCount; i++) {

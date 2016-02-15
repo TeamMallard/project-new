@@ -12,7 +12,7 @@ public class Statistics {
 
     private int currentHP,currentMP, maxHP, maxMP;
     private int speed,strength,dexterity,intelligence;
-    private int baseArmourVal,armourVal;
+    private int armourVal;
     private int experience, currentLevel;
     public final int maxLevel = 10;
     public final int maxExp = 250;
@@ -29,7 +29,6 @@ public class Statistics {
                 ", strength=" + strength +
                 ", dexterity=" + dexterity +
                 ", intelligence=" + intelligence +
-                ", baseArmourVal=" + baseArmourVal +
                 ", armourVal=" + armourVal +
                 ", experience=" + experience +
                 ", currentLevel=" + currentLevel +
@@ -37,7 +36,7 @@ public class Statistics {
                 '}';
     }
 
-    public Statistics(int maxHP, int maxMP, int speed, int strength, int dexterity, int intelligence, int baseArmourVal, int experience, int currentLevel) {
+    public Statistics(int maxHP, int maxMP, int speed, int strength, int dexterity, int intelligence, int armourVal, int experience, int currentLevel) {
         this.maxHP = maxHP;
         this.maxMP = maxMP;
         this.currentHP = maxHP; //Current HP & MP set to max
@@ -48,8 +47,7 @@ public class Statistics {
         this.dexterity = dexterity; //Determines ranged damage
         this.intelligence = intelligence; //Determines magic damage
 
-        this.baseArmourVal = baseArmourVal; //influenced by armour
-        this.armourVal = baseArmourVal;
+        this.armourVal = armourVal; //influenced by armour
 
         this.experience = experience; //current amount of xp
         this.currentLevel = currentLevel;
@@ -83,12 +81,6 @@ public class Statistics {
             return -1;
     }
 
-    //when equipment is changed, this should be called
-    public void adjustArmourVal() {
-
-    }
-
-
     public void reduceHP(int amount){
         currentHP-=amount;
         if(currentHP<0){
@@ -117,8 +109,7 @@ public class Statistics {
     //Get Methods
     /////////////
     public int[] getAllStats(){
-        int[] x = {currentHP,currentMP,maxHP, maxMP,speed,strength,dexterity,intelligence,baseArmourVal,armourVal,experience, currentLevel};
-        return x;
+        return new int[]{currentHP,currentMP,maxHP, maxMP,speed,strength,dexterity,intelligence, armourVal,armourVal,experience, currentLevel};
     }
 
     public int getCurrentHP() {
@@ -151,10 +142,6 @@ public class Statistics {
 
     public int getIntelligence() {
         return intelligence;
-    }
-
-    public int getBaseArmourVal() {
-        return baseArmourVal;
     }
 
     public int getArmourVal() {

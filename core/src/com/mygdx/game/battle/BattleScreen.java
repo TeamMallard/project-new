@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
-import com.mygdx.game.ui.UIDialogue;
 
 import java.util.*;
 
@@ -359,8 +358,8 @@ public class BattleScreen extends ScreenAdapter {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(Assets.battleBGs[backgroundNumber], 0, -Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        enemyParty.render(delta, batch);
-        Game.party.render(delta, batch);
+        enemyParty.render(batch);
+        Game.party.render(batch);
         battleMenu.render(delta, batch);
         batch.end();
 

@@ -82,7 +82,7 @@ public class GameWorld {
                     for(int i=0;i<random.nextInt(3)+1;i++){
                         Agent thisAgent = Game.enemies.getMember(random.nextInt(Game.enemies.size()));
                         Statistics thisAgentStats = thisAgent.getStats();
-                        Statistics newStats = new Statistics(thisAgentStats.getMaxHP(),thisAgentStats.getMaxMP(),thisAgentStats.getSpeed(),thisAgentStats.getStrength(),thisAgentStats.getDexterity(),thisAgentStats.getIntelligence(),thisAgentStats.getBaseArmourVal(),thisAgentStats.getExperience(),thisAgentStats.getCurrentLevel());
+                        Statistics newStats = new Statistics(thisAgentStats.getMaxHP(),thisAgentStats.getMaxMP(),thisAgentStats.getSpeed(),thisAgentStats.getStrength(),thisAgentStats.getDexterity(),thisAgentStats.getIntelligence(),thisAgentStats.getArmourVal(),thisAgentStats.getExperience(),thisAgentStats.getCurrentLevel());
                         params.addEnemy(new Agent(thisAgent.getName(), thisAgent.getType(), newStats, thisAgent.getSkills(), thisAgent.getCurrentEquipment(), thisAgent.getTexture()));
                     }
 

@@ -152,6 +152,7 @@ public class UIPartyMenu extends UIComponent {
             playerSelected++;
         }
         equipmentMenu.selectPlayer(playerSelected);
+        consumableMenu.selectPlayer(playerSelected);
 
         if (InputHandler.isLeftJustPressed()) {
             menuSelected--;

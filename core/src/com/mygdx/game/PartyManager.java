@@ -1,7 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.assets.Assets;
+import com.mygdx.game.assets.BattleTextures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,40 +57,36 @@ public class PartyManager {
         return -1;
     }
 
-    /**
-     * Finds party members with names that contain the search term.
-     *
-     * @param searchString The search string- case insensitive
-     * @return returns list of agents with names that contain the search string
-     */
-    public List<Agent> getMember(String searchString) {
-        List<Agent> returnList = new ArrayList<Agent>();
-        for (int i = 0; i < partyList.size(); i++) {
-            if (partyList.get(i).getName().toLowerCase().contains(searchString.toLowerCase()))
-                returnList.add(partyList.get(i));
-        }
-        return returnList;
-    }
+//    /**
+//     * Finds party members with names that contain the search term.
+//     *
+//     * @param searchString The search string- case insensitive
+//     * @return returns list of agents with names that contain the search string
+//     */
+//    public List<Agent> getMember(String searchString) {
+//        List<Agent> returnList = new ArrayList<Agent>();
+//        for (Agent agent : partyList) {
+//            if (agent.getName().toLowerCase().contains(searchString.toLowerCase()))
+//                returnList.add(agent);
+//        }
+//        return returnList;
+//    }
 
     public int size() {
         return partyList.size();
     }
 
-    //The update function for the party
-    public void update() {
-
-
-    }
-
     /**
      * Renders the the party at their respective locations with their respective sprite.
      *
-     * @param delta The time between frames
      * @param batch The SpriteBatch to use
      */
-    public void render(float delta, SpriteBatch batch) {
+    public void render(SpriteBatch batch) {
         for (Agent agent : partyList) {
-            batch.draw(Assets.battleTextures[agent.getTexture()].getTexture(agent.isDead()), agent.getX() - (32), agent.getY() - (32), 96f, 96f);
+            BattleTextures battleTextures = Assets.battleTextures[agent.getTexture()];
+            TextureRegion texture = agent.isAttacking() ? battleTextures.getBattleTexture(agent.getAttackTime()) : battleTextures.getTexture(agent.isDead());
+
+            batch.draw(texture, agent.getX() - (32), agent.getY() - (32), 96f, 96f);
         }
 
     }
@@ -100,8 +98,8 @@ public class PartyManager {
      */
     public boolean isDead() {
         boolean isDead = true;
-        for (int i = 0; i < partyList.size(); i++) {
-            if (!partyList.get(i).isDead()) {
+        for (Agent agent : partyList) {
+            if (!agent.isDead()) {
                 isDead = false;
                 break;
             }
@@ -130,8 +128,8 @@ public class PartyManager {
      * @param x The health to set each party member to
      */
     public void setHealths(int x) {
-        for (int i = 0; i < partyList.size(); i++) {
-            partyList.get(i).dealHealth(x);
+        for (Agent agent : partyList) {
+            agent.dealHealth(x);
         }
     }
 }
