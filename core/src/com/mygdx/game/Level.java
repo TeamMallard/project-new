@@ -66,8 +66,10 @@ public class Level {
             if (character instanceof Player) {
             	System.out.println(character.getCurrentTile().toString());
                 for (int i = 0; i < doors.length; i++) {
+                	//map.getLayers().remove(map.getLayers().get("door1"));
 	                if (character.getCurrentTile().equals(doors[i]) && character.getState() != CharacterState.TRANSITIONING) {
 	                    character.setCurrentTile(exits[i]);
+	                    Game.segment += 1;
 	                }
                 }
             }

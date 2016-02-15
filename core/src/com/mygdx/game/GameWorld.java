@@ -128,8 +128,8 @@ public class GameWorld {
         BattleParameters params = new BattleParameters(Game.segment);
 
         //Get a number of agents from the list of enemies, make new agent instances with their information and setup the next battle
-        for (int i = 0; i < MathUtils.random(1, 3); i++) {
-            Agent thisAgent = Game.enemies.getMember(MathUtils.random(Game.enemies.size() - 1));
+        for (int i = 0; i < MathUtils.random(1, 4); i++) {
+            Agent thisAgent = Game.enemies.getMember(MathUtils.random(1, 3) + 3 * Game.segment);
             Statistics thisAgentStats = thisAgent.getStats();
             Statistics newStats = new Statistics(thisAgentStats.getMaxHP(), thisAgentStats.getMaxMP(), thisAgentStats.getSpeed(), thisAgentStats.getStrength(), thisAgentStats.getDexterity(), thisAgentStats.getIntelligence(), thisAgentStats.getArmourVal(), thisAgentStats.getExperience(), thisAgentStats.getCurrentLevel());
             params.addEnemy(new Agent(thisAgent.getName(), thisAgent.getType(), newStats, thisAgent.getSkills(), thisAgent.getCurrentEquipment(), thisAgent.getTexture()));
