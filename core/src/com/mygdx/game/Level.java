@@ -19,7 +19,6 @@ public class Level {
     public static final int TILE_SIZE = 32;
 
     public TiledMap map;
-    public boolean[][] collisionMap;
     public Player player;
     public ArrayList<Character> characters;
     public boolean stopInput;
@@ -51,14 +50,6 @@ public class Level {
         int tileHeight = prop.get("tileheight", Integer.class);
         mapBounds = new Vector2(mapWidth * tileWidth, mapHeight * tileHeight);
 
-        collisionMap = new boolean[mapWidth][mapHeight];
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = mapHeight - 1; y >= 0; y--) {
-                collisionMap[x][y] = layer.getCell(x, y).getTile().getProperties().containsKey("blocked");
-            }
-        }
-
         player = new Player(this, new Vector2(85, 59));
         characters = new ArrayList<Character>();
         characters.add(player);
@@ -70,7 +61,6 @@ public class Level {
      */
     public void update(float delta) {
         characters.sort(new Character.CharacterComparator());
-        updateCollisionMap();
         for (Character character : characters) {
             character.update(delta);
             if (character instanceof Player) {
@@ -85,28 +75,7 @@ public class Level {
 
     }
 
-    /**
-     * The CollisionMap allows characters to know if their path is blocked by a player or a blocked tile.
-     */
-    private void updateCollisionMap() {
-        for (int i = 0; i < collisionMap.length; i++) {
-            for (int j = 0; j < collisionMap[i].length; j++) {
-                collisionMap[i][j] = false;
-            }
-        }
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = mapHeight - 1; y >= 0; y--) {
-                collisionMap[x][y] = layer.getCell(x, y).getTile().getProperties().containsKey("blocked");
-            }
-        }
-        for (int i = 0; i < characters.size(); i++) {
-            collisionMap[(int) characters.get(i).getCurrentTile().x][(int) characters.get(i).getCurrentTile().y] = true;
-            collisionMap[(int) characters.get(i).targetTile.x][(int) characters.get(i).targetTile.y] = true;
-        }
-        collisionMap[(int) player.targetTile.x][(int) player.targetTile.y] = true;
-        collisionMap[(int) player.getCurrentTile().x][(int) player.getCurrentTile().y] = true;
-    }
+
 
     public boolean checkCollision(int x, int y) {
         return isTileBlocked(x, y) || isTileOccupied(x, y);
