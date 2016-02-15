@@ -46,10 +46,11 @@ public class UIConsumableMenu extends UIComponent {
 
     /**
      * Creates a new UIConsumableMenu with the specified parameters.
-     * @param x        the x coordinate
-     * @param y        the y coordinate
-     * @param width    the width of the menu
-     * @param height   the height of the menu
+     *
+     * @param x      the x coordinate
+     * @param y      the y coordinate
+     * @param width  the width of the menu
+     * @param height the height of the menu
      * @param parent the party menu this UIConsumableMenu belongs to
      */
     public UIConsumableMenu(float x, float y, float width, float height, UIPartyMenu parent) {
@@ -71,11 +72,11 @@ public class UIConsumableMenu extends UIComponent {
         int page = selectedConsumable / MAX_ITEMS_PER_PAGE;
         int offset = page * MAX_ITEMS_PER_PAGE;
 
-        for(int i = offset; i < offset + Math.min(MAX_ITEMS_PER_PAGE, currentConsumable.length - offset); i++) {
+        for (int i = offset; i < offset + Math.min(MAX_ITEMS_PER_PAGE, currentConsumable.length - offset); i++) {
             currentConsumable[i].render(batch, patch);
 
-            if(hasFocus && selectedConsumable == i) {
-                batch.draw(Assets.selectArrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+            if (hasFocus && selectedConsumable == i) {
+                batch.draw(Assets.selectArrow, x, y - (75 * (i % MAX_ITEMS_PER_PAGE)) + 30);
             }
         }
 
@@ -89,7 +90,7 @@ public class UIConsumableMenu extends UIComponent {
         List<Item> consumable = new ArrayList<Item>();
         int index = 0;
 
-        for(Integer consumableId : partyManager.getConsumables()) {
+        for (Integer consumableId : partyManager.getConsumables()) {
             consumable.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getConsumable(consumableId)));
         }
 
@@ -99,6 +100,7 @@ public class UIConsumableMenu extends UIComponent {
 
     /**
      * Sets the currently selected player.
+     *
      * @param index the index of the selected player
      */
     public void selectPlayer(int index) {
@@ -128,82 +130,109 @@ public class UIConsumableMenu extends UIComponent {
         return hasFocus;
     }
 
+    /**
+     * Updates the state of this UIConsumableMenu.
+     */
     public void update() {
-        if(InputHandler.isUpJustPressed() && selectedConsumable > 0) {
+        if (InputHandler.isUpJustPressed() && selectedConsumable > 0) {
             selectedConsumable--;
-        } else if(InputHandler.isDownJustPressed() && selectedConsumable < currentConsumable.length - 1) {
+        } else if (InputHandler.isDownJustPressed() && selectedConsumable < currentConsumable.length - 1) {
             selectedConsumable++;
         }
 
-        if(InputHandler.isActJustPressed()) {
+        if (InputHandler.isActJustPressed()) {
             UIManager uiManager = Game.worldScreen.getGameWorld().uiManager;
-        	Consumable item = currentConsumable[selectedConsumable].consumable;
-            switch(item.getType()){
-                case HEAL:{
-                    if(!getSelectedPlayer().isDead()) {
-	                    Assets.sfx_healNoise.play(Game.masterVolume);
-	                    this.getSelectedPlayer().dealHealth(item.getPower());
-	                    partyManager.getConsumables().remove(selectedConsumable);
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " is healed for " + item.getPower() + " health");
+            Consumable item = currentConsumable[selectedConsumable].consumable;
+            switch (item.getType()) {
+                case HEAL: {
+                    if (!getSelectedPlayer().isDead()) {
+                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        this.getSelectedPlayer().dealHealth(item.getPower());
+                        partyManager.getConsumables().remove(selectedConsumable);
+                        uiManager.addNotification(getSelectedPlayer().getName() + " is healed for " + item.getPower() + " health");
                     } else {
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be healed");
+                        uiManager.addNotification(getSelectedPlayer().getName() + " cannot be healed");
                     }
                     break;
                 }
-                case REVIVE:{
-                    if(getSelectedPlayer().isDead()) {
-	                    Assets.sfx_healNoise.play(Game.masterVolume);
-	                    this.getSelectedPlayer().dealHealth(item.getPower());
-	                    partyManager.getConsumables().remove(selectedConsumable);
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " is revived on " + item.getPower() + " health");
-	                } else {
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be revived");
-	                }
+                case REVIVE: {
+                    if (getSelectedPlayer().isDead()) {
+                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        this.getSelectedPlayer().dealHealth(item.getPower());
+                        partyManager.getConsumables().remove(selectedConsumable);
+                        uiManager.addNotification(getSelectedPlayer().getName() + " is revived on " + item.getPower() + " health");
+                    } else {
+                        uiManager.addNotification(getSelectedPlayer().getName() + " cannot be revived");
+                    }
                     break;
                 }
-                case MANA:{
-                    if(!getSelectedPlayer().isDead()) {
-	                    Assets.sfx_healNoise.play(Game.masterVolume);
-	                    this.getSelectedPlayer().giveMana(item.getPower());
-	                    partyManager.getConsumables().remove(selectedConsumable);
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " gains " + item.getPower() + " mana");
-	                } else {
-	                    uiManager.addNotification(getSelectedPlayer().getName() + " cannot be given mana");
-	                }
+                case MANA: {
+                    if (!getSelectedPlayer().isDead()) {
+                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        this.getSelectedPlayer().giveMana(item.getPower());
+                        partyManager.getConsumables().remove(selectedConsumable);
+                        uiManager.addNotification(getSelectedPlayer().getName() + " gains " + item.getPower() + " mana");
+                    } else {
+                        uiManager.addNotification(getSelectedPlayer().getName() + " cannot be given mana");
+                    }
                     break;
                 }
                 default:
                     uiManager.addNotification("This item cannot be used outside of combat");
-            		break;
-                	
+                    break;
+
             }
             updateConsumable();
-        	
+
             hasFocus = false;
             parent.focus();
         }
-        if(currentConsumable.length == 0) {
+        if (currentConsumable.length == 0) {
             hasFocus = false;
             parent.focus();
         }
-        	
+
     }
 
+    /**
+     * Represents an item in the UIConsumableMenu.
+     */
     public class Item extends UIComponent {
 
+        /**
+         * The consumable this Item represents.
+         */
         private Consumable consumable;
 
+        /**
+         * How tall one line of text is.
+         */
         private final float LINE_HEIGHT = 25f;
 
-        private float paddingX = 20;
-        private float paddingY = 10;
+        /**
+         * Text padding.
+         */
+        private float paddingX = 20, paddingY = 10;
 
-
+        /**
+         * Creates a new Item with the specified parameters.
+         *
+         * @param x          the x coordinate
+         * @param y          the y coordinate
+         * @param width      the width of the menu
+         * @param consumable the consumable this Item represents
+         */
         public Item(float x, float y, float width, Consumable consumable) {
             super(x, y, width, 55);
             this.consumable = consumable;
         }
 
+        /**
+         * Renders this Item onto the specified sprite batch.
+         *
+         * @param batch the sprite batch to render on
+         * @param patch the nine patch for drawing boxes
+         */
         @Override
         public void render(SpriteBatch batch, NinePatch patch) {
             patch.draw(batch, x, y, width, height + (paddingY * 2));

@@ -14,22 +14,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Oliver on 06/02/2016.
+ * Represents the list of equipment items in the overworld.
  */
 public class UIEquipmentMenu extends UIComponent {
 
+    /**
+     * The maximum number of items to render on one page.
+     */
     public static final int MAX_ITEMS_PER_PAGE = 5;
 
+    /**
+     * The party menu this UIConsumableMenu belongs to.
+     */
     private UIPartyMenu parent;
 
+    /**
+     * The party.
+     */
     private PartyManager partyManager;
 
+    /**
+     * Which player/equipment is currently selected.
+     */
     private int selectedPlayer = 0, selectedEquipment = 0;
 
+    /**
+     * Whether or not input is currently focused on this component.
+     */
     private boolean hasFocus = false;
 
+    /**
+     * The current list of equipment to display.
+     */
     private Item[] currentEquipment;
 
+    /**
+     * Creates a new UIConsumableMenu with the specified parameters.
+     *
+     * @param x      the x coordinate
+     * @param y      the y coordinate
+     * @param width  the width of the menu
+     * @param height the height of the menu
+     * @param parent the party menu this UIEquipmentMenu belongs to
+     */
     public UIEquipmentMenu(float x, float y, float width, float height, UIPartyMenu parent) {
         super(x, y, width, height);
 
@@ -39,6 +66,12 @@ public class UIEquipmentMenu extends UIComponent {
         updateEquipment();
     }
 
+    /**
+     * Renders this UIEquipmentMenu onto the specified sprite batch.
+     *
+     * @param batch the sprite batch to render on
+     * @param patch the nine patch for drawing boxes
+     */
     @Override
     public void render(SpriteBatch batch, NinePatch patch) {
         int page = selectedEquipment / MAX_ITEMS_PER_PAGE;
@@ -52,28 +85,10 @@ public class UIEquipmentMenu extends UIComponent {
             }
         }
 
-        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentEquipment.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, Color.WHITE, Assets.consolas16);
+        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentEquipment.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, 0, 0, Color.WHITE, Assets.consolas16);
     }
 
-    /**
-     * Helper function for render that actually does the rendering.
-     * @param batch the spritebatch to use.
-     * @param message The string to add.
-     * @param x The x location.
-     * @param y The y location.
-     * @param color The colour to render the text as.
-     */
-    private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
-        GlyphLayout layout = new GlyphLayout(font, message,
-                Color.BLACK, width, Align.left, false);
-
-        font.draw(batch, layout, x, y);
-        layout.setText(font, message,
-                color, width, Align.left, false);
-        font.draw(batch, layout, x, y);
-    }
-
-    private Item[] generateEquipment() {
+    private void updateEquipment() {
         List<Item> equipment = new ArrayList<Item>();
         int index = 0;
 
@@ -91,12 +106,8 @@ public class UIEquipmentMenu extends UIComponent {
             equipment.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getEquipment(equipmentId), false));
         }
 
-        return equipment.toArray(new Item[equipment.size()]);
-    }
-
-    private void updateEquipment() {
+        currentEquipment = equipment.toArray(new Item[equipment.size()]);
         selectedEquipment = 0;
-        currentEquipment = generateEquipment();
     }
 
     public void selectPlayer(int index) {
@@ -169,9 +180,6 @@ public class UIEquipmentMenu extends UIComponent {
             // Equip the item.
             player.getCurrentEquipment().equip(selected.equipment.getID());
         }
-
-//        player.equipEquipment(partyManager.getEquipment().get(selectedEquipment));
-//        partyManager.getEquipment().remove(selectedEquipment);
     }
 
     public class Item extends UIComponent {
@@ -212,36 +220,17 @@ public class UIEquipmentMenu extends UIComponent {
         @Override
         public void render(SpriteBatch batch, NinePatch patch) {
             patch.draw(batch, x, y, width, height + (paddingY * 2));
-            renderText(batch, equipment.getName(), x, y, Color.WHITE, font);
-            renderText(batch, equipment.getDescription(), x, y - LINE_HEIGHT, Color.LIGHT_GRAY, font);
-            //renderText(batch, "MP COST: " + skill.getMPCost(), x+250, y, Color.WHITE);
+            renderText(batch, equipment.getName(), x, y, paddingX, paddingY, Color.WHITE, font);
+            renderText(batch, equipment.getDescription(), x, y - LINE_HEIGHT, paddingX, paddingY, Color.LIGHT_GRAY, font);
 
-            renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 340, y, Color.WHITE, font);
-            renderText(batch, statString, x, y - LINE_HEIGHT * 2, Color.WHITE, smallFont);
+            renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 340, y, paddingX, paddingY, Color.WHITE, font);
+            renderText(batch, statString, x, y - LINE_HEIGHT * 2, paddingX, paddingY, Color.WHITE, smallFont);
 
             batch.draw(equipment.getType().getTexture(), x + width - 70, y + 20);
 
             if(equipped) {
                 batch.draw(Assets.shield, x + width - 50, y + 20);
             }
-        }
-
-        /**
-         * Helper function for render that actually does the rendering.
-         * @param batch the spritebatch to use.
-         * @param message The string to add.
-         * @param x The x location.
-         * @param y The y location.
-         * @param color The colour to render the text as.
-         */
-        private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
-            GlyphLayout layout = new GlyphLayout(font, message,
-                    Color.BLACK, width - paddingX * 2, Align.left, false);
-
-            font.draw(batch, layout, x + paddingX, y + height + paddingY - 2);
-            layout.setText(font, message,
-                    color, width - paddingX * 2, Align.left, false);
-            font.draw(batch, layout, x + paddingX, y + height + paddingY);
         }
     }
 }
