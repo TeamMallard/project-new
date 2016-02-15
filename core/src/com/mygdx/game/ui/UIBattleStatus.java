@@ -1,11 +1,8 @@
 package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Agent;
 import com.mygdx.game.PartyManager;
 import com.mygdx.game.Statistics;
@@ -15,57 +12,82 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * For creating and rendering the Party status UI element on the battlescreen.
- * Displays health and mana.
+ * Represents the party's status display during battle.
  */
-public class UIBattleStatus extends UIComponent{
+public class UIBattleStatus extends UIComponent {
 
+    /**
+     * The list of text lines to draw.
+     */
     public List<String> textList;
+
+    /**
+     * Which agent's turn it is.
+     */
     private int selected = 0;
+
+    /**
+     * The party.
+     */
     private PartyManager party;
 
-    float paddingX;
-    float paddingY;
+    /**
+     * Text padding.
+     */
+    private float paddingX, paddingY;
 
-    private BitmapFont bigFont, smallFont;
-
-    public UIBattleStatus(float x, float y, float width, float height, float paddingX, float paddingY, PartyManager party){
-        super(x,y,width,height);
+    /**
+     * Creates a new UIBattleStatus with the specified parameters.
+     *
+     * @param x        the x coordinate
+     * @param y        the y coordinate
+     * @param width    the width of the menu
+     * @param height   the height of the menu
+     * @param paddingX horizontal text padding
+     * @param paddingY vertical text padding
+     * @param party    the party
+     */
+    public UIBattleStatus(float x, float y, float width, float height, float paddingX, float paddingY, PartyManager party) {
+        super(x, y, width, height);
         this.paddingX = paddingX;
         this.paddingY = paddingY;
         this.party = party;
 
-        bigFont = Assets.consolas22;
-        smallFont = Assets.consolas16;
+        textList = new ArrayList<String>();
     }
 
     /**
      * Fills the textList with alternating strings of agent names and agent stats.
      */
     private void listToString() {
-        textList = new ArrayList<String>();
+        textList.clear();
         for (int x = 0; x < party.size(); x++) {
             Agent thisAgent = party.getMember(x);
             Statistics thisAgentStats = thisAgent.getStats();
             textList.add(thisAgent.getName());
-            textList.add("HP:"+thisAgentStats.getCurrentHP()+"/"+thisAgentStats.getMaxHP()+" MP:"+thisAgentStats.getCurrentMP()+"/"+thisAgentStats.getMaxMP());
+            textList.add("HP:" + thisAgentStats.getCurrentHP() + "/" + thisAgentStats.getMaxHP() + " MP:" + thisAgentStats.getCurrentMP() + "/" + thisAgentStats.getMaxMP());
         }
     }
 
-
+    /**
+     * Sets the current turn agent to the specified index.
+     *
+     * @param selected the index of the agent in the party
+     */
     public void selectAgent(int selected) {
         this.selected = selected;
     }
 
     /**
-     * Manages the rendering of the UI.
-     * @param batch The Spritebatch to use.
-     * @param patch The Ninepatch to use.
+     * Renders this UIBattleStatus onto the specified sprite batch.
+     *
+     * @param batch the sprite batch to render on
+     * @param patch the nine patch for drawing boxes
      */
     @Override
     public void render(SpriteBatch batch, NinePatch patch) {
         listToString();
-        float thisX= x;
+        float thisX = x;
         float thisY = y;
 
         //Draws the background box
@@ -73,36 +95,15 @@ public class UIBattleStatus extends UIComponent{
 
         //The even indexes are the Agent names and the odd indexes are hp & mana so the two are rendered differently
         for (int x = 0; x < textList.size(); x++) {
-            if (x==selected*2) {
-                renderText(batch, textList.get(x), thisX, thisY, Color.WHITE, bigFont);
+            if (x == selected * 2) {
+                renderText(batch, textList.get(x), thisX, thisY, paddingX, paddingY, Color.WHITE, Assets.consolas22);
+            } else if (x % 2 != 0) {
+                renderText(batch, textList.get(x), thisX + 5, thisY - 2, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas16); //Render the odd indexes with smaller font
+            } else {
+                renderText(batch, textList.get(x), thisX, thisY, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas22);
             }
-            else if (x%2!=0){
-                renderText(batch, textList.get(x), thisX+5, thisY-2, Color.LIGHT_GRAY, smallFont); //Render the odd indexes with smaller font
-            }
-            else {
-                renderText(batch, textList.get(x), thisX, thisY, Color.LIGHT_GRAY, bigFont);
-            }
-            thisY-=23;
+            thisY -= 23;
         }
 
-    }
-
-    /**
-     * Helper function for render that actually does the rendering.
-     * @param batch the spritebatch to use.
-     * @param message The string to add.
-     * @param x The x location.
-     * @param y The y location.
-     * @param color The colour to render the text as.
-     * @param font The font to use.
-     */
-    private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
-        GlyphLayout layout = new GlyphLayout(font, message,
-                Color.BLACK, width - paddingX * 2, Align.left, false);
-
-        font.draw(batch, layout, x + paddingX, y + height + paddingY - 2);
-        layout.setText(font, message,
-                color, width - paddingX * 2, Align.left, false);
-        font.draw(batch, layout, x + paddingX, y + height + paddingY);
     }
 }

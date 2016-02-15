@@ -18,7 +18,6 @@ public class Level {
 
     public static final int TILE_SIZE = 32;
 
-    private GameWorld gameWorld;
     public TiledMap map;
     public boolean[][] collisionMap;
     public Player player;
@@ -36,7 +35,6 @@ public class Level {
      * The constructor loads the map and creates a new player in the appropriate position.
      */
     public Level(GameWorld gameWorld) {
-        this.gameWorld = gameWorld;
         map = new TmxMapLoader().load("map.tmx");
         collisionLayer = (TiledMapTileLayer) map.getLayers().get("Collision");
 
@@ -68,11 +66,11 @@ public class Level {
     public void update(float delta) {
         characters.sort(new Character.CharacterComparator());
         updateCollisionMap();
-        for (int i = 0; i < characters.size(); i++) {
-            characters.get(i).update(delta);
-            if (characters.get(i) instanceof Player) {
-                if (characters.get(i).getCurrentTile().equals(new Vector2(115, 95)) && characters.get(i).getState() != CharacterState.TRANSITIONING) {
-                    characters.get(i).setCurrentTile(new Vector2(115, 94));
+        for (Character character : characters) {
+            character.update(delta);
+            if (character instanceof Player) {
+                if (character.getCurrentTile().equals(new Vector2(115, 95)) && character.getState() != CharacterState.TRANSITIONING) {
+                    character.setCurrentTile(new Vector2(115, 94));
                 }
             }
         }

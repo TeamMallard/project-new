@@ -73,7 +73,7 @@ public class BattleMenu {
         partyStatusList = new UIBattleStatus(0, yOffset, Gdx.graphics.getWidth()/5+10, Gdx.graphics.getHeight()/4, 10, 10, Game.party);
         battleUI.addUIComponent(partyStatusList);
 
-        baseMenuList = new UIBattleBaseMenu(partyStatusList.width, yOffset, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/5, 10, 10);
+        baseMenuList = new UIBattleBaseMenu(partyStatusList.getWidth(), yOffset, Gdx.graphics.getWidth()/6, Gdx.graphics.getHeight()/5, 10, 10);
         baseMenuList.addListItem("Skills");
         baseMenuList.addListItem("Items");
         baseMenuList.selectItem(baseMenuPointer);
@@ -318,7 +318,7 @@ public class BattleMenu {
      * Creates the skillUI using the skills of the Agent with the current turn.
      */
     private void populateSkillUI() {
-        skillUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).width+battleUI.getUIComponent(1).width,yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5, 20, 10);
+        skillUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).getWidth()+battleUI.getUIComponent(1).getWidth(),yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5, 20, 10);
         for(int i=0; i<battleScreen.getCurrentTurnAgent().getSkills().size();i++){
             skillUI.addListItem(Game.skills.getSkill(battleScreen.getCurrentTurnAgent().getSkills().get(i)).getName());
         }
@@ -331,7 +331,7 @@ public class BattleMenu {
      */
     private void populateItemUI() {
 
-        itemUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).width+battleUI.getUIComponent(1).width,yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5,20,10);
+        itemUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).getWidth()+battleUI.getUIComponent(1).getWidth(),yOffset,Gdx.graphics.getWidth()/2+50,Gdx.graphics.getHeight()/5,20,10);
         for(int i=0; i<Game.party.getConsumables().size();i++){
             itemUI.addListItem(Game.items.getConsumable(Game.party.getConsumables().get(i)).getName());
         }

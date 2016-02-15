@@ -1,11 +1,8 @@
 package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
 
@@ -13,22 +10,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Oliver on 06/02/2016.
+ * Represents the list of consumable items in the overworld.
  */
 public class UIConsumableMenu extends UIComponent {
 
+    /**
+     * The maximum number of items to render on one page.
+     */
     public static final int MAX_ITEMS_PER_PAGE = 5;
 
+    /**
+     * The party menu this UIConsumableMenu belongs to.
+     */
     private UIPartyMenu parent;
 
+    /**
+     * The party.
+     */
     private PartyManager partyManager;
 
+    /**
+     * Which player/consumable is currently selected.
+     */
     private int selectedPlayer = 0, selectedConsumable = 0;
 
+    /**
+     * Whether or not input is currently focused on this component.
+     */
     private boolean hasFocus = false;
 
+    /**
+     * The current list of consumables to display.
+     */
     private Item[] currentConsumable;
 
+    /**
+     * Creates a new UIConsumableMenu with the specified parameters.
+     * @param x        the x coordinate
+     * @param y        the y coordinate
+     * @param width    the width of the menu
+     * @param height   the height of the menu
+     * @param parent the party menu this UIConsumableMenu belongs to
+     */
     public UIConsumableMenu(float x, float y, float width, float height, UIPartyMenu parent) {
         super(x, y, width, height);
         this.parent = parent;
@@ -37,6 +60,12 @@ public class UIConsumableMenu extends UIComponent {
         updateConsumable();
     }
 
+    /**
+     * Renders this UIConsumableMenu onto the specified sprite batch.
+     *
+     * @param batch the sprite batch to render on
+     * @param patch the nine patch for drawing boxes
+     */
     @Override
     public void render(SpriteBatch batch, NinePatch patch) {
         int page = selectedConsumable / MAX_ITEMS_PER_PAGE;
@@ -50,28 +79,13 @@ public class UIConsumableMenu extends UIComponent {
             }
         }
 
-        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentConsumable.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, Color.WHITE, Assets.consolas16);
+        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentConsumable.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, 0, 0, Color.WHITE, Assets.consolas16);
     }
 
     /**
-     * Helper function for render that actually does the rendering.
-     * @param batch the spritebatch to use.
-     * @param message The string to add.
-     * @param x The x location.
-     * @param y The y location.
-     * @param color The colour to render the text as.
+     * Updates the list of consumables to display.
      */
-    private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
-        GlyphLayout layout = new GlyphLayout(font, message,
-                Color.BLACK, width, Align.left, false);
-
-        font.draw(batch, layout, x, y);
-        layout.setText(font, message,
-                color, width, Align.left, false);
-        font.draw(batch, layout, x, y);
-    }
-
-    private Item[] generateConsumable() {
+    private void updateConsumable() {
         List<Item> consumable = new ArrayList<Item>();
         int index = 0;
 
@@ -79,28 +93,37 @@ public class UIConsumableMenu extends UIComponent {
             consumable.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getConsumable(consumableId)));
         }
 
-        return consumable.toArray(new Item[consumable.size()]);
-    }
-
-    private void updateConsumable() {
+        currentConsumable = consumable.toArray(new Item[consumable.size()]);
         selectedConsumable = 0;
-        currentConsumable = generateConsumable();
     }
 
+    /**
+     * Sets the currently selected player.
+     * @param index the index of the selected player
+     */
     public void selectPlayer(int index) {
         this.selectedPlayer = index;
 
         updateConsumable();
     }
 
+    /**
+     * @return the agent representing the currently selected player
+     */
     private Agent getSelectedPlayer() {
         return partyManager.getMember(selectedPlayer);
     }
 
+    /**
+     * Focuses input on this UIConsumableMenu.
+     */
     public void focus() {
         hasFocus = true;
     }
 
+    /**
+     * @return whether or not input is currently focused on this component
+     */
     public boolean hasFocus() {
         return hasFocus;
     }
@@ -167,8 +190,6 @@ public class UIConsumableMenu extends UIComponent {
     }
 
     public class Item extends UIComponent {
-        private BitmapFont font = Assets.consolas22;
-        private BitmapFont smallFont = Assets.consolas16;
 
         private Consumable consumable;
 
@@ -186,26 +207,8 @@ public class UIConsumableMenu extends UIComponent {
         @Override
         public void render(SpriteBatch batch, NinePatch patch) {
             patch.draw(batch, x, y, width, height + (paddingY * 2));
-            renderText(batch, consumable.getName(), x, y, Color.WHITE, font);
-            renderText(batch, consumable.getDescription(), x, y - LINE_HEIGHT, Color.LIGHT_GRAY, font);
-        }
-
-        /**
-         * Helper function for render that actually does the rendering.
-         * @param batch the spritebatch to use.
-         * @param message The string to add.
-         * @param x The x location.
-         * @param y The y location.
-         * @param color The colour to render the text as.
-         */
-        private void renderText(SpriteBatch batch, String message, float x, float y, Color color, BitmapFont font) {
-            GlyphLayout layout = new GlyphLayout(font, message,
-                    Color.BLACK, width - paddingX * 2, Align.left, false);
-
-            font.draw(batch, layout, x + paddingX, y + height + paddingY - 2);
-            layout.setText(font, message,
-                    color, width - paddingX * 2, Align.left, false);
-            font.draw(batch, layout, x + paddingX, y + height + paddingY);
+            renderText(batch, consumable.getName(), x, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
+            renderText(batch, consumable.getDescription(), x, y - LINE_HEIGHT, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas22);
         }
     }
 }

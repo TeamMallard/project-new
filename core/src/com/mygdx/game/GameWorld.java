@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
@@ -53,6 +54,7 @@ public class GameWorld {
     /**
      * Called once per frame to update GameWorld logic.
      * This looks at the current game's current state and acts accordingly.
+     *
      * @param delta The time since the last frame was rendered.
      */
     public void update(float delta) {
@@ -69,27 +71,9 @@ public class GameWorld {
                 break;
             case FREEROAM:
                 level.stopInput = false;
-                Random random = new Random();
-                // FUCK YOU
-                if (false/*level.player.getState() == Character.CharacterState.TRANSITIONING && random.nextInt(battleChance--) == 1*/){
-                    uiManager.createDialogue(new String[] {"You have been stopped by a group of... somethings!"});
-                    level.stopInput = true;
-                    battleChance = 1000;
-                    BattleParameters params = new BattleParameters(Game.segment);
 
-                    //Get a number of agents from the list of enemies, make new agent instances with their information and setup the next battle
-                    for(int i=0;i<random.nextInt(3)+1;i++){
-                        Agent thisAgent = Game.enemies.getMember(random.nextInt(Game.enemies.size()));
-                        Statistics thisAgentStats = thisAgent.getStats();
-                        Statistics newStats = new Statistics(thisAgentStats.getMaxHP(),thisAgentStats.getMaxMP(),thisAgentStats.getSpeed(),thisAgentStats.getStrength(),thisAgentStats.getDexterity(),thisAgentStats.getIntelligence(),thisAgentStats.getArmourVal(),thisAgentStats.getExperience(),thisAgentStats.getCurrentLevel());
-                        params.addEnemy(new Agent(thisAgent.getName(), thisAgent.getType(), newStats, thisAgent.getSkills(), thisAgent.getCurrentEquipment(), thisAgent.getTexture()));
-                    }
-
-                    battleParams = params;
-                    Assets.worldMusic.stop();//Stop the worldMusic
-                    Assets.sfx_battleStart.play(Game.masterVolume);
-                    gameState = GameState.BATTLE_DIALOGUE;
-                    level.stopInput = true;
+                if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance-- - 1) == 1) {
+                    triggerEncounter();
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;
@@ -104,13 +88,13 @@ public class GameWorld {
                 break;
 
             case PARTY_MENU:
-                if (!uiManager.updatePartyMenu(delta)){
+                if (!uiManager.updatePartyMenu(delta)) {
                     gameState = GameState.FREEROAM;
                 }
                 break;
 
             case SHOP_MENU:
-                if (!uiManager.updateShop(delta)){
+                if (!uiManager.updateShop(delta)) {
                     gameState = GameState.FREEROAM;
                 }
                 break;
@@ -118,8 +102,8 @@ public class GameWorld {
             case INTERACTION:
                 if (!interactingNPC.updateInteracting(delta)) {
                     interactingNPC.action(this);
-                    if(gameState != GameState.SHOP_MENU)
-                    	gameState = GameState.FREEROAM;
+                    if (gameState != GameState.SHOP_MENU)
+                        gameState = GameState.FREEROAM;
                 }
                 break;
 
@@ -136,11 +120,33 @@ public class GameWorld {
         }
     }
 
+    private void triggerEncounter() {
+        uiManager.createDialogue(new String[]{"You have been stopped by a group of... somethings!"});
+        level.stopInput = true;
+        battleChance = 1000;
+        BattleParameters params = new BattleParameters(Game.segment);
+
+        //Get a number of agents from the list of enemies, make new agent instances with their information and setup the next battle
+        for (int i = 0; i < MathUtils.random(1, 3); i++) {
+            Agent thisAgent = Game.enemies.getMember(MathUtils.random(Game.enemies.size() - 1));
+            Statistics thisAgentStats = thisAgent.getStats();
+            Statistics newStats = new Statistics(thisAgentStats.getMaxHP(), thisAgentStats.getMaxMP(), thisAgentStats.getSpeed(), thisAgentStats.getStrength(), thisAgentStats.getDexterity(), thisAgentStats.getIntelligence(), thisAgentStats.getArmourVal(), thisAgentStats.getExperience(), thisAgentStats.getCurrentLevel());
+            params.addEnemy(new Agent(thisAgent.getName(), thisAgent.getType(), newStats, thisAgent.getSkills(), thisAgent.getCurrentEquipment(), thisAgent.getTexture()));
+        }
+
+        battleParams = params;
+        Assets.worldMusic.stop();//Stop the worldMusic
+        Assets.sfx_battleStart.play(Game.masterVolume);
+        gameState = GameState.BATTLE_DIALOGUE;
+        level.stopInput = true;
+    }
+
     /**
      * changes the game state to BATTLE and loads a new battle in the Game object.
+     *
      * @param battleParams The parameters used to create a battle.
      */
-    public void setBattle(BattleParameters battleParams){
+    public void setBattle(BattleParameters battleParams) {
         gameState = GameState.BATTLE;
         this.battleParams = battleParams;
         game.newBattle(battleParams);
@@ -148,9 +154,10 @@ public class GameWorld {
 
     /**
      * changes the game state to BATTLE and loads a new battle in the Game object.
+     *
      * @param battleParams The parameters used to create a battle.
      */
-    public void setShop(UIShop shop){
+    public void setShop(UIShop shop) {
         System.out.println(gameState);
         uiManager.setShop(shop);
         uiManager.addUIComponent(shop);

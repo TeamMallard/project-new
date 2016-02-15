@@ -1,13 +1,13 @@
-	package com.mygdx.game.entity;
+package com.mygdx.game.entity;
 
-    import com.badlogic.gdx.graphics.g2d.TextureRegion;
-    import com.badlogic.gdx.math.Vector2;
-    import com.mygdx.game.Level;
-    import com.mygdx.game.assets.WalkingTextures;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Level;
+import com.mygdx.game.assets.WalkingTextures;
 
-    import java.util.Comparator;
+import java.util.Comparator;
 
-    import static com.mygdx.game.Level.TILE_SIZE;
+import static com.mygdx.game.Level.TILE_SIZE;
 
 /**
  * This abstract class represents a character in the Level.
@@ -18,9 +18,9 @@ public abstract class Character {
     public final float TRANSITION_SPEED = 0.25f;
     public final float WAIT_PERIOD = 0.15f;
 
-    public static final Vector2 CHARACTER_SIZE = new Vector2(26,42);
+    public static final Vector2 CHARACTER_SIZE = new Vector2(26, 42);
 
-//  Player position & orientation information
+    //  Player position & orientation information
     private Vector2 currentTile;
     private Vector2 absPos;
 
@@ -38,12 +38,13 @@ public abstract class Character {
 
     private WalkingTextures walkingTextures;
 
-//  Map information for collision detection.
+    //  Map information for collision detection.
     protected Level level;
 
     /**
      * Character constructor creates a character at a particular position on the level.
-     * @param level The level which contains the character.
+     *
+     * @param level       The level which contains the character.
      * @param currentTile The tile which the character should start on.
      */
     public Character(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
@@ -65,22 +66,24 @@ public abstract class Character {
 
     /**
      * Called once per frame to update character logic.
+     *
      * @param delta The time since the last frame was rendered.
      */
     public void update(float delta) {
-        if (level.stopInput){
-
-        } else if (getState() == CharacterState.STATIONARY) {
-            updateStationary(delta);
-        } else if (getState() == CharacterState.WAITING) {
-            updateWaiting(delta);
-        } else {
-            updateTransitioning(delta);
+        if (!level.stopInput) {
+            if (getState() == CharacterState.STATIONARY) {
+                updateStationary(delta);
+            } else if (getState() == CharacterState.WAITING) {
+                updateWaiting(delta);
+            } else {
+                updateTransitioning(delta);
+            }
         }
     }
 
     /**
      * Helper method for update if the character state is WAITING.
+     *
      * @param delta The time since the last frame was rendered.
      */
     private void updateWaiting(float delta) {
@@ -92,16 +95,18 @@ public abstract class Character {
 
     /**
      * Helper method for update if the character state is TRANSITIONING.
+     *
      * @param delta The time since the last frame was rendered.
      */
     protected abstract void updateTransitioning(float delta);
 
     /**
      * Helper method that determines if a character can move to a particular position in the level.
+     *
      * @param requestedDirection The time since the last frame was rendered.
      */
     protected void updateMovement(Direction requestedDirection) {
-    	setDirection(requestedDirection);
+        setDirection(requestedDirection);
         int currentX = (int) getCurrentTile().x, currentY = (int) getCurrentTile().y;
         int deltaX = 0, deltaY = 0;
 
@@ -119,7 +124,7 @@ public abstract class Character {
                 deltaX = 1;
         }
 
-        if(!level.checkCollision(currentX + deltaX, currentY + deltaY)) {
+        if (!level.checkCollision(currentX + deltaX, currentY + deltaY)) {
             setState(CharacterState.TRANSITIONING);
             targetTile.add(deltaX, deltaY);
             targetPos.set(targetTile.cpy().scl(TILE_SIZE));
@@ -161,6 +166,7 @@ public abstract class Character {
 
     /**
      * Helper method for update if the character state is STATIONARY.
+     *
      * @param delta The time since the last frame was rendered.
      */
     protected abstract void updateStationary(float delta);
@@ -227,7 +233,7 @@ public abstract class Character {
      * Represents the direction of a character
      */
     public enum Direction {
-        DOWN (0), UP (1), LEFT (2), RIGHT (3);
+        DOWN(0), UP(1), LEFT(2), RIGHT(3);
 
         private int index;
 

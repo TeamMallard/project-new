@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
  * This class handles loading and disposing of asset resources, done so by calling the
  * respective methods.
  */
-public class Assets {
+public final class Assets {
 
     public static final String[] BATTLE_TEXTURES = new String[]
             {"player", "robo", "blue_ooze", "green_ooze", "red_ooze", "yellow_ooze", "black_ooze", "poisonous_duck", "radiated_duck", "radiated_scar", "radiated_undead", "scar_duck", "super_radiated", "undead_duck"};
