@@ -166,7 +166,7 @@ public class Assets {
         if (Gdx.files.internal("battle/" + prefix + "_anim.png").exists()) {
             Texture texture = loadTexture("battle/" + prefix + "_anim.png");
 
-            return new BattleTextures(alive, dead, loadAnimation(texture, width, height, texture.getWidth() / width, 0.05f));
+            return new BattleTextures(alive, dead, loadAnimation(texture, width, height, texture.getWidth() / width, 0.025f));
         } else {
             return new BattleTextures(alive, dead);
         }

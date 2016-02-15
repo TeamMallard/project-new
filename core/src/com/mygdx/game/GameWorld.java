@@ -42,7 +42,7 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(108, 91)));
         level.characters.add(new RoboNPC(level, new Vector2(75, 98)));
         uiManager.addUIComponent(new UIScore());
-        battleParams = new BattleParameters(0);
+        battleParams = new BattleParameters(level.getCurrentSegment());
         List<Integer> emptyList = new ArrayList<Integer>();
         Agent enemyDuck = new Agent("Crazed Duck", Agent.AgentType.ENEMY,new Statistics(100,100,0,2,2,2,2,2,3),emptyList,new CurrentEquipment(0,0,0,0,0),0);
         enemyDuck.addSkill(0);
@@ -76,7 +76,7 @@ public class GameWorld {
                     uiManager.createDialogue(new String[] {"You have been stopped by a group of... somethings!"});
                     level.stopInput = true;
                     battleChance = 1000;
-                    BattleParameters params = new BattleParameters(0);
+                    BattleParameters params = new BattleParameters(level.getCurrentSegment());
 
                     //Get a number of agents from the list of enemies, make new agent instances with their information and setup the next battle
                     for(int i=0;i<random.nextInt(3)+1;i++){
