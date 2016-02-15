@@ -32,6 +32,7 @@ public class Level {
     public int tileWidth;
     public int tileHeight;
     public Vector2 mapBounds;
+    private int currentSegment;
 
     /**
      * The constructor loads the map and creates a new player in the appropriate position.
@@ -72,6 +73,7 @@ public class Level {
             if(characters.get(i) instanceof Player) {
 	            if(characters.get(i).getCurrentTile().equals(new Vector2(115, 95)) && characters.get(i).getState() != CharacterState.TRANSITIONING) {
 	            	characters.get(i).setCurrentTile(new Vector2(115, 94));
+	            	currentSegment += 1;
 	            }
             }
         }
@@ -112,6 +114,10 @@ public class Level {
             }
         }
         return null;
+    }
+    
+    public int getCurrentSegment() {
+    	return currentSegment;
     }
 
 

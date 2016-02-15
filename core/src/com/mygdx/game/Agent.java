@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -142,7 +143,18 @@ public class Agent implements Comparable<Agent>{
     }
 
     public List<Integer> getSkills() {
-        return skills;
+    	List<Integer> tempSkills = new ArrayList<Integer>();
+    	if(this.getStats().getCurrentLevel() >= 8 && skills.size() >= 4) {
+    		tempSkills.add(skills.get(3));
+    	}
+    	if(this.getStats().getCurrentLevel() >= 4 && skills.size() >= 3) {
+    		tempSkills.add(skills.get(2));
+    	}
+    	if(this.getStats().getCurrentLevel() >= 2 && skills.size() >= 2) {
+    		tempSkills.add(skills.get(1));
+    	}
+		tempSkills.add(skills.get(0));
+        return tempSkills;
     }
 
     
