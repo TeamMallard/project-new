@@ -14,10 +14,13 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Assets {
 
+    public static final String[] BATTLE_TEXTURES = new String[]
+            {"player", "robo", "blue_ooze", "green_ooze", "red_ooze", "yellow_ooze", "black_ooze", "poisonous_duck", "radiated_duck", "radiated_scar", "radiated_undead", "scar_duck", "super_radiated", "undead_duck"};
+
     public static Texture selectArrow, turnArrow;
 
     //  MAP ASSETS
-    public static Texture[] battleBGs = new Texture[4];
+    public static Texture[] battleBackgrounds = new Texture[8];
 
     //  UI ASSETS
     public static BitmapFont consolas22;
@@ -32,8 +35,9 @@ public class Assets {
     public static Texture title;
 
 
-    public static WalkingTextures playerWalkingTextures, playerSwimmingTextures, roboWalkingTextures, sallyWalkingTextures;
-    public static BattleTextures[] battleTextures = new BattleTextures[6];
+    public static WalkingTextures playerWalkingTextures, playerSwimmingTextures;
+    public static WalkingTextures roboWalkingTextures, sallyWalkingTextures;
+    public static BattleTextures[] battleTextures = new BattleTextures[14];
 
     public static TextureRegion[] equipment = new TextureRegion[5];
 
@@ -58,27 +62,19 @@ public class Assets {
         title = new Texture("Start Screen.png");
 
         //  BATTLE ASSETS
-        battleTextures = new BattleTextures[6];
+        battleTextures = new BattleTextures[BATTLE_TEXTURES.length];
+        loadAllBattleTextures();
+
+
+        roboWalkingTextures = loadWalkingTextures("robo", 32, 32, 2, 0.175f);
+        sallyWalkingTextures = loadWalkingTextures("sally", 32, 32, 2, 0.175f);
 
         loadPlayerTextures();
-        loadRoboTextures();
-        loadSallyTextures();
-
         loadEquipmentTextures();
-
-        battleTextures[2] = loadBattleTextures("ooze", 32, 32);
-        battleTextures[3] = loadBattleTextures("radiated_duck", 32, 32);
-        battleTextures[4] = loadBattleTextures("scar_duck", 32, 32);
-        battleTextures[5] = loadBattleTextures("undead_duck", 32, 32);
+        loadBattleBackgrounds();
 
         turnArrow = new Texture("turnPointer.png");
         selectArrow = new Texture("arrow.png");
-
-        //  MAP ASSETS
-        battleBGs[0] = new Texture("backgrounds/CS_centrefixed.png");
-        battleBGs[1] = new Texture("backgrounds/LM_path.png");
-        battleBGs[2] = new Texture("backgrounds/RCH_lake.png");
-        battleBGs[3] = new Texture("backgrounds/Background_1.png");
 
         //  UI ASSETS
         consolas22 = new BitmapFont(Gdx.files.internal("fonts/consolas22.fnt"));
@@ -110,6 +106,18 @@ public class Assets {
         shadow = new Texture("shadow.png");
     }
 
+    private static void loadBattleBackgrounds() {
+        for(int i = 0; i < battleBackgrounds.length; i++) {
+            battleBackgrounds[i] = loadTexture("backgrounds/segment_" + i + ".png");
+        }
+    }
+
+    private static void loadAllBattleTextures() {
+        for (int i = 0; i < BATTLE_TEXTURES.length; i++) {
+            battleTextures[i] = loadBattleTextures(BATTLE_TEXTURES[i], 32, 32);
+        }
+    }
+
     private static void loadEquipmentTextures() {
         Texture texture = loadTexture("equipment.png");
 
@@ -128,17 +136,6 @@ public class Assets {
         TextureRegion swimmingLeft = new TextureRegion(swimming, 64, 0, 32, 32);
         TextureRegion swimmingRight = new TextureRegion(swimming, 96, 0, 32, 32);
         playerSwimmingTextures = new WalkingTextures(swimmingDown, swimmingUp, swimmingLeft, swimmingRight);
-
-        battleTextures[0] = loadBattleTextures("player", 32, 32);
-    }
-
-    private static void loadRoboTextures() {
-        roboWalkingTextures = loadWalkingTextures("robo", 32, 32, 2, 0.175f);
-        battleTextures[1] = loadBattleTextures("robo", 32, 32);
-    }
-
-    private static void loadSallyTextures() {
-        sallyWalkingTextures = loadWalkingTextures("sally", 32, 32, 2, 0.175f);
     }
 
     private static WalkingTextures loadWalkingTextures(String prefix, int width, int height, int frameCount, float frameDuration) {

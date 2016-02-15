@@ -358,7 +358,7 @@ public class BattleScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(Assets.battleBGs[backgroundNumber], 0, -Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(Assets.battleBackgrounds[backgroundNumber], 0, -Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         enemyParty.render(batch);
         Game.party.render(batch);
         battleMenu.render(delta, batch);
