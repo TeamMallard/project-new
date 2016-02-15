@@ -29,7 +29,7 @@
 		"name":"Test Sword",
 		"description":"A sword of testing",
 		"type":"WEAPON",
-		"modifiers":[1000, 1000, 1000, 1000, 1000],
+		"modifiers":[1, 1, 1, 1, 1],
 		"levelRequirement":0,
 		"cost":7
 	},{
@@ -105,6 +105,30 @@
 		"type":"REVIVE",
 		"power":30,
 		"cost":1
+	},
+	{
+		"id":7,
+		"name":"Slime",
+		"description":"You probably don't want to eat this...",
+		"type":"HEAL",
+		"power":-10,
+		"cost":0
+	},
+	{
+		"id":8,
+		"name":"Duck Bones",
+		"description":"... Why?",
+		"type":"HEAL",
+		"power":-50,
+		"cost":0
+	},
+	{
+		"id":9,
+		"name":"Super Duck Bones",
+		"description":"Which bone is this?",
+		"type":"HEAL",
+		"power":-1000,
+		"cost":0
 	}
 	]
 }

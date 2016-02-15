@@ -1,7 +1,7 @@
 {
   "partyList": [
     {
-      "name": "Ooze",
+      "name": "Green Ooze",
       "type": "ENEMY",
       "stats": {
         "currentHP": 25,
@@ -19,6 +19,37 @@
       },
       "skills": [
         5
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 2
+    },
+    {
+      "name": "Blue Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 25,
+        "currentMP": 30,
+        "maxHP": 25,
+        "maxMP": 30,
+        "speed": 4,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
       ],
       "equipment": {
         "equipSlots": [
@@ -61,6 +92,68 @@
         ]
       },
       "texture": 3
+    },
+    {
+      "name": "Poisonous Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 2,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 3
+    },
+    {
+      "name": "Yellow Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 25,
+        "currentMP": 30,
+        "maxHP": 25,
+        "maxMP": 30,
+        "speed": 4,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 2
     },
     {
       "name": "Scarred Duck",
@@ -123,7 +216,534 @@
         ]
       },
       "texture": 5
-    }
+    },
+    {
+      "name": "Red Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Radiated Scarred Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Radiated Undead Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Black Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Radiated Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Green Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 25,
+        "currentMP": 30,
+        "maxHP": 25,
+        "maxMP": 30,
+        "speed": 4,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        5
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 2
+    },
+    {
+      "name": "Super Blue Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 25,
+        "currentMP": 30,
+        "maxHP": 25,
+        "maxMP": 30,
+        "speed": 4,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 2
+    },
+    {
+      "name": "Super Radiated Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 2,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 3
+    },
+    {
+      "name": "Super Poisonous Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 2,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 3
+    },
+    {
+      "name": "Super Yellow Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 25,
+        "currentMP": 30,
+        "maxHP": 25,
+        "maxMP": 30,
+        "speed": 4,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        6
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 2
+    },
+    {
+      "name": "Super Scarred Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Undead Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 60,
+        "currentMP": 30,
+        "maxHP": 60,
+        "maxMP": 30,
+        "speed": 0,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        8
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 5
+    },
+    {
+      "name": "Super Red Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Radiated Scarred Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Radiated Undead Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Black Ooze",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
+    {
+      "name": "Super Super Radiated Duck",
+      "type": "ENEMY",
+      "stats": {
+        "currentHP": 50,
+        "currentMP": 30,
+        "maxHP": 50,
+        "maxMP": 30,
+        "speed": 3,
+        "strength": 2,
+        "dexterity": 2,
+        "intelligence": 2,
+        "armourVal": 2,
+        "experience": 205,
+        "currentLevel": 2,
+        "maxLevel": 20
+      },
+      "skills": [
+        7
+      ],
+      "equipment": {
+        "equipSlots": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "texture": 4
+    },
   ],
   "consumables": [
     0,
