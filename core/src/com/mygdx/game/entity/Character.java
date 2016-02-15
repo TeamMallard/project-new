@@ -1,15 +1,13 @@
 	package com.mygdx.game.entity;
 
-import com.badlogic.gdx.assets.loaders.SynchronousAssetLoader;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Level;
-import com.mygdx.game.assets.WalkingTextures;
+    import com.badlogic.gdx.graphics.g2d.TextureRegion;
+    import com.badlogic.gdx.math.Vector2;
+    import com.mygdx.game.Level;
+    import com.mygdx.game.assets.WalkingTextures;
 
-import java.util.Comparator;
+    import java.util.Comparator;
 
-import static com.mygdx.game.Level.TILE_SIZE;
+    import static com.mygdx.game.Level.TILE_SIZE;
 
 /**
  * This abstract class represents a character in the Level.
@@ -104,38 +102,61 @@ public abstract class Character {
      */
     protected void updateMovement(Direction requestedDirection) {
     	setDirection(requestedDirection);
-            switch (requestedDirection) {
-                case UP:
-                    if (!level.collisionMap[(int) getCurrentTile().x][(int) getCurrentTile().y + 1]) {
-                        setState(CharacterState.TRANSITIONING);
-                        targetTile.add(0, 1);
-                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-                    }
-                    break;
-                case DOWN:
-                    if (!level.collisionMap[(int) getCurrentTile().x][(int) getCurrentTile().y - 1]) {
-                        setState(CharacterState.TRANSITIONING);
-                        targetTile.add(0, -1);
-                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-                    }
-                    break;
-                case LEFT:
-                    if (!level.collisionMap[(int) getCurrentTile().x - 1][(int) getCurrentTile().y]) {
-                        setState(CharacterState.TRANSITIONING);
-                        targetTile.add(-1, 0);
-                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-                    }
-                    break;
-                case RIGHT:
-                    if (!level.collisionMap[(int) getCurrentTile().x + 1][(int) getCurrentTile().y]) {
-                        setState(CharacterState.TRANSITIONING);
-                        targetTile.add(1, 0);
-                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-                    }
-                    break;
-            }
+        int currentX = (int) getCurrentTile().x, currentY = (int) getCurrentTile().y;
+        int deltaX = 0, deltaY = 0;
+
+        switch (requestedDirection) {
+            case UP:
+                deltaY = 1;
+                break;
+            case DOWN:
+                deltaY = -1;
+                break;
+            case LEFT:
+                deltaX = -1;
+                break;
+            case RIGHT:
+                deltaX = 1;
+        }
+
+        if(!level.checkCollision(currentX + deltaX, currentY + deltaY)) {
+            setState(CharacterState.TRANSITIONING);
+            targetTile.add(deltaX, deltaY);
+            targetPos.set(targetTile.cpy().scl(TILE_SIZE));
+        }
+
+//            switch (requestedDirection) {
+//                case UP:
+//                    if (!level.checkCollision(currentX, currentY + 1)) {
+//                        setState(CharacterState.TRANSITIONING);
+//                        targetTile.add(0, 1);
+//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
+//                    }
+//                    break;
+//                case DOWN:
+//                    if (!level.collisionMap[(int) getCurrentTile().x][(int) getCurrentTile().y - 1]) {
+//                        setState(CharacterState.TRANSITIONING);
+//                        targetTile.add(0, -1);
+//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
+//                    }
+//                    break;
+//                case LEFT:
+//                    if (!level.collisionMap[(int) getCurrentTile().x - 1][(int) getCurrentTile().y]) {
+//                        setState(CharacterState.TRANSITIONING);
+//                        targetTile.add(-1, 0);
+//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
+//                    }
+//                    break;
+//                case RIGHT:
+//                    if (!level.collisionMap[(int) getCurrentTile().x + 1][(int) getCurrentTile().y]) {
+//                        setState(CharacterState.TRANSITIONING);
+//                        targetTile.add(1, 0);
+//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
+//                    }
+//                    break;
+//            }
 //          To stop other characters moving in the same frame
-            level.collisionMap[(int) targetTile.x][(int) targetTile.y] = true;
+//            level.collisionMap[(int) targetTile.x][(int) targetTile.y] = true;
     }
 
     /**

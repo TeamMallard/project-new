@@ -1,9 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
-
-
 /**
  * An individual skill, instantiated and stored in the SkillManager.
  * Implements Json.Serializable to allow objects to be easily generated.

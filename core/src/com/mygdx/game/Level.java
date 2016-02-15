@@ -6,9 +6,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Character;
-import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Character.CharacterState;
-import com.mygdx.game.objective.Objective;
+import com.mygdx.game.entity.Player;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Level {
 
-    public static final int TILE_SIZE = 16;
+    public static final int TILE_SIZE = 32;
 
     private GameWorld gameWorld;
     public TiledMap map;
@@ -26,10 +25,11 @@ public class Level {
     public ArrayList<Character> characters;
     public boolean stopInput;
 
-    public int mapWidth;
-    public int mapHeight;
-    public int tileWidth;
-    public int tileHeight;
+    private int mapWidth;
+    private int mapHeight;
+
+    private TiledMapTileLayer collisionLayer;
+
     public Vector2 mapBounds;
 
     /**
@@ -37,13 +37,15 @@ public class Level {
      */
     public Level(GameWorld gameWorld) {
         this.gameWorld = gameWorld;
-        map = new TmxMapLoader().load("newMap.tmx");
+        map = new TmxMapLoader().load("map.tmx");
+        collisionLayer = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         MapProperties prop = map.getProperties();
         mapWidth = prop.get("width", Integer.class);
         mapHeight = prop.get("height", Integer.class);
-        tileWidth = prop.get("tilewidth", Integer.class);
-        tileHeight = prop.get("tileheight", Integer.class);
+
+        int tileWidth = prop.get("tilewidth", Integer.class);
+        int tileHeight = prop.get("tileheight", Integer.class);
         mapBounds = new Vector2(mapWidth * tileWidth, mapHeight * tileHeight);
 
         collisionMap = new boolean[mapWidth][mapHeight];
@@ -98,6 +100,24 @@ public class Level {
         }
         collisionMap[(int) player.targetTile.x][(int) player.targetTile.y] = true;
         collisionMap[(int) player.getCurrentTile().x][(int) player.getCurrentTile().y] = true;
+    }
+
+    public boolean checkCollision(int x, int y) {
+        return isTileBlocked(x, y) || isTileOccupied(x, y);
+    }
+
+    private boolean isTileBlocked(int x, int y) {
+        return collisionLayer.getCell(x, y) != null;
+    }
+
+    private boolean isTileOccupied(int x, int y) {
+        for (Character character : characters) {
+            if ((int) character.getCurrentTile().x == x && (int) character.getCurrentTile().y == y || (int) character.targetTile.x == x && (int) character.targetTile.y == y) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

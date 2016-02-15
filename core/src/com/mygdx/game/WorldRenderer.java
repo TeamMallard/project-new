@@ -3,15 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.assets.Assets;
-import com.mygdx.game.ui.UIRenderer;
 import com.mygdx.game.entity.Character;
-import com.mygdx.game.entity.Player;
-import com.mygdx.game.entity.SallyNPC;
+import com.mygdx.game.ui.UIRenderer;
 
 /**
  * This class renders a GameWorld that has been passed in it's constructor.
@@ -45,6 +45,7 @@ public class WorldRenderer {
 
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth() / SCALE, Gdx.graphics.getHeight() / SCALE);
+        camera.zoom = 2f;
         batch.setProjectionMatrix(camera.combined);
 
         mapRenderer = new OrthogonalTiledMapRenderer(world.level.map);
@@ -86,7 +87,10 @@ public class WorldRenderer {
                 c.setStateTime(c.getStateTime() + delta);
             }
 
-            batch.draw(c.getCurrentTexture(), c.getAbsPos().x - textureOffset.x, c.getAbsPos().y - textureOffset.y);
+            TextureRegion texture = c.getCurrentTexture();
+
+
+            batch.draw(texture, c.getAbsPos().x - textureOffset.x, c.getAbsPos().y - textureOffset.y, 64, 64);
         }
     }
 

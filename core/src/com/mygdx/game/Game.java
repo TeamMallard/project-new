@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
 import com.mygdx.game.battle.BattleScreen;
-import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.Objective;
 
 import java.io.FileNotFoundException;

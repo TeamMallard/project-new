@@ -1,7 +1,5 @@
 package com.mygdx.game.objective;
 
-import com.mygdx.game.entity.NPC;
-
 /**
  * Created by olivermcclellan on 10/02/2016.
  */

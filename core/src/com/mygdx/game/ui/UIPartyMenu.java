@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.*;
+import com.mygdx.game.Game;
+import com.mygdx.game.InputHandler;
+import com.mygdx.game.PartyManager;
 import com.mygdx.game.assets.Assets;
 
 import java.util.ArrayList;

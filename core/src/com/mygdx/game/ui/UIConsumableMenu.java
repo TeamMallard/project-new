@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
+
 import java.util.ArrayList;
 import java.util.List;
 

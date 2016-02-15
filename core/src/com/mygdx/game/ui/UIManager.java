@@ -3,7 +3,6 @@ package com.mygdx.game.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
-import com.mygdx.game.InputHandler;
 import com.mygdx.game.PartyManager;
 import com.mygdx.game.assets.Assets;
 

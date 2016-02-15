@@ -11,8 +11,6 @@ import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIScore;
 import com.mygdx.game.ui.UIShop;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -72,7 +70,8 @@ public class GameWorld {
             case FREEROAM:
                 level.stopInput = false;
                 Random random = new Random();
-                if (level.player.getState() == Character.CharacterState.TRANSITIONING && random.nextInt(battleChance--) == 1){
+                // FUCK YOU
+                if (false/*level.player.getState() == Character.CharacterState.TRANSITIONING && random.nextInt(battleChance--) == 1*/){
                     uiManager.createDialogue(new String[] {"You have been stopped by a group of... somethings!"});
                     level.stopInput = true;
                     battleChance = 1000;

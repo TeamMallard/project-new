@@ -2,10 +2,6 @@ package com.mygdx.game;
 
 import java.util.List;
 
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.Agent.AgentType;
-
 
 /**
  * An individual shop, instantiated and stored in the ShopManager.
