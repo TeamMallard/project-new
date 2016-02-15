@@ -8,13 +8,8 @@ import com.mygdx.game.entity.NPC;
 public class DefeatRoboduckObjective implements Objective {
 
     private boolean complete;
-    private String name;
 
-    public DefeatRoboduckObjective(String name) {
-        this.name = name;
-    }
-
-    public void setComplete() {
+    public void roboduckDefeated() {
         complete = true;
     }
 
@@ -25,6 +20,6 @@ public class DefeatRoboduckObjective implements Objective {
 
     @Override
     public String getObjectiveString() {
-        return "Defeat " + name;
+        return "Defeat Roboduck";
     }
 }

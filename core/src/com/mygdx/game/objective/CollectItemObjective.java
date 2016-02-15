@@ -19,12 +19,12 @@ public class CollectItemObjective implements Objective {
     public boolean isComplete() {
         int count = 0;
 
-        for(int item : Game.party.getConsumables()) {
+        for (int item : Game.party.getConsumables()) {
             if (item == itemId)
                 count++;
         }
 
-        if(count >= quantity) {
+        if (count >= quantity) {
             return true;
         } else {
             return false;
@@ -33,6 +33,6 @@ public class CollectItemObjective implements Objective {
 
     @Override
     public String getObjectiveString() {
-        return "Collect " + quantity + " of " + Game.items.getConsumable(itemId);
+        return "Collect " + quantity + " of " + Game.items.getConsumable(itemId).getName();
     }
 }

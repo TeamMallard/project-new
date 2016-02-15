@@ -17,86 +17,85 @@ import java.io.IOException;
 public class Game extends com.badlogic.gdx.Game {
 
 
+    public static PartyManager party;
+    public static PartyManager enemies;
+    public static ItemManager items;
+    public static SkillManager skills;
+    public static ShopManager shops;
+    public static Objective objective;
+    private static JsonLoader jsonLoader = new JsonLoader();
+    public static int pointsScore = 0;
+    public static int segment = 0;
 
-	public static PartyManager party;
-	public static PartyManager enemies;
-	public static ItemManager items;
-	public static SkillManager skills;
-	public static ShopManager shops;
-	private static JsonLoader jsonLoader = new JsonLoader();
-	public static int pointsScore=0;
+    public static float masterVolume = 0.1f;
 
-	public static Objective objective;
+    public static WorldScreen worldScreen;
+    private BattleScreen battleScreen;
 
-	public static float masterVolume = 0.1f;
-
-	public static WorldScreen worldScreen;
-	private BattleScreen battleScreen;
-
-	public boolean wonBattle;
+    public boolean wonBattle;
 
 
-	@Override
-	public void create() {
-		loadFiles();
-		Assets.load();
-		wonBattle = false;
-		setScreen(new StartScreen(this));
+    @Override
+    public void create() {
+        loadFiles();
+        Assets.load();
+        wonBattle = false;
+        setScreen(new StartScreen(this));
 
-		// TODO: change where objective is assigned
-		objective = new DefeatRoboduckObjective("Roboduck");
-	}
+        // TODO: change where objective is assigned
+    }
 
-	/**
-	 * Loads json files for the party, items and skills.
-	 */
-	private void loadFiles(){
-		try {
-			skills = jsonLoader.parseSkillManager("skills.json");
-			items = jsonLoader.parseItemManager("items.json");
-			party = jsonLoader.parsePartyManager("party.json");
-			enemies = jsonLoader.parsePartyManager("enemies.json");
-			shops = jsonLoader.parseShopManager("shops.json");
-			System.out.println(shops.toString());
-		}
-		catch (FileNotFoundException ex) {
-			// Do something with 'ex'
-		} catch (IOException ex2) {
-			// Do something with 'ex2'
-		}
-	}
+    /**
+     * Loads json files for the party, items and skills.
+     */
+    private void loadFiles() {
+        try {
+            skills = jsonLoader.parseSkillManager("skills.json");
+            items = jsonLoader.parseItemManager("items.json");
+            party = jsonLoader.parsePartyManager("party.json");
+            enemies = jsonLoader.parsePartyManager("enemies.json");
+            shops = jsonLoader.parseShopManager("shops.json");
+            System.out.println(shops.toString());
+        } catch (FileNotFoundException ex) {
+            // Do something with 'ex'
+        } catch (IOException ex2) {
+            // Do something with 'ex2'
+        }
+    }
 
-	/**
-	 * Called when a battle has ended.
-	 * @param won True if the player won the battle.
-	 */
-	public void returnToWorld(boolean won){
-		wonBattle = won;
-		setScreen(worldScreen);
-	}
+    /**
+     * Called when a battle has ended.
+     *
+     * @param won True if the player won the battle.
+     */
+    public void returnToWorld(boolean won) {
+        wonBattle = won;
+        setScreen(worldScreen);
+    }
 
-	/**
-	 * Disposes of assets when game is no longer used.
-	 */
-	@Override
-	public void dispose() {
-		super.dispose();
-	}
+    /**
+     * Disposes of assets when game is no longer used.
+     */
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
 
-	/**
-	 * Creates a new battle and sets the battleScreen as the current screen.
-	 * @param battleParams
-	 */
-	public void newBattle(BattleParameters battleParams) {
-		battleScreen = new BattleScreen(this, battleParams);
-		setScreen(battleScreen);
-	}
+    /**
+     * Creates a new battle and sets the battleScreen as the current screen.
+     *
+     * @param battleParams
+     */
+    public void newBattle(BattleParameters battleParams) {
+        battleScreen = new BattleScreen(this, battleParams);
+        setScreen(battleScreen);
+    }
 
-	/**
-	 * Used when switching to the worldScreen from the startScreen.
-	 */
-	public void newWorldScreen() {
-		worldScreen = new WorldScreen(this);
-		setScreen(worldScreen);
-	}
+    /**
+     * Used when switching to the worldScreen from the startScreen.
+     */
+    public void newWorldScreen() {
+        worldScreen = new WorldScreen(this);
+        setScreen(worldScreen);
+    }
 }

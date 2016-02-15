@@ -8,8 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Character;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Character.CharacterState;
-
-import static com.mygdx.game.Level.TILE_SIZE;
+import com.mygdx.game.objective.Objective;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,6 @@ public class Level {
     public int tileWidth;
     public int tileHeight;
     public Vector2 mapBounds;
-    private int currentSegment;
 
     /**
      * The constructor loads the map and creates a new player in the appropriate position.
@@ -70,14 +68,13 @@ public class Level {
         updateCollisionMap();
         for (int i = 0; i < characters.size(); i++) {
             characters.get(i).update(delta);
-            if(characters.get(i) instanceof Player) {
-	            if(characters.get(i).getCurrentTile().equals(new Vector2(115, 95)) && characters.get(i).getState() != CharacterState.TRANSITIONING) {
-	            	characters.get(i).setCurrentTile(new Vector2(115, 94));
-	            	currentSegment += 1;
-	            }
+            if (characters.get(i) instanceof Player) {
+                if (characters.get(i).getCurrentTile().equals(new Vector2(115, 95)) && characters.get(i).getState() != CharacterState.TRANSITIONING) {
+                    characters.get(i).setCurrentTile(new Vector2(115, 94));
+                }
             }
         }
-        
+
     }
 
     /**
@@ -106,7 +103,7 @@ public class Level {
     /**
      * @return Returns null if no character exists at x, y.
      */
-    public Character getCharacterAt(float tileX, float tileY){
+    public Character getCharacterAt(float tileX, float tileY) {
         if (characters != null) {
             for (Character c : characters) {
                 if (c.getCurrentTile().equals(new Vector2(tileX, tileY)))
@@ -115,10 +112,5 @@ public class Level {
         }
         return null;
     }
-    
-    public int getCurrentSegment() {
-    	return currentSegment;
-    }
-
 
 }
