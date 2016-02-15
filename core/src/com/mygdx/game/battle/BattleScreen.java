@@ -264,6 +264,7 @@ public class BattleScreen extends ScreenAdapter {
                 messages[i]=resultsText.get(i);
             }
             battleMenu.addResultsDialog(messages);
+            Game.pointsScore -= Game.pointsScore * 0.25;
         }
     }
 

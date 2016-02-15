@@ -7,6 +7,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.entity.Character;
 import com.mygdx.game.entity.Player;
+import com.mygdx.game.entity.Character.CharacterState;
+
+import static com.mygdx.game.Level.TILE_SIZE;
 
 import java.util.ArrayList;
 
@@ -66,7 +69,13 @@ public class Level {
         updateCollisionMap();
         for (int i = 0; i < characters.size(); i++) {
             characters.get(i).update(delta);
+            if(characters.get(i) instanceof Player) {
+	            if(characters.get(i).getCurrentTile().equals(new Vector2(115, 95)) && characters.get(i).getState() != CharacterState.TRANSITIONING) {
+	            	characters.get(i).setCurrentTile(new Vector2(115, 94));
+	            }
+            }
         }
+        
     }
 
     /**

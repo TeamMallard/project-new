@@ -91,8 +91,7 @@ public class GameWorld {
                     Assets.sfx_battleStart.play(Game.masterVolume);
                     gameState = GameState.BATTLE_DIALOGUE;
                     level.stopInput = true;
-                } else
-                if (InputHandler.isActJustPressed()) {
+                } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;
                     if (interactingNPC != null) {
