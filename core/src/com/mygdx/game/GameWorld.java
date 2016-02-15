@@ -38,7 +38,7 @@ public class GameWorld {
         level = new Level(this);
         uiManager = new UIManager(Game.party);
         battleChance = 2000;
-        level.characters.add(new SallyNPC(level, new Vector2(108, 91)));
+        level.characters.add(new SallyNPC(level, new Vector2(85, 59)));
         level.characters.add(new RoboNPC(level, new Vector2(75, 98)));
         uiManager.addUIComponent(new UIScore());
 //        battleParams = new BattleParameters(level.getCurrentSegment());
@@ -72,8 +72,9 @@ public class GameWorld {
             case FREEROAM:
                 level.stopInput = false;
 
-                if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance-- - 1) == 1) {
-                    triggerEncounter();
+                if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
+                    //triggerEncounter();
+                    battleChance = 1000;
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;
