@@ -78,7 +78,7 @@
 		"id":3,
 		"name":"Small MP Flask",
 		"description":"It gives a small amount of MP",
-		"type":"MANAHEAL",
+		"type":"MANA",
 		"power":10,
 		"cost":1
 	},
@@ -86,7 +86,7 @@
 		"id":4,
 		"name":"Medium MP Flask",
 		"description":"It gives a fair amount of MP",
-		"type":"MANAHEAL",
+		"type":"MANA",
 		"power":30,
 		"cost":1
 	},
@@ -94,7 +94,7 @@
 		"id":5,
 		"name":"Large MP Flask",
 		"description":"It gives a large amount of MP",
-		"type":"MANAHEAL",
+		"type":"MANA",
 		"power":60,
 		"cost":1
 	},

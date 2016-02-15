@@ -33,7 +33,7 @@ public class UseItem extends UseAbility {
         item = Game.items.getConsumable(abilityID);
 
         switch (item.getType()) {
-            case HEAL: {
+            case HEAL:
                 if(!target.isDead()) {
                     battleAnimator.moveAgentTo(user, target.getX(), target.getY(), this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
@@ -44,8 +44,7 @@ public class UseItem extends UseAbility {
                     InputHandler.enableAllInput();
                 }
                 break;
-            }
-            case REVIVE: {
+            case REVIVE:
                 if(target.isDead()){
                     battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
@@ -56,8 +55,7 @@ public class UseItem extends UseAbility {
                     InputHandler.enableAllInput();
                 }
                 break;
-            }
-            case MANAHEAL: {
+            case MANA:
                 if(!target.isDead()) {
                     battleAnimator.moveAgentTo(user, target.getX(), target.getY(), this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
@@ -68,19 +66,6 @@ public class UseItem extends UseAbility {
                     InputHandler.enableAllInput();
                 }
                 break;
-            }
-            case SPEEDBUFF: {
-                break;
-            }
-            case STRENGTHBUFF: {
-                break;
-            }
-            case DEXTERITYBUFF: {
-                break;
-            }
-            case INTELLIGENCEBUFF: {
-                break;
-            }
         }
     }
 
@@ -115,7 +100,7 @@ public class UseItem extends UseAbility {
                     battleAnimator.returnAgent();
                     break;
                 }
-                case MANAHEAL:{
+                case MANA:{
                     Assets.sfx_healNoise.play(Game.masterVolume);
                     Game.party.getConsumables().remove(item.getID());
                     battleMenu.createInfoBox(target.getName() + " gains " + item.getPower()
@@ -123,18 +108,7 @@ public class UseItem extends UseAbility {
                     battleAnimator.returnAgent();
                     break;
                 }
-                case SPEEDBUFF:{
-                    break;
-                }
-                case STRENGTHBUFF:{
-                    break;
-                }
-                case DEXTERITYBUFF:{
-                    break;
-                }
-                case INTELLIGENCEBUFF:{
-                    break;
-                }
+
             }
         }
         else if(type==1){

@@ -26,7 +26,7 @@ public class Consumable{
     }
 
     public enum ConsumeType {
-        HEAL, REVIVE, MANAHEAL, SPEEDBUFF, STRENGTHBUFF, DEXTERITYBUFF, INTELLIGENCEBUFF;
+        HEAL, REVIVE, MANA;
     }
 
 

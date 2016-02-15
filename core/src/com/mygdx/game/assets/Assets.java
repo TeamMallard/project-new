@@ -32,7 +32,7 @@ public class Assets {
     public static Texture title;
 
 
-    public static WalkingTextures playerWalkingTextures, roboWalkingTextures, sallyWalkingTextures;
+    public static WalkingTextures playerWalkingTextures, playerSwimmingTextures, roboWalkingTextures, sallyWalkingTextures;
     public static BattleTextures[] battleTextures = new BattleTextures[6];
 
     public static TextureRegion[] equipment = new TextureRegion[5];
@@ -120,6 +120,15 @@ public class Assets {
 
     private static void loadPlayerTextures() {
         playerWalkingTextures = loadWalkingTextures("player", 32, 32, 2, 0.175f);
+
+        // Load swimming textures for world.
+        Texture swimming = loadTexture("world/player_swimming.png");
+        TextureRegion swimmingDown = new TextureRegion(swimming, 0, 0, 32, 32);
+        TextureRegion swimmingUp = new TextureRegion(swimming, 32, 0, 32, 32);
+        TextureRegion swimmingLeft = new TextureRegion(swimming, 64, 0, 32, 32);
+        TextureRegion swimmingRight = new TextureRegion(swimming, 96, 0, 32, 32);
+        playerSwimmingTextures = new WalkingTextures(swimmingDown, swimmingUp, swimmingLeft, swimmingRight);
+
         battleTextures[0] = loadBattleTextures("player", 32, 32);
     }
 
@@ -158,10 +167,9 @@ public class Assets {
 
         // Load the battle animation if it exists.
         if (Gdx.files.internal("battle/" + prefix + "_anim.png").exists()) {
-            System.out.println("loaded animation");
             Texture texture = loadTexture("battle/" + prefix + "_anim.png");
 
-            return new BattleTextures(alive, dead, loadAnimation(texture, width, height, texture.getWidth() / width, 100f));
+            return new BattleTextures(alive, dead, loadAnimation(texture, width, height, texture.getWidth() / width, 0.05f));
         } else {
             return new BattleTextures(alive, dead);
         }

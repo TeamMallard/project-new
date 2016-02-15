@@ -137,7 +137,7 @@ public class UIConsumableMenu extends UIComponent {
 	                }
                     break;
                 }
-                case MANAHEAL:{
+                case MANA:{
                     if(!getSelectedPlayer().isDead()) {
 	                    Assets.sfx_healNoise.play(Game.masterVolume);
 	                    this.getSelectedPlayer().giveMana(item.getPower());

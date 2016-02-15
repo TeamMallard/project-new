@@ -9,48 +9,39 @@ import com.mygdx.game.UseAbility;
  */
 public class BattleAnimator {
 
-    boolean isMoving = false;
-    boolean isReturning = false;
-    float baseSpeed = 5;
-    float moveSpeedX,moveSpeedY;
+    private static final float BASE_SPEED = 5;
 
-
-    float targetX,targetY,originalX,originalY;
-    Agent currentMoveAgent;
-
-    UseAbility currentCaller;
-
-
-    public void BattleAnimator(){
-
-    }
+    private boolean isMoving = false, isReturning = false;
+    private float moveSpeedX, moveSpeedY;
+    private float targetX, targetY, originalX, originalY;
+    private Agent currentMoveAgent;
+    private UseAbility currentCaller;
 
     /**
      * Updates the movement and checks for reaching target location
      * Will also call the movementDone function of the caller to notify of a movement completion
      */
-    public void update(float delta){
-        if(isMoving) {
+    public void update(float delta) {
+        if (isMoving) {
             updateMovement();
 
-            if(checkArrived()){
+            if (checkArrived()) {
                 currentMoveAgent.setX(targetX);
                 currentMoveAgent.setY(targetY);
-                isMoving=false;
+                isMoving = false;
                 currentCaller.movementDone(UseAbility.MOVEMENT_GOING);
             }
 
-            if(currentMoveAgent.isAttacking()) {
+            if (currentMoveAgent.isAttacking()) {
                 currentMoveAgent.updateAttackTime(delta);
             }
-        }
-        else if(isReturning){
+        } else if (isReturning) {
             updateMovement();
 
-            if(checkArrived()){
+            if (checkArrived()) {
                 currentMoveAgent.setX(targetX);
                 currentMoveAgent.setY(targetY);
-                isReturning=false;
+                isReturning = false;
                 currentCaller.movementDone(UseAbility.MOVEMENT_RETURNING);
             }
         }
@@ -59,39 +50,42 @@ public class BattleAnimator {
     /**
      * Updates the currentMoveAgent's location using the values already determined
      */
-    private void updateMovement(){
-        if(getDistance(currentMoveAgent.getX(),targetX)>Math.abs(moveSpeedX))
-            currentMoveAgent.setX(currentMoveAgent.getX()+moveSpeedX);
-        if(getDistance(currentMoveAgent.getY(),targetY)>Math.abs(moveSpeedY))
-            currentMoveAgent.setY(currentMoveAgent.getY()+moveSpeedY);
+    private void updateMovement() {
+        if (getDistance(currentMoveAgent.getX(), targetX) > Math.abs(moveSpeedX))
+            currentMoveAgent.setX(currentMoveAgent.getX() + moveSpeedX);
+        if (getDistance(currentMoveAgent.getY(), targetY) > Math.abs(moveSpeedY))
+            currentMoveAgent.setY(currentMoveAgent.getY() + moveSpeedY);
     }
 
     /**
      * Checks to see if the agent has arrived at the target
+     *
      * @return True if agent has arrived
      */
-    private boolean checkArrived(){
-        return getDistance(currentMoveAgent.getX(),targetX)<=Math.abs(moveSpeedX) && getDistance(currentMoveAgent.getY(),targetY)<=Math.abs(moveSpeedY);
+    private boolean checkArrived() {
+        return getDistance(currentMoveAgent.getX(), targetX) <= Math.abs(moveSpeedX) && getDistance(currentMoveAgent.getY(), targetY) <= Math.abs(moveSpeedY);
     }
 
     /**
      * Returns the distance between 2 points
+     *
      * @param point1 float point 1
      * @param point2 float point 2
      * @return the distance between point1 and point2 as a float
      */
-    private float getDistance(float point1, float point2){
-        return Math.abs(point1-point2);
+    private float getDistance(float point1, float point2) {
+        return Math.abs(point1 - point2);
     }
 
     /**
      * Moves the given agent to the target coordinates
-     * @param agent The agent to move
+     *
+     * @param agent       The agent to move
      * @param thisTargetX The target x coordinates
      * @param thisTargetY The target y coordinates
-     * @param caller The class that is calling the function. This is so that once the movement is complete, the calling class can be informed.
+     * @param caller      The class that is calling the function. This is so that once the movement is complete, the calling class can be informed.
      */
-    public void moveAgentTo(Agent agent, float thisTargetX, float thisTargetY, UseAbility caller){
+    public void moveAgentTo(Agent agent, float thisTargetX, float thisTargetY, UseAbility caller) {
         currentCaller = caller;
         currentMoveAgent = agent;
 
@@ -109,35 +103,35 @@ public class BattleAnimator {
     /**
      * Returns the agent given in moveAgentTo(), to it's starting location
      */
-    public void returnAgent(){
-        float temp= targetX;
-        targetX=originalX;
-        originalX=temp;
+    public void returnAgent() {
+        float temp = targetX;
+        targetX = originalX;
+        originalX = temp;
 
         temp = targetY;
-        targetY=originalY;
-        originalY=temp;
+        targetY = originalY;
+        originalY = temp;
 
         calculateMovement();
 
-        isReturning=true;
+        isReturning = true;
 
     }
 
     /**
      * Calculates the values needed to make the movement take place
      */
-    private void calculateMovement(){
+    private void calculateMovement() {
         float distX, distY;
 
-        distX=getDistance(targetX,originalX);
-        distY=getDistance(targetY,originalY);
+        distX = getDistance(targetX, originalX);
+        distY = getDistance(targetY, originalY);
 
-        moveSpeedY = (distY/distX) * baseSpeed;
-        moveSpeedX = targetX < originalX ? -baseSpeed : baseSpeed;
+        moveSpeedY = (distY / distX) * BASE_SPEED;
+        moveSpeedX = targetX < originalX ? -BASE_SPEED : BASE_SPEED;
 
-        if(targetY < originalY)
-            moveSpeedY =- moveSpeedY;
+        if (targetY < originalY)
+            moveSpeedY = -moveSpeedY;
     }
 
 

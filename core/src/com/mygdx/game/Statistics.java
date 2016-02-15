@@ -36,6 +36,8 @@ public class Statistics {
                 '}';
     }
 
+
+
     public Statistics(int maxHP, int maxMP, int speed, int strength, int dexterity, int intelligence, int armourVal, int experience, int currentLevel) {
         this.maxHP = maxHP;
         this.maxMP = maxMP;
