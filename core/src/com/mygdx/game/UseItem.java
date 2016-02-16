@@ -85,27 +85,28 @@ public class UseItem extends UseAbility {
                 case HEAL:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
-                    Game.party.getConsumables().remove(item);
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " is healed for " + item.getPower()
                             + " health",3);
                     battleAnimator.returnAgent();
                     break;
+                    
                 case REVIVE:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
-                    Game.party.getConsumables().remove(item);
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " is revived on " + item.getPower()
                             + " health",3);
                     battleAnimator.returnAgent();
                     break;
+                    
                 case MANA:
                     Assets.sfxHealNoise.play(Game.masterVolume);
-                    Game.party.getConsumables().remove(item);
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " gains " + item.getPower()
                             + " mana",3);
                     battleAnimator.returnAgent();
                     break;
-
             }
         }
         else if(type==1){
