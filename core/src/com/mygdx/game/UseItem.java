@@ -84,10 +84,9 @@ public class UseItem extends UseAbility {
      *
      * @param type the type of movement that was completed
      */
-    public void movementDone(int type){
-        //Type 0=moved, type 1=returned
-        if(type==0) {
-            switch(item.getType()){
+    public void movementDone(int type) {
+        if (type == UseAbility.MOVEMENT_GOING) {
+            switch (item.getType()) {
                 case HEAL:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
@@ -96,7 +95,6 @@ public class UseItem extends UseAbility {
                             + " health", 3);
                     battleAnimator.returnAgent();
                     break;
-
                 case REVIVE:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
@@ -105,7 +103,6 @@ public class UseItem extends UseAbility {
                             + " health", 3);
                     battleAnimator.returnAgent();
                     break;
-
                 case MANA:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     Game.party.getConsumables().remove(new Integer(item.getID()));
