@@ -30,7 +30,7 @@ public class UIObjective extends UIComponent {
      * @param patch the nine patch for drawing boxes
      */
     public void render(SpriteBatch batch, NinePatch patch) {
-        if(Game.objective != null) {
+        if (Game.objective != null) {
             messageBox.setMessage(Game.objective.isComplete() ? "Find the exit door" : Game.objective.getObjectiveString());
             messageBox.render(batch, patch);
         }

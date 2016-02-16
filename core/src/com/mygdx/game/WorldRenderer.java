@@ -15,29 +15,53 @@ import com.mygdx.game.entity.Character;
 import com.mygdx.game.ui.UIRenderer;
 
 /**
- * This class renders a GameWorld that has been passed in it's constructor.
- * This also contains a mapRenderer that renders the map,
- * and the uiRenderer that renders UI.
+ * Responsible for rendering the game world.
  */
 public class WorldRenderer {
 
+    /**
+     * The distance the player must move before the camera moves.
+     */
     public static final float PLAYER_CAMERA_BOUND = 8f;
 
+    /**
+     * Camera scale.
+     */
     public final float SCALE = 3f;
 
+    /**
+     * The game world to render.
+     */
     private GameWorld world;
 
+    /**
+     * The camera looking at the game world.
+     */
     private OrthographicCamera camera;
+    /**
+     * The sprite batch to draw on.
+     */
     private SpriteBatch batch;
 
+    /**
+     * The map renderer.
+     */
     private OrthogonalTiledMapRenderer mapRenderer;
+
+    /**
+     * The UI renderer.
+     */
     private UIRenderer uiRenderer;
 
+    /**
+     * The offset to render characters relative to their coordinates.
+     */
     private Vector2 textureOffset = new Vector2(-2, 0);
 
     /**
-     * @param world required to access state of the game e.g.
-     *              character positions and map.
+     * Creates a new WorldRenderer, rendering the specified game world.
+     *
+     * @param world the game world to render
      */
     public WorldRenderer(GameWorld world) {
         this.world = world;
@@ -56,7 +80,9 @@ public class WorldRenderer {
     }
 
     /**
-     * Renders the game world and should be called once per frame.
+     * Renders the game world.
+     *
+     * @param delta the time elapsed since the last render
      */
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -73,7 +99,7 @@ public class WorldRenderer {
         // Render all layers but the trees layer.
         for (MapLayer layer : world.level.map.getLayers()) {
             if (layer.isVisible() && !layer.getName().equals("trees")) {
-                mapRenderer.renderTileLayer((TiledMapTileLayer)layer);
+                mapRenderer.renderTileLayer((TiledMapTileLayer) layer);
             }
         }
 
@@ -88,8 +114,9 @@ public class WorldRenderer {
     }
 
     /**
-     * Iterates through each player in the level and renders the correct sprite based
-     * on position, orientation ect.
+     * Renders each character in the game world.
+     *
+     * @param delta the time elapsed since the last render
      */
     private void renderPlayers(float delta) {
         for (int i = 0; i < world.level.characters.size(); i++) {
@@ -108,8 +135,7 @@ public class WorldRenderer {
     }
 
     /**
-     * Updates the position of the camera to be constrained to the player and stay within the
-     * bounds of the map.
+     * Updates the camera bounds based on the player's position.
      */
     private void updateCamera() {
         // Constrain camera to area around player.
@@ -135,6 +161,12 @@ public class WorldRenderer {
         camera.update();
     }
 
+    /**
+     * Re-sizes the game world camera.
+     *
+     * @param width  the new width
+     * @param height the new height
+     */
     public void resize(int width, int height) {
         camera.viewportWidth = width / SCALE;
         camera.viewportHeight = height / SCALE;
@@ -142,6 +174,9 @@ public class WorldRenderer {
         uiRenderer.resize();
     }
 
+    /**
+     * Cleans up resources used by this WorldRenderer.
+     */
     public void dispose() {
         batch.dispose();
         uiRenderer.dispose();

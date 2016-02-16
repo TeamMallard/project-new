@@ -257,6 +257,7 @@ public class Agent implements Comparable<Agent> {
 
     /**
      * Sets the x coordinate of this Agent on the battle screen
+     *
      * @param x the x coordinate of this Agent on the battle screen
      */
     public void setX(float x) {
@@ -272,6 +273,7 @@ public class Agent implements Comparable<Agent> {
 
     /**
      * Sets the y coordinate of this Agent on the battle screen
+     *
      * @param y the y coordinate of this Agent on the battle screen
      */
     public void setY(float y) {
@@ -287,6 +289,7 @@ public class Agent implements Comparable<Agent> {
 
     /**
      * Sets whether this Agent is currently attacking.
+     *
      * @param attacking whether this Agent is currently attacking
      */
     public void setAttacking(boolean attacking) {
@@ -306,11 +309,10 @@ public class Agent implements Comparable<Agent> {
 
     /**
      * Updates the time this Agent has been attacking.
+     *
      * @param delta the time elapsed since the last update
      */
     public void updateAttackTime(float delta) {
-        System.out.println(attackTime);
-
         this.attackTime += delta;
     }
 

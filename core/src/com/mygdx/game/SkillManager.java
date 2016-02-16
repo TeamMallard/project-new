@@ -1,46 +1,41 @@
 package com.mygdx.game;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Stores and manages every skill.
+ * Stores all of the skills usable in the game.
  */
-
 public class SkillManager {
 
+    /**
+     * The list of skills usable in the game.
+     */
     private List<Skill> skills = new ArrayList<Skill>();
 
-
-    public SkillManager() {
-
-    }
-
     /**
-     * Add new Skill.
-     * @param skill The Skill to add
+     * Empty constructor required for JSON deserialisation to work.
      */
-    public void addSkill(Skill skill) {
-
-        skill.updateID(skills.size()); //Gives the skill the ID of it's index
-        skills.add(skill);//Check size function
+    public SkillManager() {
     }
 
     /**
-     * Returns the Skill stored at the given index.
-     * @param skillID The index of the Skill to retrieve
-     * @return Skill
+     * Returns the skill with the specified ID.
+     *
+     * @param skillID the ID of the skill
+     * @return the skill
      */
     public Skill getSkill(int skillID) {
         return skills.get(skillID);
     }
 
-
+    /**
+     * @return a string representation of the specified SkillManager
+     */
     @Override
     public String toString() {
         return "SkillManager{" +
                 "skills=" + skills +
                 '}';
     }
-
-
 }

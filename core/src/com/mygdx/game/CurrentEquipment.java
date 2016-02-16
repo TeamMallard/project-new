@@ -72,7 +72,6 @@ public class CurrentEquipment {
                 totalStatModifiers[column] += totalStatModifiersPerItem[row][column];
             }
         }
-        System.out.println("total modifiers:" + Arrays.toString(totalStatModifiers));
         return totalStatModifiers;
     }
 

@@ -199,7 +199,6 @@ public abstract class Character {
         absPos = new Vector2(currentTile.cpy().scl(TILE_SIZE));
         targetPos = new Vector2(targetTile.cpy().scl(TILE_SIZE));
         oldPos = new Vector2(absPos);
-        System.out.println(absPos);
     }
 
     /**

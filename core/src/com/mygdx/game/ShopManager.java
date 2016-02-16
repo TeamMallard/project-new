@@ -1,39 +1,37 @@
 package com.mygdx.game;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Stores and manages every skill.
+ * Stores all of the shops accessible in the game.
  */
-
 public class ShopManager {
 
+    /**
+     * List of all shops accessible in the game.
+     */
     private List<Shop> shops = new ArrayList<Shop>();
 
-
-    public ShopManager() {
-
-    }
-
     /**
-     * Adds a new shop.
-     * @param shop the Shop to add
+     * Empty constructor required for JSON deserialisation to work.
      */
-    public void addShop(Shop shop) {
-    	shop.updateID(shops.size()); //Gives the shop the ID of it's index
-        shops.add(shop);//Check size function
+    public ShopManager() {
     }
 
     /**
-     * Returns the Skill stored at the given index.
-     * @param shopID the index of the Sgop to retrieve
-     * @return Shop the shop
+     * Returns the shop with the specified ID.
+     *
+     * @param shopID the ID of the shop
+     * @return the shop
      */
     public Shop getShop(int shopID) {
         return shops.get(shopID);
     }
 
-
+    /**
+     * @return a string representation of this ShopManager
+     */
     @Override
     public String toString() {
         return "ShopManager{" +

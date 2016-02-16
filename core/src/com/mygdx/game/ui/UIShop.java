@@ -270,8 +270,6 @@ public class UIShop extends UIComponent {
             return;
         }
 
-        System.out.println("Buying index " + selectedShopItem);
-
         if (selected.getCost() <= Game.pointsScore) {
             if (selected instanceof ConsumableShopItem) {
                 // Item is a consumable.

@@ -61,7 +61,7 @@ public class GameWorld {
     public GameWorld(Game game) {
         this.game = game;
         gameState = GameState.FREEROAM;
-        level = new Level(this);
+        level = new Level();
         uiManager = new UIManager(Game.party);
         battleChance = 2000;
         level.characters.add(new SallyNPC(level, new Vector2(84, 59)));
@@ -179,7 +179,6 @@ public class GameWorld {
      * @param shop the shop
      */
     public void setShop(UIShop shop) {
-        System.out.println(gameState);
         uiManager.setShop(shop);
         uiManager.addUIComponent(shop);
         gameState = GameState.SHOP_MENU;

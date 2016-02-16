@@ -61,7 +61,7 @@ public class UIBattleSkillItemMenu extends UIComponent {
      * @param selected the index of the item to select
      */
     public boolean selectItem(int selected) {
-        if(selected < listItems.size()) {
+        if (selected < listItems.size()) {
             this.selected = selected;
             return true;
         } else {

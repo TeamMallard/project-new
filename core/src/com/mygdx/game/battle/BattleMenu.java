@@ -177,9 +177,9 @@ public class BattleMenu {
 
         if (currentUseAbility != null) {
             currentUseAbility.update(delta);
-            if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() 
-            		&& battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type
-            		&& !battleScreen.enemyParty.isDead()) {
+            if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()
+                    && battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type
+                    && !battleScreen.enemyParty.isDead()) {
                 targetingMenuInput(InputHandler.InputType.UP);
             }
         }
@@ -520,7 +520,7 @@ public class BattleMenu {
             case ACT:
                 if (isSkillTargeting) {
                     if (battleScreen.getCurrentTurnAgent().getType() == Agent.AgentType.FRIENDLY) {
-                        if (battleScreen.getCurrentTurnAgent().getStats().getCurrentMP() - Game.skills.getSkill(0).getMPCost() < 0) {
+                        if (battleScreen.getCurrentTurnAgent().getStats().getCurrentMP() - Game.skills.getSkill(0).getMpCost() < 0) {
                             createInfoBox(battleScreen.getCurrentTurnAgent().getName() + " does not have enough MP to use this skill", 3);
                             break;
                         }

@@ -93,7 +93,6 @@ public class Game extends com.badlogic.gdx.Game {
             party = jsonLoader.parsePartyManager("party.json");
             enemies = jsonLoader.parsePartyManager("enemies.json");
             shops = jsonLoader.parseShopManager("shops.json");
-            System.out.println(shops.toString());
         } catch (IOException ignored) {
         }
     }
@@ -139,7 +138,7 @@ public class Game extends com.badlogic.gdx.Game {
      * Used when switching to the win screen.
      */
     public void winScreen() {
-        WinScreen winScreen = new WinScreen(this);
+        WinScreen winScreen = new WinScreen();
         setScreen(winScreen);
     }
 

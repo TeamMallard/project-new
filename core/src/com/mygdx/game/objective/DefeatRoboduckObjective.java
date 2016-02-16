@@ -1,7 +1,5 @@
 package com.mygdx.game.objective;
 
-import com.mygdx.game.Game;
-
 /**
  * Represents an objective that involves defeating Roboduck.
  */

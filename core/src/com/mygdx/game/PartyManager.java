@@ -9,44 +9,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Stores and manages a list of Agents and allows higher level functions across the list.
+ * Contains information about a party of agents.
  */
 public class PartyManager {
 
+    /**
+     * The list of agents in the party.
+     */
     private List<Agent> partyList = new ArrayList<Agent>();
+
+    /**
+     * The list of equipment shared between party members (does not include equipped items).
+     */
     private List<Integer> equipment = new ArrayList<Integer>();
+
+    /**
+     * The list of consumables the party has.
+     */
     private List<Integer> consumables = new ArrayList<Integer>();
 
-
+    /**
+     * Empty constructor required for JSON deserialisation to work.
+     */
     public PartyManager() {
-
     }
 
     /**
-     * Add an Agent to the Party.
+     * Adds an agent to this PartyManager.
      *
-     * @param member The Agent to add
+     * @param member the agent to add
      */
     public void addMember(Agent member) {
-
         if (partyList.size() <= 4)
             partyList.add(member);
     }
 
     /**
-     * Returns the Agent stored at the given index.
+     * Gets the agent stored at the specified index.
      *
-     * @param index The index to receive the Agent at
+     * @param index the index of the agent
+     * @return the agent
      */
     public Agent getMember(int index) {
         return partyList.get(index);
     }
 
     /**
-     * Returns the index of a given Agent.
+     * Gets the index of the specified agent in the party.
      *
-     * @param member The Agent to find the index of
-     * @return The index of the given agent
+     * @param member the agent
+     * @return the index of the agent, or -1 if the agent is not in the party
      */
     public int getIndex(Agent member) {
         for (int i = 0; i < partyList.size(); i++) {
@@ -54,32 +66,21 @@ public class PartyManager {
                 return i;
             }
         }
+
         return -1;
     }
 
-//    /**
-//     * Finds party members with names that contain the search term.
-//     *
-//     * @param searchString The search string- case insensitive
-//     * @return returns list of agents with names that contain the search string
-//     */
-//    public List<Agent> getMember(String searchString) {
-//        List<Agent> returnList = new ArrayList<Agent>();
-//        for (Agent agent : partyList) {
-//            if (agent.getName().toLowerCase().contains(searchString.toLowerCase()))
-//                returnList.add(agent);
-//        }
-//        return returnList;
-//    }
-
+    /**
+     * @return the number of agents in the party
+     */
     public int size() {
         return partyList.size();
     }
 
     /**
-     * Renders the the party at their respective locations with their respective sprite.
+     * Renders the party on the battle screen.
      *
-     * @param batch The SpriteBatch to use
+     * @param batch the sprite batch to use
      */
     public void render(SpriteBatch batch) {
         for (Agent agent : partyList) {
@@ -92,9 +93,7 @@ public class PartyManager {
     }
 
     /**
-     * Checks to see if the entire Party is dead.
-     *
-     * @return True if entire party is dead, false otherwise
+     * @return true if all agents in the party are dead
      */
     public boolean isDead() {
         boolean isDead = true;
@@ -107,14 +106,23 @@ public class PartyManager {
         return isDead;
     }
 
+    /**
+     * @return the list of consumables the party has
+     */
     public List<Integer> getConsumables() {
         return consumables;
     }
 
+    /**
+     * @return the list of equipment the party has
+     */
     public List<Integer> getEquipment() {
         return equipment;
     }
 
+    /**
+     * @return a string representation of this PartyManager
+     */
     @Override
     public String toString() {
         return "PartyManager{" +
@@ -123,13 +131,13 @@ public class PartyManager {
     }
 
     /**
-     * Sets the health of each party member.
+     * Sets the health of each agent in the party.
      *
-     * @param x The health to set each party member to
+     * @param health the health to set each agent to
      */
-    public void setHealths(int x) {
+    public void setHealths(int health) {
         for (Agent agent : partyList) {
-            agent.dealHealth(x);
+            agent.dealHealth(health);
         }
     }
 }

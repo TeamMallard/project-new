@@ -4,58 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Stores and manages every item in the game.
+ * Contains every item accessible in the game.
  */
 public class ItemManager {
 
+    /**
+     * The complete list of equipment available in the game.
+     */
     private List<Equipment> equipment = new ArrayList<Equipment>();
+
+    /**
+     * The complete list of consumables accessible in the game.
+     */
     private List<Consumable> consumables = new ArrayList<Consumable>();
 
-
-    public ItemManager() {
-
-        //Add default Empty equipments to first index of each list
-        equipment.add(new Equipment("EmptyEquipment", "EmptyEquipment", Equipment.EquipType.WEAPON, 0, 0, 0, 0, 0, 0));
-        consumables.add(new Consumable("EmptyConsumable","EmptyConsumable", Consumable.ConsumeType.HEAL,0, 0));
-    }
-
     /**
-     * Adds a new equipment item.
-     * @param equipment The Equipment to add.
+     * Creates a new ItemManager with the default empty items.
      */
-    public void addEquipment(Equipment equipment) {
-
-        equipment.updateID(this.equipment.size());
-        this.equipment.add(equipment);//Check size function
+    public ItemManager() {
+        equipment.add(new Equipment("EmptyEquipment", "EmptyEquipment", Equipment.EquipType.WEAPON, 0, 0, 0, 0, 0, 0));
+        consumables.add(new Consumable("EmptyConsumable", "EmptyConsumable", Consumable.ConsumeType.HEAL, 0, 0));
     }
 
     /**
-     * Returns the Equipment stored at the given index.
-     * @param itemID The index of the Equipment to retrieve.
-     * @return An Equipment
+     * Returns the equipment item with the specified ID.
+     *
+     * @param itemID the ID of the equipment
+     * @return the equipment
      */
     public Equipment getEquipment(int itemID) {
         return equipment.get(itemID);
     }
 
     /**
-     * Adds a new consumable item.
-     */
-    public void addConsumable(Consumable consumable) {
-
-        consumable.updateID(consumables.size());
-        consumables.add(consumable);//Check size function
-    }
-
-    /**
-     * Returns the Consumable stored at the given index.
-     * @param itemID The index of the Consumable to retrieve.
-     * @return A Consumable
+     * Returns the consumable item with the specified ID.
+     *
+     * @param itemID the ID of the consumable
+     * @return the consumable
      */
     public Consumable getConsumable(int itemID) {
         return consumables.get(itemID);
     }
 
+    /**
+     * @return a string representation of this ItemManager
+     */
     @Override
     public String toString() {
         return "ItemManager{" +

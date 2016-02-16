@@ -47,6 +47,6 @@ public class UISkill extends UIComponent {
         patch.draw(batch, x, y, width, height + (paddingY * 2));
         renderText(batch, skill.getName(), x, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
         renderText(batch, skill.getDescription(), x, y - 25f, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas22);
-        renderText(batch, "MP COST: " + skill.getMPCost(), x + 250, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
+        renderText(batch, "MP COST: " + skill.getMpCost(), x + 250, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
     }
 }
