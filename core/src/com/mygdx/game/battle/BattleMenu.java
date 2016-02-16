@@ -536,12 +536,10 @@ public class BattleMenu {
                 isItemTargeting = false;
                 break;
             case RIGHT:
-                System.out.println("RIGHT");
                 if (targetMenuPointerColumn == 0 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn + 1] != -1)
                     targetMenuPointerColumn += 1;
                 break;
             case LEFT:
-                System.out.println("LEFT");
                 if (targetMenuPointerColumn == 1)
                     targetMenuPointerColumn -= 1;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
@@ -551,9 +549,7 @@ public class BattleMenu {
                 }
                 break;
             case UP:
-                System.out.println("UP");
                 targetMenuPointerRow -= 1;
-                //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
                 if (targetMenuPointerRow < 0)
                     targetMenuPointerRow = battleLayout.length - 1;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
@@ -564,9 +560,7 @@ public class BattleMenu {
                 }
                 break;
             case DOWN:
-                System.out.println("DOWN");
                 targetMenuPointerRow += 1;
-                //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
                 if (targetMenuPointerRow > battleLayout.length - 1)
                     targetMenuPointerRow = 0;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
