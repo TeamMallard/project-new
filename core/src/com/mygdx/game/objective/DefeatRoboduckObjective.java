@@ -32,10 +32,4 @@ public class DefeatRoboduckObjective implements Objective {
     public String getObjectiveString() {
         return "Defeat Roboduck";
     }
-
-	@Override
-	public void wonBattle() {
-		// TODO Auto-generated method stub
-		
-	}
 }
