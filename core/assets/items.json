@@ -189,7 +189,7 @@
 		"name":"Slime",
 		"description":"You probably don't want to eat this...",
 		"type":"HEAL",
-		"power":-10,
+		"power":0,
 		"cost":0
 	},
 	{
@@ -197,7 +197,7 @@
 		"name":"Duck Bones",
 		"description":"... Why?",
 		"type":"HEAL",
-		"power":-50,
+		"power":0,
 		"cost":0
 	},
 	{
@@ -205,7 +205,7 @@
 		"name":"Super Duck Bones",
 		"description":"Which bone is this?",
 		"type":"HEAL",
-		"power":-1000,
+		"power":0,
 		"cost":0
 	}
 	]
