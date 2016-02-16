@@ -41,11 +41,11 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(47, 49)));
         level.characters.add(new SallyNPC(level, new Vector2(21, 55)));
         level.characters.add(new SallyNPC(level, new Vector2(58, 76)));
-        level.characters.add(new SallyNPC(level, new Vector2(58, 76)));
-        level.characters.add(new SallyNPC(level, new Vector2(88, 106)));
+        level.characters.add(new SallyNPC(level, new Vector2(59, 77)));
+        level.characters.add(new SallyNPC(level, new Vector2(89, 107)));
         level.characters.add(new SallyNPC(level, new Vector2(118, 87)));
-        level.characters.add(new SallyNPC(level, new Vector2(156, 97)));
-        level.characters.add(new SallyNPC(level, new Vector2(210, 73)));
+        level.characters.add(new SallyNPC(level, new Vector2(157, 98)));
+        level.characters.add(new SallyNPC(level, new Vector2(211, 74)));
         level.characters.add(new RoboNPC(level, new Vector2(222,83)));
         uiManager.addUIComponent(new UIScore());
         uiManager.addUIComponent(new UIObjective());
