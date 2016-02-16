@@ -37,7 +37,7 @@ public class UseSkill extends UseAbility {
             user.setAttacking(true);
         }
 
-        battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);//Moves the agent to the target
+        battleAnimator.moveAgentTo(user,target.getX(), this);//Moves the agent to the target
         battleMenu.createInfoBox(user.getName() + " uses " + skill.getName()+" on "+target.getName(),3);//Create an info box with information on the current action
     }
 

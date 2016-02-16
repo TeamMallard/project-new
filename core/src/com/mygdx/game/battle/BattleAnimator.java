@@ -5,21 +5,45 @@ import com.mygdx.game.Agent;
 import com.mygdx.game.UseAbility;
 
 /**
- * Controls Agent Animation on the Battle Screen
+ * Controls the animation of agents on the battle screen.
  */
 public class BattleAnimator {
 
+    /**
+     * The base speed at which agents move to attack.
+     */
     private static final float BASE_SPEED = 5;
 
+    /**
+     * Whether the current turn agent is moving out to attack or returning.
+     */
     private boolean isMoving = false, isReturning = false;
+
+    /**
+     * The number of pixels moved each frame in each direction.
+     */
     private float moveSpeedX, moveSpeedY;
+
+    /**
+     * The target and original coordinates of the current move agent.
+     */
     private float targetX, targetY, originalX, originalY;
+
+    /**
+     * The agent that is currently moving.
+     */
     private Agent currentMoveAgent;
+
+    /**
+     * The ability that is causing the agent to move.
+     */
     private UseAbility currentCaller;
 
     /**
-     * Updates the movement and checks for reaching target location
-     * Will also call the movementDone function of the caller to notify of a movement completion
+     * Updates the movement and checks for reaching target location.
+     * Will also call the movementDone function of the caller to notify of a movement completion.
+     *
+     * @param delta the time elapsed since the last update
      */
     public void update(float delta) {
         if (isMoving) {
@@ -48,7 +72,7 @@ public class BattleAnimator {
     }
 
     /**
-     * Updates the currentMoveAgent's location using the values already determined
+     * Moves the current move agent one step.
      */
     private void updateMovement() {
         if (getDistance(currentMoveAgent.getX(), targetX) > Math.abs(moveSpeedX))
@@ -58,34 +82,33 @@ public class BattleAnimator {
     }
 
     /**
-     * Checks to see if the agent has arrived at the target
+     * Checks to see if the agent has arrived at the target coordinates.
      *
-     * @return True if agent has arrived
+     * @return true if agent has arrived
      */
     private boolean checkArrived() {
         return getDistance(currentMoveAgent.getX(), targetX) <= Math.abs(moveSpeedX) && getDistance(currentMoveAgent.getY(), targetY) <= Math.abs(moveSpeedY);
     }
 
     /**
-     * Returns the distance between 2 points
+     * Returns the distance between two points.
      *
-     * @param point1 float point 1
-     * @param point2 float point 2
-     * @return the distance between point1 and point2 as a float
+     * @param point1 the first point
+     * @param point2 the second point
+     * @return the distance between the two points in pixels
      */
     private float getDistance(float point1, float point2) {
         return Math.abs(point1 - point2);
     }
 
     /**
-     * Moves the given agent to the target coordinates
+     * Moves the specified agent to the target coordinates.
      *
-     * @param agent       The agent to move
-     * @param thisTargetX The target x coordinates
-     * @param thisTargetY The target y coordinates
-     * @param caller      The class that is calling the function. This is so that once the movement is complete, the calling class can be informed.
+     * @param agent       the agent to move
+     * @param thisTargetX the target x coordinate
+     * @param caller      the ability that is calling the function
      */
-    public void moveAgentTo(Agent agent, float thisTargetX, float thisTargetY, UseAbility caller) {
+    public void moveAgentTo(Agent agent, float thisTargetX, UseAbility caller) {
         currentCaller = caller;
         currentMoveAgent = agent;
 
@@ -101,7 +124,7 @@ public class BattleAnimator {
     }
 
     /**
-     * Returns the agent given in moveAgentTo(), to it's starting location
+     * Returns the current move agent to its starting location.
      */
     public void returnAgent() {
         float temp = targetX;
@@ -119,7 +142,7 @@ public class BattleAnimator {
     }
 
     /**
-     * Calculates the values needed to make the movement take place
+     * Calculates movement speed based on original and target coordinates.
      */
     private void calculateMovement() {
         float distX, distY;
@@ -133,6 +156,4 @@ public class BattleAnimator {
         if (targetY < originalY)
             moveSpeedY = -moveSpeedY;
     }
-
-
 }

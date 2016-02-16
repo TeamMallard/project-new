@@ -35,7 +35,7 @@ public class UseItem extends UseAbility {
         switch (item.getType()) {
             case HEAL:
                 if(!target.isDead()) {
-                    battleAnimator.moveAgentTo(user, target.getX(), target.getY(), this);
+                    battleAnimator.moveAgentTo(user, target.getX(), this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
                             + " on " + target.getName(), 3);
                 }
@@ -46,7 +46,7 @@ public class UseItem extends UseAbility {
                 break;
             case REVIVE:
                 if(target.isDead()){
-                    battleAnimator.moveAgentTo(user,target.getX(),target.getY(),this);
+                    battleAnimator.moveAgentTo(user,target.getX(), this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
                             + " on " + target.getName(), 3);
                 }
@@ -57,7 +57,7 @@ public class UseItem extends UseAbility {
                 break;
             case MANA:
                 if(!target.isDead()) {
-                    battleAnimator.moveAgentTo(user, target.getX(), target.getY(), this);
+                    battleAnimator.moveAgentTo(user, target.getX(), this);
                     battleMenu.createInfoBox(user.getName() + " uses " + item.getName()
                             + " on " + target.getName(), 3);
                 }

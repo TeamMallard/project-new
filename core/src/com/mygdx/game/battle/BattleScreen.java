@@ -36,9 +36,6 @@ public class BattleScreen extends ScreenAdapter {
     int turnOrderPointer = 0;
     private Agent currentTurnAgent;
 
-
-    List<Integer> emptyList = new ArrayList<Integer>();
-
     UseAbility currentUseAbility;
 
     boolean enemyHasUsedSkill = false;
@@ -345,35 +342,6 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Removes the target agent from the turnOrder list, adjusting turnOrderPointer if needed.
-     *
-     * @param target the agent that is to be removed from the turnOrder.
-     */
-    public void removeFromBattle(Agent target) {
-        int index = -1;
-        for (int i = 0; i < turnOrder.size(); i++) {
-            if (turnOrder.get(i) == target) {
-                index = i;
-                break;
-            }
-        }
-        if (index >= 0)
-            removeFromBattle(index);
-    }
-
-    /**
-     * Removes the Agent at given index from the turnOrder list, adjusting turnOrderPointer if needed.
-     *
-     * @param index the index of the Agent to remove from the turnOrder list.
-     */
-    public void removeFromBattle(int index) {
-        turnOrder.remove(index);
-        if (index <= turnOrderPointer) {
-            turnOrderPointer -= 1;
-        }
-    }
-
-    /**
      * Renders background and calls all other necessary render functions.
      */
     public void render(float delta) {
@@ -387,7 +355,7 @@ public class BattleScreen extends ScreenAdapter {
         batch.draw(Assets.battleBackgrounds[backgroundNumber], 0, -Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         enemyParty.render(batch);
         Game.party.render(batch);
-        battleMenu.render(delta, batch);
+        battleMenu.render(batch);
         batch.end();
 
 
