@@ -25,12 +25,12 @@ public class StartScreen extends ScreenAdapter {
 
     public StartScreen (Game game){
         this.game = game;
+        black = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
     }
 
     public void show() {
         fadeInCounter = 1f;
         runningTime = 0;
-        black = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
     }
 
     public void render (float delta) {

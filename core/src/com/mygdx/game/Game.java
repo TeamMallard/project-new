@@ -103,6 +103,8 @@ public class Game extends com.badlogic.gdx.Game {
     }
     
     public static void setObjective() {
+		for(int i = 0; i < Game.party.size(); i++)
+			Game.party.getMember(i).getStats().increaseXP(Game.segment*5);
     	switch(segment) {
     	case 0:
     		objective = new WinBattlesObjective(1);
