@@ -112,7 +112,7 @@ public class GameWorld {
                     uiManager.addNotification("You won the battle!");
                 } else {
                     Game.party.setHealths(1);
-                    level.player.setCurrentTile(new Vector2(118, 94));
+                    level.player.setCurrentTile(level.exits[Game.segment - 1]);
                     uiManager.addNotification("You lost the battle! You have been moved backwards.");
                 }
                 gameState = GameState.FREEROAM;

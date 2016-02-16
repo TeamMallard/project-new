@@ -5,8 +5,10 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
+import com.mygdx.game.objective.CollectItemObjective;
 import com.mygdx.game.objective.WinBattlesObjective;
 
 import java.util.ArrayList;
@@ -264,6 +266,21 @@ public class BattleScreen extends ScreenAdapter {
             if(Game.objective instanceof WinBattlesObjective) {
                 ((WinBattlesObjective) Game.objective).wonBattle();
             }
+            if(Game.objective instanceof CollectItemObjective) {
+                //((CollectItemObjective) Game.objective)
+                for (int i = 0; i < enemyParty.size(); i++) {
+                    if(enemyParty.getMember(i).getName().contains("Ooze") && Game.segment == 1) {
+                    	Game.party.getConsumables().add(7);
+                    }
+                    if(enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 3) {
+                    	Game.party.getConsumables().add(8);
+                    }
+                    if(enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 5) {
+                    	Game.party.getConsumables().add(9);
+                    }
+                }
+            }
+        	Game.party.getConsumables().add(MathUtils.random(0,6));
         } else {
             resultsText.add("You Lost.");
             Assets.sfx_battleLose.play(Game.masterVolume + 0.3f);
