@@ -11,12 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the robot boss of the game.
+ * Represents the robot boss of the game.
  */
 public class RoboNPC extends NPC {
 
+    /**
+     * The messages to display on the dialogue.
+     */
     private String[] messages;
 
+    /**
+     * Creates a new RoboNPC in the specified level at the specified tile.
+     *
+     * @param level       the level this RoboNPC belongs to
+     * @param currentTile the tile this RoboNPC begins on
+     */
     public RoboNPC(Level level, Vector2 currentTile) {
         super(level, currentTile, Assets.roboWalkingTextures);
         messages = new String[2];
@@ -24,32 +33,43 @@ public class RoboNPC extends NPC {
         messages[1] = "Robo duck has challenged you to a battle.";
     }
 
+    /**
+     * Called when a player first interacts with this RoboNPC.
+     *
+     * @param delta     the time elapsed since the last update
+     * @param uiManager the UI manager to show messages on
+     */
     @Override
     public void initializeInteraction(float delta, UIManager uiManager) {
         uiManager.createDialogue(messages);
         this.uiManager = uiManager;
     }
 
+    /**
+     * Called every frame while a player interacts with this RoboNPC.
+     *
+     * @param delta the time elapsed since the last update
+     * @return true if update should continue
+     */
     @Override
     public boolean updateInteracting(float delta) {
         return uiManager.updateDialogue(delta);
     }
 
+    /**
+     * Called when a player has finished interacting with this RoboNPC.
+     */
     @Override
     public void action(GameWorld gameWorld) {
         Assets.sfxBattleStart.play(Game.masterVolume);
         uiManager.addNotification("Robo Duck has been defeated.");
         BattleParameters params = new BattleParameters(Game.segment);
-        //Enemy ducks
+
+        // List of enemy ducks.
         List<Integer> emptyList = new ArrayList<Integer>();
         Agent enemyDuck = new Agent("Robo Duck", Agent.AgentType.ENEMY, new Statistics(250, 500, 8, 2, 3, 3, 3, 201, 9), emptyList, new CurrentEquipment(0, 0, 0, 0, 0), 1);
-//        enemyDuck.equipEquipment(0);
-//        enemyDuck.equipEquipment(1);
         enemyDuck.addSkill(4);
-
         params.addEnemy(enemyDuck);
-
-
         gameWorld.setBattle(params);
 
         // If Roboduck is dead then the player has completed the objective.
@@ -58,6 +78,23 @@ public class RoboNPC extends NPC {
         }
 
         level.characters.remove(this);
+    }
 
+    /**
+     * Not implemented.
+     *
+     * @param delta the time elapsed since the last update
+     */
+    @Override
+    protected void updateTransitioning(float delta) {
+    }
+
+    /**
+     * Not implemented.
+     *
+     * @param delta the time elapsed since the last update
+     */
+    @Override
+    protected void updateStationary(float delta) {
     }
 }

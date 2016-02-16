@@ -12,7 +12,7 @@
 		"dexterity":2,
 		"intelligence":3,
 		"armourVal":2,
-		"experience":200,
+		"experience":0,
 		"currentLevel":1,
 		"maxLevel":20
 		},

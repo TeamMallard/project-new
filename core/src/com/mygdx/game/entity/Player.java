@@ -7,7 +7,7 @@ import com.mygdx.game.Level;
 import com.mygdx.game.assets.Assets;
 
 /**
- * This class is a character that is controlled by the user.
+ * Represents the player character in the overworld.
  */
 public class Player extends Character {
 
@@ -23,8 +23,9 @@ public class Player extends Character {
     }
 
     /**
-     * Updates the movement of the character based on user input.
-     * @param delta The time since the last frame was rendered.
+     * Helper method to update if the player state is STATIONARY (begins movement if WASD is pressed).
+     *
+     * @param delta the time elapsed since the last update
      */
     protected void updateStationary(float delta) {
         if (InputHandler.isUpPressed()) {
@@ -39,8 +40,9 @@ public class Player extends Character {
     }
 
     /**
-     * Similar to NPC but requires user input to determine direction.
-     * @param delta The time since the last frame was rendered.
+     * Helper method to update if the player state is TRANSITIONING. Uses keyboard input.
+     *
+     * @param delta the time elapsed since the last update
      */
     protected void updateTransitioning(float delta) {
         runningTime += delta;
@@ -65,8 +67,9 @@ public class Player extends Character {
     }
 
     /**
-     * Extends parent class by also updating the current interactingNPC of the player.
-     * @param delta The time since the last frame was rendered.
+     * Updates the state of this Player.
+     *
+     * @param delta the time elapsed since the last update
      */
     @Override
     public void update(float delta) {
@@ -87,9 +90,13 @@ public class Player extends Character {
         }
     }
 
+    /**
+     * @return the current texture to use when rendering this Player.
+     */
     @Override
     public TextureRegion getCurrentTexture() {
-        if(level.checkWater((int) getCurrentTile().x, (int) getCurrentTile().y)) {
+        // If we're in water, use swimming textures.
+        if (level.checkWater((int) getCurrentTile().x, (int) getCurrentTile().y)) {
             return Assets.playerSwimmingTextures.getTexture(getDirection(), getStateTime());
         } else {
             return super.getCurrentTexture();
