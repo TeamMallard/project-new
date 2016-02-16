@@ -177,7 +177,9 @@ public class BattleMenu {
 
         if (currentUseAbility != null) {
             currentUseAbility.update(delta);
-            if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() && !battleScreen.enemyParty.isDead()) {
+            if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() 
+            		&& battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type
+            		&& !battleScreen.enemyParty.isDead()) {
                 targetingMenuInput(InputHandler.inputType.UP);
             }
         }
@@ -534,11 +536,12 @@ public class BattleMenu {
                 isItemTargeting = false;
                 break;
             case RIGHT:
+                System.out.println("RIGHT");
                 if (targetMenuPointerColumn == 0 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn + 1] != -1)
                     targetMenuPointerColumn += 1;
                 break;
             case LEFT:
-                System.out.println(targetMenuPointerRow + " " + targetMenuPointerColumn);
+                System.out.println("LEFT");
                 if (targetMenuPointerColumn == 1)
                     targetMenuPointerColumn -= 1;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
@@ -548,6 +551,7 @@ public class BattleMenu {
                 }
                 break;
             case UP:
+                System.out.println("UP");
                 targetMenuPointerRow -= 1;
                 //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
                 if (targetMenuPointerRow < 0)
@@ -560,6 +564,7 @@ public class BattleMenu {
                 }
                 break;
             case DOWN:
+                System.out.println("DOWN");
                 targetMenuPointerRow += 1;
                 //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
                 if (targetMenuPointerRow > battleLayout.length - 1)
