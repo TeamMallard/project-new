@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.objective.CollectItemObjective;
+import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.WinBattlesObjective;
 
 import java.util.ArrayList;
@@ -325,6 +326,12 @@ public class BattleScreen extends ScreenAdapter {
                         Game.party.getConsumables().add(9);
                     }
                 }
+            }
+            for (int i = 0; i < enemyParty.size(); i++) {
+	            if(Game.objective instanceof DefeatRoboduckObjective && enemyParty.getMember(i).getName().contains("Robo")) {
+	                ((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
+	                game.winScreen();
+	            }
             }
             Game.party.getConsumables().add(MathUtils.random(0, 6));
         } else {

@@ -65,18 +65,20 @@ public class Statistics {
         int levelIncrease = 0;
         Random random = new Random();
         experience+=xp;
-        while(experience>=this.getLevelCap()) {
-        	maxHP += random.nextInt(intelligence*5) + 10;
-        	currentHP = maxHP;
-        	maxMP += random.nextInt(intelligence) + 1;
-        	currentMP = maxMP;
-        	speed += random.nextInt(intelligence) + 1;
-        	strength += random.nextInt(intelligence) + 1;
-        	dexterity += random.nextInt(intelligence) + 1;
-        	intelligence += random.nextInt(intelligence) + 1;
-        	
-            currentLevel += 1;
-            levelIncrease+=1;
+        if(currentLevel < 10) {
+	        while(experience>=this.getLevelCap()) {
+	        	maxHP += random.nextInt(intelligence*5) + 10;
+	        	currentHP = maxHP;
+	        	maxMP += random.nextInt(intelligence) + 1;
+	        	currentMP = maxMP;
+	        	speed += random.nextInt(intelligence) + 1;
+	        	strength += random.nextInt(intelligence) + 1;
+	        	dexterity += random.nextInt(intelligence) + 1;
+	        	intelligence += random.nextInt(intelligence) + 1;
+	        	
+	            currentLevel += 1;
+	            levelIncrease+=1;
+	        }
         }
         if(levelIncrease>0)
             return levelIncrease;

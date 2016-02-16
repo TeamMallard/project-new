@@ -61,7 +61,6 @@ public class Level {
         for (Character character : characters) {
             character.update(delta);
             if (character instanceof Player) {
-            	System.out.println(character.getCurrentTile().toString());
                 for (int i = 0; i < doors.length; i++) {
 	                if (character.getCurrentTile().equals(doors[i]) && character.getState() != CharacterState.TRANSITIONING) {
 	                    character.setCurrentTile(exits[i]);

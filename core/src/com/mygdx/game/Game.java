@@ -33,6 +33,7 @@ public class Game extends com.badlogic.gdx.Game {
 
     public static WorldScreen worldScreen;
     private BattleScreen battleScreen;
+    private WinScreen winScreen;
 
     public boolean wonBattle;
 
@@ -100,6 +101,15 @@ public class Game extends com.badlogic.gdx.Game {
         worldScreen = new WorldScreen(this);
         setScreen(worldScreen);
         setObjective();
+    }
+
+
+    /**
+     * Used when switching to the winScreen.
+     */
+    public void winScreen() {
+        winScreen = new WinScreen(this);
+        setScreen(winScreen);
     }
     
     public static void setObjective() {

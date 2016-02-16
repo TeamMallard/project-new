@@ -8,6 +8,7 @@ import com.mygdx.game.entity.Character;
 import com.mygdx.game.entity.NPC;
 import com.mygdx.game.entity.RoboNPC;
 import com.mygdx.game.entity.SallyNPC;
+import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.WinBattlesObjective;
 import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIObjective;
