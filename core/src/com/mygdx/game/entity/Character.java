@@ -180,6 +180,9 @@ public abstract class Character {
      */
     protected abstract void updateStationary(float delta);
 
+    /**
+     * @return the current tile that the Character is on
+     */
     public Vector2 getCurrentTile() {
         return currentTile;
     }
