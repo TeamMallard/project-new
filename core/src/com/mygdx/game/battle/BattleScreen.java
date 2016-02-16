@@ -108,25 +108,14 @@ public class BattleScreen extends ScreenAdapter {
         camera.update();
 
         backgroundNumber = battleParams.getBackground();
-
-        //Adding new party member test
-/*        Agent tomDuck = new Agent("Tom the Duck", Agent.AgentType.FRIENDLY,new Statistics(30,10,2,2,2,2,2,2,2),list1,new CurrentEquipment(0,0,0,0,0));
-        Game.party.addMember(tomDuck);
-*/
-
         enemyParty = battleParams.getEnemyParty();
 
         determineTurnOrder();
         assignInitialPositions();
 
-        //json.toJson(Game.items.getEquipment(0), Equipment.class, new FileHandle("E:\\My Documents\\Uni Stuff\\Second Year\\SEPR\\PrivateDev\\core\\assets\\items.json"));
-
-
         //Initialise the size of the battlemenu menus
         battleMenu.setItemMenuSize(Game.party.getConsumables().size());
         battleMenu.updateBattleLayout();
-
-        //System.out.println("turnorder: "+turnOrder);
 
         Assets.battleMusic.setVolume(Game.masterVolume + 0.3f);
         Assets.battleMusic.play();
