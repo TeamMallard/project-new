@@ -1,5 +1,6 @@
 package com.mygdx.game.entity;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.InputHandler;
 import com.mygdx.game.Level;
@@ -83,6 +84,15 @@ public class Player extends Character {
             case RIGHT:
                 interactingNPC = (NPC) level.getCharacterAt(getCurrentTile().x + 1, getCurrentTile().y);
                 break;
+        }
+    }
+
+    @Override
+    public TextureRegion getCurrentTexture() {
+        if(level.checkWater((int) getCurrentTile().x, (int) getCurrentTile().y)) {
+            return Assets.playerSwimmingTextures.getTexture(getDirection(), getStateTime());
+        } else {
+            return super.getCurrentTexture();
         }
     }
 }
