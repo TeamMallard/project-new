@@ -83,8 +83,8 @@ public class GameWorld {
                 level.stopInput = false;
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
-                    triggerEncounter();
-                    //battleChance = 1000;
+                    //triggerEncounter();
+                    battleChance = 1000;
                     
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
@@ -122,10 +122,6 @@ public class GameWorld {
             case BATTLE:
                 if (game.wonBattle) {
                     uiManager.addNotification("You won the battle!");
-                    if(Game.objective instanceof DefeatRoboduckObjective) {
-                        ((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
-                        game.winScreen();
-                    }
                 } else {
                     Game.party.setHealths(1);
                     level.player.setCurrentTile(level.exits[Game.segment - 1]);
