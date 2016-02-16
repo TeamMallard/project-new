@@ -276,7 +276,7 @@ public class BattleScreen extends ScreenAdapter {
             //work out baseline xp to give to each Agent
             int xpGain = 0;
             for (int i = 0; i < enemyParty.size(); i++) {
-                xpGain += enemyParty.getMember(i).getStats().getCurrentLevel() * 3;
+                xpGain += (int) (Math.log(enemyParty.getMember(i).getStats().getCurrentLevel()) * 3);
             }
 
             Random random = new Random();
