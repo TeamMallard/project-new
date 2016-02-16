@@ -84,36 +84,35 @@ public class UseItem extends UseAbility {
      *
      * @param type the type of movement that was completed
      */
-    public void movementDone(int type) {
-        if (type == UseAbility.MOVEMENT_GOING) {
-            switch (item.getType()) {
-                case HEAL: {
+    public void movementDone(int type){
+        //Type 0=moved, type 1=returned
+        if(type==0) {
+            switch(item.getType()){
+                case HEAL:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
-                    Game.party.getConsumables().remove(item.getID());
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " is healed for " + item.getPower()
                             + " health", 3);
                     battleAnimator.returnAgent();
                     break;
-                }
-                case REVIVE: {
+
+                case REVIVE:
                     Assets.sfxHealNoise.play(Game.masterVolume);
                     target.dealHealth(item.getPower());
-                    Game.party.getConsumables().remove(item.getID());
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " is revived on " + item.getPower()
                             + " health", 3);
                     battleAnimator.returnAgent();
                     break;
-                }
-                case MANA: {
+
+                case MANA:
                     Assets.sfxHealNoise.play(Game.masterVolume);
-                    Game.party.getConsumables().remove(item.getID());
+                    Game.party.getConsumables().remove(new Integer(item.getID()));
                     battleMenu.createInfoBox(target.getName() + " gains " + item.getPower()
                             + " mana", 3);
                     battleAnimator.returnAgent();
                     break;
-                }
-
             }
         } else if (type == UseAbility.MOVEMENT_RETURNING) {
             InputHandler.enableAllInput();
