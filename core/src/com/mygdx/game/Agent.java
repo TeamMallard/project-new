@@ -178,6 +178,9 @@ public class Agent implements Comparable<Agent> {
      * @return the current list of skills that can be used by this Agent
      */
     public List<Integer> getSkills() {
+        /**
+         * CHANGE P5: Changed skill unlocks from objective-based to level-based.
+         */
         List<Integer> tempSkills = new ArrayList<Integer>();
         if (this.getStats().getCurrentLevel() >= 8 && skills.size() >= 4) {
             tempSkills.add(skills.get(3));
@@ -224,6 +227,9 @@ public class Agent implements Comparable<Agent> {
      * @return the total defence stat of this Agent
      */
     public int getTotalDefence() {
+        /**
+         * CHANGE P1: Equipment increases the armour rating.
+         */
         return this.getStats().getArmourVal() + this.getCurrentEquipment().getTotalArmourValModifiers();
     }
 

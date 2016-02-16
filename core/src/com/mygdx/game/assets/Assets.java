@@ -24,6 +24,10 @@ public final class Assets {
     public static Texture selectArrow, turnArrow, dialoguePointer;
 
     /**
+     * CHANGE M8: Added a recognisable background location to each segment.
+     */
+
+    /**
      * Backgrounds for battles, indexed by segment number.
      */
     public static Texture[] battleBackgrounds = new Texture[8];

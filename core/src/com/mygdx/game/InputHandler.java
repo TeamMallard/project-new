@@ -14,6 +14,10 @@ public class InputHandler {
     private static boolean isInputEnabled = true;
 
     /**
+     * CHANGE M5: Added additional movement control, the arrow keys.
+     */
+
+    /**
      * Keys for moving up.
      */
     private static final int[] UP = {Input.Keys.W, Input.Keys.UP};
@@ -139,7 +143,7 @@ public class InputHandler {
     /**
      * @return whether an escape key has just been pressed
      */
-    public static Boolean isEscJustPressed() {
+    public static boolean isEscJustPressed() {
         return isInputEnabled && anyKeyJustPressed(ESC);
     }
 

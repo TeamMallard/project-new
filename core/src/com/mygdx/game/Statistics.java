@@ -8,6 +8,10 @@ import java.util.Random;
 public class Statistics {
 
     /**
+     * CHANGE P2: Altered the XP amounts and level thresholds for the leveling system.
+     */
+
+    /**
      * The experience required for each level.
      */
     private final int[] LEVEL_CURVE = {15, 35, 50, 70, 95, 125, 160, 200, 250, 325};
@@ -66,7 +70,6 @@ public class Statistics {
         this.experience = experience; // Current amount of xp
         this.currentLevel = currentLevel;
         increaseXP(0);
-
     }
 
     /**
@@ -108,6 +111,10 @@ public class Statistics {
         experience += xp;
         if (currentLevel < maxLevel) {
             while (experience >= this.getLevelCap()) {
+                /**
+                 * CHANGE P3: Leveling up fully restores the HP and MP of the party.
+                 */
+
                 maxHP += random.nextInt(intelligence * 5) + 10;
                 currentHP = maxHP;
                 maxMP += random.nextInt(intelligence) + 1;

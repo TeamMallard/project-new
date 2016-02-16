@@ -115,6 +115,9 @@ public class BattleAnimator {
         originalX = agent.getX();
         originalY = agent.getY();
 
+        /**
+         * CHANGE E2: Amount of movement required in combat animations was reduced.
+         */
         targetX = agent.getX() + (thisTargetX < originalX ? -100 : 100);
         targetY = agent.getY();
 

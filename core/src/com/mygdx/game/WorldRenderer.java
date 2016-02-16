@@ -93,6 +93,9 @@ public class WorldRenderer {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
+        /**
+         * CHANGE M4: Modified the rendering system.
+         */
         mapRenderer.setMap(world.level.map);
         mapRenderer.setView(camera);
 

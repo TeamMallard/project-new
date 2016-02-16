@@ -95,6 +95,9 @@ public class Player extends Character {
      */
     @Override
     public TextureRegion getCurrentTexture() {
+        /**
+         * CHANGE M6: Swimming movement mode was added, which activated when the player navigates over water.
+         */
         // If we're in water, use swimming textures.
         if (level.checkWater((int) getCurrentTile().x, (int) getCurrentTile().y)) {
             return Assets.playerSwimmingTextures.getTexture(getDirection(), getStateTime());

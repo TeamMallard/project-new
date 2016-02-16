@@ -142,6 +142,9 @@ public class Level {
      * @return true if the specified tile is blocked
      */
     private boolean isTileBlocked(int x, int y) {
+        /**
+         * CHANGE M11: Adjusted the collision system to only apply to one layer.
+         */
         // Check each door layer.
         for (int i = 1; i < 8; i++) {
             TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("door" + i);
