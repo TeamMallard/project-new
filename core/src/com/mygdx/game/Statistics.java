@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Statistics {
 	
-	private final int[] LEVEL_CURVE = {20, 35, 50, 70, 95, 125, 160, 200, 250, 325};
+	private final int[] LEVEL_CURVE = {15, 35, 50, 70, 95, 125, 160, 200, 250, 325};
 
     private int currentHP,currentMP, maxHP, maxMP;
     private int speed,strength,dexterity,intelligence;
@@ -53,6 +53,7 @@ public class Statistics {
 
         this.experience = experience; //current amount of xp
         this.currentLevel = currentLevel;
+        increaseXP(0);
 
     }
     /**

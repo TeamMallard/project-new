@@ -42,7 +42,7 @@ public class RoboNPC extends NPC {
         BattleParameters params = new BattleParameters(Game.segment);
         //Enemy ducks
         List<Integer> emptyList = new ArrayList<Integer>();
-        Agent enemyDuck = new Agent("Robo Duck", Agent.AgentType.ENEMY, new Statistics(250, 500, 8, 2, 3, 3, 3, 3, 3), emptyList, new CurrentEquipment(0, 0, 0, 0, 0), 1);
+        Agent enemyDuck = new Agent("Robo Duck", Agent.AgentType.ENEMY, new Statistics(250, 500, 8, 2, 3, 3, 3, 201, 9), emptyList, new CurrentEquipment(0, 0, 0, 0, 0), 1);
 //        enemyDuck.equipEquipment(0);
 //        enemyDuck.equipEquipment(1);
         enemyDuck.addSkill(4);
