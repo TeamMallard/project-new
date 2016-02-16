@@ -75,7 +75,7 @@ public class Level {
             }
         }
         if(Game.objective.isComplete()) {
-        	map.getLayers().remove(map.getLayers().get("door" + Game.segment + 1));
+        	map.getLayers().remove(map.getLayers().get("door" + (Game.segment + 1)));
         }
 
     }
