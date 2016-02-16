@@ -47,7 +47,7 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(119, 87)));
         level.characters.add(new SallyNPC(level, new Vector2(157, 97)));
         level.characters.add(new SallyNPC(level, new Vector2(211, 73)));
-        level.characters.add(new RoboNPC(level, new Vector2(75, 98)));
+        level.characters.add(new RoboNPC(level, new Vector2(223,83)));
         uiManager.addUIComponent(new UIScore());
         uiManager.addUIComponent(new UIObjective());
 //        battleParams = new BattleParameters(level.getCurrentSegment());
@@ -83,6 +83,8 @@ public class GameWorld {
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
                     triggerEncounter();
+                    //battleChance = 1000;
+                    
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;

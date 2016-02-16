@@ -13,8 +13,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 0,
+        "currentLevel": 1,
         "maxLevel": 20
       },
       "skills": [
@@ -44,8 +44,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 0,
+        "currentLevel": 1,
         "maxLevel": 20
       },
       "skills": [
@@ -75,8 +75,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 0,
+        "currentLevel": 1,
         "maxLevel": 20
       },
       "skills": [
@@ -106,7 +106,7 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
+        "experience": 21,
         "currentLevel": 2,
         "maxLevel": 20
       },
@@ -137,7 +137,7 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
+        "experience": 21,
         "currentLevel": 2,
         "maxLevel": 20
       },
@@ -168,7 +168,7 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
+        "experience": 21,
         "currentLevel": 2,
         "maxLevel": 20
       },
@@ -199,8 +199,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 36,
+        "currentLevel": 3,
         "maxLevel": 20
       },
       "skills": [
@@ -230,8 +230,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 36,
+        "currentLevel": 3,
         "maxLevel": 20
       },
       "skills": [
@@ -261,8 +261,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 36,
+        "currentLevel": 3,
         "maxLevel": 20
       },
       "skills": [
@@ -292,8 +292,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 51,
+        "currentLevel": 4,
         "maxLevel": 20
       },
       "skills": [
@@ -323,8 +323,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 51,
+        "currentLevel": 4,
         "maxLevel": 20
       },
       "skills": [
@@ -354,8 +354,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 51,
+        "currentLevel": 4,
         "maxLevel": 20
       },
       "skills": [
@@ -385,8 +385,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 71,
+        "currentLevel": 5,
         "maxLevel": 20
       },
       "skills": [
@@ -416,8 +416,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 71,
+        "currentLevel": 5,
         "maxLevel": 20
       },
       "skills": [
@@ -447,8 +447,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 71,
+        "currentLevel": 5,
         "maxLevel": 20
       },
       "skills": [
@@ -478,8 +478,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 96,
+        "currentLevel": 6,
         "maxLevel": 20
       },
       "skills": [
@@ -509,8 +509,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 96,
+        "currentLevel": 6,
         "maxLevel": 20
       },
       "skills": [
@@ -540,8 +540,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 96,
+        "currentLevel": 6,
         "maxLevel": 20
       },
       "skills": [
@@ -571,8 +571,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 126,
+        "currentLevel": 7,
         "maxLevel": 20
       },
       "skills": [
@@ -602,8 +602,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 126,
+        "currentLevel":7,
         "maxLevel": 20
       },
       "skills": [
@@ -633,8 +633,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 126,
+        "currentLevel": 7,
         "maxLevel": 20
       },
       "skills": [
@@ -664,8 +664,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 161,
+        "currentLevel": 8,
         "maxLevel": 20
       },
       "skills": [
@@ -695,8 +695,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 161,
+        "currentLevel": 8,
         "maxLevel": 20
       },
       "skills": [
@@ -726,8 +726,8 @@
         "dexterity": 2,
         "intelligence": 2,
         "armourVal": 2,
-        "experience": 205,
-        "currentLevel": 2,
+        "experience": 161,
+        "currentLevel": 8,
         "maxLevel": 20
       },
       "skills": [
