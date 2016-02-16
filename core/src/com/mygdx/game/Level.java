@@ -68,9 +68,14 @@ public class Level {
                 for (int i = 0; i < doors.length; i++) {
 	                if (character.getCurrentTile().equals(doors[i]) && character.getState() != CharacterState.TRANSITIONING) {
 	                    character.setCurrentTile(exits[i]);
+	                    Game.segment += 1;
+	                    Game.setObjective();
 	                }
                 }
             }
+        }
+        if(Game.objective.isComplete()) {
+        	map.getLayers().remove(map.getLayers().get("door" + Game.segment + 1));
         }
 
     }

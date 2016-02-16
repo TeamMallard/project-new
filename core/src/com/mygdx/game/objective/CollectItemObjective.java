@@ -45,4 +45,10 @@ public class CollectItemObjective implements Objective {
     public String getObjectiveString() {
         return "Collect " + quantity + " of " + Game.items.getConsumable(itemId).getName();
     }
+
+	@Override
+	public void wonBattle() {
+		// TODO Auto-generated method stub
+		
+	}
 }

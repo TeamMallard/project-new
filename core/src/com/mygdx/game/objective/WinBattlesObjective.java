@@ -31,7 +31,7 @@ public class WinBattlesObjective implements Objective {
      */
     @Override
     public boolean isComplete() {
-        return battles == 0;
+        return battles <= 0;
     }
 
     /**
