@@ -255,7 +255,7 @@ public class BattleMenu {
      * Removes the information box from the screen.
      */
     public void destroyInfoBox() {
-        if(infoBox != null) {
+        if (infoBox != null) {
             battleUI.removeUIComponent(infoBox);
             infoBox = null;
         }
@@ -307,9 +307,9 @@ public class BattleMenu {
     }
 
     /**
-     * Takes an input to update the Battle Menu with. Calls the relevant function based on the current menuPointer.
+     * Updates the appropriate menu based on the previous input.
      *
-     * @param input The input to apply to the Battle Menu.
+     * @param input the input to update the menu with
      */
     public void newKeypress(InputHandler.inputType input) {
 
@@ -346,9 +346,9 @@ public class BattleMenu {
     }
 
     /**
-     * Uses the given input to update the baseMenu.
+     * Updates the base menu based on the previous input.
      *
-     * @param input the input to update the menu with.
+     * @param input the input to update the menu with
      */
     private void baseMenuInput(InputHandler.inputType input) {
         switch (input) {
@@ -375,7 +375,7 @@ public class BattleMenu {
     }
 
     /**
-     * Creates the skillUI using the skills of the Agent with the current turn.
+     * Creates the skill list and populates it with available skills.
      */
     private void populateSkillUI() {
         skillUI = new UIBattleSkillItemMenu(battleUI.getUIComponent(0).getWidth() + battleUI.getUIComponent(1).getWidth(), yOffset, Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 5, 20, 10);
@@ -387,7 +387,7 @@ public class BattleMenu {
     }
 
     /**
-     * Creates the itemUI using the consumable items the party currently has.
+     * Creates the item list and populates it with available items.
      */
     private void populateItemUI() {
 
@@ -400,10 +400,9 @@ public class BattleMenu {
     }
 
     /**
-     * Uses the given input to update the skillMenu based on a 2x2 grid system.
-     * No menu wrapping is implemented e.g. pressing up when on the first element will not take you to the last element.
+     * Uses the given input to update the skill menu.
      *
-     * @param input the input to update the menu with.
+     * @param input the input to update the menu with
      */
     private void skillMenuInput(InputHandler.inputType input) {
         int oldSkillMenuPointer = skillMenuPointer;
@@ -449,10 +448,9 @@ public class BattleMenu {
     }
 
     /**
-     * Uses the given input to update the itemMenu based on a 2x2 grid system.
-     * No menu wrapping is implemented e.g. pressing up when on the first element will not take you to the last element.
+     * Uses the given input to update the item menu.
      *
-     * @param input the input to update the menu with.
+     * @param input the input to update the menu with
      */
     private void itemMenuInput(InputHandler.inputType input) {
         switch (input) {
@@ -493,8 +491,7 @@ public class BattleMenu {
     }
 
     /**
-     * Sets the targeting type to skill while storing the previous menu pointer as the same targeting function
-     * is used for both skill and item targeting.
+     * Sets the current targeting type to skill.
      */
     private void setSkillTargeting() {
         previousMenuPointer = menuPointer;
@@ -503,8 +500,7 @@ public class BattleMenu {
     }
 
     /**
-     * Sets the targeting type to skill while storing the previous menu pointer as the same targeting function
-     * is used for both skill and item targeting
+     * Sets the current targeting type to item.
      */
     private void setItemTargeting() {
         previousMenuPointer = menuPointer;
@@ -513,12 +509,11 @@ public class BattleMenu {
     }
 
     /**
-     * Uses the given input to update the targeting system.
-     * Uses the battleLayout 2D array and row and column pointers.
-     * You cannot wrap around the screen i.e. pressing left in the leftmost column won't select the rightmost column.
+     * Uses the given input to update the targeting menu.
+     *
+     * @param input the input to update the menu with
      */
     private void targetingMenuInput(InputHandler.inputType input) {
-
         switch (input) {
             case ACT:
                 if (isSkillTargeting) {
@@ -533,18 +528,15 @@ public class BattleMenu {
                     currentUseAbility = new UseItem(battleScreen.getCurrentTurnAgent(), battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]), skillOrItemID, this);
                 }
                 break;
-
             case ESC:
                 menuPointer = previousMenuPointer;
                 isSkillTargeting = false;
                 isItemTargeting = false;
                 break;
-
             case RIGHT:
                 if (targetMenuPointerColumn == 0 && battleLayout[targetMenuPointerRow][targetMenuPointerColumn + 1] != -1)
                     targetMenuPointerColumn += 1;
                 break;
-
             case LEFT:
                 System.out.println(targetMenuPointerRow + " " + targetMenuPointerColumn);
                 if (targetMenuPointerColumn == 1)
@@ -555,7 +547,6 @@ public class BattleMenu {
                     targetingMenuInput(InputHandler.inputType.DOWN);
                 }
                 break;
-
             case UP:
                 targetMenuPointerRow -= 1;
                 //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
@@ -568,7 +559,6 @@ public class BattleMenu {
                     targetingMenuInput(InputHandler.inputType.UP);
                 }
                 break;
-
             case DOWN:
                 targetMenuPointerRow += 1;
                 //targetMenuPointerRow = targetMenuPointerRow % (battleLayout.length - 1);
@@ -587,9 +577,9 @@ public class BattleMenu {
     }
 
     /**
-     * Sets the size of the skillMenu.
+     * Sets the size of the skill menu.
      *
-     * @param size the integer size for the skillMenu.
+     * @param size the size
      */
     public void setSkillMenuSize(int size) {
         List<Integer> newMenu = new ArrayList<Integer>();
@@ -600,9 +590,9 @@ public class BattleMenu {
     }
 
     /**
-     * Sets the size of the itemMenu.
+     * Sets the size of the item menu.
      *
-     * @param size the integer size for the itemMenu.
+     * @param size the size
      */
     public void setItemMenuSize(int size) {
         List<Integer> newMenu = new ArrayList<Integer>();
