@@ -38,7 +38,15 @@ public class GameWorld {
         level = new Level(this);
         uiManager = new UIManager(Game.party);
         battleChance = 2000;
-        level.characters.add(new SallyNPC(level, new Vector2(85, 59)));
+        level.characters.add(new SallyNPC(level, new Vector2(84, 59)));
+        level.characters.add(new SallyNPC(level, new Vector2(48, 49)));
+        level.characters.add(new SallyNPC(level, new Vector2(22, 55)));
+        level.characters.add(new SallyNPC(level, new Vector2(59, 76)));
+        level.characters.add(new SallyNPC(level, new Vector2(59, 76)));
+        level.characters.add(new SallyNPC(level, new Vector2(89, 106)));
+        level.characters.add(new SallyNPC(level, new Vector2(119, 87)));
+        level.characters.add(new SallyNPC(level, new Vector2(157, 97)));
+        level.characters.add(new SallyNPC(level, new Vector2(211, 73)));
         level.characters.add(new RoboNPC(level, new Vector2(75, 98)));
         uiManager.addUIComponent(new UIScore());
         uiManager.addUIComponent(new UIObjective());

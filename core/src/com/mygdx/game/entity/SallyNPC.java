@@ -18,17 +18,68 @@ public class SallyNPC extends NPC {
 
     public SallyNPC(Level level, Vector2 currentTile) {
         super(level, currentTile, Assets.sallyWalkingTextures);
-        messages = new String[3];
-        messages[0] = "Help! There is a robo duck on the loose!";
-        messages[1] = "Please help us by finding him and defeating him!";
-        messages[2] = "The last time I saw him was by the Catalyst building.";
         doneInteraction = false;
     }
 
+    public String[] getMessage() {
+    	
+    	switch(Game.segment) {
+		case 0:
+	        messages = new String[3];
+	        messages[0] = "Please help, theres too many monsters around!";
+	        messages[1] = "Help me by winning a battle against them.";
+	        messages[2] = "Here, have some points and take a look at my shop.";
+			return messages;
+		case 1:
+	        messages = new String[3];
+	        messages[0] = "Could you do me a favour and get me some slime from an Ooze?";
+	        messages[1] = "Only when you've done this will you be able to progress.";
+	        messages[2] = "I have a few more things to sell to you.";
+			return messages;
+		case 2:
+	        messages = new String[3];
+	        messages[0] = "The monsters are starting to over-run us!";
+	        messages[1] = "Could you help out again and win 3 battles against them?";
+	        messages[2] = "Here's what I have to help you out.";
+			return messages;
+		case 3:
+	        messages = new String[3];
+	        messages[0] = "This time I'll need some duck bones - don't ask why.";
+	        messages[1] = "You should be able to find them from any ducks around.";
+	        messages[2] = "Take a look at some of the new wares I have to offer.";
+			return messages;
+		case 4:
+	        messages = new String[3];
+	        messages[0] = "No matter how much we try to hold them back they keep striking.";
+	        messages[1] = "If you could win 5 battles against them it would be appreciated!";
+	        messages[2] = "You should equip yourself before you continue.";
+			return messages;
+		case 5:
+	        messages = new String[3];
+	        messages[0] = "I sense we're getting closer to the source of the power.";
+	        messages[1] = "If you could get some Super Duck Bones, I'm sure I could locate it.";
+	        messages[2] = "Please, take a look at my wares.";
+			return messages;
+		case 6:
+	        messages = new String[3];
+	        messages[0] = "Almost there now!";
+	        messages[1] = "Win 7 more battles and we'll be there!";
+	        messages[2] = "I have some more things to sell to you.";
+			return messages;
+		case 7:
+	        messages = new String[3];
+	        messages[0] = "We've found him! We've found the Roboduck!";
+	        messages[1] = "Please help us by defeating him!";
+	        messages[2] = "Take one last look at my shop while you can!";
+			return messages;
+    	}
+		return null;
+    }
+    
     @Override
     public void initializeInteraction(float delta, UIManager uiManager) {
         if (!doneInteraction) {
-            uiManager.createDialogue(messages);
+            uiManager.createDialogue(getMessage());
             this.uiManager = uiManager;
         }
     }
@@ -45,8 +96,8 @@ public class SallyNPC extends NPC {
     public void action(GameWorld gameWorld) {
         if (!doneInteraction) {
         	Game.worldScreen.getGameWorld().setShop(new UIShop(100, 500, 910, 440, Game.party, Game.shops.getShop(Game.segment)));
-            uiManager.addNotification("You gained 40 points.");
-            Game.pointsScore += 40;
+            uiManager.addNotification("You gained 50 points.");
+            Game.pointsScore += 50;
             doneInteraction = true;
         }
     }
