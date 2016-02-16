@@ -8,6 +8,7 @@ import com.mygdx.game.entity.Character;
 import com.mygdx.game.entity.NPC;
 import com.mygdx.game.entity.RoboNPC;
 import com.mygdx.game.entity.SallyNPC;
+import com.mygdx.game.objective.WinBattlesObjective;
 import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIScore;
 import com.mygdx.game.ui.UIShop;
@@ -73,8 +74,8 @@ public class GameWorld {
                 level.stopInput = false;
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
-                    //triggerEncounter();
-                    battleChance = 1000;
+                    triggerEncounter();
+                    //battleChance = 1000;
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;

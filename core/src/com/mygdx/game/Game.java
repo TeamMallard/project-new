@@ -3,7 +3,10 @@ package com.mygdx.game;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.battle.BattleParameters;
 import com.mygdx.game.battle.BattleScreen;
+import com.mygdx.game.objective.CollectItemObjective;
+import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.Objective;
+import com.mygdx.game.objective.WinBattlesObjective;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -96,5 +99,35 @@ public class Game extends com.badlogic.gdx.Game {
     public void newWorldScreen() {
         worldScreen = new WorldScreen(this);
         setScreen(worldScreen);
+        setObjective();
+    }
+    
+    public static void setObjective() {
+    	switch(segment) {
+    	case 0:
+    		objective = new WinBattlesObjective(1);
+    		break;
+    	case 1:
+    		objective = new CollectItemObjective(7, 1);
+    		break;
+    	case 2:
+    		objective = new WinBattlesObjective(3);
+    		break;
+    	case 3:
+    		objective = new CollectItemObjective(8, 1);
+    		break;
+    	case 4:
+    		objective = new WinBattlesObjective(5);
+    		break;
+    	case 5:
+    		objective = new CollectItemObjective(9, 1);
+    		break;
+    	case 6:
+    		objective = new WinBattlesObjective(7);
+    		break;
+    	case 7:
+    		objective = new DefeatRoboduckObjective();
+    		break;
+    	}
     }
 }

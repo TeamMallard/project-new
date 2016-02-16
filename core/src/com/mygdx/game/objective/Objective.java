@@ -8,5 +8,7 @@ public interface Objective {
     public boolean isComplete();
 
     public String getObjectiveString();
+    
+    public void wonBattle();
 
 }

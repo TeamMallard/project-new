@@ -62,7 +62,7 @@ public class WorldRenderer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         updateCamera();
-
+        mapRenderer.setMap(world.level.map);
         mapRenderer.setView(camera);
         mapRenderer.render();
 
