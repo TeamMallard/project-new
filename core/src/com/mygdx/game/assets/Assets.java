@@ -8,37 +8,73 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Assets is a static class containing all assets that are used in rendering the game.
- * This class handles loading and disposing of asset resources, done so by calling the
- * respective methods.
+ * Contains all assets used in the game.
  */
 public final class Assets {
 
+    /**
+     * List of battle textures to load. The index in the battleTextures array will be the same as the index in this array for each enemy.
+     */
     public static final String[] BATTLE_TEXTURES = new String[]
             {"player", "robo", "blue_ooze", "green_ooze", "red_ooze", "yellow_ooze", "black_ooze", "poisonous_duck", "radiated_duck", "radiated_scar", "radiated_undead", "scar_duck", "super_radiated", "undead_duck"};
 
-    public static Texture selectArrow, turnArrow;
+    /**
+     * Arrows for selection, turn pointing and dialogue pointing.
+     */
+    public static Texture selectArrow, turnArrow, dialoguePointer;
 
-    //  MAP ASSETS
+    /**
+     * Backgrounds for battles, indexed by segment number.
+     */
     public static Texture[] battleBackgrounds = new Texture[8];
 
-    //  UI ASSETS
-    public static BitmapFont consolas22;
-    public static BitmapFont consolas16;
-    public static NinePatch patch;
-    public static TextureAtlas atlas;
-    public static Texture dialoguePointer;
-    public static Texture shield;
+    /**
+     * UI fonts.
+     */
+    public static BitmapFont consolas22, consolas16;
 
+    /**
+     * UI nine patch for drawing boxes.
+     */
+    public static NinePatch patch;
+    /**
+     * Texture atlas for loading the nine patch.
+     */
+    public static TextureAtlas atlas;
+
+    /**
+     * Shadow texture for drawing below world characters.
+     */
     public static Texture shadow;
 
+    /**
+     * Title screen.
+     */
     public static Texture title;
 
-
+    /**
+     * Player's walking and swimming textures.
+     */
     public static WalkingTextures playerWalkingTextures, playerSwimmingTextures;
+
+    /**
+     * Walking textures for world NPCs.
+     */
     public static WalkingTextures roboWalkingTextures, sallyWalkingTextures;
+
+    /**
+     * Battle textures for enemies.
+     */
     public static BattleTextures[] battleTextures = new BattleTextures[14];
 
+    /**
+     * The shield texture to show that a piece of equipment is currently equipped.
+     */
+    public static Texture shield;
+
+    /**
+     * Textures representing each type of equipment (head, body, feet, accessory, weapon).
+     */
     public static TextureRegion[] equipment = new TextureRegion[5];
 
     //SOUNDS
@@ -56,15 +92,13 @@ public final class Assets {
     public static Music worldMusic;
 
     /**
-     * Loads the assets from the asset folder and initialises animation frames.
+     * Loads all assets from the asset folder.
      */
     public static void load() {
         title = new Texture("Start Screen.png");
 
-        //  BATTLE ASSETS
         battleTextures = new BattleTextures[BATTLE_TEXTURES.length];
         loadAllBattleTextures();
-
 
         roboWalkingTextures = loadWalkingTextures("robo", 32, 32, 2, 0.175f);
         sallyWalkingTextures = loadWalkingTextures("sally", 32, 32, 2, 0.175f);
@@ -72,11 +106,15 @@ public final class Assets {
         loadPlayerTextures();
         loadEquipmentTextures();
         loadBattleBackgrounds();
+        loadUITextures();
+        loadSounds();
 
+        shadow = new Texture("shadow.png");
+    }
+
+    private static void loadUITextures() {
         turnArrow = new Texture("turnPointer.png");
         selectArrow = new Texture("arrow.png");
-
-        //  UI ASSETS
         consolas22 = new BitmapFont(Gdx.files.internal("fonts/consolas22.fnt"));
         consolas16 = new BitmapFont(Gdx.files.internal("fonts/consolas16.fnt"));
         atlas = new TextureAtlas(Gdx.files.internal("packedimages/pack.atlas"));
@@ -84,7 +122,9 @@ public final class Assets {
         dialoguePointer = new Texture("dialoguePointer.png");
         selectArrow = new Texture("arrow.png");
         shield = new Texture("shield.png");
+    }
 
+    private static void loadSounds() {
         sfx_menuMove = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuMove.wav"));
         sfx_menuSelect = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuSelect.wav"));
         sfx_menuBack = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuBack.wav"));
@@ -100,14 +140,10 @@ public final class Assets {
 
         battleMusic.setLooping(true);
         worldMusic.setLooping(true);
-
-
-        //  CHARACTER TEXTURE SHEETS
-        shadow = new Texture("shadow.png");
     }
 
     private static void loadBattleBackgrounds() {
-        for(int i = 0; i < battleBackgrounds.length; i++) {
+        for (int i = 0; i < battleBackgrounds.length; i++) {
             battleBackgrounds[i] = loadTexture("backgrounds/segment_" + i + ".png");
         }
     }
@@ -138,6 +174,16 @@ public final class Assets {
         playerSwimmingTextures = new WalkingTextures(swimmingDown, swimmingUp, swimmingLeft, swimmingRight);
     }
 
+    /**
+     * Loads a standard set of walking textures from the world folder.
+     *
+     * @param prefix        the file prefix of the textures to load
+     * @param width         the width of each texture
+     * @param height        the height of each texture
+     * @param frameCount    the number of frames in the walking animations
+     * @param frameDuration how long each frame in the walking animation should be displayed for
+     * @return the set of walking textures
+     */
     private static WalkingTextures loadWalkingTextures(String prefix, int width, int height, int frameCount, float frameDuration) {
         Texture idle = loadTexture("world/" + prefix + "_idle.png");
 
@@ -156,6 +202,14 @@ public final class Assets {
         return new WalkingTextures(down, up, left, right, walkingDown, walkingUp, walkingLeft, walkingRight);
     }
 
+    /**
+     * Loads a standard set of battle textures from the battle folder.
+     *
+     * @param prefix the file prefix of the textures to load
+     * @param width  the width of each texture
+     * @param height the height of each texture
+     * @return the set of battle textures
+     */
     private static BattleTextures loadBattleTextures(String prefix, int width, int height) {
         Texture battle = loadTexture("battle/" + prefix + "_battle.png");
 
@@ -198,7 +252,7 @@ public final class Assets {
     }
 
     /**
-     * Loads an animation from the specified texture.Ò
+     * Loads an animation from the specified texture.
      *
      * @param texture       the texture to create from
      * @param frameCount    how many frames are in the file
