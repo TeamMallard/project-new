@@ -86,7 +86,7 @@ public class BattleMenu {
      * @param batch The spritebatch to draw the elements to.
      */
     public void render(float delta, SpriteBatch batch) {
-        uiRenderer.render(batch);
+        uiRenderer.renderBattle(batch);
         if(menuPointer==3){
             batch.draw(Assets.selectArrow,targetingIndicatorX,targetingIndicatorY,Assets.selectArrow.getWidth(),Assets.selectArrow.getHeight(),0,0,Assets.selectArrow.getWidth(),Assets.selectArrow.getHeight(),isTargetingIndicatorPointLeft,false);
         }

@@ -13,8 +13,6 @@ import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIScore;
 import com.mygdx.game.ui.UIShop;
 
-import java.util.Random;
-
 /**
  * This class contains the high level logic for the game world and contains the level and UI objects.
  */
@@ -90,13 +88,13 @@ public class GameWorld {
                 break;
 
             case PARTY_MENU:
-                if (!uiManager.updatePartyMenu(delta)) {
+                if (!uiManager.updatePartyMenu()) {
                     gameState = GameState.FREEROAM;
                 }
                 break;
 
             case SHOP_MENU:
-                if (!uiManager.updateShop(delta)) {
+                if (!uiManager.updateShop()) {
                     gameState = GameState.FREEROAM;
                 }
                 break;

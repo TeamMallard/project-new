@@ -1,11 +1,8 @@
 package com.mygdx.game.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the list of equipment items in the overworld.
+ * Represents the list of equipment items (including equipped ones) in the overworld.
  */
 public class UIEquipmentMenu extends UIComponent {
 
@@ -77,32 +74,35 @@ public class UIEquipmentMenu extends UIComponent {
         int page = selectedEquipment / MAX_ITEMS_PER_PAGE;
         int offset = page * MAX_ITEMS_PER_PAGE;
 
-        for(int i = offset; i < offset + Math.min(MAX_ITEMS_PER_PAGE, currentEquipment.length - offset); i++) {
+        for (int i = offset; i < offset + Math.min(MAX_ITEMS_PER_PAGE, currentEquipment.length - offset); i++) {
             currentEquipment[i].render(batch, patch);
 
-            if(hasFocus && selectedEquipment == i) {
-                batch.draw(Assets.selectArrow, x, y - (75* (i % MAX_ITEMS_PER_PAGE)) + 30);
+            if (hasFocus && selectedEquipment == i) {
+                batch.draw(Assets.selectArrow, x, y - (75 * (i % MAX_ITEMS_PER_PAGE)) + 30);
             }
         }
 
         renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentEquipment.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, 0, 0, Color.WHITE, Assets.consolas16);
     }
 
+    /**
+     * Updates the list of equipment to display.
+     */
     private void updateEquipment() {
         List<Item> equipment = new ArrayList<Item>();
         int index = 0;
 
         // Add player's current equipment.
-        for(int i = 0; i < getSelectedPlayer().getCurrentEquipment().equipSlots.length; i++) {
+        for (int i = 0; i < getSelectedPlayer().getCurrentEquipment().equipSlots.length; i++) {
             int equipmentId = getSelectedPlayer().getCurrentEquipment().equipSlots[i];
 
-            if(equipmentId != 0) {
+            if (equipmentId != 0) {
                 equipment.add(new Item(x, y - (75 * index++), width, Game.items.getEquipment(equipmentId), true));
             }
         }
 
         // Add rest of equipment in inventory.
-        for(Integer equipmentId : partyManager.getEquipment()) {
+        for (Integer equipmentId : partyManager.getEquipment()) {
             equipment.add(new Item(x, y - (75 * (index++ % MAX_ITEMS_PER_PAGE)), width, Game.items.getEquipment(equipmentId), false));
         }
 
@@ -110,32 +110,49 @@ public class UIEquipmentMenu extends UIComponent {
         selectedEquipment = 0;
     }
 
+    /**
+     * Sets the currently selected player.
+     *
+     * @param index the index of the selected player
+     */
     public void selectPlayer(int index) {
         this.selectedPlayer = index;
 
         updateEquipment();
     }
 
+    /**
+     * @return the agent representing the currently selected player
+     */
     private Agent getSelectedPlayer() {
         return partyManager.getMember(selectedPlayer);
     }
 
+    /**
+     * Focuses input on this UIConsumableMenu.
+     */
     public void focus() {
         hasFocus = true;
     }
 
+    /**
+     * @return whether or not input is currently focused on this component
+     */
     public boolean hasFocus() {
         return hasFocus;
     }
 
+    /**
+     * Updates the state of this UIConsumableMenu.
+     */
     public void update() {
-        if(InputHandler.isUpJustPressed() && selectedEquipment > 0) {
+        if (InputHandler.isUpJustPressed() && selectedEquipment > 0) {
             selectedEquipment--;
-        } else if(InputHandler.isDownJustPressed() && selectedEquipment < currentEquipment.length - 1) {
+        } else if (InputHandler.isDownJustPressed() && selectedEquipment < currentEquipment.length - 1) {
             selectedEquipment++;
         }
 
-        if(InputHandler.isActJustPressed()) {
+        if (InputHandler.isActJustPressed()) {
             setPlayerEquipment(partyManager.getMember(selectedPlayer), selectedEquipment);
             selectedEquipment -= selectedEquipment > 0 ? 1 : 0;
 
@@ -145,35 +162,32 @@ public class UIEquipmentMenu extends UIComponent {
             hasFocus = false;
             parent.focus();
         }
-        if(currentEquipment.length == 0) {
+        if (currentEquipment.length == 0) {
             hasFocus = false;
             parent.focus();
         }
     }
 
-    private void setPlayerEquipment(Agent player, int selectedEquipment)
-    {
+    /**
+     * Equips/unequips the specified selected equipment from the specified agent.
+     *
+     * @param player            the currently selected player
+     * @param selectedEquipment the currently selected equipment
+     */
+    private void setPlayerEquipment(Agent player, int selectedEquipment) {
         Item selected = currentEquipment[selectedEquipment];
         Equipment.EquipType slot = selected.equipment.getType();
 
-        System.out.println("EQUIPPING " + selected.equipment.getName());
-        System.out.println("FROM SLOT " + selectedEquipment);
-
-        if(selected.equipped) {
-
-            System.out.println("ALREADY EQUIPPED");
+        if (selected.equipped) {
             // Already equipped, unequip.
             player.getCurrentEquipment().unequip(slot);
             partyManager.getEquipment().add(selected.equipment.getID());
         } else {
-            System.out.println("NOT EQUIPPED");
-
             // Remove the appropraite item from the party's equipment.
             partyManager.getEquipment().remove(selectedEquipment - player.getCurrentEquipment().getNumberEquipped());
 
             // If player already has an item in the slot, remove it.
-            if(player.getCurrentEquipment().isEquipped(slot)) {
-                System.out.println("REPLACING");
+            if (player.getCurrentEquipment().isEquipped(slot)) {
                 partyManager.getEquipment().add(player.getCurrentEquipment().unequip(slot));
             }
 
@@ -182,20 +196,45 @@ public class UIEquipmentMenu extends UIComponent {
         }
     }
 
-    public class Item extends UIComponent {
-        private BitmapFont font = Assets.consolas22;
-        private BitmapFont smallFont = Assets.consolas16;
+    /**
+     * Represents an item of equipment in the UIEquipmentMenu.
+     */
+    private class Item extends UIComponent {
 
+        /**
+         * The equipment this Item represents.
+         */
         private Equipment equipment;
+
+        /**
+         * Whether this Item represents equipment that is currently equipped.
+         */
         private boolean equipped;
 
+        /**
+         * How tall one line of text is.
+         */
         private final float LINE_HEIGHT = 25f;
 
-        private float paddingX = 20;
-        private float paddingY = 10;
+        /**
+         * Text padding.
+         */
+        private float paddingX = 20, paddingY = 10;
 
+        /**
+         * String describing the stats for this Item.
+         */
         private String statString;
 
+        /**
+         * Creates a new Item with the specified parameters.
+         *
+         * @param x         the x coordinate
+         * @param y         the y coordinate
+         * @param width     the width of the menu
+         * @param equipment the equipment this Item represents
+         * @param equipped  whether this Item represents equipment that is currently equipped
+         */
         public Item(float x, float y, float width, Equipment equipment, boolean equipped) {
             super(x, y, width, 55);
             this.equipment = equipment;
@@ -217,18 +256,24 @@ public class UIEquipmentMenu extends UIComponent {
             statString = statStringBuilder.toString();
         }
 
+        /**
+         * Renders this Item onto the specified sprite batch.
+         *
+         * @param batch the sprite batch to render on
+         * @param patch the nine patch for drawing boxes
+         */
         @Override
         public void render(SpriteBatch batch, NinePatch patch) {
             patch.draw(batch, x, y, width, height + (paddingY * 2));
-            renderText(batch, equipment.getName(), x, y, paddingX, paddingY, Color.WHITE, font);
-            renderText(batch, equipment.getDescription(), x, y - LINE_HEIGHT, paddingX, paddingY, Color.LIGHT_GRAY, font);
+            renderText(batch, equipment.getName(), x, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
+            renderText(batch, equipment.getDescription(), x, y - LINE_HEIGHT, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas22);
 
-            renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 340, y, paddingX, paddingY, Color.WHITE, font);
-            renderText(batch, statString, x, y - LINE_HEIGHT * 2, paddingX, paddingY, Color.WHITE, smallFont);
+            renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 340, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
+            renderText(batch, statString, x, y - LINE_HEIGHT * 2, paddingX, paddingY, Color.WHITE, Assets.consolas16);
 
             batch.draw(equipment.getType().getTexture(), x + width - 70, y + 20);
 
-            if(equipped) {
+            if (equipped) {
                 batch.draw(Assets.shield, x + width - 50, y + 20);
             }
         }
