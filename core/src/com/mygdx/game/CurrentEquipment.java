@@ -76,6 +76,10 @@ public class CurrentEquipment {
     }
 
     /**
+     * CHANGE I1: Added ability to equip and unequip items.
+     */
+
+    /**
      * Equips the specified item of equipment.
      *
      * @param id the ID of the equipment to equip

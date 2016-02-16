@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Game;
 
 /**
+ * CHANGE G2: The objective is displayed on screen whilst in the map view.
+ */
+
+/**
  * Represents the player's current objective display.
  */
 public class UIObjective extends UIComponent {

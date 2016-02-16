@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * CHANGE G4: Implemented consumable item list, as well as the ability to use items outside of combat.
+ */
+
+/**
  * Represents the list of consumable items in the overworld.
  */
 public class UIConsumableMenu extends UIComponent {

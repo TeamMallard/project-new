@@ -28,6 +28,10 @@ public class Player extends Character {
      * @param delta the time elapsed since the last update
      */
     protected void updateStationary(float delta) {
+        /**
+         * CHANGE N1: Single key press in an opposite direction will move you to the next tile rather than just turn you around.
+         */
+
         if (InputHandler.isUpPressed()) {
             updateMovement(Direction.UP);
         } else if (InputHandler.isDownPressed()) {

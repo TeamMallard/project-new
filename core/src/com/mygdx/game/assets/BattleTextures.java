@@ -52,6 +52,10 @@ public final class BattleTextures {
     }
 
     /**
+     * CHANGE E3: Added animations to abilities used while in an encounter.
+     */
+
+    /**
      * Gets a frame for the character's battle animation.
      *
      * @param stateTime the time since the character started attacking

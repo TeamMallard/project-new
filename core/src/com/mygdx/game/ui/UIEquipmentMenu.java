@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * CHANGE G3: Implemented equipment list, as well as equipping/unequipping equipment for each player in the party.
+ */
+
+/**
  * Represents the list of equipment items (including equipped ones) in the overworld.
  */
 public class UIEquipmentMenu extends UIComponent {

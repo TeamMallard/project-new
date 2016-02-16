@@ -64,6 +64,10 @@ public class GameWorld {
         level = new Level();
         uiManager = new UIManager(Game.party);
         battleChance = 2000;
+
+        /**
+         * CHANGE O5: Positioned NPCs in each segment.
+         */
         level.characters.add(new SallyNPC(level, new Vector2(84, 59)));
         level.characters.add(new SallyNPC(level, new Vector2(47, 49)));
         level.characters.add(new SallyNPC(level, new Vector2(21, 55)));
@@ -149,6 +153,9 @@ public class GameWorld {
 
         //Get a number of agents from the list of enemies, make new agent instances with their information and setup the next battle
         for (int i = 0; i < MathUtils.random(1, 4); i++) {
+            /**
+             * CHANGE E1: Changed enemy spawn pool to be reliant on segment.
+             */
             Agent thisAgent = Game.enemies.getMember(MathUtils.random(0, 2) + (3 * Game.segment));
             Statistics thisAgentStats = thisAgent.getStats();
             Statistics newStats = new Statistics(thisAgentStats.getMaxHP(), thisAgentStats.getMaxMP(), thisAgentStats.getSpeed(), thisAgentStats.getStrength(), thisAgentStats.getDexterity(), thisAgentStats.getIntelligence(), thisAgentStats.getArmourVal(), thisAgentStats.getExperience(), thisAgentStats.getCurrentLevel());

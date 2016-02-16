@@ -55,6 +55,10 @@ public class UIStats extends UIComponent {
         String st = "STRENGTH:  " + player.getTotalStrength() + "(" + player.getStats().getStrength() + ")";
         String in = "INTELLIGENCE:  " + player.getTotalInteligence() + "(" + player.getStats().getIntelligence() + ")";
         String ar = "ARMOUR:  " + player.getTotalDefence() + "(" + player.getStats().getArmourVal() + ")";
+
+        /**
+         * CHANGE G1: Added visible slots for equipment to be placed in.
+         */
         String eq = "EQUIPMENT:";
         String eqHead = "HEAD:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[0]).getName();
         String eqChest = "CHEST:  " + Game.items.getEquipment(player.getCurrentEquipment().equipSlots[1]).getName();

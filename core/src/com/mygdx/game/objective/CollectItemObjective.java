@@ -3,6 +3,10 @@ package com.mygdx.game.objective;
 import com.mygdx.game.Game;
 
 /**
+ * CHANGE O4: Added an objective to obtain a specific drop.
+ */
+
+/**
  * Represents an objective that involves collecting a certain amount of a specific item.
  */
 public class CollectItemObjective implements Objective {

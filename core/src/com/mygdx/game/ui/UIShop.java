@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * CHANGE I6: Added the shop interface in full.
+ */
+
+/**
  * Represents the shop where the player can buy/sell items.
  */
 public class UIShop extends UIComponent {

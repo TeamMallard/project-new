@@ -143,6 +143,10 @@ public class Game extends com.badlogic.gdx.Game {
     }
 
     /**
+     * CHANGE O2: Completing the objective unlocks the door for the next segment, and grants bonus XP.
+     */
+
+    /**
      * Updates party experience and changes the objective once a segment has been completed.
      */
     public static void setObjective() {

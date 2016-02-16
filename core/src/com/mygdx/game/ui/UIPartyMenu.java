@@ -77,6 +77,9 @@ public class UIPartyMenu extends UIComponent {
             playerList.add(new UIPlayer(x, (y + height - 70) - (110 * i), width / 2, party.getMember(i)));
         }
 
+        /**
+         * CHANGE N3: Split item list on UI into consumable and equipables.
+         */
         equipmentMenu = new UIEquipmentMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
         consumableMenu = new UIConsumableMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
 

@@ -95,19 +95,14 @@ public class Equipment {
     }
 
     /**
+     * CHANGE I2: Added statistic altering effects to equipment.
+     */
+
+    /**
      * @return the stat modifiers of this Equipment (in order: speed, strength, dexterity, intelligence, defence)
      */
     public int[] getModifiers() {
         return modifiers;
-    }
-
-    /**
-     * Changes the ID of this Equipment.
-     *
-     * @param id the new ID
-     */
-    public void updateID(int id) {
-        this.id = id;
     }
 
     /**

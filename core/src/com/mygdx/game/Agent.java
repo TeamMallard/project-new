@@ -103,11 +103,17 @@ public class Agent implements Comparable<Agent> {
      * @return the actual damage taken
      */
     public int dealDamage(int power, Agent attacker) {
+        /**
+         * CHANGE B3: Added a dodge chance to every attack based on the dexterity of the attacker and defender.
+         */
         // Calculate chance to take damage based on attacker's and defender's dexterity.
         float hitChance = MathUtils.clamp(1 - ((float) getTotalDexterity() / attacker.getTotalDexterity()) / 10, 0.1f, 0.9f);
 
         int damageDone = 0;
         if (hitChance > MathUtils.random()) {
+            /**
+             * CHANGE B2: Adapted damage calculation to involve strength of the attacker and armour of defender.
+             */
             damageDone = MathUtils.round((float) (power * MathUtils.clamp(Math.sqrt((float) attacker.getTotalStrength() / getTotalDefence()), 0.1, 1)));
         }
 

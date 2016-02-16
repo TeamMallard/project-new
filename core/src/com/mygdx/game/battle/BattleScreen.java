@@ -315,6 +315,9 @@ public class BattleScreen extends ScreenAdapter {
             }
             if (Game.objective instanceof DefeatRoboduckObjective) {
                 for (int i = 0; i < enemyParty.size(); i++) {
+                    /**
+                     * CHANGE O6: Completing the 8th objective moves to the win screen, and the game has been completed successfully.
+                     */
                     if (enemyParty.getMember(i).getName().contains("Robo")) {
                         ((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
                         game.winScreen();

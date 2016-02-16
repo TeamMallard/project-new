@@ -1,6 +1,10 @@
 package com.mygdx.game.objective;
 
 /**
+ * CHANGE O3: Added an objective where the party had to win some number of battles.
+ */
+
+/**
  * Represents an objective that involves winning a certain number of battles.
  */
 public class WinBattlesObjective implements Objective {

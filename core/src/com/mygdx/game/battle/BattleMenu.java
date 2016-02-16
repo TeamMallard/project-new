@@ -549,6 +549,9 @@ public class BattleMenu {
                 }
                 break;
             case UP:
+                /**
+                 * CHANGE B1: Modified the targeting system so you could not target downed enemies, and enemies could not targeted downed allies.
+                 */
                 targetMenuPointerRow -= 1;
                 if (targetMenuPointerRow < 0)
                     targetMenuPointerRow = battleLayout.length - 1;

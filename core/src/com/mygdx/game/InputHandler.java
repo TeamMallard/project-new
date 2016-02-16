@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 /**
+ * CHANGE N2: Refactored InputHandler class.
+ */
+
+/**
  * Handles input from the keyboard.
  */
 public class InputHandler {
