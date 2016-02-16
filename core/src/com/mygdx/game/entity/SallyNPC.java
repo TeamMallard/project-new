@@ -44,7 +44,7 @@ public class SallyNPC extends NPC {
     @Override
     public void action(GameWorld gameWorld) {
         if (!doneInteraction) {
-        	Game.worldScreen.getGameWorld().setShop(new UIShop(100, 500, 910, 440, Game.party, Game.shops.getShop(0)));
+        	Game.worldScreen.getGameWorld().setShop(new UIShop(100, 500, 910, 440, Game.party, Game.shops.getShop(Game.segment)));
             uiManager.addNotification("You gained 40 points.");
             Game.pointsScore += 40;
             doneInteraction = true;
