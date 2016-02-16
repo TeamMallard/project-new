@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameWorld;
 import com.mygdx.game.Level;
 import com.mygdx.game.assets.WalkingTextures;
+import com.mygdx.game.entity.Character.Direction;
 import com.mygdx.game.ui.UIManager;
 
 /**
@@ -31,39 +32,27 @@ public abstract class NPC extends Character {
      */
     public NPC(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
         super(level, currentTile, walkingTextures);
+        setDirection(Direction.DOWN);
     }
 
     /**
-     * Randomly moves to a new tile.
+     * 
      *
      * @param delta the time elapsed since the last update
      */
     protected void updateStationary(float delta) {
-        int randomInt = MathUtils.random(480);
-        if (randomInt == 0) {
-            updateMovement(Direction.UP);
-        } else if (randomInt == 1) {
-            updateMovement(Direction.DOWN);
-        } else if (randomInt == 2) {
-            updateMovement(Direction.LEFT);
-        } else if (randomInt == 3) {
-            updateMovement(Direction.RIGHT);
-        }
+    	
     }
 
+    /**
+     * 
+     *
+     * @param delta the time elapsed since the last update
+     */
     @Override
     protected void updateTransitioning(float delta) {
-        runningTime += delta;
-        float t = runningTime / TRANSITION_SPEED;
-        getAbsPos().set(oldPos.x + (targetPos.x - oldPos.x) * t, oldPos.y + (targetPos.y - oldPos.y) * t);
-        if (t >= 1) {
-            setState(CharacterState.STATIONARY);
-            runningTime = 0;
-            getCurrentTile().set(targetTile);
-            oldPos.set(getAbsPos());
-        }
+    	
     }
-
     /**
      * This abstract method is called when a player first interacts with the NPC.
      *
