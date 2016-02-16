@@ -21,13 +21,17 @@ public class WinScreen extends ScreenAdapter {
     private final Game game;
     private float fadeInCounter;
     private float runningTime;
-    private final String MESSAGE = "YOU WIN!";
+    private final String MESSAGE = "YOU WIN!"; 
+    private GlyphLayout grey = new GlyphLayout(Assets.consolas22, MESSAGE, Color.GRAY, Gdx.graphics.getWidth(), Align.center, false);
+    private GlyphLayout white = new GlyphLayout(Assets.consolas22, MESSAGE, Color.WHITE, Gdx.graphics.getWidth(), Align.center, false);
     private SpriteBatch batch = new SpriteBatch();
     private Pixmap black;
+    private Texture blackTex;
 
     public WinScreen (Game game){
         this.game = game;
         black = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
+        blackTex = new Texture(black);
     }
 
     public void show() {
@@ -49,11 +53,11 @@ public class WinScreen extends ScreenAdapter {
         }
         black.fill();
         if (runningTime %1 > 0.5f) {
-            Assets.consolas22.draw(batch, new GlyphLayout(Assets.consolas22, MESSAGE, Color.GRAY, Gdx.graphics.getWidth(), Align.center, false), 0, 100);
+            Assets.consolas22.draw(batch, grey, 0, 100);
         } else {
-            Assets.consolas22.draw(batch, new GlyphLayout(Assets.consolas22, MESSAGE, Color.WHITE, Gdx.graphics.getWidth(), Align.center, false), 0, 100);
+            Assets.consolas22.draw(batch, white, 0, 100);
         }
-        batch.draw(new Texture(black),0,0);
+        batch.draw(blackTex,0,0);
         batch.end();
     }
 

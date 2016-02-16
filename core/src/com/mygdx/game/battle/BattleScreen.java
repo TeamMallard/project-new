@@ -331,6 +331,7 @@ public class BattleScreen extends ScreenAdapter {
                 for (int i = 0; i < enemyParty.size(); i++) {
                     if (enemyParty.getMember(i).getName().contains("Robo")) {
                     	((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
+                    	game.winScreen();
                     }
                 }
             }
