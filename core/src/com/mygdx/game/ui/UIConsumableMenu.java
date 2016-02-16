@@ -146,7 +146,7 @@ public class UIConsumableMenu extends UIComponent {
             switch (item.getType()) {
                 case HEAL: {
                     if (!getSelectedPlayer().isDead()) {
-                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        Assets.sfxHealNoise.play(Game.masterVolume);
                         this.getSelectedPlayer().dealHealth(item.getPower());
                         partyManager.getConsumables().remove(selectedConsumable);
                         uiManager.addNotification(getSelectedPlayer().getName() + " is healed for " + item.getPower() + " health");
@@ -157,7 +157,7 @@ public class UIConsumableMenu extends UIComponent {
                 }
                 case REVIVE: {
                     if (getSelectedPlayer().isDead()) {
-                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        Assets.sfxHealNoise.play(Game.masterVolume);
                         this.getSelectedPlayer().dealHealth(item.getPower());
                         partyManager.getConsumables().remove(selectedConsumable);
                         uiManager.addNotification(getSelectedPlayer().getName() + " is revived on " + item.getPower() + " health");
@@ -168,7 +168,7 @@ public class UIConsumableMenu extends UIComponent {
                 }
                 case MANA: {
                     if (!getSelectedPlayer().isDead()) {
-                        Assets.sfx_healNoise.play(Game.masterVolume);
+                        Assets.sfxHealNoise.play(Game.masterVolume);
                         this.getSelectedPlayer().giveMana(item.getPower());
                         partyManager.getConsumables().remove(selectedConsumable);
                         uiManager.addNotification(getSelectedPlayer().getName() + " gains " + item.getPower() + " mana");

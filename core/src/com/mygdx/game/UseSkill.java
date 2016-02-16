@@ -72,13 +72,13 @@ public class UseSkill extends UseAbility {
                     infoBoxText.append(" and is defeated.");
                 }
 
-                Assets.sfx_hitNoise.play(Game.masterVolume);
+                Assets.sfxHitNoise.play(Game.masterVolume);
                 user.setAttacking(false);
             } else {
                 target.dealHealth(skill.getBasePower());
                 user.takeMana(skill.getMPCost());
 
-                Assets.sfx_healNoise.play(Game.masterVolume);
+                Assets.sfxHealNoise.play(Game.masterVolume);
             }
 
             battleMenu.createInfoBox(infoBoxText.toString(), 3);

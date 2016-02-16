@@ -77,19 +77,20 @@ public final class Assets {
      */
     public static TextureRegion[] equipment = new TextureRegion[5];
 
-    //SOUNDS
-    public static Sound sfx_menuMove;
-    public static Sound sfx_menuSelect;
-    public static Sound sfx_menuBack;
-    public static Sound sfx_hitNoise;
-    public static Sound sfx_healNoise;
+    /**
+     * Sound effects for moving in a menu, selecting, going back and the hit/heal noises.
+     */
+    public static Sound sfxMenuMove, sfxMenuSelect, sfxMenuBack, sfxHitNoise, sfxHealNoise;
 
-    public static Sound sfx_battleStart;
-    public static Sound sfx_battleWin;
-    public static Sound sfx_battleLose;
+    /**
+     * Sound effects for the start of a battle, winning and losing.
+     */
+    public static Sound sfxBattleStart, sfxBattleWin, sfxBattleLose;
 
-    public static Music battleMusic;
-    public static Music worldMusic;
+    /**
+     * Music for battle and the overworld.
+     */
+    public static Music battleMusic, worldMusic;
 
     /**
      * Loads all assets from the asset folder.
@@ -112,6 +113,9 @@ public final class Assets {
         shadow = new Texture("shadow.png");
     }
 
+    /**
+     * Loads all UI-related textures.
+     */
     private static void loadUITextures() {
         turnArrow = new Texture("turnPointer.png");
         selectArrow = new Texture("arrow.png");
@@ -124,16 +128,19 @@ public final class Assets {
         shield = new Texture("shield.png");
     }
 
+    /**
+     * Loads all sound effects and music.
+     */
     private static void loadSounds() {
-        sfx_menuMove = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuMove.wav"));
-        sfx_menuSelect = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuSelect.wav"));
-        sfx_menuBack = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuBack.wav"));
-        sfx_hitNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Damage.wav"));
-        sfx_healNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Heal.wav"));
+        sfxMenuMove = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuMove.wav"));
+        sfxMenuSelect = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuSelect.wav"));
+        sfxMenuBack = Gdx.audio.newSound(Gdx.files.internal("sound_effects/MenuBack.wav"));
+        sfxHitNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Damage.wav"));
+        sfxHealNoise = Gdx.audio.newSound(Gdx.files.internal("sound_effects/Heal.wav"));
 
-        sfx_battleStart = Gdx.audio.newSound(Gdx.files.internal("sound_effects/EnterBattle.wav"));
-        sfx_battleWin = Gdx.audio.newSound(Gdx.files.internal("sound_effects/WinBattle.wav"));
-        sfx_battleLose = Gdx.audio.newSound(Gdx.files.internal("sound_effects/LoseBattle.wav"));
+        sfxBattleStart = Gdx.audio.newSound(Gdx.files.internal("sound_effects/EnterBattle.wav"));
+        sfxBattleWin = Gdx.audio.newSound(Gdx.files.internal("sound_effects/WinBattle.wav"));
+        sfxBattleLose = Gdx.audio.newSound(Gdx.files.internal("sound_effects/LoseBattle.wav"));
 
         battleMusic = Gdx.audio.newMusic(Gdx.files.internal("sound_effects/BattleTheme.ogg"));
         worldMusic = Gdx.audio.newMusic(Gdx.files.internal("sound_effects/WorldTheme.ogg"));
@@ -142,12 +149,18 @@ public final class Assets {
         worldMusic.setLooping(true);
     }
 
+    /**
+     * Loads all battle backgrounds.
+     */
     private static void loadBattleBackgrounds() {
         for (int i = 0; i < battleBackgrounds.length; i++) {
             battleBackgrounds[i] = loadTexture("backgrounds/segment_" + i + ".png");
         }
     }
 
+    /**
+     * Loads all battle textures.
+     */
     private static void loadAllBattleTextures() {
         for (int i = 0; i < BATTLE_TEXTURES.length; i++) {
             battleTextures[i] = loadBattleTextures(BATTLE_TEXTURES[i], 32, 32);
@@ -162,6 +175,9 @@ public final class Assets {
         }
     }
 
+    /**
+     * Loads all player textures.
+     */
     private static void loadPlayerTextures() {
         playerWalkingTextures = loadWalkingTextures("player", 32, 32, 2, 0.175f);
 
