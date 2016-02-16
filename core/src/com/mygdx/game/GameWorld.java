@@ -8,6 +8,7 @@ import com.mygdx.game.entity.Character;
 import com.mygdx.game.entity.NPC;
 import com.mygdx.game.entity.RoboNPC;
 import com.mygdx.game.entity.SallyNPC;
+import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.WinBattlesObjective;
 import com.mygdx.game.ui.UIManager;
 import com.mygdx.game.ui.UIObjective;
@@ -121,6 +122,10 @@ public class GameWorld {
             case BATTLE:
                 if (game.wonBattle) {
                     uiManager.addNotification("You won the battle!");
+                    if(Game.objective instanceof DefeatRoboduckObjective) {
+                        ((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
+                        game.winScreen();
+                    }
                 } else {
                     Game.party.setHealths(1);
                     level.player.setCurrentTile(level.exits[Game.segment - 1]);
