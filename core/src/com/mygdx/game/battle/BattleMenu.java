@@ -315,13 +315,13 @@ public class BattleMenu {
 
         switch (input) {
             case ACT:
-                Assets.sfx_menuSelect.play(Game.masterVolume);
+                Assets.sfxMenuSelect.play(Game.masterVolume);
                 break;
             case ESC:
-                Assets.sfx_menuBack.play(Game.masterVolume);
+                Assets.sfxMenuBack.play(Game.masterVolume);
                 break;
             default:
-                Assets.sfx_menuMove.play(Game.masterVolume);
+                Assets.sfxMenuMove.play(Game.masterVolume);
         }
 
         switch (menuPointer) {

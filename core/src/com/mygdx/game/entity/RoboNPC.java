@@ -37,7 +37,7 @@ public class RoboNPC extends NPC {
 
     @Override
     public void action(GameWorld gameWorld) {
-        Assets.sfx_battleStart.play(Game.masterVolume);
+        Assets.sfxBattleStart.play(Game.masterVolume);
         uiManager.addNotification("Robo Duck has been defeated.");
         BattleParameters params = new BattleParameters(Game.segment);
         //Enemy ducks

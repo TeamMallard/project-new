@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.game.*;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.objective.CollectItemObjective;
-import com.mygdx.game.objective.DefeatRoboduckObjective;
 import com.mygdx.game.objective.WinBattlesObjective;
 
 import java.util.ArrayList;
@@ -272,7 +271,7 @@ public class BattleScreen extends ScreenAdapter {
         List<String> resultsText = new ArrayList<String>();
         Assets.battleMusic.stop();
         if (battleIsWon) {
-            Assets.sfx_battleWin.play(Game.masterVolume + 0.3f);
+            Assets.sfxBattleWin.play(Game.masterVolume + 0.3f);
             resultsText.add("You Won!");
 
             //work out baseline xp to give to each Agent
@@ -327,16 +326,10 @@ public class BattleScreen extends ScreenAdapter {
                     }
                 }
             }
-            for (int i = 0; i < enemyParty.size(); i++) {
-	            if(Game.objective instanceof DefeatRoboduckObjective && enemyParty.getMember(i).getName().contains("Robo")) {
-	                ((DefeatRoboduckObjective) Game.objective).roboduckDefeated();
-	                game.winScreen();
-	            }
-            }
             Game.party.getConsumables().add(MathUtils.random(0, 6));
         } else {
             resultsText.add("You Lost.");
-            Assets.sfx_battleLose.play(Game.masterVolume + 0.3f);
+            Assets.sfxBattleLose.play(Game.masterVolume + 0.3f);
             String messages[] = new String[resultsText.size()];
             for (int i = 0; i < resultsText.size(); i++) {
                 messages[i] = resultsText.get(i);
