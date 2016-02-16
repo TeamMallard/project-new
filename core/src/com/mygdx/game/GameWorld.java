@@ -40,7 +40,6 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(84, 59)));
         level.characters.add(new SallyNPC(level, new Vector2(47, 49)));
         level.characters.add(new SallyNPC(level, new Vector2(21, 55)));
-        level.characters.add(new SallyNPC(level, new Vector2(58, 76)));
         level.characters.add(new SallyNPC(level, new Vector2(59, 77)));
         level.characters.add(new SallyNPC(level, new Vector2(89, 107)));
         level.characters.add(new SallyNPC(level, new Vector2(118, 87)));
