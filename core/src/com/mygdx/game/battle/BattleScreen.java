@@ -17,32 +17,76 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * The BattleScreen controls all the systems for the Battle system, including turn order, skill use and drawing agents to the screen.
- * (0,0) is at the top left corner. Moving positively in x goes left to right. Moving Negatively in y goes top to bottom.
+ * Manages the battle display.
  */
 public class BattleScreen extends ScreenAdapter {
 
-    public Game game;
-    public SpriteBatch batch;
-    public OrthographicCamera camera;
-    public BattleMenu battleMenu = new BattleMenu(this);
-    public BattleAnimator battleAnimator = new BattleAnimator();
+    /**
+     * The game this BattleScreen belongs to.
+     */
+    private Game game;
 
-    int backgroundNumber;//the background to use
+    /**
+     * The sprite batch to render on.
+     */
+    private SpriteBatch batch;
+    /**
+     * The camera looking at the battle display.
+     */
+    private OrthographicCamera camera;
+    /**
+     * The battle menu instance.
+     */
+    private BattleMenu battleMenu = new BattleMenu(this);
+    /**
+     * The battle animator instance.
+     */
+    private BattleAnimator battleAnimator = new BattleAnimator();
 
-    PartyManager enemyParty = new PartyManager();
+    /**
+     * The index of the background to use.
+     */
+    private int backgroundNumber;
 
-    List<Agent> turnOrder = new ArrayList<Agent>();
-    int turnOrderPointer = 0;
+    /**
+     * The enemy party.
+     */
+    public PartyManager enemyParty = new PartyManager();
+
+    /**
+     * The order in which agents should have their turns.
+     */
+    public List<Agent> turnOrder = new ArrayList<Agent>();
+    /**
+     * The pointer to the current turn's agent.
+     */
+    private int turnOrderPointer = 0;
+    /**
+     * The current turn's agent.
+     */
     private Agent currentTurnAgent;
 
-    UseAbility currentUseAbility;
+    /**
+     * The ability currently being used.
+     */
+    private UseAbility currentUseAbility;
 
-    boolean enemyHasUsedSkill = false;
+    /**
+     * Whether the current enemy has finished using their skill.
+     */
+    private boolean enemyHasUsedSkill = false;
 
-    boolean isBattleOver = false;
-    boolean isBattleWon;
+    /**
+     * Whether the battle is over and whether it is won (by the player).
+     */
+    private boolean isBattleOver = false, isBattleWon;
 
+    /**
+     * Creates a new BattleScreen with the specified parameters.
+     *
+     * @param game         the game this BattleScreen belongs to
+     * @param battleParams the battle parameters to use
+     */
     public BattleScreen(Game game, BattleParameters battleParams) {
         this.game = game;
         batch = new SpriteBatch();
@@ -52,7 +96,12 @@ public class BattleScreen extends ScreenAdapter {
 
     }
 
-    public void initialiseBattleScreen(BattleParameters battleParams) {
+    /**
+     * Initialises this BattleScreen.
+     *
+     * @param battleParams the battle parameters to use
+     */
+    private void initialiseBattleScreen(BattleParameters battleParams) {
         //Set (0,0) to be the top left corner
         camera.translate(Gdx.graphics.getWidth() / 2, -(Gdx.graphics.getHeight() / 2));
         camera.update();
@@ -85,7 +134,7 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Uses the turnorder and agent type to assign positions on the screen to each agent in the battle.
+     * Assigns agents their initial positions based on the turn order.
      */
     private void assignInitialPositions() {
         int friendlyPointer = 0;
@@ -105,13 +154,18 @@ public class BattleScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * Calculates the initial y coordinate of an agent.
+     *
+     * @param index the y-index of the agent
+     * @return the y coordinate
+     */
     private float assignInitialYPositions(int index) {
         return (((1 + index) * Gdx.graphics.getHeight()) / 12) - Gdx.graphics.getHeight() + 190;
     }
 
     /**
-     * Fills the turnOrder list with the agents in the battle, ordered based on speed
-     * with highest speed first.
+     * Determines the turn order of agents based on their speed stat.
      */
     private void determineTurnOrder() {
 
@@ -126,10 +180,9 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * The Main Update Loop for the battle system. Checks inputs and updates the menus with them as well as
-     * updating other classes.
+     * Updates the state of this BattleMenu.
      *
-     * @param delta the delta time between frames.
+     * @param delta the time elapsed since the last update
      */
     public void update(float delta) {
         InputHandler.update();
@@ -155,7 +208,6 @@ public class BattleScreen extends ScreenAdapter {
 
             } else {
                 if (!enemyHasUsedSkill) {
-                    //Enemy targetting
                     currentUseAbility = new UseSkill(currentTurnAgent, turnOrder.get(getTarget(Agent.AgentType.FRIENDLY)), currentTurnAgent.getSkills().get(0), battleMenu);
                     enemyHasUsedSkill = true;
                 }
@@ -170,9 +222,10 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Rudimentary targeting for the AI agents.
+     * Gets a random target for use by enemy agents.
      *
-     * @param typeToGet The type of agent to target.
+     * @param typeToGet the type of target to get (friendly/enemy)
+     * @return the index in the turn order of the target
      */
     public int getTarget(Agent.AgentType typeToGet) {
         Random random = new Random();
@@ -209,12 +262,9 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Creates the Text for and applies the end of battle results/rewards.
-     * XP gain is currently calculated by the sum of each enemy's level multiplied by 3.
-     * A slight random amount is also applied to each individual xp amount.
-     * Dead players don't recieve xp.
+     * Displays the battle results dialogue and adds experience rewards.
      *
-     * @param battleIsWon true if the player won, false otherwise.
+     * @param battleIsWon whether or not the battle was won
      */
     private void setBattleResults(boolean battleIsWon) {
 
@@ -260,23 +310,23 @@ public class BattleScreen extends ScreenAdapter {
 
             Game.pointsScore += xpGain * 3.5f;
 
-            if(Game.objective instanceof WinBattlesObjective) {
+            if (Game.objective instanceof WinBattlesObjective) {
                 ((WinBattlesObjective) Game.objective).wonBattle();
-            } else if(Game.objective instanceof CollectItemObjective) {
+            } else if (Game.objective instanceof CollectItemObjective) {
                 //((CollectItemObjective) Game.objective)
                 for (int i = 0; i < enemyParty.size(); i++) {
-                    if(enemyParty.getMember(i).getName().contains("Ooze") && Game.segment == 1) {
-                    	Game.party.getConsumables().add(7);
+                    if (enemyParty.getMember(i).getName().contains("Ooze") && Game.segment == 1) {
+                        Game.party.getConsumables().add(7);
                     }
-                    if(enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 3) {
-                    	Game.party.getConsumables().add(8);
+                    if (enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 3) {
+                        Game.party.getConsumables().add(8);
                     }
-                    if(enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 5) {
-                    	Game.party.getConsumables().add(9);
+                    if (enemyParty.getMember(i).getName().contains("Duck") && Game.segment == 5) {
+                        Game.party.getConsumables().add(9);
                     }
                 }
             }
-        	Game.party.getConsumables().add(MathUtils.random(0,6));
+            Game.party.getConsumables().add(MathUtils.random(0, 6));
         } else {
             resultsText.add("You Lost.");
             Assets.sfx_battleLose.play(Game.masterVolume + 0.3f);
@@ -305,7 +355,6 @@ public class BattleScreen extends ScreenAdapter {
      * Sets up next turn, ensuring that the agent with the next turn isn't dead.
      */
     private void nextTurn() {
-
         //Increment turn pointer and wrap it around if out of range
         turnOrderPointer++;
         if (turnOrderPointer >= turnOrder.size()) {
@@ -321,8 +370,7 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Starts next turn.
-     * If the this turn's agent is friendly, adjust their location and move the turnIndicator.
+     * Starts next turn. If the this turn's agent is friendly, adjust their location and move the turn indicator.
      */
     public void startTurn() {
         if (turnOrder.get(turnOrderPointer).type == Agent.AgentType.FRIENDLY) {
@@ -342,7 +390,9 @@ public class BattleScreen extends ScreenAdapter {
     }
 
     /**
-     * Renders background and calls all other necessary render functions.
+     * Renders this BattleMenu onto the specified sprite batch.
+     *
+     * @param delta the time elapsed since the last render
      */
     public void render(float delta) {
         super.render(delta);
@@ -361,6 +411,9 @@ public class BattleScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * @return the agent whose turn it currently is
+     */
     public Agent getCurrentTurnAgent() {
         return currentTurnAgent;
     }
