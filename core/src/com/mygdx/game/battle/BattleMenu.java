@@ -180,7 +180,7 @@ public class BattleMenu {
             if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead() 
             		&& battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type
             		&& !battleScreen.enemyParty.isDead()) {
-                targetingMenuInput(InputHandler.inputType.UP);
+                targetingMenuInput(InputHandler.InputType.UP);
             }
         }
 
@@ -313,7 +313,7 @@ public class BattleMenu {
      *
      * @param input the input to update the menu with
      */
-    public void newKeypress(InputHandler.inputType input) {
+    public void newKeypress(InputHandler.InputType input) {
 
         switch (input) {
             case ACT:
@@ -352,7 +352,7 @@ public class BattleMenu {
      *
      * @param input the input to update the menu with
      */
-    private void baseMenuInput(InputHandler.inputType input) {
+    private void baseMenuInput(InputHandler.InputType input) {
         switch (input) {
             case ACT: {
                 menuPointer = baseMenuPointer + 1;//Set menuPointer to the relevant menu
@@ -406,7 +406,7 @@ public class BattleMenu {
      *
      * @param input the input to update the menu with
      */
-    private void skillMenuInput(InputHandler.inputType input) {
+    private void skillMenuInput(InputHandler.InputType input) {
         int oldSkillMenuPointer = skillMenuPointer;
 
         switch (input) {
@@ -454,7 +454,7 @@ public class BattleMenu {
      *
      * @param input the input to update the menu with
      */
-    private void itemMenuInput(InputHandler.inputType input) {
+    private void itemMenuInput(InputHandler.InputType input) {
         switch (input) {
             case ACT: {
                 skillOrItemID = Game.party.getConsumables().get(itemMenuPointer);
@@ -515,7 +515,7 @@ public class BattleMenu {
      *
      * @param input the input to update the menu with
      */
-    private void targetingMenuInput(InputHandler.inputType input) {
+    private void targetingMenuInput(InputHandler.InputType input) {
         switch (input) {
             case ACT:
                 if (isSkillTargeting) {
@@ -543,9 +543,9 @@ public class BattleMenu {
                 if (targetMenuPointerColumn == 1)
                     targetMenuPointerColumn -= 1;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
-                    targetingMenuInput(InputHandler.inputType.DOWN);
+                    targetingMenuInput(InputHandler.InputType.DOWN);
                 } else if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()) {
-                    targetingMenuInput(InputHandler.inputType.DOWN);
+                    targetingMenuInput(InputHandler.InputType.DOWN);
                 }
                 break;
             case UP:
@@ -553,10 +553,10 @@ public class BattleMenu {
                 if (targetMenuPointerRow < 0)
                     targetMenuPointerRow = battleLayout.length - 1;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
-                    targetingMenuInput(InputHandler.inputType.UP);
+                    targetingMenuInput(InputHandler.InputType.UP);
                 } else if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()
                         && battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type) {
-                    targetingMenuInput(InputHandler.inputType.UP);
+                    targetingMenuInput(InputHandler.InputType.UP);
                 }
                 break;
             case DOWN:
@@ -564,10 +564,10 @@ public class BattleMenu {
                 if (targetMenuPointerRow > battleLayout.length - 1)
                     targetMenuPointerRow = 0;
                 if (battleLayout[targetMenuPointerRow][targetMenuPointerColumn] == -1) {
-                    targetingMenuInput(InputHandler.inputType.DOWN);
+                    targetingMenuInput(InputHandler.InputType.DOWN);
                 } else if (battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).isDead()
                         && battleScreen.turnOrder.get(battleLayout[targetMenuPointerRow][targetMenuPointerColumn]).getType() != battleScreen.getCurrentTurnAgent().type) {
-                    targetingMenuInput(InputHandler.inputType.DOWN);
+                    targetingMenuInput(InputHandler.InputType.DOWN);
                 }
                 break;
 

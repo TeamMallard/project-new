@@ -14,22 +14,49 @@ import com.mygdx.game.ui.UIScore;
 import com.mygdx.game.ui.UIShop;
 
 /**
- * This class contains the high level logic for the game world and contains the level and UI objects.
+ * Contains the logic for exploring the game world and triggering encounters.
  */
 public class GameWorld {
 
+    /**
+     * The parent game.
+     */
     public Game game;
+
+    /**
+     * The level that this GameWorld manages.
+     */
     public Level level;
+
+    /**
+     * The UI manager to draw on.
+     */
     public UIManager uiManager;
+
+    /**
+     * The current state of the game.
+     */
     public GameState gameState;
 
+    /**
+     * The NPC currently being interacted with.
+     */
     private NPC interactingNPC;
+
+    /**
+     * The current battle parameters.
+     */
     private BattleParameters battleParams;
+
+    /**
+     * Used to calculate the chance of a battle encounter.
+     */
     private int battleChance;
 
     /**
-     * Constructor for the GameWorld generates a new level and adds the characters to be used in the game.
-     * The initial state for the game is FREEROAM.
+     * Creates a new GameWorld with the specified game parent.
+     *
+     * @param game the parent game
      */
     public GameWorld(Game game) {
         this.game = game;
@@ -45,27 +72,15 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(118, 87)));
         level.characters.add(new SallyNPC(level, new Vector2(157, 98)));
         level.characters.add(new SallyNPC(level, new Vector2(211, 74)));
-        level.characters.add(new RoboNPC(level, new Vector2(222,83)));
+        level.characters.add(new RoboNPC(level, new Vector2(222, 83)));
         uiManager.addUIComponent(new UIScore());
         uiManager.addUIComponent(new UIObjective());
-//        battleParams = new BattleParameters(level.getCurrentSegment());
-//        List<Integer> emptyList = new ArrayList<Integer>();
-//        Agent enemyDuck = new Agent("Crazed Duck", Agent.AgentType.ENEMY,new Statistics(100,100,0,2,2,2,2,2,3),emptyList,new CurrentEquipment(0,0,0,0,0),0);
-//        enemyDuck.addSkill(0);
-//        Agent enemyDuck2 = new Agent("Crazed Duck", Agent.AgentType.ENEMY,new Statistics(100,100,0,2,2,2,2,2,3),emptyList,new CurrentEquipment(0,0,0,0,0),0);
-//        enemyDuck2.addSkill(0);
-//        battleParams.addEnemy(enemyDuck);
-//        battleParams.addEnemy(enemyDuck2);
     }
 
     /**
-     * Called once per frame to update GameWorld logic.
-     * This looks at the current game's current state and acts accordingly.
-     *
-     * @param delta The time since the last frame was rendered.
+     * Updates the state of this GameWorld.
      */
     public void update(float delta) {
-        InputHandler.update();
         level.update(delta);
         uiManager.updateNotification(delta);
         switch (gameState) {
@@ -81,8 +96,6 @@ public class GameWorld {
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
                     triggerEncounter();
-                    //battleChance = 1000;
-                    
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;
@@ -95,19 +108,16 @@ public class GameWorld {
                     }
                 }
                 break;
-
             case PARTY_MENU:
                 if (!uiManager.updatePartyMenu()) {
                     gameState = GameState.FREEROAM;
                 }
                 break;
-
             case SHOP_MENU:
                 if (!uiManager.updateShop()) {
                     gameState = GameState.FREEROAM;
                 }
                 break;
-
             case INTERACTION:
                 if (!interactingNPC.updateInteracting(delta)) {
                     interactingNPC.action(this);
@@ -115,7 +125,6 @@ public class GameWorld {
                         gameState = GameState.FREEROAM;
                 }
                 break;
-
             case BATTLE:
                 if (game.wonBattle) {
                     uiManager.addNotification("You won the battle!");
@@ -129,6 +138,9 @@ public class GameWorld {
         }
     }
 
+    /**
+     * Triggers an encounter.
+     */
     private void triggerEncounter() {
         uiManager.createDialogue(new String[]{"You have been stopped by a group of... somethings!"});
         level.stopInput = true;
@@ -151,9 +163,9 @@ public class GameWorld {
     }
 
     /**
-     * changes the game state to BATTLE and loads a new battle in the Game object.
+     * Creates a new battle with the specified battle parameters.
      *
-     * @param battleParams The parameters used to create a battle.
+     * @param battleParams the battle parameters
      */
     public void setBattle(BattleParameters battleParams) {
         gameState = GameState.BATTLE;
@@ -162,9 +174,9 @@ public class GameWorld {
     }
 
     /**
-     * changes the game state to BATTLE and loads a new battle in the Game object.
+     * Creates and displays a shop with the specified shop items.
      *
-     * @param battleParams The parameters used to create a battle.
+     * @param shop the shop
      */
     public void setShop(UIShop shop) {
         System.out.println(gameState);
@@ -173,5 +185,10 @@ public class GameWorld {
         gameState = GameState.SHOP_MENU;
     }
 
-
+    /**
+     * Represents the current state of the game.
+     */
+    private enum GameState {
+        FREEROAM, PARTY_MENU, SHOP_MENU, BATTLE, INTERACTION, BATTLE_DIALOGUE
+    }
 }

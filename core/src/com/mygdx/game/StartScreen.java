@@ -60,7 +60,6 @@ public class StartScreen extends ScreenAdapter {
     }
 
     private void update() {
-        InputHandler.update();
         if (InputHandler.isActJustPressed()) {
             game.newWorldScreen();
         }

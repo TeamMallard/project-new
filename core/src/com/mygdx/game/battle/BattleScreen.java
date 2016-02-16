@@ -186,25 +186,23 @@ public class BattleScreen extends ScreenAdapter {
      * @param delta the time elapsed since the last update
      */
     public void update(float delta) {
-        InputHandler.update();
-
         if (!isBattleOver) {
             //Check inputs if the current turn agent is friendly
             if (currentTurnAgent.type == Agent.AgentType.FRIENDLY) {
 
                 //Input checks
                 if (InputHandler.isActJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.ACT);
+                    battleMenu.newKeypress(InputHandler.InputType.ACT);
                 } else if (InputHandler.isEscJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.ESC);
+                    battleMenu.newKeypress(InputHandler.InputType.ESC);
                 } else if (InputHandler.isUpJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.UP);
+                    battleMenu.newKeypress(InputHandler.InputType.UP);
                 } else if (InputHandler.isDownJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.DOWN);
+                    battleMenu.newKeypress(InputHandler.InputType.DOWN);
                 } else if (InputHandler.isLeftJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.LEFT);
+                    battleMenu.newKeypress(InputHandler.InputType.LEFT);
                 } else if (InputHandler.isRightJustPressed()) {
-                    battleMenu.newKeypress(InputHandler.inputType.RIGHT);
+                    battleMenu.newKeypress(InputHandler.InputType.RIGHT);
                 }
 
             } else {

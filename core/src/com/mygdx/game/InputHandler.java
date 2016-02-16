@@ -4,112 +4,164 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 /**
- * Handles input
- * There are 6 different inputs for the game. Up, down, left, right, esc and act.
- * The keybinds for these inputs are assigned here.
+ * Handles input from the keyboard.
  */
 public class InputHandler {
-    private static Boolean isInputEnabled=true;
 
-    private static final int[] UP = {Input.Keys.W, Input.Keys.UP};
-    private static final int[] DOWN = {Input.Keys.S, Input.Keys.DOWN};
-    private static final int[] LEFT = {Input.Keys.A, Input.Keys.LEFT};
-    private static final int[] RIGHT = {Input.Keys.D, Input.Keys.RIGHT};
-    private static final int[] ACT = {Input.Keys.E, Input.Keys.ENTER, Input.Keys.Z};
-    private static final int[] ESC = {Input.Keys.Q, Input.Keys.ESCAPE, Input.Keys.X};
-    
     /**
-     * Checks whether any of the keys from the list is pressed
+     * Whether input is enabled.
+     */
+    private static boolean isInputEnabled = true;
+
+    /**
+     * Keys for moving up.
+     */
+    private static final int[] UP = {Input.Keys.W, Input.Keys.UP};
+
+    /**
+     * Keys for moving down.
+     */
+    private static final int[] DOWN = {Input.Keys.S, Input.Keys.DOWN};
+
+    /**
+     * Keys for moving left.
+     */
+    private static final int[] LEFT = {Input.Keys.A, Input.Keys.LEFT};
+
+    /**
+     * Keys for moving right.
+     */
+    private static final int[] RIGHT = {Input.Keys.D, Input.Keys.RIGHT};
+
+    /**
+     * Action keys.
+     */
+    private static final int[] ACT = {Input.Keys.E, Input.Keys.ENTER, Input.Keys.Z};
+
+    /**
+     * Back keys.
+     */
+    private static final int[] ESC = {Input.Keys.Q, Input.Keys.ESCAPE, Input.Keys.X};
+
+    /**
+     * Checks whether any of the keys from the specified list is pressed.
+     *
      * @param possibleKeys a set of possible keys for a given action
      * @return whether any of the given keys is pressed
      */
-    private static boolean anyKeyPressed(int[] possibleKeys){
-    	for(int key:possibleKeys){
-    		if(Gdx.input.isKeyPressed(key)){
-    			return true;
-    		}
-    	}
-    	return false;
+    private static boolean anyKeyPressed(int[] possibleKeys) {
+        for (int key : possibleKeys) {
+            if (Gdx.input.isKeyPressed(key)) {
+                return true;
+            }
+        }
+        return false;
     }
-    
+
     /**
-     * Checks whether any of the keys from the list is the only key pressed
+     * Checks whether any of the keys from the specified list has just been pressed.
+     *
      * @param possibleKeys a set of possible keys for a given action
      * @return whether any of the given keys is the only one pressed
      */
-    private static boolean anyKeyJustPressed(int[] possibleKeys){
-    	for(int key:possibleKeys){
-    		if(Gdx.input.isKeyJustPressed(key)){
-    			return true;
-    		}
-    	}
-    	return false;
-    }
-    
-    //TODO remove and refactor
-    public static void update() {}
-
-    public static Boolean isUpPressed() {
-        return isInputEnabled?anyKeyPressed(UP):false;
-    }
-
-    public static Boolean isUpJustPressed() {
-        return isInputEnabled?anyKeyJustPressed(UP):false;
-    }
-
-    public static Boolean isDownPressed() {
-    	return isInputEnabled?anyKeyPressed(DOWN):false;
-    }
-
-    public static Boolean isDownJustPressed() {
-    	return isInputEnabled?anyKeyJustPressed(DOWN):false;
-    }
-
-    public static Boolean isRightPressed() {
-    	return isInputEnabled?anyKeyPressed(RIGHT):false;
-    }
-
-    public static Boolean isRightJustPressed() {
-    	return isInputEnabled?anyKeyJustPressed(RIGHT):false;
-    }
-
-    public static Boolean isLeftPressed() {
-    	return isInputEnabled?anyKeyPressed(LEFT):false;
-    }
-
-    public static Boolean isLeftJustPressed() {
-    	return isInputEnabled?anyKeyJustPressed(LEFT):false;
-    }
-
-    public static Boolean isActPressed() {
-    	return isInputEnabled?anyKeyPressed(ACT):false;
-    	}
-
-    public static Boolean isActJustPressed() {
-    	return isInputEnabled?anyKeyJustPressed(ACT):false;
-    }
-
-    public static Boolean isEscPressed(){
-    	return isInputEnabled?anyKeyPressed(ESC):false;
-    	}
-
-    public static Boolean isEscJustPressed(){
-    	return isInputEnabled?anyKeyJustPressed(ESC):false;
-    	}
-
-    public enum inputType{
-        UP,DOWN,LEFT,RIGHT,ACT,ESC
+    private static boolean anyKeyJustPressed(int[] possibleKeys) {
+        for (int key : possibleKeys) {
+            if (Gdx.input.isKeyJustPressed(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Disables all input updating and sets inputs to false.
+     * @return whether an up key is pressed
      */
-    public static void disableAllInput(){
-        isInputEnabled=false;
+    public static boolean isUpPressed() {
+        return isInputEnabled && anyKeyPressed(UP);
     }
-    
-    public static void enableAllInput(){
-        isInputEnabled=true;
+
+    /**
+     * @return whether an up key has just been pressed
+     */
+    public static boolean isUpJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(UP);
+    }
+
+    /**
+     * @return whether a down key is pressed
+     */
+    public static boolean isDownPressed() {
+        return isInputEnabled && anyKeyPressed(DOWN);
+    }
+
+    /**
+     * @return whether a down key has just been pressed
+     */
+    public static boolean isDownJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(DOWN);
+    }
+
+    /**
+     * @return whether a right key is pressed
+     */
+    public static boolean isRightPressed() {
+        return isInputEnabled && anyKeyPressed(RIGHT);
+    }
+
+    /**
+     * @return whether a right key has just been pressed
+     */
+    public static boolean isRightJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(RIGHT);
+    }
+
+    /**
+     * @return whether a left key is pressed
+     */
+    public static boolean isLeftPressed() {
+        return isInputEnabled && anyKeyPressed(LEFT);
+    }
+
+    /**
+     * @return whether a left key has just been pressed
+     */
+    public static boolean isLeftJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(LEFT);
+    }
+
+    /**
+     * @return whether an action key has just been pressed
+     */
+    public static boolean isActJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(ACT);
+    }
+
+    /**
+     * @return whether an escape key has just been pressed
+     */
+    public static Boolean isEscJustPressed() {
+        return isInputEnabled && anyKeyJustPressed(ESC);
+    }
+
+    /**
+     * Represents a type of input.
+     */
+    public enum InputType {
+        UP, DOWN, LEFT, RIGHT, ACT, ESC
+    }
+
+    /**
+     * Disables user input.
+     */
+    public static void disableAllInput() {
+        isInputEnabled = false;
+    }
+
+    /**
+     * Enables user input.
+     */
+    public static void enableAllInput() {
+        isInputEnabled = true;
     }
 
 }
