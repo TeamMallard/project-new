@@ -42,7 +42,7 @@ public final class WalkingTextures {
     }
 
     /**
-     * Initilaises this TextureSet with textures for facing and movement animations.
+     * Initialises this TextureSet with textures for facing and movement animations.
      *
      * @param down         the forward facing texture
      * @param up           the backward facing texture
@@ -64,24 +64,6 @@ public final class WalkingTextures {
         walkingAnimations[Character.Direction.UP.getIndex()] = walkingUp;
         walkingAnimations[Character.Direction.LEFT.getIndex()] = walkingLeft;
         walkingAnimations[Character.Direction.RIGHT.getIndex()] = walkingRight;
-    }
-
-    /**
-     * Gets the representative width of this TextureSet (the front idle texture).
-     *
-     * @return the width
-     */
-    public int getWidth() {
-        return idleTextures[0].getRegionWidth();
-    }
-
-    /**
-     * Gets the representative height of this TextureSet (the front idle texture).
-     *
-     * @return the height
-     */
-    public int getHeight() {
-        return idleTextures[0].getRegionHeight();
     }
 
     /**

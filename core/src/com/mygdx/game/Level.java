@@ -78,7 +78,9 @@ public class Level {
 
     }
 
-
+    public boolean checkWater(int x, int y) {
+        return ((TiledMapTileLayer) map.getLayers().get(0)).getCell(x, y).getTile().getProperties().containsKey("water");
+    }
 
     public boolean checkCollision(int x, int y) {
         return isTileBlocked(x, y) || isTileOccupied(x, y);
