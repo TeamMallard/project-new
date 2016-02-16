@@ -85,8 +85,9 @@ public abstract class Character {
 
     /**
      * Creates a new Character with the specified parameters.
-     * @param level the level this Character is a part of
-     * @param currentTile the tile this Character begins on
+     *
+     * @param level           the level this Character is a part of
+     * @param currentTile     the tile this Character begins on
      * @param walkingTextures the walking textures to use
      */
     public Character(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
@@ -185,6 +186,7 @@ public abstract class Character {
 
     /**
      * Sets the current tile that the Character is on.
+     *
      * @param currentTile the tile
      */
     public void setCurrentTile(Vector2 currentTile) {
@@ -199,49 +201,77 @@ public abstract class Character {
 
     /**
      * Gets the absolute position of this Character in the world.
+     *
      * @return the absolute position
      */
     public Vector2 getAbsPos() {
         return absPos;
     }
 
+    /**
+     * @return the direction this Character is facing
+     */
     public Direction getDirection() {
         return direction;
     }
 
+    /**
+     * Sets the direction this Character is facing.
+     *
+     * @param direction the direction
+     */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
+    /**
+     * @return the state of this Character
+     */
     public CharacterState getState() {
         return state;
     }
 
+    /**
+     * Sets the state of this Character.
+     *
+     * @param state the state
+     */
     public void setState(CharacterState state) {
         this.state = state;
     }
 
+    /**
+     * @return how long this Character has been in its current state
+     */
     public float getStateTime() {
         return stateTime;
     }
 
+    /**
+     * Sets the state time of this Character.
+     *
+     * @param stateTime how long this Character has been in its current state
+     */
     public void setStateTime(float stateTime) {
         this.stateTime = stateTime;
     }
 
+    /**
+     * @return the current texture to use when rendering this Character.
+     */
     public TextureRegion getCurrentTexture() {
         return walkingTextures.getTexture(direction, stateTime);
     }
 
     /**
-     * The state of the character
+     * Represents the state of a character.
      */
     public enum CharacterState {
         STATIONARY, WAITING, TRANSITIONING
     }
 
     /**
-     * Represents the direction of a character
+     * Represents the direction that a character is facing.
      */
     public enum Direction {
         DOWN(0), UP(1), LEFT(2), RIGHT(3);
@@ -252,17 +282,26 @@ public abstract class Character {
             this.index = index;
         }
 
+        /**
+         * @return the direction represented (down: 0, up: 1, left: 2, right: 3)
+         */
         public int getIndex() {
             return index;
         }
     }
 
     /**
-     * Used to compare the y position of characters in the level.
-     * Useful for rendering correctly.
+     * Compares characters according to their y coordinate.
      */
     public static class CharacterComparator implements Comparator<Character> {
 
+        /**
+         * Compares characters according to their y coordinate.
+         *
+         * @param o1 the first character
+         * @param o2 the second character
+         * @return the result of the comparison
+         */
         @Override
         public int compare(Character o1, Character o2) {
             if (o1.getCurrentTile().y > o2.getCurrentTile().y)
@@ -273,5 +312,4 @@ public abstract class Character {
                 return 1;
         }
     }
-
 }
