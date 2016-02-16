@@ -5,7 +5,6 @@
 		"description":"No Item",
 		"type":"WEAPON",
 		"modifiers":[0, 0, 0, 0, 0],
-		"levelRequirement":0,
 		"cost":1
 	},
 	{	
@@ -14,7 +13,6 @@
 		"description":"Made of wood",
 		"type":"WEAPON",
 		"modifiers":[2, 2, 2, 2, 2],
-		"levelRequirement":0,
 		"cost":5
 	},
 	{
@@ -23,7 +21,6 @@
 		"description":"This won't stop much",
 		"type":"HEAD",
 		"modifiers":[2, 2, 2, 2, 2],
-		"levelRequirement":0,
 		"cost":5
 	},
 	{
@@ -32,7 +29,6 @@
 		"description":"This won't stop much",
 		"type":"CHEST",
 		"modifiers":[2, 2, 2, 2, 2],
-		"levelRequirement":0,
 		"cost":5
 	},
 	{
@@ -41,7 +37,6 @@
 		"description":"This won't stop much",
 		"type":"FEET",
 		"modifiers":[2, 2, 2, 2, 2],
-		"levelRequirement":0,
 		"cost":5
 	},
 	{
@@ -50,7 +45,6 @@
 		"description":"Increases your reaction times",
 		"type":"ACCESSORY",
 		"modifiers":[3, 0, 3, 0, 0],
-		"levelRequirement":0,
 		"cost":5
 	},
 	{	
@@ -59,7 +53,6 @@
 		"description":"Made of steel, quite sharp",
 		"type":"WEAPON",
 		"modifiers":[5, 5, 3, 5, 5],
-		"levelRequirement":0,
 		"cost":20
 	},
 	{
@@ -68,7 +61,6 @@
 		"description":"This will protect you",
 		"type":"HEAD",
 		"modifiers":[5, 5, 3, 5, 5],
-		"levelRequirement":0,
 		"cost":20
 	},
 	{
@@ -77,7 +69,6 @@
 		"description":"This will protect you",
 		"type":"CHEST",
 		"modifiers":[5, 5, 3, 5, 5],
-		"levelRequirement":0,
 		"cost":20
 	},
 	{
@@ -86,7 +77,6 @@
 		"description":"This will protect you",
 		"type":"FEET",
 		"modifiers":[5, 5, 3, 5, 5],
-		"levelRequirement":0,
 		"cost":20
 	},
 	{
@@ -95,7 +85,6 @@
 		"description":"The gem in the necklace glows with power",
 		"type":"ACCESSORY",
 		"modifiers":[0, 7, 0, 0, 0],
-		"levelRequirement":0,
 		"cost":20
 	},
 	{	
@@ -104,7 +93,6 @@
 		"description":"Oooh, shiny!",
 		"type":"WEAPON",
 		"modifiers":[10, 10, 10, 10, 10],
-		"levelRequirement":0,
 		"cost":40
 	},
 	{
@@ -113,7 +101,6 @@
 		"description":"Oooh, shiny!",
 		"type":"HEAD",
 		"modifiers":[10, 10, 10, 10, 10],
-		"levelRequirement":0,
 		"cost":40
 	},
 	{
@@ -122,7 +109,6 @@
 		"description":"Oooh, shiny!",
 		"type":"CHEST",
 		"modifiers":[10, 10, 10, 10, 10],
-		"levelRequirement":0,
 		"cost":40
 	},
 	{
@@ -131,7 +117,6 @@
 		"description":"Oooh, shiny!",
 		"type":"FEET",
 		"modifiers":[10, 10, 10, 10, 10],
-		"levelRequirement":0,
 		"cost":40
 	},
 	{
@@ -140,7 +125,6 @@
 		"description":"All your ememies shall fall before you.",
 		"type":"ACCESSORY",
 		"modifiers":[0, 15, 0, 0, 0],
-		"levelRequirement":0,
 		"cost":40
 	}],
 "consumables":[

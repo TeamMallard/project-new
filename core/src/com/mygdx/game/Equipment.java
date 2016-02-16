@@ -6,44 +6,49 @@ import com.mygdx.game.assets.Assets;
 import java.util.Arrays;
 
 /**
- * Class represents an individual item of equipment, id's are assigned by the order of the equipment in the ItemManager's list.
- * The Modifiers array stores the statistic modifiers this equipment piece gives in the order: Speed, Strength, Dexterity, Intelligence, ArmourValue.
+ * Represents an item of equipment.
  */
 public class Equipment {
 
+    /**
+     * The ID of this Equipment.
+     */
     private int id = -1;
-    private String name, description;
-    private EquipType type;
-    private int[] modifiers = new int[5];//Ordered: speed, strength, dexterity, intelligence, armourVal
-    private int levelRequirement;
-    private int cost;
-
-    @Override
-    public String toString() {
-        return "Equipment{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", type=" + type +
-                ", modifiers=" + Arrays.toString(modifiers) +
-                ", levelRequirement=" + levelRequirement +
-                '}';
-    }
 
     /**
-     * Constructor for a new Equipment.
-     * @param name The name of the Equipment.
-     * @param description The description of the Equipment.
-     * @param type The type of the Equipment.
-     * @param speedModifier The speedModifier.
-     * @param strengthModifier The strengthModifier.
-     * @param dexterityModifier The dexterityModifier.
-     * @param intelligenceModifier The intelligenceModifier.
-     * @param armourValModifier The armourValue Modifier.
-     * @param levelRequirement The level requirement of the Equipment.
-     * @param cost
+     * The name and description of this Equipment.
      */
-    public Equipment(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int levelRequirement, int cost) {
+    private String name, description;
+
+    /**
+     * The type of equipment.
+     */
+    private EquipType type;
+
+    /**
+     * The stat modifiers of this Equipment (in order: speed, strength, dexterity, intelligence, defence).
+     */
+    private int[] modifiers = new int[5];
+
+    /**
+     * How much this Equipment item costs in the shop.
+     */
+    private int cost;
+
+    /**
+     * Creates a new Equipment with the specified parameters.
+     *
+     * @param name                 the name of this Equipment
+     * @param description          the description of this Equipment
+     * @param type                 the type of Equipment
+     * @param speedModifier        the speed modifier
+     * @param strengthModifier     the strength modifier
+     * @param dexterityModifier    the dexterity modifier
+     * @param intelligenceModifier the intelligence modifier
+     * @param armourValModifier    the defence modifier
+     * @param cost                 how much this Equipment costs in the shop
+     */
+    public Equipment(String name, String description, EquipType type, int speedModifier, int strengthModifier, int dexterityModifier, int intelligenceModifier, int armourValModifier, int cost) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -52,7 +57,6 @@ public class Equipment {
         this.modifiers[2] = dexterityModifier;
         this.modifiers[3] = intelligenceModifier;
         this.modifiers[4] = armourValModifier;
-        this.levelRequirement = levelRequirement;
         this.cost = cost;
     }
 
@@ -62,36 +66,67 @@ public class Equipment {
     public Equipment() {
     }
 
+    /**
+     * @return a string representation of this Equipment
+     */
+    @Override
+    public String toString() {
+        return "Equipment{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                ", modifiers=" + Arrays.toString(modifiers) +
+                '}';
+    }
+
+    /**
+     * @return the name of this Equipment
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return the description of this Equipment
+     */
     public String getDescription() {
         return description;
     }
 
-    //Used in the CurrentEquipment method, totalStatModifiers. Simply returns modifiers array
+    /**
+     * @return the stat modifiers of this Equipment (in order: speed, strength, dexterity, intelligence, defence)
+     */
     public int[] getModifiers() {
         return modifiers;
     }
 
-    public int getLevelRequirement() {
-        return levelRequirement;
-    }
-
+    /**
+     * Changes the ID of this Equipment.
+     *
+     * @param id the new ID
+     */
     public void updateID(int id) {
         this.id = id;
     }
 
-
+    /**
+     * @return the ID of this Equipment
+     */
     public int getID() {
         return id;
     }
 
+    /**
+     * @return the type of this Equipment
+     */
     public EquipType getType() {
         return type;
     }
 
+    /**
+     * @return how much this Equipment costs in the shop
+     */
     public int getCost() {
         return cost;
     }
@@ -100,11 +135,11 @@ public class Equipment {
      * Represents each different type of equipment.
      */
     public enum EquipType {
-        HEAD (0),
-        CHEST (1),
-        FEET (2),
-        ACCESSORY (3),
-        WEAPON (4);
+        HEAD(0),
+        CHEST(1),
+        FEET(2),
+        ACCESSORY(3),
+        WEAPON(4);
 
         private final int slot;
 
@@ -112,10 +147,16 @@ public class Equipment {
             this.slot = slot;
         }
 
+        /**
+         * @return the slot the represented EquipType has in the equipment array
+         */
         public int slot() {
             return slot;
         }
 
+        /**
+         * @return the texture to use when rendering the represented EquipType in the equipment list
+         */
         public TextureRegion getTexture() {
             return Assets.equipment[slot];
         }

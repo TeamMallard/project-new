@@ -444,8 +444,6 @@ public class UIShop extends UIComponent {
             patch.draw(batch, x, y, width, height + (paddingY * 2));
             renderText(batch, equipment.getName(), x, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
             renderText(batch, equipment.getDescription(), x, y - LINE_HEIGHT, paddingX, paddingY, Color.LIGHT_GRAY, Assets.consolas22);
-
-            renderText(batch, "LVL " + equipment.getLevelRequirement(), x + 350, y - LINE_HEIGHT, paddingX, paddingY, Color.WHITE, Assets.consolas22);
             renderText(batch, (selling ? "SELL: " : "BUY: ") + cost, x + 324, y, paddingX, paddingY, Color.WHITE, Assets.consolas22);
             renderText(batch, statString, x, y - LINE_HEIGHT * 2, paddingX, paddingY, Color.WHITE, Assets.consolas16);
 
