@@ -83,8 +83,8 @@ public class GameWorld {
                 level.stopInput = false;
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
-                    //triggerEncounter();
-                    battleChance = 1000;
+                    triggerEncounter();
+                    //battleChance = 1000;
                     
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
