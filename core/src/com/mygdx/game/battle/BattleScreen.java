@@ -407,8 +407,6 @@ public class BattleScreen extends ScreenAdapter {
         Game.party.render(batch);
         battleMenu.render(batch);
         batch.end();
-
-
     }
 
     /**

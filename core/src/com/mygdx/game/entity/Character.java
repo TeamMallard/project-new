@@ -63,19 +63,31 @@ public abstract class Character {
      */
     private CharacterState state;
 
+    /**
+     * How long the Character has been in its current state.
+     */
     private float stateTime;
+
+    /**
+     * How long the character has been waiting before stopping moving.
+     */
     protected float waitTime;
 
+    /**
+     * The set of walking textures to use.
+     */
     private WalkingTextures walkingTextures;
 
-    //  Map information for collision detection.
+    /**
+     * The level this Character is a part of.
+     */
     protected Level level;
 
     /**
-     * Character constructor creates a character at a particular position on the level.
-     *
-     * @param level       The level which contains the character.
-     * @param currentTile The tile which the character should start on.
+     * Creates a new Character with the specified parameters.
+     * @param level the level this Character is a part of
+     * @param currentTile the tile this Character begins on
+     * @param walkingTextures the walking textures to use
      */
     public Character(Level level, Vector2 currentTile, WalkingTextures walkingTextures) {
         this.level = level;
@@ -90,14 +102,13 @@ public abstract class Character {
         oldPos = new Vector2(absPos);
 
         setDirection(Direction.UP);
-
         setState(CharacterState.STATIONARY);
     }
 
     /**
-     * Called once per frame to update character logic.
+     * Updates the state of this Character.
      *
-     * @param delta The time since the last frame was rendered.
+     * @param delta the time elapsed since the last update
      */
     public void update(float delta) {
         if (!level.stopInput) {
@@ -112,9 +123,9 @@ public abstract class Character {
     }
 
     /**
-     * Helper method for update if the character state is WAITING.
+     * Helper method to update if the character state is WAITING.
      *
-     * @param delta The time since the last frame was rendered.
+     * @param delta the time elapsed since the last update
      */
     private void updateWaiting(float delta) {
         waitTime += delta;
@@ -124,16 +135,16 @@ public abstract class Character {
     }
 
     /**
-     * Helper method for update if the character state is TRANSITIONING.
+     * Helper method to update if the character state is TRANSITIONING.
      *
-     * @param delta The time since the last frame was rendered.
+     * @param delta the time elapsed since the last update
      */
     protected abstract void updateTransitioning(float delta);
 
     /**
      * Helper method that determines if a character can move to a particular position in the level.
      *
-     * @param requestedDirection The time since the last frame was rendered.
+     * @param requestedDirection the time elapsed since the last update
      */
     protected void updateMovement(Direction requestedDirection) {
         setDirection(requestedDirection);
@@ -159,45 +170,12 @@ public abstract class Character {
             targetTile.add(deltaX, deltaY);
             targetPos.set(targetTile.cpy().scl(TILE_SIZE));
         }
-
-//            switch (requestedDirection) {
-//                case UP:
-//                    if (!level.checkCollision(currentX, currentY + 1)) {
-//                        setState(CharacterState.TRANSITIONING);
-//                        targetTile.add(0, 1);
-//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-//                    }
-//                    break;
-//                case DOWN:
-//                    if (!level.collisionMap[(int) getCurrentTile().x][(int) getCurrentTile().y - 1]) {
-//                        setState(CharacterState.TRANSITIONING);
-//                        targetTile.add(0, -1);
-//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-//                    }
-//                    break;
-//                case LEFT:
-//                    if (!level.collisionMap[(int) getCurrentTile().x - 1][(int) getCurrentTile().y]) {
-//                        setState(CharacterState.TRANSITIONING);
-//                        targetTile.add(-1, 0);
-//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-//                    }
-//                    break;
-//                case RIGHT:
-//                    if (!level.collisionMap[(int) getCurrentTile().x + 1][(int) getCurrentTile().y]) {
-//                        setState(CharacterState.TRANSITIONING);
-//                        targetTile.add(1, 0);
-//                        targetPos.set(targetTile.cpy().scl(TILE_SIZE));
-//                    }
-//                    break;
-//            }
-//          To stop other characters moving in the same frame
-//            level.collisionMap[(int) targetTile.x][(int) targetTile.y] = true;
     }
 
     /**
-     * Helper method for update if the character state is STATIONARY.
+     * Helper method to update if the character state is STATIONARY.
      *
-     * @param delta The time since the last frame was rendered.
+     * @param delta the time elapsed since the last update
      */
     protected abstract void updateStationary(float delta);
 
@@ -205,8 +183,11 @@ public abstract class Character {
         return currentTile;
     }
 
+    /**
+     * Sets the current tile that the Character is on.
+     * @param currentTile the tile
+     */
     public void setCurrentTile(Vector2 currentTile) {
-
         this.currentTile = currentTile;
         this.targetTile = currentTile;
         absPos.set(currentTile.cpy().scl(TILE_SIZE));
@@ -216,12 +197,12 @@ public abstract class Character {
         System.out.println(absPos);
     }
 
+    /**
+     * Gets the absolute position of this Character in the world.
+     * @return the absolute position
+     */
     public Vector2 getAbsPos() {
         return absPos;
-    }
-
-    public void setAbsPos(Vector2 absPos) {
-        this.absPos = absPos;
     }
 
     public Direction getDirection() {
