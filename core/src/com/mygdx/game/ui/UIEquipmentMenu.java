@@ -82,7 +82,7 @@ public class UIEquipmentMenu extends UIComponent {
             }
         }
 
-        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentEquipment.length / MAX_ITEMS_PER_PAGE), x + 20, y - 2 * height - 10, 0, 0, Color.WHITE, Assets.consolas16);
+        renderText(batch, "Page " + (page + 1) + " of " + (int) Math.ceil((float) currentEquipment.length / MAX_ITEMS_PER_PAGE), x + 20, y - 3 * height - 10, 0, 0, Color.WHITE, Assets.consolas16);
     }
 
     /**
