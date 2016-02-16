@@ -134,7 +134,7 @@
 		"description":"Just enough to heal once",
 		"type":"HEAL",
 		"power":10,
-		"cost":8
+		"cost":5
 	},
 	{
 		"id":1,
@@ -142,7 +142,7 @@
 		"description":"Heals for a fair amount",
 		"type":"HEAL",
 		"power":30,
-		"cost":8
+		"cost":15
 	},
 	{
 		"id":2,
@@ -150,7 +150,7 @@
 		"description":"Heals for a large amount",
 		"type":"HEAL",
 		"power":60,
-		"cost":8
+		"cost":30
 	},
 	{
 		"id":3,
@@ -166,7 +166,7 @@
 		"description":"It gives a fair amount of MP",
 		"type":"MANA",
 		"power":30,
-		"cost":1
+		"cost":5
 	},
 	{
 		"id":5,
@@ -174,7 +174,7 @@
 		"description":"It gives a large amount of MP",
 		"type":"MANA",
 		"power":60,
-		"cost":1
+		"cost":15
 	},
 	{
 		"id":6,
@@ -182,7 +182,7 @@
 		"description":"It Revives",
 		"type":"REVIVE",
 		"power":30,
-		"cost":1
+		"cost":30
 	},
 	{
 		"id":7,
