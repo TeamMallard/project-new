@@ -1,12 +1,18 @@
 package com.mygdx.game.objective;
 
 /**
- * Created by olivermcclellan on 10/02/2016.
+ * Represents an objective to be completed.
  */
 public interface Objective {
 
-    public boolean isComplete();
+    /**
+     * @return whether this Objective has been completed yet
+     */
+    boolean isComplete();
 
-    public String getObjectiveString();
+    /**
+     * @return a string describing this Objective
+     */
+    String getObjectiveString();
 
 }

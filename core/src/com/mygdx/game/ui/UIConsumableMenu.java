@@ -197,7 +197,7 @@ public class UIConsumableMenu extends UIComponent {
     /**
      * Represents an item in the UIConsumableMenu.
      */
-    public class Item extends UIComponent {
+    private class Item extends UIComponent {
 
         /**
          * The consumable this Item represents.

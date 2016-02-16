@@ -99,7 +99,7 @@ public class UIDialogue extends UIComponent {
     /**
      * Represents a single message in the UIDialogue.
      */
-    public class UIDialogueBox extends UIComponent {
+    private class UIDialogueBox extends UIComponent {
 
         /**
          * Whether to show the advance arrow.

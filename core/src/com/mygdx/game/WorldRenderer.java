@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -70,7 +69,8 @@ public class WorldRenderer {
         batch.begin();
         renderPlayers(delta);
         batch.end();
-        uiRenderer.render();
+
+        uiRenderer.renderWorld();
     }
 
     /**
@@ -126,7 +126,7 @@ public class WorldRenderer {
         camera.viewportWidth = width / SCALE;
         camera.viewportHeight = height / SCALE;
         camera.update();
-        uiRenderer.resize(width, height);
+        uiRenderer.resize();
     }
 
     public void dispose() {

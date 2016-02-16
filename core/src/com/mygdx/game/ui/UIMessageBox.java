@@ -9,56 +9,97 @@ import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.assets.Assets;
 
 /**
- * A message box with simple text.
+ * Represents a message box with simple text.
  */
 public class UIMessageBox extends UIComponent {
-    public Color color;
-    public BitmapFont font;
-    public String message;
-    public int alignment;
-    float paddingX;
-    float paddingY;
 
     /**
-     * Constructor for message box
-     * @param message The message to be displayed
-     * @param x X position of the bottom left corner of the message box.
-     * @param y Y position of the bottom left corner of the message box.
-     * @param width Width of the message box.
-     * @param height Height of the message box.
-     * @param paddingX X padding of the text in the message box.
-     * @param paddingY Y padding of the text in the message box.
+     * Text colour.
+     */
+    private Color color;
+
+    /**
+     * The font to use.
+     */
+    private BitmapFont font;
+
+    /**
+     * Message to be displayed.
+     */
+    private String message;
+
+    /**
+     * Text alignment in the message box.
+     */
+    private int alignment;
+
+    /**
+     * Text padding.
+     */
+    private float paddingX, paddingY;
+
+    /**
+     * Creates a new UIMessageBox with the specified parameters.
+     *
+     * @param message  the message to be displayed
+     * @param x        x coordinate
+     * @param y        y coordinate
+     * @param width    width of message box
+     * @param height   height of message box
+     * @param paddingX horizontal padding
+     * @param paddingY vertical padding
      */
     public UIMessageBox(String message, float x, float y, float width, float height, float paddingX, float paddingY) {
-        super(x, y, width, height);
-        this.message = message;
-        this.font = Assets.consolas22;
-        this.color = Color.WHITE;
-        this.alignment = Align.left;
-        this.paddingX = paddingX;
-        this.paddingY = paddingY;
+        this(message, Assets.consolas22, Color.WHITE, Align.left, x, y, width, height, paddingX, paddingY);
     }
 
+    /**
+     * Creates a new UIMessageBox with the specified parameters and default padding.
+     *
+     * @param message   the message to be displayed
+     * @param font      the font to use
+     * @param color     the colour of the message
+     * @param alignment the alignment of the message in the box
+     * @param x         x coordinate
+     * @param y         y coordinate
+     * @param width     width of message box
+     * @param height    height of message box
+     */
     public UIMessageBox(String message, BitmapFont font, Color color, int alignment, float x, float y, float width, float height) {
-        super(x, y, width, height);
-        this.message = message;
-        this.font = font;
-        this.color = color;
-        this.alignment = alignment;
-        paddingX = 40;
-        paddingY = 20;
+        this(message, font, color, alignment, x, y, width, height, 40, 20);
     }
 
+    /**
+     * Creates a new UIMessageBox with the specified parameters and default padding.
+     *
+     * @param message   the message to be displayed
+     * @param font      the font to use
+     * @param color     the colour of the message
+     * @param alignment the alignment of the message in the box
+     * @param x         x coordinate
+     * @param y         y coordinate
+     * @param width     width of message box
+     * @param height    height of message box
+     * @param padding   horizontal and vertical padding
+     */
     public UIMessageBox(String message, BitmapFont font, Color color, int alignment, float x, float y, float width, float height, float padding) {
-        super(x, y, width, height);
-        this.message = message;
-        this.font = font;
-        this.color = color;
-        this.alignment = alignment;
-        this.paddingX = padding;
-        this.paddingY = padding;
+        this(message, font, color, alignment, x, y, width, height, padding, padding);
     }
 
+    /**
+     * Creates a new UIMessageBox with the specified parameters and default padding.
+     *
+     * @param message   the message to be displayed
+     * @param font      the font to use
+     * @param color     the colour of the message
+     * @param alignment the alignment of the message in the box
+     * @param x         x coordinate
+     * @param y         y coordinate
+     * @param width     width of message box
+     * @param height    height of message box
+     * @param paddingX  horizontal padding
+     * @param paddingY  vertical padding
+     */
     public UIMessageBox(String message, BitmapFont font, Color color, int alignment, float x, float y, float width, float height, float paddingX, float paddingY) {
         super(x, y, width, height);
         this.message = message;
@@ -70,9 +111,10 @@ public class UIMessageBox extends UIComponent {
     }
 
     /**
-     * Renders the UIComponent and should be rendered once per frame.
-     * @param batch The batch used to render the UI.
-     * @param patch The patch used from Assets.
+     * Renders this UIMessageBox onto the specified sprite batch.
+     *
+     * @param batch the sprite batch to render on
+     * @param patch the nine patch for drawing boxes
      */
     @Override
     public void render(SpriteBatch batch, NinePatch patch) {
@@ -87,13 +129,22 @@ public class UIMessageBox extends UIComponent {
         layout.setText(font, message,
                 color, width - paddingX * 2, alignment, true);
         font.draw(batch, layout, x + paddingX, y + height + paddingY);
-
     }
 
+    /**
+     * Sets the message of this UIMessageBox.
+     *
+     * @param message the new message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Sets the text colour of this UIMessageBox.
+     *
+     * @param color the new colour
+     */
     public void setColor(Color color) {
         this.color = color;
     }

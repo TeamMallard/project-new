@@ -13,32 +13,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The party menu allows the user to see information about each party member.
- * It contains a party member's skills and statistics.
+ * Represents the party menu in the overworld.
  */
 public class UIPartyMenu extends UIComponent {
 
+    /**
+     * The party.
+     */
     private PartyManager party;
+
+    /**
+     * Whether the party menu is being displayed.
+     */
     private boolean show;
 
+    /**
+     * Which player/tab is currently selected.
+     */
     private int playerSelected, menuSelected;
 
+    /**
+     * List of players to be displayed in the party menu.
+     */
     private List<UIPlayer> playerList;
 
-    // Stuff for the equipment menu.
+    /**
+     * Whether or not input is currently focused on this component.
+     */
     private boolean hasFocus;
 
+    /**
+     * The instance of the equipment menu.
+     */
     private UIEquipmentMenu equipmentMenu;
+
+    /**
+     * The instance of the consumable menu.
+     */
     private UIConsumableMenu consumableMenu;
 
     /**
      * Labels for the titles on the party menu.
      */
-    private UIMessageBox statsMessageBox = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2, (y + height + 4), width / 8, 0, 10);
-    private UIMessageBox skillsMessageBox = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 8, (y + height + 4), width / 8, 0, 10);
-    private UIMessageBox equipmentMessageBox = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 4, (y + height + 4), width / 8, 0, 10);
-    private UIMessageBox consumableMessageBox = new UIMessageBox("CONSUMABLE", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + 3*(width / 8), (y + height + 4), width / 8, 0, 10);
+    private UIMessageBox[] messageBoxes;
 
+    /**
+     * Creates a new UIPartyMenu with the specified parameters.
+     *
+     * @param x      the x coordinate
+     * @param y      the y coordinate
+     * @param width  the width of the menu
+     * @param height the height of the menu
+     * @param party  the party
+     */
     public UIPartyMenu(float x, float y, float width, float height, PartyManager party) {
         super(x, y, width, height);
         this.party = party;
@@ -52,49 +79,49 @@ public class UIPartyMenu extends UIComponent {
 
         equipmentMenu = new UIEquipmentMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
         consumableMenu = new UIConsumableMenu(x + width / 2, (y + height - 71), width / 2, 150, this);
+
+        messageBoxes = new UIMessageBox[4];
+        messageBoxes[0] = new UIMessageBox("STATS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2, (y + height + 4), width / 8, 0, 10);
+        messageBoxes[1] = new UIMessageBox("SKILLS", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 8, (y + height + 4), width / 8, 0, 10);
+        messageBoxes[2] = new UIMessageBox("EQUIPMENT", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + width / 4, (y + height + 4), width / 8, 0, 10);
+        messageBoxes[3] = new UIMessageBox("CONSUMABLE", Assets.consolas22, Color.LIGHT_GRAY, Align.center, x + width / 2 + 3 * (width / 8), (y + height + 4), width / 8, 0, 10);
     }
 
     /**
-     * Called once per frame to render the party menu.
+     * Renders this UIPartyMenu onto the specified sprite batch.
+     *
+     * @param batch the sprite batch to render on
+     * @param patch the nine patch for drawing boxes
      */
     @Override
     public void render(SpriteBatch batch, NinePatch patch) {
-
         if (show) {
             new UIMessageBox("", Assets.consolas22, Color.WHITE, Align.center, x, y, width, height).render(batch, patch);
             for (UIPlayer aPlayerList : playerList) {
                 aPlayerList.render(batch, patch);
             }
 
-            statsMessageBox.setColor(Color.LIGHT_GRAY);
-            skillsMessageBox.setColor(Color.LIGHT_GRAY);
-            equipmentMessageBox.setColor(Color.LIGHT_GRAY);
-            consumableMessageBox.setColor(Color.LIGHT_GRAY);
-
-            if (menuSelected == 0) {
-                statsMessageBox.setColor(Color.WHITE);
-                new UIStats(x + width / 2, (y + height - 386), width / 2, party.getMember(playerSelected)).render(batch, patch);
-            }
-            if (menuSelected == 1) {
-                skillsMessageBox.setColor(Color.WHITE);
-                for (int i = 0; i < party.getMember(playerSelected).getSkills().size(); i++) {
-                    new UISkill(x + width / 2, (y + height - 86) - (90 * i), width / 2, Game.skills.getSkill(party.getMember(playerSelected).getSkills().get(i))).render(batch, patch);
-                }
-            }
-            if (menuSelected == 2) {
-                equipmentMessageBox.setColor(Color.WHITE);
-                equipmentMenu.render(batch, patch);
-            }
-            if (menuSelected == 3) {
-            	consumableMessageBox.setColor(Color.WHITE);
-            	consumableMenu.render(batch, patch);
+            switch (menuSelected) {
+                case 0:
+                    new UIStats(x + width / 2, (y + height - 386), width / 2, party.getMember(playerSelected)).render(batch, patch);
+                    break;
+                case 1:
+                    for (int i = 0; i < party.getMember(playerSelected).getSkills().size(); i++) {
+                        new UISkill(x + width / 2, (y + height - 86) - (90 * i), width / 2, Game.skills.getSkill(party.getMember(playerSelected).getSkills().get(i))).render(batch, patch);
+                    }
+                    break;
+                case 2:
+                    equipmentMenu.render(batch, patch);
+                    break;
+                case 3:
+                    consumableMenu.render(batch, patch);
+                    break;
             }
 
-            statsMessageBox.render(batch, patch);
-            skillsMessageBox.render(batch, patch);
-            equipmentMessageBox.render(batch, patch);
-            consumableMessageBox.render(batch, patch);
-
+            for (int i = 0; i < messageBoxes.length; i++) {
+                messageBoxes[i].setColor(menuSelected == i ? Color.WHITE : Color.LIGHT_GRAY);
+                messageBoxes[i].render(batch, patch);
+            }
         }
     }
 
@@ -108,27 +135,31 @@ public class UIPartyMenu extends UIComponent {
             playerList.get(i).selected = i == 0;
         }
 
-        // TODO: finish off equipment menu
-
         menuSelected = 1;
         hasFocus = true;
         show = true;
     }
 
+    /**
+     * Focuses input on this UIPartyMenu.
+     */
     public void focus() {
         hasFocus = true;
     }
 
+    /**
+     * @return the party that this menu is showing
+     */
     public PartyManager getParty() {
         return party;
     }
 
     /**
-     * Called once per frame to handle input logic for selecting a player and exiting the menu.
+     * Updates the state of this UIConsumableMenu.
      *
-     * @return returns true if the dialogue box should continue to be displayed.
+     * @return true if the dialogue box should continue to be displayed
      */
-    public boolean update(float delta) {
+    public boolean update() {
         if (InputHandler.isEscJustPressed()) {
             show = false;
             return false;
@@ -140,13 +171,16 @@ public class UIPartyMenu extends UIComponent {
             } else if (equipmentMenu.hasFocus()) {
                 equipmentMenu.update();
             } else if (consumableMenu.hasFocus()) {
-            	consumableMenu.update();
+                consumableMenu.update();
             }
 
             return true;
         }
     }
 
+    /**
+     * Handles user input to update which player/tab is currently selected.
+     */
     private void optionUpdate() {
         if (InputHandler.isUpJustPressed() && playerSelected > 0) {
             playerSelected--;
