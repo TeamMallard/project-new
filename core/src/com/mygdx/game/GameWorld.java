@@ -10,6 +10,7 @@ import com.mygdx.game.entity.RoboNPC;
 import com.mygdx.game.entity.SallyNPC;
 import com.mygdx.game.objective.WinBattlesObjective;
 import com.mygdx.game.ui.UIManager;
+import com.mygdx.game.ui.UIObjective;
 import com.mygdx.game.ui.UIScore;
 import com.mygdx.game.ui.UIShop;
 
@@ -40,6 +41,7 @@ public class GameWorld {
         level.characters.add(new SallyNPC(level, new Vector2(85, 59)));
         level.characters.add(new RoboNPC(level, new Vector2(75, 98)));
         uiManager.addUIComponent(new UIScore());
+        uiManager.addUIComponent(new UIObjective());
 //        battleParams = new BattleParameters(level.getCurrentSegment());
 //        List<Integer> emptyList = new ArrayList<Integer>();
 //        Agent enemyDuck = new Agent("Crazed Duck", Agent.AgentType.ENEMY,new Statistics(100,100,0,2,2,2,2,2,3),emptyList,new CurrentEquipment(0,0,0,0,0),0);
@@ -73,7 +75,6 @@ public class GameWorld {
 
                 if (level.player.getState() == Character.CharacterState.TRANSITIONING && MathUtils.random(battleChance--) == 0) {
                     triggerEncounter();
-                    //battleChance = 1000;
                 } else if (InputHandler.isActJustPressed()) {
                     interactingNPC = level.player.interactingNPC;
                     level.stopInput = true;

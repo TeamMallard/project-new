@@ -23,9 +23,6 @@ public class Level {
     public ArrayList<Character> characters;
     public boolean stopInput;
 
-    private int mapWidth;
-    private int mapHeight;
-
     private TiledMapTileLayer collisionLayer;
 
     public Vector2 mapBounds;
@@ -43,8 +40,8 @@ public class Level {
         collisionLayer = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         MapProperties prop = map.getProperties();
-        mapWidth = prop.get("width", Integer.class);
-        mapHeight = prop.get("height", Integer.class);
+        int mapWidth = prop.get("width", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
 
         int tileWidth = prop.get("tilewidth", Integer.class);
         int tileHeight = prop.get("tileheight", Integer.class);
@@ -74,6 +71,8 @@ public class Level {
                 }
             }
         }
+
+        // Remove closed door.
         if(Game.objective.isComplete()) {
         	map.getLayers().remove(map.getLayers().get("door" + (Game.segment + 1)));
         }
@@ -87,6 +86,14 @@ public class Level {
     }
 
     private boolean isTileBlocked(int x, int y) {
+        // Check each door layer.
+        for(int i = 1; i < 8; i++) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("door" + i);
+            if(layer != null && layer.getCell(x, y) != null) {
+                return true;
+            }
+        }
+
         return collisionLayer.getCell(x, y) != null;
     }
 

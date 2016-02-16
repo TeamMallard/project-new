@@ -265,8 +265,7 @@ public class BattleScreen extends ScreenAdapter {
 
             if(Game.objective instanceof WinBattlesObjective) {
                 ((WinBattlesObjective) Game.objective).wonBattle();
-            }
-            if(Game.objective instanceof CollectItemObjective) {
+            } else if(Game.objective instanceof CollectItemObjective) {
                 //((CollectItemObjective) Game.objective)
                 for (int i = 0; i < enemyParty.size(); i++) {
                     if(enemyParty.getMember(i).getName().contains("Ooze") && Game.segment == 1) {
