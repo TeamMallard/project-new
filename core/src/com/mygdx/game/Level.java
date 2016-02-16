@@ -84,7 +84,6 @@ public class Level {
 
     public boolean checkCollision(int x, int y) {
         return isTileBlocked(x, y) || isTileOccupied(x, y);
-    	//return false;
     }
 
     private boolean isTileBlocked(int x, int y) {

@@ -10,27 +10,57 @@ import java.util.Comparator;
 import static com.mygdx.game.Level.TILE_SIZE;
 
 /**
- * This abstract class represents a character in the Level.
- * Character behaviour must be implemented before use.
+ * Represents a character in the overworld.
  */
 public abstract class Character {
 
+    /**
+     * The speed at which Characters move between tiles.
+     */
     public final float TRANSITION_SPEED = 0.25f;
+
+    /**
+     * The time to wait before stopping moving.
+     */
     public final float WAIT_PERIOD = 0.15f;
 
+    /**
+     * The size of each Character, used for moving the camera.
+     */
     public static final Vector2 CHARACTER_SIZE = new Vector2(26, 42);
 
-    //  Player position & orientation information
+    /**
+     * Which tile the Character is on.
+     */
     private Vector2 currentTile;
+
+    /**
+     * The absolute position of this Character in the world.
+     */
     private Vector2 absPos;
 
+    /**
+     * Which tile the Character is moving to.
+     */
     public Vector2 targetTile;
+    /**
+     * The absolute position of the target.
+     */
     protected Vector2 targetPos;
 
+    /**
+     * The position of this Character before movement.
+     */
     protected Vector2 oldPos;
 
+    /**
+     * The direction this Character is moving in.
+     */
     private Direction direction;
 
+    /**
+     * The state this Character is in.
+     */
     private CharacterState state;
 
     private float stateTime;

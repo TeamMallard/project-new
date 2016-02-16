@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -47,7 +49,7 @@ public class WorldRenderer {
         camera.zoom = 2f;
         batch.setProjectionMatrix(camera.combined);
 
-        mapRenderer = new OrthogonalTiledMapRenderer(world.level.map);
+        mapRenderer = new OrthogonalTiledMapRenderer(world.level.map, batch);
         mapRenderer.setView(camera);
 
         uiRenderer = new UIRenderer(world.uiManager);
@@ -61,13 +63,25 @@ public class WorldRenderer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         updateCamera();
-        mapRenderer.setMap(world.level.map);
-        mapRenderer.setView(camera);
-        mapRenderer.render();
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
+        mapRenderer.setMap(world.level.map);
+        mapRenderer.setView(camera);
+
+        // Render all layers but the trees layer.
+        for (MapLayer layer : world.level.map.getLayers()) {
+            if (layer.isVisible() && !layer.getName().equals("trees")) {
+                mapRenderer.renderTileLayer((TiledMapTileLayer)layer);
+            }
+        }
+
         renderPlayers(delta);
+
+        // Render treetops layer over player.
+        mapRenderer.renderTileLayer((TiledMapTileLayer) world.level.map.getLayers().get("trees"));
+
         batch.end();
 
         uiRenderer.renderWorld();
@@ -88,7 +102,6 @@ public class WorldRenderer {
             }
 
             TextureRegion texture = c.getCurrentTexture();
-
 
             batch.draw(texture, c.getAbsPos().x - textureOffset.x, c.getAbsPos().y - textureOffset.y, 64, 64);
         }
