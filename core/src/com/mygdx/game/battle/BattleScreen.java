@@ -298,7 +298,7 @@ public class BattleScreen extends ScreenAdapter {
                     }
 
                 } else {
-                    thisAgent.getStats().increaseHP(1);//Set dead Agent's hp to 1
+                    thisAgent.getStats().increaseHP(1); //Set dead agent's hp to 1
                 }
             }
             String messages[] = new String[resultsText.size()];
@@ -312,7 +312,6 @@ public class BattleScreen extends ScreenAdapter {
             if (Game.objective instanceof WinBattlesObjective) {
                 ((WinBattlesObjective) Game.objective).wonBattle();
             } else if (Game.objective instanceof CollectItemObjective) {
-                //((CollectItemObjective) Game.objective)
                 for (int i = 0; i < enemyParty.size(); i++) {
                     if (enemyParty.getMember(i).getName().contains("Ooze") && Game.segment == 1) {
                         Game.party.getConsumables().add(7);
@@ -387,11 +386,7 @@ public class BattleScreen extends ScreenAdapter {
             battleMenu.setSkillMenuSize(turnOrder.get(turnOrderPointer).getSkills().size());
             battleMenu.resetMenus(); //Reset the menus
         }
-        //if(!turnOrder.get(turnOrderPointer).isDead()) {
         currentTurnAgent = turnOrder.get(turnOrderPointer);
-        //} else {
-        //	currentTurnAgent = turnOrder.get(turnOrderPointer)
-        //}
         battleMenu.createInfoBox(currentTurnAgent.getName() + "'s turn", 10);
         battleMenu.updateTurnIndicator();
     }
