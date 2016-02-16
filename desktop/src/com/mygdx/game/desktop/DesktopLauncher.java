@@ -6,6 +6,7 @@ import com.mygdx.game.Game;
 
 /**
  * Launcher for the game.
+ * Game executable URL: https://drive.google.com/a/york.ac.uk/file/d/0B4to7QAfaHDISWhnZzlXbC15cjg/view?usp=sharing
  */
 public class DesktopLauncher {
 
